@@ -1,0 +1,32 @@
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\bin\Debug\TibiaHeleper.exe.config
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\bin\Debug\TibiaHeleper.exe
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\bin\Debug\TibiaHeleper.pdb
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper.csprojResolveAssemblyReference.cache
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\App.g.cs
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper_MarkupCompile.cache
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper_MarkupCompile.lref
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper.g.resources
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper.Properties.Resources.resources
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper.csproj.GenerateResource.Cache
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper.exe
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\TibiaHeleper.pdb
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\Windows\HealerWindow.g.cs
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\Windows\HealerWindow.baml
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\MainWindow.g.cs
+c:\users\wiktor\documents\visual studio 2015\Projects\TibiaHeleper\TibiaHeleper\obj\Debug\MainWindow.baml
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\TibiaHeleper.exe.config
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.exe
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.pdb
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\TibiaHeleper.exe
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\TibiaHeleper.pdb
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.csprojResolveAssemblyReference.cache
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\MainWindow.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\HealerWindow.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\App.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper_MarkupCompile.cache
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper_MarkupCompile.lref
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\MainWindow.baml
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\HealerWindow.baml
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.g.resources
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.Properties.Resources.resources
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.csproj.GenerateResource.Cache

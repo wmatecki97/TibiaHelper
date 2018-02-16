@@ -1,0 +1,14 @@
+﻿<Window x:Class="TibiaHeleper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TibiaHeleper"
+        mc:Ignorable="d"
+        Title="TibiaHelper" Height="350" Width="525" 
+        Loaded="Window_Loaded" Closing="Close">
+    <Grid Margin="0,0,0.4,-0.2">
+        <Button x:Name="Healer" Content="Healer" HorizontalAlignment="Left" Margin="61,71,0,0" VerticalAlignment="Top" Width="97" Click="HealerButtonClicked"/>
+        <CheckBox x:Name="HealerEnable" Content="Enable Healer" HorizontalAlignment="Left" Margin="65,124,0,0" VerticalAlignment="Top" Checked="HealerRun" Unchecked="HealerDisable" />
+    </Grid>
+</Window>
