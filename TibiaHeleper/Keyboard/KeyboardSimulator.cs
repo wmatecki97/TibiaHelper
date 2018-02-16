@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Keyboard
 {
@@ -23,12 +24,10 @@ namespace TibiaHeleper.Keyboard
         static KeyboardSimulator()
         {
             proc = GetData.getProcess();
-
             DButton = new Dictionary<string, int>();
-            Keyboard.KeysAdresses.assignKeys(DButton);
+            KeysAdresses.assignKeys(DButton);
 
         }
-
 
         public static void Press(string button)
         {
@@ -52,6 +51,16 @@ namespace TibiaHeleper.Keyboard
                 }
             }
 
+        }
+
+        public static void Message(string text)
+        {
+            text = text.ToUpper();
+            foreach(char letter in text)
+            {
+                PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton[letter.ToString()], 0);
+                PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton[letter.ToString()], 0);
+            }
         }
     }
 }

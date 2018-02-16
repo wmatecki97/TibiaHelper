@@ -30,3 +30,5 @@ C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.g.resources
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.Properties.Resources.resources
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\TibiaHeleper.csproj.GenerateResource.Cache
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\AdditionalModules.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\AdditionalModules.baml

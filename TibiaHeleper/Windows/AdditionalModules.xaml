@@ -1,0 +1,20 @@
+﻿<Window x:Class="TibiaHeleper.Windows.AdditionalModules"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TibiaHeleper.Windows"
+        mc:Ignorable="d"
+        Title="Other" Height="300" Width="350"
+        Loaded="AssignData">
+    <Grid Margin="0,0,-24.4,0.4" Width="350">
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="21,232,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="AHSpell" HorizontalAlignment="Left" Height="23" Margin="88,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="52"/>
+        <Label x:Name="AutoHasteRow" Content="Auto Haste" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Height="23"/>
+        <Label x:Name="AHSpellLabel" Content="Spell" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="88,5,0,0" VerticalAlignment="Top" Width="52"/>
+        <Label x:Name="AHManaLabel" Content="Mana cost" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="145,5,0,0" VerticalAlignment="Top" Width="73"/>
+        <TextBox x:Name="AHMana" HorizontalAlignment="Left" Height="23" Margin="154,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="63"/>
+        <CheckBox x:Name="AHEnable" Content="Enable" HorizontalAlignment="Left" Margin="236,36,0,0" VerticalAlignment="Top" Checked="EnableAutoHaste" Unchecked="DisableAutoHate"/>
+
+    </Grid>
+</Window>

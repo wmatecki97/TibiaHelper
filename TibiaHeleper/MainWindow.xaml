@@ -8,7 +8,8 @@
         Title="TibiaHelper" Height="350" Width="525" 
         Loaded="Window_Loaded" Closing="Close">
     <Grid Margin="0,0,0.4,-0.2">
-        <Button x:Name="Healer" Content="Healer" HorizontalAlignment="Left" Margin="61,71,0,0" VerticalAlignment="Top" Width="97" Click="HealerButtonClicked"/>
-        <CheckBox x:Name="HealerEnable" Content="Enable Healer" HorizontalAlignment="Left" Margin="65,124,0,0" VerticalAlignment="Top" Checked="HealerRun" Unchecked="HealerDisable" />
+        <Button x:Name="Healer" Content="Healer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="97" Click="HealerButtonClicked"/>
+        <CheckBox x:Name="HealerEnable" Content="Enable Healer" HorizontalAlignment="Left" Margin="125,12,0,0" VerticalAlignment="Top" Checked="HealerRun" Unchecked="HealerDisable" />
+        <Button x:Name="AdditionalModules" Content="Other" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="97" Click="OpenAdditionalModulesWindow"/>
     </Grid>
 </Window>

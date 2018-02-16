@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper
 {
@@ -30,9 +31,9 @@ namespace TibiaHeleper
         {
             if (!GetData.inject())
             {
-               // Environment.Exit(0);
+                Environment.Exit(0);
             }
-            if (Modules.Healer.isWorking()) HealerEnable.IsChecked = true;
+            if (Modules.ModuesManager.healer.working) HealerEnable.IsChecked = true;
            
         }
 
@@ -43,7 +44,7 @@ namespace TibiaHeleper
 
         private void HealerRun(object sender, RoutedEventArgs e)
         {
-            Modules.ModuesManager.HealerRun();
+            Modules.ModuesManager.HealerEnable();
         }
 
         private void HealerButtonClicked(object sender, RoutedEventArgs e)
@@ -56,6 +57,11 @@ namespace TibiaHeleper
         private void Close(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void OpenAdditionalModulesWindow(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

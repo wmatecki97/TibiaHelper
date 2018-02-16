@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,11 @@ namespace TibiaHeleper.MemoryOperations
             return true;
         }
 
+        /// <summary>
+        /// returns 32bit integer from adress given
+        /// </summary>
+        /// <param name="adress"></param>
+        /// <returns></returns>
         public static int getDataFromAdress(UInt32 adress)
         {
             return ReadMemory.ReadInt32(Base + adress, Handle); ;
@@ -39,5 +45,7 @@ namespace TibiaHeleper.MemoryOperations
         {
             return Tibia;
         }
+
+        public static int getXOR() { return getDataFromAdress(Adresses.XORAdr); }
     }
 }

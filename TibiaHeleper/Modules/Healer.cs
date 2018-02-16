@@ -5,24 +5,36 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TibiaHeleper.Keyboard;
+using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Modules
 {
 
-    public static class Healer
+    public class Healer : Module
     {
-        static UInt32 Base;
-        static bool working;
-        static int lowHP, medHP, highHP, lowHPMana, medHPMana, highHPMana;
-        static int lowMana, medMana, highMana;
-        static string lowHPButton, medHPButton, highHPButton, lowManaButton, medManaButton, highManaButton;
-        static UInt32 XORAdr;
-        static UInt32 MaxHPAdr;
-        static UInt32 HPAdr;
-        static UInt32 MaxManaAdr;
-        static UInt32 ManaAdr;
+        public bool working { get; set; }
+        public int lowHP { get; set; }
+        public int medHP { get; set; }
+        public int highHP {get; set;}
+        public int lowHPMana {get; set;}
+        public int medHPMana {get; set;}
+        public int highHPMana {get; set;}
+        public int lowMana { get; set; }
+        public int medMana {get; set;}
+        public int highMana {get; set;}
+        public string lowHPButton {get; set;}
+        public string medHPButton {get; set;}
+        public string highHPButton {get; set;}
+        public string lowManaButton {get; set;}
+        public string medManaButton {get; set;}
+        public string highManaButton {get; set;}
+        UInt32 XORAdr;
+        UInt32 MaxHPAdr;
+        UInt32 HPAdr;
+        UInt32 MaxManaAdr;
+        UInt32 ManaAdr;
          
-        static Healer()
+        public Healer()
         {
             //getting adresses of variables in Tibia.exe
             MaxHPAdr = Adresses.MaxHPAdr;
@@ -33,12 +45,11 @@ namespace TibiaHeleper.Modules
             
         }
 
-        public static void Run()
+        public void Run()
         {
             int XOR = GetData.getDataFromAdress(XORAdr);
 
-
-
+            /*
             //TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP
             lowHP = 500;
             lowHPButton = "shift + f3";
@@ -49,12 +60,14 @@ namespace TibiaHeleper.Modules
             highHP = 900;
             highHPButton = "ShiFT + f1";
             highHPMana = 20;
-
+            //TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP
+            */
 
             working = true;
 
             while (working)
             {
+
                 //int maxHP = HPXOR ^ GetData.getDataFromAdress(MaxHPAdr);
                 int HP = XOR ^ GetData.getDataFromAdress(HPAdr);
                 int mana = XOR ^ GetData.getDataFromAdress(ManaAdr);
@@ -64,7 +77,7 @@ namespace TibiaHeleper.Modules
             }
 
         }
-        private static void healMana(int mana)
+        private void healMana(int mana)
         {
             if (mana < lowMana)
                 KeyboardSimulator.Press(lowManaButton);
@@ -72,7 +85,7 @@ namespace TibiaHeleper.Modules
                 KeyboardSimulator.Press(highManaButton);
         }
 
-        private static void healHP(int HP, int mana)
+        private void healHP(int HP, int mana)
         {
             if (HP < lowHP && mana > lowHPMana)
             {
@@ -88,72 +101,6 @@ namespace TibiaHeleper.Modules
             }
         }
 
-        public static void AsignValues(int lHP,int mHP,int hHP,string lHPB,string mHPB,string hHPB, int lHPMana, int mHPMana, int hHPMana, int lMana, int hMana, string lManaB, string hManaB)
-        {
-            lowHP = lHP;
-            medHP = mHP;
-            highHP = hHP;
-            lowHPButton = lHPB;
-            medHPButton = mHPB;
-            highHPButton = hHPB;
-            lowHPMana = lHPMana;
-            medHPMana = lHPMana;
-            highHPMana = hHPMana;
-            lowMana = lMana;
-            lowManaButton = lManaB;
-            highMana = hMana;
-            highManaButton = hManaB;
-        }
-
-
-        public static string getLowHP() { return lowHP.ToString(); }
-        public static string getMedHP() { return medHP.ToString(); }
-
-        internal static string getlowHPMana()
-        {
-            return lowHPMana.ToString();
-        }
-
-        internal static string gethighHPMana()
-        {
-            return medHPMana.ToString();
-        }
-
-        internal static string getmedHPMana()
-        {
-            return highHPMana.ToString();
-        }
-
-        public static string getLowMana()
-        {
-            return lowMana.ToString();
-        }
-
-        public static string getLowManaButton()
-        {
-            return lowManaButton;
-        }
-
-        public static string getHighManaButton()
-        {
-            return highManaButton;
-        }
-
-        public static string getHighMana()
-        {
-            return highMana.ToString();
-        }
-
-        public static string getHighHP() { return highHP.ToString(); }
-        public static string getLowHPB() { return lowHPButton; }
-        public static string getMedHPB() { return medHPButton; }
-        public static string getHighHPB() { return highHPButton; }
-        public static bool isWorking() { return working; }
-
-        public static void Stop()
-        {
-            working = false;
-        }
     }
 }
 

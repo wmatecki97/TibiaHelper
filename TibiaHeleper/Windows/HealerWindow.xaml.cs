@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TibiaHeleper.Modules;
 
 namespace TibiaHeleper.Windows
 {
@@ -29,36 +30,38 @@ namespace TibiaHeleper.Windows
         {
             try
             {
-                string lHPB = lowHPB.Text;
-                string mHPB = medHPB.Text;
-                string hHPB = highHPB.Text;
-                if (lowHP.Text == "") lowHP.Text = "0";
-                if (medHP.Text == "") medHP.Text = "0";
-                if (highHP.Text == "") highHP.Text = "0";
-                int lHP = int.Parse(lowHP.Text);
-                int mHP = int.Parse(medHP.Text);
-                int hHP = int.Parse(highHP.Text);
+                bool isWorking = ModuesManager.healer.working;
+                if (isWorking)
+                    ModuesManager.HealerDisable();
+               
+                ModuesManager.healer.lowHPButton = lowHPB.Text;
+                ModuesManager.healer.medHPButton = medHPB.Text;
+                ModuesManager.healer.highHPButton = highHPB.Text;
+
                 if (lowHPMana.Text == "") lowHPMana.Text = "0";
                 if (medHPMana.Text == "") medHPMana.Text = "0";
                 if (highHPMana.Text == "") highHPMana.Text = "0";
-                int lHPMana = int.Parse(lowHPMana.Text);
-                int mHPMana = int.Parse(medHPMana.Text);
-                int hHPMana = int.Parse(highHPMana.Text);
+                ModuesManager.healer.lowHPMana = int.Parse(lowHPMana.Text);
+                ModuesManager.healer.medHPMana = int.Parse(medHPMana.Text);
+                ModuesManager.healer.highHPMana = int.Parse(highHPMana.Text);
+
+                if (lowHP.Text == "") lowHP.Text = "0";
+                if (medHP.Text == "") medHP.Text = "0";
+                if (highHP.Text == "") highHP.Text = "0";
+                ModuesManager.healer.lowHP = int.Parse(lowHP.Text);
+                ModuesManager.healer.medHP = int.Parse(medHP.Text);
+                ModuesManager.healer.highHP = int.Parse(highHP.Text);
 
                 if (lowMana.Text == "") lowMana.Text = "0";
                 if (highMana.Text == "") highMana.Text = "0";
-                int lMana = int.Parse(lowMana.Text);
-                int hMana = int.Parse(highMana.Text);
-                string lManaB = lMB.Text;
-                string hManaB = hMB.Text;
+                ModuesManager.healer.lowMana = int.Parse(lowMana.Text);
+                ModuesManager.healer.highMana = int.Parse(highMana.Text);
+                ModuesManager.healer.lowManaButton = lMB.Text;
+                ModuesManager.healer.highManaButton = hMB.Text;
 
-
-                bool isWorking = Modules.Healer.isWorking();
+               
                 if(isWorking)
-                    Modules.ModuesManager.HealerDisable();
-                Modules.Healer.AsignValues(lHP, mHP, hHP, lHPB, mHPB, hHPB, lHPMana, mHPMana, hHPMana, lMana, hMana, lManaB, hManaB);
-                if(isWorking)
-                    Modules.ModuesManager.HealerRun();
+                    ModuesManager.HealerEnable();
             }
             catch(Exception err)
             {
@@ -66,9 +69,7 @@ namespace TibiaHeleper.Windows
                 Error.Visibility = Visibility.Visible;
             }
 
-            
-
-          //  Modules.Healer.AsignValues();
+           
         }
 
         private void HideErrorGrid(object sender, RoutedEventArgs e)
@@ -85,21 +86,21 @@ namespace TibiaHeleper.Windows
 
         private void SetValues(object sender, RoutedEventArgs e)
         {
-            lowHP.Text = Modules.Healer.getLowHP();
-            medHP.Text = Modules.Healer.getMedHP();
-            highHP.Text = Modules.Healer.getHighHP();
-            lowHPB.Text = Modules.Healer.getLowHPB();
-            medHPB.Text = Modules.Healer.getMedHPB();
-            highHPB.Text = Modules.Healer.getHighHPB();
+            lowHP.Text = ModuesManager.healer.lowHP.ToString();
+            medHP.Text = ModuesManager.healer.medHP.ToString();
+            highHP.Text = ModuesManager.healer.highHP.ToString();
+            lowHPB.Text = ModuesManager.healer.lowHPButton;
+            medHPB.Text = ModuesManager.healer.medHPButton;
+            highHPB.Text = ModuesManager.healer.highHPButton;
 
-            lowHPMana.Text = Modules.Healer.getlowHPMana();
-            medHPMana.Text = Modules.Healer.getmedHPMana();
-            highHPMana.Text = Modules.Healer.gethighHPMana();
+            lowHPMana.Text = ModuesManager.healer.lowHPMana.ToString();
+            medHPMana.Text = ModuesManager.healer.medHPMana.ToString();
+            highHPMana.Text = ModuesManager.healer.highHPMana.ToString();
 
-            lowMana.Text = Modules.Healer.getLowMana();
-            highMana.Text = Modules.Healer.getHighMana();
-            lMB.Text = Modules.Healer.getLowManaButton();
-            hMB.Text = Modules.Healer.getHighManaButton();
+            lowMana.Text = ModuesManager.healer.lowMana.ToString();
+            highMana.Text = ModuesManager.healer.highMana.ToString();
+            lMB.Text = ModuesManager.healer.lowManaButton;
+            hMB.Text = ModuesManager.healer.highManaButton;
         }
     
 

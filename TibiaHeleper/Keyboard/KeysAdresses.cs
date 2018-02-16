@@ -10,6 +10,7 @@ namespace TibiaHeleper.Keyboard
     {
         public static void assignKeys(Dictionary<string, int> DButton)
         {
+            
             //Functional Keys
             DButton.Add("F1", 0x70);
             DButton.Add("F2", 0x71);
@@ -74,7 +75,7 @@ namespace TibiaHeleper.Keyboard
             DButton.Add("DOWN", 0x28);
 
 
-
+    
 
         }
     }

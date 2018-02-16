@@ -9,24 +9,58 @@ namespace TibiaHeleper.Modules
 {
     static class ModuesManager
     {
-        static Thread THealer;
+        
+        public static Healer healer { get; set; }
+        public static AutoHaste autoHaste;
+
+        private static Thread THealer;
+        private static Thread TAutoHaste;
+        private static Semaphore sem;
 
         static ModuesManager()
         {
-            THealer = new Thread(Modules.Healer.Run);
+            
+            sem = new Semaphore(1, 1);
+
+            
+            healer = new Healer();
+            THealer = new Thread(healer.Run);
+            autoHaste = new AutoHaste();
+            TAutoHaste = new Thread(autoHaste.Run);
+          
         }
 
-        public static void HealerDisable()
+        private static void enableThread(Module module)
         {
-            Healer.Stop();
-            THealer.Abort();//for safety
-            THealer = new Thread(Modules.Healer.Run);
+            sem.WaitOne();
+
+                if (!module.working);
+                    Thread t = new Thread(module.Run);
+                t.Start();
+
+            sem.Release();
+                
         }
 
-        public static void HealerRun()
+        private static void disableThread(Module module)
         {
-            if(!Healer.isWorking())
-                THealer.Start();
+            
+            sem.WaitOne();
+                module.working = false;
+            sem.Release();
+            
         }
+
+        public static void HealerEnable() { enableThread((Module)healer); }
+        
+        public static void HealerDisable() { disableThread((Module)healer); }
+
+        public static void AutoHasteEnable() { enableThread((Module)autoHaste); }
+
+        public static void AutoHasteDisable() { disableThread((Module)autoHaste); }
+
+        
+
+
     }
 }

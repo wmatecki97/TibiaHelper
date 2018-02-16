@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\App.xaml
-2500338490
+31740787412
 
-1873240840
+20-196012699
 13738642453
-MainWindow.xaml;Windows\HealerWindow.xaml;
+MainWindow.xaml;Windows\AdditionalModules.xaml;Windows\HealerWindow.xaml;
 
-False
+True
 
