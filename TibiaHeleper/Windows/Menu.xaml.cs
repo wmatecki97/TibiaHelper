@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,45 +10,44 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TibiaHeleper.MemoryOperations;
 
-namespace TibiaHeleper
+namespace TibiaHeleper.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Menu : Window
     {
-               public MainWindow()
+        public Menu()
         {
             InitializeComponent();
         }
-
+       
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (!GetData.inject())
             {
                 Environment.Exit(0);
             }
-            if (Modules.ModuesManager.healer.working) HealerEnable.IsChecked = true;
-           
+            if (Modules.ModulesManager.healer.working) HealerEnable.IsChecked = true;
+
         }
 
         private void HealerDisable(object sender, RoutedEventArgs e)
         {
-            Modules.ModuesManager.HealerDisable();
+            Modules.ModulesManager.HealerDisable();
         }
 
         private void HealerRun(object sender, RoutedEventArgs e)
         {
-            Modules.ModuesManager.HealerEnable();
+            Modules.ModulesManager.HealerEnable();
         }
 
         private void HealerButtonClicked(object sender, RoutedEventArgs e)
         {
-            Windows.HealerWindow healerWindow = new Windows.HealerWindow();
+            HealerWindow healerWindow = new Windows.HealerWindow();
             healerWindow.Show();
             this.Hide();
         }
@@ -61,7 +59,9 @@ namespace TibiaHeleper
 
         private void OpenAdditionalModulesWindow(object sender, RoutedEventArgs e)
         {
-           
+            AdditionalModules othersWindow = new AdditionalModules();
+            othersWindow.Show();
+            this.Hide();
         }
     }
 }

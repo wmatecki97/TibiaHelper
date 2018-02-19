@@ -13,25 +13,41 @@ namespace TibiaHeleper.Modules
     {
         public bool working { get; set; }
         public string HasteSpell { get; set; }
-        public int HasteMana { get; set; }
+        public int ManaCost { get; set; }
 
-        private UInt32 ActualSpeedAdress = Adresses.ActualSpeed;
-        private UInt32 NormalSpeedAdress = Adresses.NormalSpeed;
-        private UInt32 Mana
+        
 
         public void Run()
         {
             working = true;
             int mana;
+            int actualSpeed;
+
+            /* 
+            int hastedSpeed;
+
+          //  int speedBeforeHaste = normalSpeed = GetData.getActualSpeed();
+
+            hastedSpeed = GetData.getActualSpeed();
+            KeyboardSimulator.Message(HasteSpell);
+
+            // while (hastedSpeed = GetData.getActualSpeed()) ;
+            //Thread.Sleep(3000);
+            hastedSpeed = GetData.getActualSpeed();
+
+            */
+            int normalSpeed = GetData.getNormalSpeed();
 
             while (working)
             {
-                mana=
-                if (GetData.getDataFromAdress(ActualSpeedAdress) <= GetData.getDataFromAdress(NormalSpeedAdress) + 100)
+                mana = GetData.getMana();
+                actualSpeed = GetData.getActualSpeed();
+
+                if (mana>=ManaCost && GetData.getActualSpeed()<=normalSpeed+50)
                 {
                     KeyboardSimulator.Message(HasteSpell);
                 }
-                Thread.Sleep(300);
+                Thread.Sleep(500);
             }
         }
     }

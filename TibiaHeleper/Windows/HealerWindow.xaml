@@ -25,10 +25,6 @@
         <TextBox x:Name="medHPMana" HorizontalAlignment="Left" Height="23" Margin="255,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         <TextBox x:Name="highHPMana" HorizontalAlignment="Left" Height="23" Margin="255,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         <Label x:Name="ManaNeededLabel" Content="Mana cost" HorizontalAlignment="Left" Margin="245,33,0,0" VerticalAlignment="Top" Width="74"/>
-        <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
-            <Label x:Name="ErrorLabel" Content="Error" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="300" Height="177"/>
-            <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
-        </Grid>
         <Label x:Name="LowManaLabel" Content="Low Mana" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top" Width="69"/>
         <TextBox x:Name="lowMana" HorizontalAlignment="Left" Height="23" Margin="92,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         <TextBox x:Name="lMB" HorizontalAlignment="Left" Height="23" Margin="166,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
@@ -36,5 +32,9 @@
         <TextBox x:Name="highMana" HorizontalAlignment="Left" Height="23" Margin="92,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         <TextBox x:Name="hMB" HorizontalAlignment="Left" Height="23" Margin="166,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
         
+        <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
+            <Label x:Name="ErrorLabel" Content="Error" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="300" Height="177"/>
+            <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
+        </Grid>
     </Grid>
 </Window>

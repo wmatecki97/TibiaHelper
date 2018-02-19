@@ -49,6 +49,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -58,27 +62,25 @@
     <Compile Include="Keyboard\KeyboardSimulator.cs" />
     <Compile Include="Keyboard\KeysAdresses.cs" />
     <Compile Include="MemoryOperations\Adresses.cs" />
+    <Compile Include="MemoryOperations\Flags.cs" />
     <Compile Include="MemoryOperations\GetData.cs" />
     <Compile Include="MemoryOperations\ReadMemory.cs" />
     <Compile Include="Modules\AutoHaste.cs" />
-    <Compile Include="Modules\ModuesManager.cs" />
+    <Compile Include="Modules\ModulesManager.cs" />
     <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\Sio.cs" />
     <Compile Include="Windows\AdditionalModules.xaml.cs">
       <DependentUpon>AdditionalModules.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\HealerWindow.xaml.cs">
       <DependentUpon>HealerWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Windows\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WindowsManager.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\AdditionalModules.xaml">
@@ -86,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\HealerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +115,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

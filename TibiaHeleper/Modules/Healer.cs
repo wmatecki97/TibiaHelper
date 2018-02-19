@@ -28,27 +28,11 @@ namespace TibiaHeleper.Modules
         public string lowManaButton {get; set;}
         public string medManaButton {get; set;}
         public string highManaButton {get; set;}
-        UInt32 XORAdr;
-        UInt32 MaxHPAdr;
-        UInt32 HPAdr;
-        UInt32 MaxManaAdr;
-        UInt32 ManaAdr;
-         
-        public Healer()
-        {
-            //getting adresses of variables in Tibia.exe
-            MaxHPAdr = Adresses.MaxHPAdr;
-            MaxManaAdr = Adresses.MaxManaAdr;
-            HPAdr = Adresses.HPAdr;
-            ManaAdr = Adresses.ManaAdr;
-            XORAdr = Adresses.HPXORAdr;
-            
-        }
+
 
         public void Run()
         {
-            int XOR = GetData.getDataFromAdress(XORAdr);
-
+           
             /*
             //TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP
             lowHP = 500;
@@ -68,9 +52,9 @@ namespace TibiaHeleper.Modules
             while (working)
             {
 
-                //int maxHP = HPXOR ^ GetData.getDataFromAdress(MaxHPAdr);
-                int HP = XOR ^ GetData.getDataFromAdress(HPAdr);
-                int mana = XOR ^ GetData.getDataFromAdress(ManaAdr);
+                //int maxHP = HPXOR ^ GetData.getIntegerDataFromAdress(MaxHPAdr);
+                int HP = GetData.getHP();
+                int mana = GetData.getMana();
                 healHP(HP, mana);
                 healMana(mana);
                 Thread.Sleep(100);

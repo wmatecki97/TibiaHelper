@@ -16,6 +16,12 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 ActualSpeed { get; }
         public static UInt32 NormalSpeed { get; }
 
+        //list of spotted monsters persons and NPC
+        public static UInt32 InformationsOfSpottedCreaturesAndPlayersSartAdress { get; } 
+        public static UInt32 PlayerInformationBlockSize { get; }
+        public static UInt32 PlayerHpShift { get; }//shift means PlayerInformationsAdress + shift is player HP
+        public static UInt32 PlayerOnScreenShift { get; }
+
         static Adresses()
         {
             MaxHPAdr = 0x70E048;
@@ -23,8 +29,13 @@ namespace TibiaHeleper.MemoryOperations
             XORAdr = 0x570458;
             MaxManaAdr = 0x57045C;
             ManaAdr = 0x57048C;
-            ActualSpeed = 570418;
-            NormalSpeed = 570480;
+            ActualSpeed = 0x570418;
+            NormalSpeed = 0x570480;
+
+            InformationsOfSpottedCreaturesAndPlayersSartAdress = 0x76A0B4;
+            PlayerInformationBlockSize = 0xDC;
+            PlayerHpShift = 0x88;
+            PlayerOnScreenShift = 0xA0;
         }
     }
 }
