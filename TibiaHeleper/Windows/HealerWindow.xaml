@@ -12,22 +12,27 @@
         <Label x:Name="hotkeyLabel" Content="Hotkey" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="166,33,0,0" VerticalAlignment="Top" Width="53"/>
         <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="92,275,0,0" VerticalAlignment="Top" Width="75" Click="Save"/>
         <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" Margin="194,275,0,0" VerticalAlignment="Top" Width="75" Click="Back"/>
-        <TextBox x:Name="lowHPB" HorizontalAlignment="Left" Height="23" Margin="166,72,0,0" TextWrapping="Wrap" Text="F1" VerticalAlignment="Top" Width="65" />
-        <TextBox x:Name="medHPB" HorizontalAlignment="Left" Height="23" Margin="166,99,0,0" TextWrapping="Wrap" Text="Shift + F2" VerticalAlignment="Top" Width="65"/>
-        <TextBox x:Name="highHPB" HorizontalAlignment="Left" Height="23" Margin="166,128,0,0" TextWrapping="Wrap" Text="Ctrl F3" VerticalAlignment="Top" Width="65" />
+
         <Label x:Name="low" Content="Low HP" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"  Width="59"/>
-        <Label x:Name="med" Content="Med HP" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="59"/>
-        <Label x:Name="high" Content="High HP" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="59"/>
         <TextBox x:Name="lowHP" HorizontalAlignment="Left" Height="23" Margin="92,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
-        <TextBox x:Name="medHP" HorizontalAlignment="Left" Height="23" Margin="92,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
-        <TextBox x:Name="highHP" HorizontalAlignment="Left" Height="23" Margin="92,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" />
+        <TextBox x:Name="lowHPB" HorizontalAlignment="Left" Height="23" Margin="166,72,0,0" TextWrapping="Wrap" Text="F1" VerticalAlignment="Top" Width="65" />
         <TextBox x:Name="lowHPMana" HorizontalAlignment="Left" Height="23" Margin="255,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+
+        <Label x:Name="med" Content="Med HP" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="59"/>
+        <TextBox x:Name="medHP" HorizontalAlignment="Left" Height="23" Margin="92,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <TextBox x:Name="medHPB" HorizontalAlignment="Left" Height="23" Margin="166,99,0,0" TextWrapping="Wrap" Text="Shift + F2" VerticalAlignment="Top" Width="65"/>
         <TextBox x:Name="medHPMana" HorizontalAlignment="Left" Height="23" Margin="255,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+
+        <Label x:Name="high" Content="High HP" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="59"/>
+        <TextBox x:Name="highHP" HorizontalAlignment="Left" Height="23" Margin="92,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" />
+        <TextBox x:Name="highHPB" HorizontalAlignment="Left" Height="23" Margin="166,128,0,0" TextWrapping="Wrap" Text="Ctrl F3" VerticalAlignment="Top" Width="65" />
         <TextBox x:Name="highHPMana" HorizontalAlignment="Left" Height="23" Margin="255,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+
         <Label x:Name="ManaNeededLabel" Content="Mana cost" HorizontalAlignment="Left" Margin="245,33,0,0" VerticalAlignment="Top" Width="74"/>
         <Label x:Name="LowManaLabel" Content="Low Mana" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top" Width="69"/>
         <TextBox x:Name="lowMana" HorizontalAlignment="Left" Height="23" Margin="92,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         <TextBox x:Name="lMB" HorizontalAlignment="Left" Height="23" Margin="166,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        
         <Label x:Name="HighManaLabel" Content="High Mana" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="69"/>
         <TextBox x:Name="highMana" HorizontalAlignment="Left" Height="23" Margin="92,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         <TextBox x:Name="hMB" HorizontalAlignment="Left" Height="23" Margin="166,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>

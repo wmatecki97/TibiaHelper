@@ -58,31 +58,13 @@ namespace TibiaHeleper.Keyboard
 
         public static void Message(string text)
         {
-            //test
-            for(int i=0; i<300; i++)
-            {
-                PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["SHIFT"], 0);
-                PostMessage(proc.MainWindowHandle, WM_KEYDOWN, 0x0+i, 0);
-                PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["SHIFT"], 0);
-            }
-            //test
-
 
             text = text.ToUpper();
             PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["ENTER"], 0);
             foreach (char letter in text)
             {
-                /*
-                if(letter == '\"')
-                {
-                    PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["SHIFT"], 0);
-                    PostMessage(proc.MainWindowHandle, WM_CHAR, DButton[letter.ToString()], 0);
-                    PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["SHIFT"], 0);
-                }
-                */
-                    PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["SHIFT"], 0);
-                    PostMessage(proc.MainWindowHandle, WM_CHAR, DButton[letter.ToString()], 0);
-                PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["SHIFT"], 0);
+                
+                PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton[letter.ToString()], 0);
 
             }
             PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["ENTER"], 0);

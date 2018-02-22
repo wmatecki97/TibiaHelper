@@ -69,6 +69,8 @@
     <Compile Include="Modules\ModulesManager.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\Sio.cs" />
+    <Compile Include="Storage\DataCollecter.cs" />
+    <Compile Include="Storage\Storage.cs" />
     <Compile Include="Windows\AdditionalModules.xaml.cs">
       <DependentUpon>AdditionalModules.xaml</DependentUpon>
     </Compile>

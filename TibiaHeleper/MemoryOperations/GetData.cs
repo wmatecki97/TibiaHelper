@@ -10,7 +10,7 @@ namespace TibiaHeleper.MemoryOperations
     class GetData
     {
         static Process Tibia;
-        static IntPtr Handle;
+        public static IntPtr Handle { get; set; }
         static UInt32 Base;
         static UInt32 BlockOfInformationOfPlayer;
 
@@ -104,6 +104,21 @@ namespace TibiaHeleper.MemoryOperations
         public static int getPlayerHPPercent(UInt32 playerAdress)
         {
             return getIntegerDataFromAdress(playerAdress + Adresses.PlayerHpShift);
+        }
+
+        public static string getActualInput()
+        {
+            return getStringFromAdress(Adresses.InputAdrWithoutBase-Base);
+        }
+
+        public static void sendInput(string inputString)
+        {
+            string temp = getActualInput();
+            byte[] bytes = Encoding.ASCII.GetBytes(inputString);
+            int bufferLength = bytes.Length;
+            int numberOfBytesWritten = 0;
+
+            ReadMemory.WriteString(Base, Handle, bytes, bufferLength, ref numberOfBytesWritten);
         }
     
     }

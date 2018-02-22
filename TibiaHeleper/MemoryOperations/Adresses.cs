@@ -8,6 +8,10 @@ namespace TibiaHeleper.MemoryOperations
 {
     class Adresses
     {
+        //GUI
+        public static UInt32 InputAdrWithoutBase { get; }
+
+        //Player
         public static UInt32 MaxHPAdr { get; }
         public static UInt32 HPAdr { get; }
         public static UInt32 XORAdr { get; }
@@ -19,11 +23,13 @@ namespace TibiaHeleper.MemoryOperations
         //list of spotted monsters persons and NPC
         public static UInt32 InformationsOfSpottedCreaturesAndPlayersSartAdress { get; } 
         public static UInt32 PlayerInformationBlockSize { get; }
-        public static UInt32 PlayerHpShift { get; }//shift means PlayerInformationsAdress + shift is player HP
+        public static UInt32 PlayerHpShift { get; }// means PlayerInformationsAdress + shift is player HP
         public static UInt32 PlayerOnScreenShift { get; }
 
         static Adresses()
         {
+            InputAdrWithoutBase= 0x09924D10;
+
             MaxHPAdr = 0x70E048;
             HPAdr = 0x70E000;
             XORAdr = 0x570458;
@@ -31,6 +37,7 @@ namespace TibiaHeleper.MemoryOperations
             ManaAdr = 0x57048C;
             ActualSpeed = 0x570418;
             NormalSpeed = 0x570480;
+
 
             InformationsOfSpottedCreaturesAndPlayersSartAdress = 0x76A0B4;
             PlayerInformationBlockSize = 0xDC;

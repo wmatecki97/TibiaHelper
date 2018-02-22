@@ -12,6 +12,9 @@ namespace TibiaHeleper.MemoryOperations
         [DllImport("kernel32.dll")]
         public static extern Int32 ReadProcessMemory(IntPtr hprocess, IntPtr lpBaseAdress, [In, Out] byte[] buffer, UInt32 size, out IntPtr lpNumberOfBytesRead);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
+
         public static byte[] ReadBytes(IntPtr Handle, Int64 Adress, uint BytesToRead)
         {
             IntPtr ptrBytesRead;
@@ -28,6 +31,11 @@ namespace TibiaHeleper.MemoryOperations
         public static string ReadString(long Adress, IntPtr Handle, uint length = 32)
         {
             return ASCIIEncoding.Default.GetString(ReadBytes(Handle, Adress, length)).Split('\0')[0];
+        }
+        //not sure
+        public static void WriteString(UInt32 Adress, IntPtr Handle, byte[] lpBuffer, int bufferLength, ref int lpNumberOfBytesWritten)
+        {
+            WriteProcessMemory((int)Handle, (int)Adress, lpBuffer, bufferLength, ref lpNumberOfBytesWritten);
         }
     }
 }

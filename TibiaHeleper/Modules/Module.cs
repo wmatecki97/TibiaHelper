@@ -10,5 +10,6 @@ namespace TibiaHeleper.Modules
     {
         void Run();
         bool working { get; set; }
+        void Stop();
     }
 }

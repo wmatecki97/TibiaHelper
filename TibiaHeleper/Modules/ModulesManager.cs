@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,11 +29,8 @@ namespace TibiaHeleper.Modules
 
             
             healer = new Healer();
-      //      THealer = new Thread(healer.Run);
             autoHaste = new AutoHaste();
-      //      TAutoHaste = new Thread(autoHaste.Run);
             sio = new Sio();
-    //        TSio = new Thread(sio.Run);
           
         }
 
@@ -51,7 +50,7 @@ namespace TibiaHeleper.Modules
         {
             
             sem.WaitOne();
-                module.working = false;
+                module.Stop();
             sem.Release();
             
         }
@@ -59,13 +58,24 @@ namespace TibiaHeleper.Modules
         public static void HealerEnable() { enableThread((Module)healer); }
         public static void HealerDisable() { disableThread((Module)healer); }
 
-        public static void AutoHasteEnable() { enableThread((Module)autoHaste); }
+        public static void AutoHasteEnable() { enableThread((Module)autoHaste); serialize(); }
         public static void AutoHasteDisable() { disableThread((Module)autoHaste); }
 
         public static void SioEnable() { enableThread((Module)sio); }
         public static void SioDisable() { disableThread((Module)sio); }
 
-        
+        public static void serialize()
+        {
+            // Serialize the object data to a file
+            Stream stream = File.Open("AnimalData.dat", FileMode.Create);
+            BinaryFormatter bf = new BinaryFormatter();
+
+            // Send the object data to the file
+            bf.Serialize(stream, autoHaste);
+            stream.Close();
+
+
+        }
 
 
     }

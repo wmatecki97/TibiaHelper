@@ -10,13 +10,14 @@ using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Modules
 {
+    [Serializable]
     class Sio : Module
     {
         public bool working { get; set; }
         public string playerName { get; set; }
         public int healthPercentToHeal { get; set; }
 
-
+        private bool stopped;
         public void Run()
         {
             working = true;
@@ -31,13 +32,24 @@ namespace TibiaHeleper.Modules
                     int mana = GetData.getMana();
                     if (GetData.getPlayerHPPercent(playerAdress) < healthPercentToHeal && GetData.getMana() >= 140)
                     {
-                        KeyboardSimulator.Message(spell);
+                        KeyboardSimulator.Press("f10");
+                        //KeyboardSimulator.Message(spell);
                         Thread.Sleep(1000);
                     }
                 }
                 Thread.Sleep(50);
             }
-            
+            stopped = true;
+        }
+
+        public void Stop()
+        {
+            if (working)
+            {
+                stopped = false;
+                working = false;
+                while (!stopped) ;//waiting for thread finish
+            }
         }
 
         /// <summary>

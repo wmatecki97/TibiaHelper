@@ -63,5 +63,15 @@ namespace TibiaHeleper.Windows
             othersWindow.Show();
             this.Hide();
         }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            Storage.Storage.Save();
+        }
+
+        private void Load(object sender, RoutedEventArgs e)
+        {
+            Storage.Storage.Load();
+        }
     }
 }

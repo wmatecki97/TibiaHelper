@@ -11,5 +11,7 @@
         <Button x:Name="Healer" Content="Healer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="97" Click="HealerButtonClicked"/>
         <CheckBox x:Name="HealerEnable" Content="Enable Healer" HorizontalAlignment="Left" Margin="125,12,0,0" VerticalAlignment="Top" Checked="HealerRun" Unchecked="HealerDisable" />
         <Button x:Name="AdditionalModulesButton" Content="Other" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="97" Click="OpenAdditionalModulesWindow"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="97" Click="Save"/>
+        <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="97" Click="Load"/>
     </Grid>
 </Window>

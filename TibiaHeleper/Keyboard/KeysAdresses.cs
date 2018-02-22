@@ -24,10 +24,10 @@ namespace TibiaHeleper.Keyboard
             DButton.Add("F10", 0x79);
             DButton.Add("F11", 0x7A);
             DButton.Add("F12", 0x7B);
-            DButton.Add("SHIFT", 0x12);
+            DButton.Add("SHIFT", 0x10);
             DButton.Add(" ", 0x20);
             DButton.Add("ENTER", 0x0D);
-            DButton.Add("\"", 0xDE);
+            DButton.Add("\"", 0x22);
 
             //Numbers
             DButton.Add("0", 0x30);

@@ -9,7 +9,7 @@ using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Modules
 {
-
+    [Serializable]
     public class Healer : Module
     {
         public bool working { get; set; }
@@ -29,38 +29,29 @@ namespace TibiaHeleper.Modules
         public string medManaButton {get; set;}
         public string highManaButton {get; set;}
 
+        private bool stopped;
 
         public void Run()
         {
-           
-            /*
-            //TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP
-            lowHP = 500;
-            lowHPButton = "shift + f3";
-            lowHPMana = 120;
-            medHP = 700;
-            medHPButton = "ShiFT + f2";
-            medHPMana = 70;
-            highHP = 900;
-            highHPButton = "ShiFT + f1";
-            highHPMana = 20;
-            //TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP
-            */
-
             working = true;
 
             while (working)
             {
-
                 //int maxHP = HPXOR ^ GetData.getIntegerDataFromAdress(MaxHPAdr);
                 int HP = GetData.getHP();
                 int mana = GetData.getMana();
-                healHP(HP, mana);
-                healMana(mana);
+                if (HP > 0)
+                {
+                    healHP(HP, mana);
+                    healMana(mana);
+                }                
                 Thread.Sleep(100);
             }
+            stopped = true;
 
         }
+
+
         private void healMana(int mana)
         {
             if (mana < lowMana)
@@ -82,6 +73,16 @@ namespace TibiaHeleper.Modules
             else if (HP < highHP && mana > medHPMana)
             {
                 KeyboardSimulator.Press(highHPButton);
+            }
+        }
+
+        public void Stop()
+        {
+            if (working)
+            {
+                stopped = false;
+                working = false;
+                while (!stopped) ;//waiting for thread finish
             }
         }
 
