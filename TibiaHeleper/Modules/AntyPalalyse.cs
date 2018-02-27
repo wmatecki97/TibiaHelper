@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,8 +9,7 @@ using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Modules
 {
-    [Serializable]
-    public class AutoHaste : Module
+    public class AntyPalalyse : Module
     {
         public bool working { get; set; }
         private bool stopped;
@@ -19,14 +17,13 @@ namespace TibiaHeleper.Modules
         public string HasteSpell { get; set; }
         public int ManaCost { get; set; }
 
-
         public void Run()
         {
+            stopped = false;
             working = true;
+
             int mana;
             int actualSpeed;
-
-            
             int normalSpeed = GetData.getNormalSpeed();
 
             while (working)
@@ -34,24 +31,20 @@ namespace TibiaHeleper.Modules
                 mana = GetData.getMana();
                 actualSpeed = GetData.getActualSpeed();
 
-                if (mana>=ManaCost && GetData.getActualSpeed()<=normalSpeed+50)
-                {
-                    //KeyboardSimulator.Press("f10");
+                if (mana >= ManaCost && GetData.getActualSpeed() <= normalSpeed-50)
+                {                    
                     KeyboardSimulator.Message(HasteSpell);
+                    Thread.Sleep(800);
                 }
-                Thread.Sleep(500);
+                Thread.Sleep(50);
             }
             stopped = true;
         }
 
         public void Stop()
         {
-            if (working)
-            {
-                stopped = false;
-                working = false;
-                while (!stopped) ;//waiting for thread finish
-            }
+            working = false;
+            while (!stopped) ;
         }
     }
 }

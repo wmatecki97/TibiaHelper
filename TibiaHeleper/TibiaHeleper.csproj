@@ -65,6 +65,7 @@
     <Compile Include="MemoryOperations\Flags.cs" />
     <Compile Include="MemoryOperations\GetData.cs" />
     <Compile Include="MemoryOperations\ReadMemory.cs" />
+    <Compile Include="Modules\AntyPalalyse.cs" />
     <Compile Include="Modules\AutoHaste.cs" />
     <Compile Include="Modules\ModulesManager.cs" />
     <Compile Include="Modules\Module.cs" />

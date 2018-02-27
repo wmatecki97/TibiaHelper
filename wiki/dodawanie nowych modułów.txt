@@ -1,3 +1,4 @@
-﻿1. dodać statyczny moduł do Modules
+﻿1. dodać moduł do Modules dziedziczący z Module
+2. zaimplementować metody wymagane przez interfejs, gdzie stop powinna czekać na zakończenie metody run
 2. dodać stronę modułu do windows
 3. dodać metody do uruchamiania i zatrzymywania wątku modułu w Modules Manager

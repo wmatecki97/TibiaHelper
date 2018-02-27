@@ -27,7 +27,10 @@ namespace TibiaHeleper.Keyboard
             DButton.Add("SHIFT", 0x10);
             DButton.Add(" ", 0x20);
             DButton.Add("ENTER", 0x0D);
-            DButton.Add("\"", 0x22);
+            DButton.Add("'", 0xDE);
+            DButton.Add("\"", 0xDE);
+            DButton.Add(";", 0xBA);
+
 
             //Numbers
             DButton.Add("0", 0x30);
