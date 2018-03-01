@@ -31,8 +31,12 @@ namespace TibiaHeleper.Windows
             {
                 Environment.Exit(0);
             }
-            if (Modules.ModulesManager.healer.working) HealerEnable.IsChecked = true;
+            checkWorkingModules();
+        }
 
+        private void checkWorkingModules()
+        {
+            if (Modules.ModulesManager.healer.working) HealerEnable.IsChecked = true;
         }
 
         private void HealerDisable(object sender, RoutedEventArgs e)
@@ -72,6 +76,9 @@ namespace TibiaHeleper.Windows
         private void Load(object sender, RoutedEventArgs e)
         {
             Storage.Storage.Load();
+            checkWorkingModules();
+            WindowsManager.additionalModulesWindow.checkWorkingModules();
+            WindowsManager.healerWindow.assignData();
         }
 
         

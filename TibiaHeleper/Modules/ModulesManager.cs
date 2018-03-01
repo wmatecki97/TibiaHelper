@@ -15,6 +15,7 @@ namespace TibiaHeleper.Modules
         public static Healer healer { get; set; }
         public static AutoHaste autoHaste { get; set; }
         public static Sio sio { get; set; }
+        public static AntyPalalyse antyParalyse { get; set; }
 
        // private static Thread THealer;
        // private static Thread TAutoHaste;
@@ -31,6 +32,7 @@ namespace TibiaHeleper.Modules
             healer = new Healer();
             autoHaste = new AutoHaste();
             sio = new Sio();
+            antyParalyse = new AntyPalalyse();
           
         }
 
@@ -63,6 +65,9 @@ namespace TibiaHeleper.Modules
 
         public static void SioEnable() { enableThread((Module)sio); }
         public static void SioDisable() { disableThread((Module)sio); }
+
+        public static void AntyParalyseEnable() { enableThread((Module)antyParalyse); }
+        public static void AntyParalyseDisable() { disableThread((Module)antyParalyse); }
 
         public static void serialize()
         {

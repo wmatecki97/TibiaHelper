@@ -85,6 +85,11 @@ namespace TibiaHeleper.Windows
 
         private void SetValues(object sender, RoutedEventArgs e)
         {
+            assignData();
+        }
+    
+        public void assignData()
+        {
             lowHP.Text = ModulesManager.healer.lowHP.ToString();
             medHP.Text = ModulesManager.healer.medHP.ToString();
             highHP.Text = ModulesManager.healer.highHP.ToString();
@@ -101,7 +106,6 @@ namespace TibiaHeleper.Windows
             lMB.Text = ModulesManager.healer.lowManaButton;
             hMB.Text = ModulesManager.healer.highManaButton;
         }
-    
 
         private void Close(object sender, System.ComponentModel.CancelEventArgs e)
         {

@@ -36,8 +36,7 @@ namespace TibiaHeleper.Modules
 
                 if (mana>=ManaCost && GetData.getActualSpeed()<=normalSpeed+50)
                 {
-                    //KeyboardSimulator.Press("f10");
-                    KeyboardSimulator.Message(HasteSpell);
+                    KeyboardSimulator.Simulate(HasteSpell);
                 }
                 Thread.Sleep(500);
             }

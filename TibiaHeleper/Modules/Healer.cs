@@ -55,24 +55,24 @@ namespace TibiaHeleper.Modules
         private void healMana(int mana)
         {
             if (mana < lowMana)
-                KeyboardSimulator.Press(lowManaButton);
+                KeyboardSimulator.Simulate(lowManaButton);
             else if (mana < highMana)
-                KeyboardSimulator.Press(highManaButton);
+                KeyboardSimulator.Simulate(highManaButton);
         }
 
         private void healHP(int HP, int mana)
         {
             if (HP < lowHP && mana > lowHPMana)
             {
-                KeyboardSimulator.Press(lowHPButton);
+                KeyboardSimulator.Simulate(lowHPButton);
             }
             else if (HP < medHP && mana > medHPMana)
             {
-                KeyboardSimulator.Press(medHPButton);
+                KeyboardSimulator.Simulate(medHPButton);
             }
             else if (HP < highHP && mana > medHPMana)
             {
-                KeyboardSimulator.Press(highHPButton);
+                KeyboardSimulator.Simulate(highHPButton);
             }
         }
 

@@ -16,8 +16,11 @@ namespace TibiaHeleper.Keyboard
         const UInt32 WM_KEYDOWN = 0x0100;
         const UInt32 WM_KEYUP = 0x0101;
         const UInt32 WM_CHAR = 0x0102;
+        const UInt32 WM_SYSKEYUP = 0x0105;
+        const UInt32 WM_SYSKEYDOWN = 0x0104;
         public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
         public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
+
 
 
         static Dictionary<string, int> DButton;
@@ -35,6 +38,15 @@ namespace TibiaHeleper.Keyboard
             DButton = new Dictionary<string, int>();
             KeysAdresses.assignKeys(DButton);
 
+        }
+
+        public static void Simulate(string action)
+        {
+            action = action.ToUpper();
+            if (action.IndexOf('+') != -1 || (action.IndexOf('F') == 0 && (action[1] >= 49 && action[1] <= 57) && action.Length <=3 )) // 49 is '1' like f1 and 57 is '9' length of f* keys is max 3 "f10"
+                Press(action);
+            else
+                Message(action);
         }
 
         public static void Press(string button)
@@ -66,7 +78,7 @@ namespace TibiaHeleper.Keyboard
         {
             switch (letter)
             {
-                case '\'': return true;
+                case '\"': return true;
             }
             return false;
         }
@@ -79,12 +91,13 @@ namespace TibiaHeleper.Keyboard
             foreach (char letter in text)
             {
                if(isSpecialLetter(letter))//if letter needs shift like " is from ' and shift
-                    keybd_event((byte)DButton["SHIFT"], 0, KEYEVENTF_EXTENDEDKEY, 0);
+                    PostMessage(proc.MainWindowHandle, WM_SYSKEYDOWN, DButton["SHIFT"], 0);
 
-                PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton[letter.ToString()], 0);
+
+                PostMessage(proc.MainWindowHandle, WM_SYSKEYUP, DButton[letter.ToString()], 0);
 
                 if(isSpecialLetter(letter))
-                    keybd_event((byte)DButton["SHIFT"], 0, KEYEVENTF_KEYUP, 0);
+                    PostMessage(proc.MainWindowHandle, WM_SYSKEYUP, DButton["SHIFT"], 0);
 
 
             }

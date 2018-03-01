@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TibiaHeleper.Modules;
 
 namespace TibiaHeleper.Windows
@@ -28,12 +17,30 @@ namespace TibiaHeleper.Windows
 
         private void AssignData(object sender, RoutedEventArgs e) //on loading
         {
+            checkWorkingModules();
+        }
+
+        public void checkWorkingModules()
+        {
             if (ModulesManager.autoHaste.working)
+            {
                 AHEnable.IsChecked = true;
-            AHSpell.Text = ModulesManager.autoHaste.HasteSpell;
-            AHMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
-            PlayerHpPercent.Text = ModulesManager.sio.healthPercentToHeal.ToString();
-            PlayerName.Text = ModulesManager.sio.playerName;
+                AHSpell.Text = ModulesManager.autoHaste.HasteSpell;
+                AHMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
+            }
+            if (ModulesManager.sio.working)
+            {
+                SioEnable.IsChecked = true;
+                PlayerHpPercent.Text = ModulesManager.sio.healthPercentToHeal.ToString();
+                PlayerName.Text = ModulesManager.sio.playerName;
+            }
+            if (ModulesManager.antyParalyse.working)
+            {
+                APSpell.Text = ModulesManager.antyParalyse.AntyParalyseSpell;
+                APMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
+                APEnable.IsChecked = true;
+            }
+
         }
 
         private void EnableAutoHaste(object sender, RoutedEventArgs e)
@@ -84,12 +91,31 @@ namespace TibiaHeleper.Windows
             {
                 ModulesManager.sio.playerName = PlayerName.Text;
                 ModulesManager.sio.healthPercentToHeal = int.Parse(PlayerHpPercent.Text);
+                ModulesManager.SioEnable();
             }
             catch (Exception)
             {
                 Error.Visibility = Visibility.Visible;
             }
-            ModulesManager.SioEnable();
+        }
+
+        private void DisableAntyParalyse(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.AntyParalyseDisable();
+        }
+
+        private void EnableAntyParalyse(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ModulesManager.antyParalyse.AntyParalyseSpell = APSpell.Text;
+                ModulesManager.antyParalyse.ManaCost = int.Parse(APMana.Text);
+                ModulesManager.AntyParalyseEnable();
+            }
+            catch (Exception)
+            {
+                Error.Visibility = Visibility.Visible;
+            }
         }
     }
 }

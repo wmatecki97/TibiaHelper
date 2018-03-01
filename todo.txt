@@ -1,0 +1,12 @@
+﻿ogarniie adresów do targetingu - lista battle
+klikanie na potwory
+
+Walker
+ogarnięcie aktualnej pozycji
+wyznaczenie czy dane pole można przejść
+ogarnięcie trasy do celu
+
+1.sprawdzenie dużych przeszkód na najprostszej drodze
+2. znalezeinie z której strony będzie łatwiej je ominąć
+3. wyznaczenie drogi do punktu przez którry będziemy omijać
+4. rozpisanie drogi na pojedyncze kratki

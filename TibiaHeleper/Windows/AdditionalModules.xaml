@@ -17,7 +17,15 @@
             <TextBox x:Name="AHMana" HorizontalAlignment="Left" Height="23" Margin="214,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="63"/>
             <CheckBox x:Name="AHEnable" Content="Enable" HorizontalAlignment="Left" Margin="296,34,0,0" VerticalAlignment="Top" Checked="EnableAutoHaste" Unchecked="DisableAutoHate"/>
         </Grid>
-        <Grid Name="Sio" Margin="0,30,0,44">
+        <Grid Name="AntyParalyse" Margin="0,120,10,-122">
+            <TextBox x:Name="APSpell" HorizontalAlignment="Left" Height="23" Margin="88,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="104"/>
+            <Label x:Name="AntyParalyseRow" Content="Anty Paralyse" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="8,30,0,0" VerticalAlignment="Top" Height="32"/>
+            <Label x:Name="APSpellLabel" Content="Spell" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="88,5,0,0" VerticalAlignment="Top" Width="104"/>
+            <Label x:Name="APManaLabel" Content="Mana cost" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="205,3,0,0" VerticalAlignment="Top" Width="73"/>
+            <TextBox x:Name="APMana" HorizontalAlignment="Left" Height="23" Margin="214,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="63"/>
+            <CheckBox x:Name="APEnable" Content="Enable" HorizontalAlignment="Left" Margin="296,34,0,0" VerticalAlignment="Top" Checked="EnableAntyParalyse" Unchecked="DisableAntyParalyse"/>
+        </Grid>
+        <Grid Name="Sio" Margin="0,29,0,44">
             <TextBox x:Name="PlayerName" HorizontalAlignment="Left" Height="23" Margin="88,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100"/>
             <TextBox x:Name="PlayerHpPercent" HorizontalAlignment="Left" Height="23" Margin="207,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
             <Label x:Name="SioRow" Content="Sio Player" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="24"/>

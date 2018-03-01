@@ -9,12 +9,13 @@ using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Modules
 {
+    [Serializable]
     public class AntyPalalyse : Module
     {
         public bool working { get; set; }
         private bool stopped;
 
-        public string HasteSpell { get; set; }
+        public string AntyParalyseSpell { get; set; }
         public int ManaCost { get; set; }
 
         public void Run()
@@ -33,7 +34,7 @@ namespace TibiaHeleper.Modules
 
                 if (mana >= ManaCost && GetData.getActualSpeed() <= normalSpeed-50)
                 {                    
-                    KeyboardSimulator.Message(HasteSpell);
+                    KeyboardSimulator.Simulate(AntyParalyseSpell);
                     Thread.Sleep(800);
                 }
                 Thread.Sleep(50);
