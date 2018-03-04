@@ -13,7 +13,7 @@ namespace TibiaHeleper.Modules
     public class AntyPalalyse : Module
     {
         public bool working { get; set; }
-        private bool stopped;
+        public bool stopped { get; set; }
 
         public string AntyParalyseSpell { get; set; }
         public int ManaCost { get; set; }
@@ -43,11 +43,6 @@ namespace TibiaHeleper.Modules
                 Thread.Sleep(50);
             }
             stopped = true;
-        }
-
-        public void Stop()
-        {
-            working = false;
         }
     }
 }

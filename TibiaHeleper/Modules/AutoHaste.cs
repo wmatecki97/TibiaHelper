@@ -14,7 +14,7 @@ namespace TibiaHeleper.Modules
     public class AutoHaste : Module
     {
         public bool working { get; set; }
-        private bool stopped;
+        public bool stopped { get; set; }
 
         public string HasteSpell { get; set; }
         public int ManaCost { get; set; }
@@ -43,14 +43,6 @@ namespace TibiaHeleper.Modules
                 Thread.Sleep(500);
             }
             stopped = true;
-        }
-
-        public void Stop()
-        {
-            if (working)
-            {
-                working = false;
-            }
         }
     }
 }

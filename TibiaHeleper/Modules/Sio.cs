@@ -24,10 +24,9 @@ namespace TibiaHeleper.Modules
             stopped = true;
         }
 
-        private bool stopped;
+        public bool stopped { get; set; }
         public void Run()
         {
-           
             findPlayer();
             string spell = "exura sio \"" + player.name + "\"";
             
@@ -46,14 +45,6 @@ namespace TibiaHeleper.Modules
                 Thread.Sleep(50);
             }
             stopped = true;
-        }
-
-        public void Stop()
-        {
-            if (working)
-            {
-                working = false;
-            }
         }
 
         /// <summary>

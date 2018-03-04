@@ -55,7 +55,7 @@ namespace TibiaHeleper.Modules
         {
 
             sem.WaitOne();
-            module.Stop();
+            module.working = false;
             sem.Release();
 
         }

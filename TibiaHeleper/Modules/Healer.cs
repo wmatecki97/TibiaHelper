@@ -29,7 +29,7 @@ namespace TibiaHeleper.Modules
         public string medManaAction {get; set;}
         public string highManaAction {get; set;}
 
-        private bool stopped;
+        public bool stopped { get; set; }
 
         public Healer()
         {
@@ -38,9 +38,6 @@ namespace TibiaHeleper.Modules
 
         public void Run()
         {
-
-            
-
 
             while (working)
             {
@@ -83,14 +80,7 @@ namespace TibiaHeleper.Modules
                 KeyboardSimulator.Simulate(highHPAction);
             }
         }
-
-        public void Stop()
-        {
-            if (working)
-            {
-                working = false;
-            }
-        }
+        
 
     }
 }

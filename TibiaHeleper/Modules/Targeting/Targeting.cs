@@ -11,14 +11,18 @@ namespace TibiaHeleper.Modules.Targeting
         public bool working { get; set; }
         public bool stopped { get; set; }
 
+
         public void Run()
         {
-            throw new NotImplementedException();
+            while (working)
+            {
+
+            }
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            working = false;
         }
     }
 }
