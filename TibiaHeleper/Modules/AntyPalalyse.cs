@@ -18,10 +18,13 @@ namespace TibiaHeleper.Modules
         public string AntyParalyseSpell { get; set; }
         public int ManaCost { get; set; }
 
+        public AntyPalalyse()
+        {
+            stopped = true;
+        }
+
         public void Run()
         {
-            stopped = false;
-            working = true;
 
             int mana;
             int actualSpeed;
@@ -45,7 +48,6 @@ namespace TibiaHeleper.Modules
         public void Stop()
         {
             working = false;
-            while (!stopped) ;
         }
     }
 }

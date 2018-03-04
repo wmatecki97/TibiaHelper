@@ -11,7 +11,7 @@ using TibiaHeleper.Storage;
 namespace TibiaHeleper.Modules
 {
     [Serializable]
-    class Sio : Module
+    public class Sio : Module
     {
         public bool working { get; set; }
         public string playerName { get;  set; }
@@ -19,10 +19,15 @@ namespace TibiaHeleper.Modules
 
         private Creature player { get; set; }
 
+        public Sio()
+        {
+            stopped = true;
+        }
+
         private bool stopped;
         public void Run()
         {
-            working = true;
+           
             findPlayer();
             string spell = "exura sio \"" + player.name + "\"";
             
@@ -47,9 +52,7 @@ namespace TibiaHeleper.Modules
         {
             if (working)
             {
-                stopped = false;
                 working = false;
-                while (!stopped) ;//waiting for thread finish
             }
         }
 

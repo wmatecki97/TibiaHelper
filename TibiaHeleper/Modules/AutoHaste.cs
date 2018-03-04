@@ -19,14 +19,16 @@ namespace TibiaHeleper.Modules
         public string HasteSpell { get; set; }
         public int ManaCost { get; set; }
 
+        public AutoHaste()
+        {
+            stopped = true;
+        }
 
         public void Run()
         {
-            working = true;
             int mana;
             int actualSpeed;
 
-            
             int normalSpeed = GetData.getNormalSpeed();
 
             while (working)
@@ -47,9 +49,7 @@ namespace TibiaHeleper.Modules
         {
             if (working)
             {
-                stopped = false;
                 working = false;
-                while (!stopped) ;//waiting for thread finish
             }
         }
     }

@@ -31,9 +31,16 @@ namespace TibiaHeleper.Modules
 
         private bool stopped;
 
+        public Healer()
+        {
+            stopped = true;
+        }
+
         public void Run()
         {
-            working = true;
+
+            
+
 
             while (working)
             {
@@ -81,9 +88,7 @@ namespace TibiaHeleper.Modules
         {
             if (working)
             {
-                stopped = false;
                 working = false;
-                while (!stopped) ;//waiting for thread finish
             }
         }
 

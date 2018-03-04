@@ -11,50 +11,53 @@ namespace TibiaHeleper.Modules
 {
     static class ModulesManager
     {
-        
+
         public static Healer healer { get; set; }
         public static AutoHaste autoHaste { get; set; }
         public static Sio sio { get; set; }
         public static AntyPalalyse antyParalyse { get; set; }
 
-       // private static Thread THealer;
-       // private static Thread TAutoHaste;
-       // private static Thread TSio;
+        // private static Thread THealer;
+        // private static Thread TAutoHaste;
+        // private static Thread TSio;
 
         private static Semaphore sem;
 
         static ModulesManager()
         {
-            
+
             sem = new Semaphore(1, 1);
 
-            
+
             healer = new Healer();
             autoHaste = new AutoHaste();
             sio = new Sio();
             antyParalyse = new AntyPalalyse();
-          
+
         }
 
         private static void enableThread(Module module)
         {
             sem.WaitOne();
-
-                if (!module.working);
-                    Thread t = new Thread(module.Run);
+            if (!module.working)
+            {
+                Thread t = new Thread(module.Run);
+                while (!module.stopped) ;//waiting for thread finish
+                module.stopped = false;
+                module.working = true;
                 t.Start();
-
+            }
             sem.Release();
-                
+
         }
 
         private static void disableThread(Module module)
         {
-            
+
             sem.WaitOne();
-                module.Stop();
+            module.Stop();
             sem.Release();
-            
+
         }
 
         public static void HealerEnable() { enableThread((Module)healer); }

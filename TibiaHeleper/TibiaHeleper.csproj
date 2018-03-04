@@ -70,6 +70,8 @@
     <Compile Include="Modules\ModulesManager.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\Sio.cs" />
+    <Compile Include="Modules\Targeting\Target.cs" />
+    <Compile Include="Modules\Targeting\Targeting.cs" />
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
     <Compile Include="Storage\Storage.cs" />
