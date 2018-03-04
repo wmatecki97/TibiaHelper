@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TibiaHeleper.Keyboard;
 using TibiaHeleper.MemoryOperations;
-
+using TibiaHeleper.Storage;
 
 namespace TibiaHeleper.Modules
 {
@@ -14,25 +14,27 @@ namespace TibiaHeleper.Modules
     class Sio : Module
     {
         public bool working { get; set; }
-        public string playerName { get; set; }
+        public string playerName { get;  set; }
         public int healthPercentToHeal { get; set; }
+
+        private Creature player { get; set; }
 
         private bool stopped;
         public void Run()
         {
             working = true;
-            UInt32 playerAdress = findPlayerAdress();
-            string spell = "exura sio \"" + playerName + "\"";
+            findPlayer();
+            string spell = "exura sio \"" + player.name + "\"";
             
             while (working)
             {
-                if(GetData.isPlayerOnScreen(playerAdress))
+                if(player.onScreen)
                 {
-                    int playerHPPercent = GetData.getPlayerHPPercent(playerAdress);
                     int mana = GetData.getMana();
-                    if (GetData.getPlayerHPPercent(playerAdress) < healthPercentToHeal && GetData.getMana() >= 140)
+                    if (player.HPPercent < healthPercentToHeal && GetData.getMana() >= 140)
                     {
-                        KeyboardSimulator.Message(spell);
+                        //KeyboardSimulator.Message(spell);
+                        KeyboardSimulator.Simulate("f10");
                         Thread.Sleep(1000);
                     }
                 }
@@ -55,18 +57,13 @@ namespace TibiaHeleper.Modules
         /// checks every 500ms if has player been spotted
         /// </summary>
         /// <returns></returns>
-        private UInt32 findPlayerAdress()
+        private void findPlayer()
         {
-            bool isPlayerfound = false;
-            UInt32 playerAdress = GetData.getPersonLastOcurranceAdress(playerName, ref isPlayerfound);
-
-            while (!isPlayerfound && working)
+            while (player == null && working)
             {
-                playerAdress = GetData.getPersonLastOcurranceAdress(playerName, ref isPlayerfound, playerAdress);//last parameter is last spotted players adress if Player was not spotted yet he would  be shown at the end
+                player = GetData.getPlayer(playerName);
                 Thread.Sleep(500);
             }
-
-            return playerAdress;
         }
     }
 }

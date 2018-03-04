@@ -32,6 +32,7 @@ namespace TibiaHeleper.Windows
                 Environment.Exit(0);
             }
             checkWorkingModules();
+            GetData.ActualizeAllSpottedCreaturesList();
         }
 
         private void checkWorkingModules()

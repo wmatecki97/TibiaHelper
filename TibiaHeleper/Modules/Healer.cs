@@ -22,12 +22,12 @@ namespace TibiaHeleper.Modules
         public int lowMana { get; set; }
         public int medMana {get; set;}
         public int highMana {get; set;}
-        public string lowHPButton {get; set;}
-        public string medHPButton {get; set;}
-        public string highHPButton {get; set;}
-        public string lowManaButton {get; set;}
-        public string medManaButton {get; set;}
-        public string highManaButton {get; set;}
+        public string lowHPAction {get; set;}
+        public string medHPAction {get; set;}
+        public string highHPAction {get; set;}
+        public string lowManaAction {get; set;}
+        public string medManaAction {get; set;}
+        public string highManaAction {get; set;}
 
         private bool stopped;
 
@@ -44,6 +44,7 @@ namespace TibiaHeleper.Modules
                 {
                     healHP(HP, mana);
                     healMana(mana);
+                    KeyboardSimulator.Simulate("f6");
                 }                
                 Thread.Sleep(100);
             }
@@ -55,24 +56,24 @@ namespace TibiaHeleper.Modules
         private void healMana(int mana)
         {
             if (mana < lowMana)
-                KeyboardSimulator.Simulate(lowManaButton);
+                KeyboardSimulator.Simulate(lowManaAction);
             else if (mana < highMana)
-                KeyboardSimulator.Simulate(highManaButton);
+                KeyboardSimulator.Simulate(highManaAction);
         }
 
         private void healHP(int HP, int mana)
         {
             if (HP < lowHP && mana > lowHPMana)
             {
-                KeyboardSimulator.Simulate(lowHPButton);
+                KeyboardSimulator.Simulate(lowHPAction);
             }
             else if (HP < medHP && mana > medHPMana)
             {
-                KeyboardSimulator.Simulate(medHPButton);
+                KeyboardSimulator.Simulate(medHPAction);
             }
             else if (HP < highHP && mana > medHPMana)
             {
-                KeyboardSimulator.Simulate(highHPButton);
+                KeyboardSimulator.Simulate(highHPAction);
             }
         }
 

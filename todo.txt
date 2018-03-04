@@ -1,5 +1,10 @@
-﻿ogarniie adresów do targetingu - lista battle
+﻿Easy stuff
+wyswietlanie jako tytul okna nazwa zalogowanej postaci + okno
+
+ogarniie adresów do targetingu - lista battle
 klikanie na potwory
+
+
 
 Walker
 ogarnięcie aktualnej pozycji

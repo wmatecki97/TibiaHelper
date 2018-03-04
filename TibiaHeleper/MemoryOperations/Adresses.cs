@@ -22,9 +22,13 @@ namespace TibiaHeleper.MemoryOperations
 
         //list of spotted monsters persons and NPC
         public static UInt32 InformationsOfSpottedCreaturesAndPlayersSartAdress { get; } 
-        public static UInt32 PlayerInformationBlockSize { get; }
-        public static UInt32 PlayerHpShift { get; }// means PlayerInformationsAdress + shift is player HP
-        public static UInt32 PlayerOnScreenShift { get; }
+        public static UInt32 CreatureInformationBlockSize { get; }
+        public static UInt32 CreatureHpShift { get; }// means PlayerInformationsAdress + shift is player HP
+        public static UInt32 CreatureOnScreenShift { get; }
+        public static UInt32 CreatureNameShift { get; }
+
+        //Battle List
+        public static UInt32 BattleListAdress { get; }
 
         static Adresses()
         {
@@ -39,10 +43,13 @@ namespace TibiaHeleper.MemoryOperations
             NormalSpeed = 0x570480;
 
 
-            InformationsOfSpottedCreaturesAndPlayersSartAdress = 0x76A0B4;
-            PlayerInformationBlockSize = 0xDC;
-            PlayerHpShift = 0x88;
-            PlayerOnScreenShift = 0xA0;
+            InformationsOfSpottedCreaturesAndPlayersSartAdress = 0x76A0B0;
+            CreatureInformationBlockSize = 0xDC;
+            CreatureHpShift = 0x8C;
+            CreatureOnScreenShift = 0xA4;
+            CreatureNameShift = 0x4;
+
+            BattleListAdress = 0x0030B9F0;
         }
     }
 }

@@ -34,9 +34,9 @@ namespace TibiaHeleper.Windows
                 if (isWorking)
                     ModulesManager.HealerDisable();
                
-                ModulesManager.healer.lowHPButton = lowHPB.Text;
-                ModulesManager.healer.medHPButton = medHPB.Text;
-                ModulesManager.healer.highHPButton = highHPB.Text;
+                ModulesManager.healer.lowHPAction = lowHPB.Text;
+                ModulesManager.healer.medHPAction = medHPB.Text;
+                ModulesManager.healer.highHPAction = highHPB.Text;
 
                 if (lowHPMana.Text == "") lowHPMana.Text = "0";
                 if (medHPMana.Text == "") medHPMana.Text = "0";
@@ -56,8 +56,8 @@ namespace TibiaHeleper.Windows
                 if (highMana.Text == "") highMana.Text = "0";
                 ModulesManager.healer.lowMana = int.Parse(lowMana.Text);
                 ModulesManager.healer.highMana = int.Parse(highMana.Text);
-                ModulesManager.healer.lowManaButton = lMB.Text;
-                ModulesManager.healer.highManaButton = hMB.Text;
+                ModulesManager.healer.lowManaAction = lMB.Text;
+                ModulesManager.healer.highManaAction = hMB.Text;
 
                
                 if(isWorking)
@@ -93,9 +93,9 @@ namespace TibiaHeleper.Windows
             lowHP.Text = ModulesManager.healer.lowHP.ToString();
             medHP.Text = ModulesManager.healer.medHP.ToString();
             highHP.Text = ModulesManager.healer.highHP.ToString();
-            lowHPB.Text = ModulesManager.healer.lowHPButton;
-            medHPB.Text = ModulesManager.healer.medHPButton;
-            highHPB.Text = ModulesManager.healer.highHPButton;
+            lowHPB.Text = ModulesManager.healer.lowHPAction;
+            medHPB.Text = ModulesManager.healer.medHPAction;
+            highHPB.Text = ModulesManager.healer.highHPAction;
 
             lowHPMana.Text = ModulesManager.healer.lowHPMana.ToString();
             medHPMana.Text = ModulesManager.healer.medHPMana.ToString();
@@ -103,8 +103,8 @@ namespace TibiaHeleper.Windows
 
             lowMana.Text = ModulesManager.healer.lowMana.ToString();
             highMana.Text = ModulesManager.healer.highMana.ToString();
-            lMB.Text = ModulesManager.healer.lowManaButton;
-            hMB.Text = ModulesManager.healer.highManaButton;
+            lMB.Text = ModulesManager.healer.lowManaAction;
+            hMB.Text = ModulesManager.healer.highManaAction;
         }
 
         private void Close(object sender, System.ComponentModel.CancelEventArgs e)

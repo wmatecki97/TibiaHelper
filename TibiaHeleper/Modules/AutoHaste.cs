@@ -34,7 +34,7 @@ namespace TibiaHeleper.Modules
                 mana = GetData.getMana();
                 actualSpeed = GetData.getActualSpeed();
 
-                if (mana>=ManaCost && GetData.getActualSpeed()<=normalSpeed+50)
+                if (mana>=ManaCost && GetData.getActualSpeed()<=normalSpeed+90)
                 {
                     KeyboardSimulator.Simulate(HasteSpell);
                 }

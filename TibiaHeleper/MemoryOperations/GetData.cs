@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TibiaHeleper.Storage;
 
 namespace TibiaHeleper.MemoryOperations
 {
@@ -12,7 +13,17 @@ namespace TibiaHeleper.MemoryOperations
         static Process Tibia;
         public static IntPtr Handle { get; set; }
         static UInt32 Base;
-        static UInt32 BlockOfInformationOfPlayer;
+        private static List<Creature> allSpottedCreaturesList;
+        private static UInt32 lastSpottedCreatureAdress;
+
+        static GetData()
+        {
+            allSpottedCreaturesList = new List<Creature>();
+            lastSpottedCreatureAdress = Adresses.InformationsOfSpottedCreaturesAndPlayersSartAdress;
+        }
+
+        
+
 
         /// <summary>
         /// looking for tibia.exe returns false when Tibia.exe not found
@@ -52,6 +63,8 @@ namespace TibiaHeleper.MemoryOperations
             return Tibia;
         }
 
+       
+
         public static int getXOR() { return getIntegerDataFromAdress(Adresses.XORAdr); }
 
         public static int getHP() {
@@ -70,45 +83,73 @@ namespace TibiaHeleper.MemoryOperations
         
         public static int getNormalSpeed() { return getIntegerDataFromAdress( Adresses.NormalSpeed); }
 
-        public static UInt32 getPersonLastOcurranceAdress(string characterName, ref bool found, UInt32 startAdress=0x0)
+        public static Creature getPlayer(string playerName)
         {
-            UInt32 adress;
-            if (startAdress == 0x0)
-                adress = Adresses.InformationsOfSpottedCreaturesAndPlayersSartAdress;
-            else
-                adress = startAdress;
-
-            UInt32 sizeOfBlock = Adresses.PlayerInformationBlockSize;
-            string name = getStringFromAdress(adress);
-            UInt32 resultAdress = 0x0;
-            found = false;
-
-            while (name != "") //Person can occure few time if relog
+            ActualizeAllSpottedCreaturesList();
+            lock (allSpottedCreaturesList)
             {
-                name = getStringFromAdress(adress);
-                if (name == characterName)
+                foreach (Creature creature in allSpottedCreaturesList)
                 {
-                    resultAdress = adress;
-                    found = true;
+                    if (creature.name == playerName)
+                        return creature;
                 }
-                adress += sizeOfBlock;
             }
-            return found ? resultAdress : adress ;
+            return null;
         }
 
-        public static bool isPlayerOnScreen(UInt32 playerAdress)
+        public static string GetCreatureName(uint adress)
         {
-            return (getIntegerDataFromAdress(playerAdress + Adresses.PlayerOnScreenShift)==1);                
+            return getStringFromAdress(adress + Adresses.CreatureNameShift);
         }
 
-        public static int getPlayerHPPercent(UInt32 playerAdress)
+        public static bool isCreatureOnScreen(UInt32 playerAdress)
         {
-            return getIntegerDataFromAdress(playerAdress + Adresses.PlayerHpShift);
+            return (getIntegerDataFromAdress(playerAdress + Adresses.CreatureOnScreenShift)==1);                
+        }
+
+        public static int getCreatureHPPercent(UInt32 CreatureAdress)
+        {
+            return getIntegerDataFromAdress(CreatureAdress + Adresses.CreatureHpShift);
         }
 
         public static string getActualInput()
         {
             return getStringFromAdress(Adresses.InputAdrWithoutBase-Base);
+        }
+        
+        public static void ActualizeAllSpottedCreaturesList()
+        {
+            bool wasCreatureSpotted = true;
+            int id;
+            UInt32 CreatureInformationBlockSize = Adresses.CreatureInformationBlockSize;
+            while (wasCreatureSpotted)
+            {
+                if ((id = getIntegerDataFromAdress(lastSpottedCreatureAdress)) != 0)
+                {
+                    Creature creature = new Creature(id, lastSpottedCreatureAdress);
+                    lock (allSpottedCreaturesList)
+                    {
+                        allSpottedCreaturesList.Insert(0, creature);
+                    }
+                    lastSpottedCreatureAdress += CreatureInformationBlockSize;
+                }
+                else wasCreatureSpotted = false;
+            }            
+        }
+
+        private static List<Creature> GetBattleList()
+        {
+            List<Creature> battleList = new List<Creature>();
+            ActualizeAllSpottedCreaturesList();
+            lock (allSpottedCreaturesList)
+            {
+                foreach (Creature creature in allSpottedCreaturesList)
+                {
+                    if (creature.onScreen)
+                        battleList.Add(creature);                        
+                }
+            }
+            return battleList;
         }
 
         public static void sendInput(string inputString)

@@ -1,0 +1,2 @@
+﻿W Data Generator istnieje metoda GetIntegerDataFromAdress, do której podajemy adres
+Można użyć readMemory.ReadInt32 i wtedy trzeba podać adres + adres tibi (zmienna Tibia) i handler
