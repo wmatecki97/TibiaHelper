@@ -59,8 +59,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Keyboard\KeyboardSimulator.cs" />
-    <Compile Include="Keyboard\KeysAdresses.cs" />
     <Compile Include="MemoryOperations\Adresses.cs" />
     <Compile Include="MemoryOperations\Flags.cs" />
     <Compile Include="MemoryOperations\GetData.cs" />
@@ -72,6 +70,8 @@
     <Compile Include="Modules\Sio.cs" />
     <Compile Include="Modules\Targeting\Target.cs" />
     <Compile Include="Modules\Targeting\Targeter.cs" />
+    <Compile Include="Simulators\KeyAddresses.cs" />
+    <Compile Include="Simulators\KeyboardSimulator.cs" />
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
     <Compile Include="Storage\Storage.cs" />

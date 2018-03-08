@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using TibiaHeleper.Keyboard;
 using TibiaHeleper.MemoryOperations;
+using TibiaHeleper.Simulators;
 
 namespace TibiaHeleper.Modules
 {

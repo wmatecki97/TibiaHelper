@@ -4,8 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using TibiaHeleper.MemoryOperations;
 
-
-namespace TibiaHeleper.Keyboard
+namespace TibiaHeleper.Simulators
 {
     class KeyboardSimulator
     {
@@ -23,13 +22,13 @@ namespace TibiaHeleper.Keyboard
         {
             proc = GetData.getProcess();
             DButton = new Dictionary<string, int>();
-            KeysAdresses.assignKeys(DButton);
+            KeyAddresses.assignKeys(DButton);
         }
 
         public static void Simulate(string action)
         {
             action = action.ToUpper();
-            if (action.IndexOf('+') != -1 || (action.IndexOf('F') == 0 && (action[1] >= 49 && action[1] <= 57) && action.Length <=3 )) // 49 is '1' like f1 and 57 is '9' length of f* keys is max 3 "f10"
+            if (action.IndexOf('+') != -1 || (action.IndexOf('F') == 0 && (action[1] >= 49 && action[1] <= 57) && action.Length <= 3)) // 49 is '1' like f1 and 57 is '9' length of f* keys is max 3 "f10"
                 Press(action);
             else
                 Message(action);
