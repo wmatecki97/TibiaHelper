@@ -1,0 +1,32 @@
+﻿<Window x:Class="TibiaHeleper.Windows.Targeting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TibiaHeleper.Windows"
+        mc:Ignorable="d"
+        Title="Targeting" Height="300" Width="300"
+        Loaded="Load" Closing="Close">
+    <Grid>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="176" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="SelectedAction"/>
+        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="208,237,0,0" VerticalAlignment="Top" Width="65" Height="21" Click="Back"/>
+        <Label x:Name="nemaLabel" Content="Name" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="134,9,0,0" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="23" Margin="134,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <Label x:Name="minHPLabel" Content="Min HP%" HorizontalAlignment="Left" Margin="134,73,0,0" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="maxHPLabel" Content="Max HP%" HorizontalAlignment="Left" Margin="208,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.13,-0.578" Width="65"/>
+        <TextBox x:Name="minHP" HorizontalAlignment="Left" Height="23" Margin="134,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="maxHP" HorizontalAlignment="Left" Height="23" Margin="208,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="actionLabel" Content="Action" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Margin="134,132,0,0" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="Action" HorizontalAlignment="Left" Height="23" Margin="134,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <Button x:Name="upButton" Content="Up" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Width="45" Click="Up"/>
+        <Button x:Name="downButton" Content="Down" HorizontalAlignment="Left" Margin="65,198,0,0" VerticalAlignment="Top" Width="45" Click="Down"/>
+        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="134,198,0,0" VerticalAlignment="Top" Width="65" Click="Add"/>
+        <Button x:Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Margin="208,198,0,0" VerticalAlignment="Top" Width="65" Click="Delete"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="134,237,0,0" VerticalAlignment="Top" Width="65" Click="Save"/>
+        <Button x:Name="editButton" Content="Apply edit" HorizontalAlignment="Left" Margin="22,237,0,0" VerticalAlignment="Top" Width="75" Click="Edit"/>
+        <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
+            <Label x:Name="ErrorLabel" Content="Error" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="300" Height="177"/>
+            <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
+        </Grid>
+    </Grid>
+</Window>

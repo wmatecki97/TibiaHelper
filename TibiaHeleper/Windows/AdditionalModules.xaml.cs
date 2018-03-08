@@ -15,29 +15,33 @@ namespace TibiaHeleper.Windows
             InitializeComponent();
         }
 
-        private void AssignData(object sender, RoutedEventArgs e) //on loading
+        public void AssignData(object sender, RoutedEventArgs e) //on loading
         {
             checkWorkingModules();
         }
 
         public void checkWorkingModules()
         {
+            AHSpell.Text = ModulesManager.autoHaste.HasteSpell;
+            AHMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
+
+            PlayerHpPercent.Text = ModulesManager.sio.healthPercentToHeal.ToString();
+            PlayerName.Text = ModulesManager.sio.playerName;
+
+            APSpell.Text = ModulesManager.antyParalyse.AntyParalyseSpell;
+            APMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
+
             if (ModulesManager.autoHaste.working)
             {
                 AHEnable.IsChecked = true;
-                AHSpell.Text = ModulesManager.autoHaste.HasteSpell;
-                AHMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
             }
             if (ModulesManager.sio.working)
             {
                 SioEnable.IsChecked = true;
-                PlayerHpPercent.Text = ModulesManager.sio.healthPercentToHeal.ToString();
-                PlayerName.Text = ModulesManager.sio.playerName;
+                
             }
             if (ModulesManager.antyParalyse.working)
             {
-                APSpell.Text = ModulesManager.antyParalyse.AntyParalyseSpell;
-                APMana.Text = ModulesManager.autoHaste.ManaCost.ToString();
                 APEnable.IsChecked = true;
             }
 
@@ -67,12 +71,13 @@ namespace TibiaHeleper.Windows
         private void Back(object sender, RoutedEventArgs e)
         {
             WindowsManager.menu.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void Close(object sender, EventArgs e)
         {
             WindowsManager.menu.Show();
+            WindowsManager.additionalModulesWindow = new AdditionalModules();
         }
 
         private void HideErrorGrid(object sender, RoutedEventArgs e)

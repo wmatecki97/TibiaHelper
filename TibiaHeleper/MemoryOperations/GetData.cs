@@ -42,7 +42,6 @@ namespace TibiaHeleper.MemoryOperations
             Base = (UInt32)Tibia.MainModule.BaseAddress;
             return true;
         }
-
         /// <summary>
         /// returns 32bit integer from adress given
         /// </summary>
@@ -52,12 +51,16 @@ namespace TibiaHeleper.MemoryOperations
         {
             return ReadMemory.ReadInt32(Base + adress, Handle); ;
         }
-
         public static string getStringFromAdress(UInt32 adress)
         {
             return ReadMemory.ReadString(Base + adress, Handle);
         }
-
+        public static void writeInt32(UInt32 adress, int toWrite)
+        {
+            byte[] lpBuffer = BitConverter.GetBytes(toWrite);
+            int bytesWritten=0;
+            ReadMemory.WriteInt32(adress + Base, Handle, lpBuffer, 4, ref bytesWritten);
+        }
         public static Process getProcess()
         {
             return Tibia;
@@ -66,21 +69,17 @@ namespace TibiaHeleper.MemoryOperations
        
 
         public static int getXOR() { return getIntegerDataFromAdress(Adresses.XORAdr); }
-
         public static int getHP() {
             int xor = getXOR();
             int hp = getIntegerDataFromAdress(Adresses.HPAdr);
             return xor ^ hp;
         }
-
         public static int getMana() {
             int xor = getXOR();
             int mana = getIntegerDataFromAdress(Adresses.ManaAdr);
             return xor ^ mana;
         }
-
         public static int getActualSpeed() { return getIntegerDataFromAdress( Adresses.ActualSpeed); }
-        
         public static int getNormalSpeed() { return getIntegerDataFromAdress( Adresses.NormalSpeed); }
 
         public static Creature getPlayer(string playerName)
@@ -97,20 +96,26 @@ namespace TibiaHeleper.MemoryOperations
             return null;
         }
 
-        public static string GetCreatureName(uint adress)
+        public static string GetCreatureName(UInt32 adress)
         {
             return getStringFromAdress(adress + Adresses.CreatureNameShift);
         }
-
         public static bool isCreatureOnScreen(UInt32 playerAdress)
         {
             return (getIntegerDataFromAdress(playerAdress + Adresses.CreatureOnScreenShift)==1);                
         }
-
         public static int getCreatureHPPercent(UInt32 CreatureAdress)
         {
             return getIntegerDataFromAdress(CreatureAdress + Adresses.CreatureHpShift);
         }
+
+        public static int GetDistance(Creature creature) //TO IMPLEMENT
+        {
+            int Xpos = creature.XPosition;
+            int Ypos = creature.YPosition;
+            return 0;
+        }
+
 
         public static string getActualInput()
         {
@@ -136,8 +141,7 @@ namespace TibiaHeleper.MemoryOperations
                 else wasCreatureSpotted = false;
             }            
         }
-
-        private static List<Creature> GetBattleList()
+        public static List<Creature> GetBattleList()
         {
             List<Creature> battleList = new List<Creature>();
             ActualizeAllSpottedCreaturesList();
@@ -151,6 +155,15 @@ namespace TibiaHeleper.MemoryOperations
             }
             return battleList;
         }
+        public static void Attack(Creature creature)
+        {
+            writeInt32(Adresses.Target, creature.id);
+        }
+        public static int getTargetID()
+        {
+            return getIntegerDataFromAdress(Adresses.Target);
+        }
+
 
         public static void sendInput(string inputString)
         {

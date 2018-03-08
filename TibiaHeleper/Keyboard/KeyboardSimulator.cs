@@ -16,10 +16,6 @@ namespace TibiaHeleper.Keyboard
         const UInt32 WM_KEYDOWN = 0x0100;
         const UInt32 WM_KEYUP = 0x0101;
         const UInt32 WM_CHAR = 0x0102;
-        const UInt32 WM_SYSKEYUP = 0x0105;
-        const UInt32 WM_SYSKEYDOWN = 0x0104;
-        public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
-        public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
 
 
 
@@ -85,26 +81,23 @@ namespace TibiaHeleper.Keyboard
 
         public static void Message(string text)
         {
-
             text = text.ToUpper();
-            PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["ENTER"], 0);
+            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
             foreach (char letter in text)
             {
-               if(isSpecialLetter(letter))//if letter needs shift like " is from ' and shift
-                    PostMessage(proc.MainWindowHandle, WM_SYSKEYDOWN, DButton["SHIFT"], 0);
-
-
-                PostMessage(proc.MainWindowHandle, WM_SYSKEYUP, DButton[letter.ToString()], 0);
-
-                if(isSpecialLetter(letter))
-                    PostMessage(proc.MainWindowHandle, WM_SYSKEYUP, DButton["SHIFT"], 0);
-
-
+                PostMessage(proc.MainWindowHandle, WM_CHAR, DButton[letter.ToString()], 0);
             }
-            PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["ENTER"], 0);
+            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
+        }
+
+        public static void test()
+        {
+           // PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["SHIFT"], 0);
+            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["\""], 0);
+           // PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["SHIFT"], 0);
 
         }
 
-        
+
     }
 }

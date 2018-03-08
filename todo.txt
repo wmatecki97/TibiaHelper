@@ -1,5 +1,7 @@
 ﻿Easy stuff
 wyswietlanie jako tytul okna nazwa zalogowanej postaci + okno
+Wybór okna Tibii podczas uruchamiania
+XY Position - getDistance()
 
 ogarniie adresów do targetingu - lista battle
 klikanie na potwory

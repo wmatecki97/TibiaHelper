@@ -11,7 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TibiaHeleper.Keyboard;
 using TibiaHeleper.MemoryOperations;
+using TibiaHeleper.Modules;
 
 namespace TibiaHeleper.Windows
 {
@@ -37,23 +39,24 @@ namespace TibiaHeleper.Windows
 
         private void checkWorkingModules()
         {
-            if (Modules.ModulesManager.healer.working) HealerEnable.IsChecked = true;
+            if (ModulesManager.healer.working) HealerEnable.IsChecked = true;
+            if (ModulesManager.targeting.working) TargetingEnable.IsChecked = true;
         }
 
         private void HealerDisable(object sender, RoutedEventArgs e)
         {
-            Modules.ModulesManager.HealerDisable();
+            ModulesManager.HealerDisable();
         }
 
         private void HealerRun(object sender, RoutedEventArgs e)
         {
-            Modules.ModulesManager.HealerEnable();
+            ModulesManager.HealerEnable();
         }
 
         private void HealerButtonClicked(object sender, RoutedEventArgs e)
         {
-            HealerWindow healerWindow = new Windows.HealerWindow();
-            healerWindow.Show();
+            WindowsManager.healerWindow.Show();
+            WindowsManager.healerWindow.assignData();
             this.Hide();
         }
 
@@ -64,8 +67,8 @@ namespace TibiaHeleper.Windows
 
         private void OpenAdditionalModulesWindow(object sender, RoutedEventArgs e)
         {
-            AdditionalModules othersWindow = new AdditionalModules();
-            othersWindow.Show();
+            WindowsManager.additionalModulesWindow.Show();
+            WindowsManager.additionalModulesWindow.checkWorkingModules();
             this.Hide();
         }
 
@@ -82,6 +85,21 @@ namespace TibiaHeleper.Windows
             WindowsManager.healerWindow.assignData();
         }
 
+        private void TargetingButtonClicked(object sender, RoutedEventArgs e)
+        {
+            WindowsManager.targeting.Show();
+            this.Hide();
+        }
         
+
+        private void TargetingDisable(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.TargetingDisable();
+        }
+
+        private void TargetingRun(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.TargetingEnable();
+        }
     }
 }

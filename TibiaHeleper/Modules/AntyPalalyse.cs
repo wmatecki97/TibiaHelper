@@ -41,6 +41,7 @@ namespace TibiaHeleper.Modules
                     Thread.Sleep(800);
                 }
                 Thread.Sleep(50);
+                KeyboardSimulator.Simulate("f5");
             }
             stopped = true;
         }

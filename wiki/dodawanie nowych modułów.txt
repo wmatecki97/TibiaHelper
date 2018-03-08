@@ -1,6 +1,7 @@
 ﻿1. dodać moduł do Modules dziedziczący z Module
-2. zaimplementować metody wymagane przez interfejs, gdzie stop powinna czekać na zakończenie metody run
+2. zaimplementować metody i pola wymagane przez interfejs.
 2. dodać stronę modułu do windows i zaimplementowac akcje dla wlaczenia modulu - przypisanie wprowadzonych wartosci
 3. dodać metody do uruchamiania i zatrzymywania wątku modułu w Modules Manager
 4. dodać na okno z modułem metodę do wczytywania stanu modułu po wczytaniu (np. wpisanie obecnej wartości hp)
 5. dodać stronę modułu do akcji Load w Menu
+6. dodać do DataCollectera moduł

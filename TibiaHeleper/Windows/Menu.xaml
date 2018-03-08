@@ -9,9 +9,11 @@
         Loaded="Window_Loaded" Closing="Close">
     <Grid Margin="0,0,0.4,-0.2">
         <Button x:Name="Healer" Content="Healer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="97" Click="HealerButtonClicked"/>
-        <CheckBox x:Name="HealerEnable" Content="Enable Healer" HorizontalAlignment="Left" Margin="125,12,0,0" VerticalAlignment="Top" Checked="HealerRun" Unchecked="HealerDisable" />
-        <Button x:Name="AdditionalModulesButton" Content="Other" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="97" Click="OpenAdditionalModulesWindow"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="97" Click="Save"/>
-        <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="97" Click="Load"/>
+        <CheckBox x:Name="HealerEnable" Content="Enable Healer" HorizontalAlignment="Left" Margin="125,12,0,0" VerticalAlignment="Top" Checked="HealerRun" Unchecked="HealerDisable" Width="127" />
+        <Button x:Name="AdditionalModulesButton" Content="Other" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Width="97" Click="OpenAdditionalModulesWindow"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="97" Click="Save"/>
+        <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="97" Click="Load"/>
+        <Button x:Name="Targeting" Content="Targeting" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="97" Click="TargetingButtonClicked"/>
+        <CheckBox x:Name="TargetingEnable" Content="Enable Targeting" HorizontalAlignment="Left" Margin="125,55,0,0" VerticalAlignment="Top" Width="127" Checked="TargetingRun" Unchecked="TargetingDisable"/>
     </Grid>
 </Window>

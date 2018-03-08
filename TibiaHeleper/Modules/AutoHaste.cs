@@ -22,6 +22,7 @@ namespace TibiaHeleper.Modules
         public AutoHaste()
         {
             stopped = true;
+            working = false;
         }
 
         public void Run()

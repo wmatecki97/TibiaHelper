@@ -48,7 +48,7 @@ namespace TibiaHeleper.Modules
                 {
                     healHP(HP, mana);
                     healMana(mana);
-                    KeyboardSimulator.Simulate("f6");
+                   // KeyboardSimulator.Simulate("f6");
                 }                
                 Thread.Sleep(100);
             }

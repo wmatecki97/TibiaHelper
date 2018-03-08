@@ -71,7 +71,7 @@
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\Sio.cs" />
     <Compile Include="Modules\Targeting\Target.cs" />
-    <Compile Include="Modules\Targeting\Targeting.cs" />
+    <Compile Include="Modules\Targeting\Targeter.cs" />
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
     <Compile Include="Storage\Storage.cs" />
@@ -83,6 +83,9 @@
     </Compile>
     <Compile Include="Windows\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Targeting.xaml.cs">
+      <DependentUpon>Targeting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WindowsManager.cs" />
     <Compile Include="App.xaml.cs">
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Targeting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

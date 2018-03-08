@@ -28,7 +28,7 @@ namespace TibiaHeleper.Keyboard
             DButton.Add(" ", 0x20);
             DButton.Add("ENTER", 0x0D);
             DButton.Add("'", 0xDE);
-            DButton.Add("\"", 0xDE);
+            DButton.Add("\"", 0x22);
             DButton.Add(";", 0xBA);
 
 

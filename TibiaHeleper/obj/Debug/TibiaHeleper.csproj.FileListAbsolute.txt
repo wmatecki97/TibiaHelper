@@ -34,3 +34,5 @@ C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\Menu.baml
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\WindowsInput.dll
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\WindowsInput.xml
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\Targeting.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\Targeting.baml

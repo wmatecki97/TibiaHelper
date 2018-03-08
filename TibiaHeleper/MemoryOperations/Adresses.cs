@@ -29,6 +29,7 @@ namespace TibiaHeleper.MemoryOperations
 
         //Battle List
         public static UInt32 BattleListAdress { get; }
+        public static UInt32 Target { get; }
 
         static Adresses()
         {
@@ -42,7 +43,6 @@ namespace TibiaHeleper.MemoryOperations
             ActualSpeed = 0x570418;
             NormalSpeed = 0x570480;
 
-
             InformationsOfSpottedCreaturesAndPlayersSartAdress = 0x76A0B0;
             CreatureInformationBlockSize = 0xDC;
             CreatureHpShift = 0x8C;
@@ -50,6 +50,7 @@ namespace TibiaHeleper.MemoryOperations
             CreatureNameShift = 0x4;
 
             BattleListAdress = 0x0030B9F0;
+            Target = 0x570488;
         }
     }
 }

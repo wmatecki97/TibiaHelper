@@ -33,6 +33,10 @@ namespace TibiaHeleper.MemoryOperations
             return ASCIIEncoding.Default.GetString(ReadBytes(Handle, Adress, length)).Split('\0')[0];
         }
         //not sure
+        public static void WriteInt32(UInt32 Adress, IntPtr Handle, byte[] lpBuffer, int bufferLength, ref int lpNumberOfBytesWritten)
+        {
+            WriteProcessMemory((int)Handle, (int)Adress, lpBuffer, bufferLength, ref lpNumberOfBytesWritten);
+        }
         public static void WriteString(UInt32 Adress, IntPtr Handle, byte[] lpBuffer, int bufferLength, ref int lpNumberOfBytesWritten)
         {
             WriteProcessMemory((int)Handle, (int)Adress, lpBuffer, bufferLength, ref lpNumberOfBytesWritten);
