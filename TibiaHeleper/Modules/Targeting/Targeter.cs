@@ -40,9 +40,9 @@ namespace TibiaHeleper.Modules.Targeting
                         {
                             if (settings.name == creature.name)
                             {
-                                gotTarget = true;
                                 if (isTargetBetter(target, creature))
                                 {
+                                    gotTarget = true;
                                     target = creature;
                                     Settings = settings;
                                 }
@@ -65,16 +65,21 @@ namespace TibiaHeleper.Modules.Targeting
 
         private void attack(Creature creature, Target settings)
         {
-            GetData.Attack(creature);
-            while (working && GetData.getTargetID() == creature.id && creature.HPPercent > settings.minHP && creature.HPPercent < settings.minHP)//waiting until creature is dead or target is not reachable
+            MouseSimulator.clickOnField(creature.XPosition, creature.YPosition, true);
+            while (working && GetData.getTargetID() == creature.id && creature.HPPercent > settings.minHP && creature.HPPercent <= settings.maxHP)//waiting until creature is dead or target is not reachable
             {
                 KeyboardSimulator.Simulate(settings.action);
+                Thread.Sleep(500);
             }
         }
 
         private bool isTargetBetter(Creature oldOne, Creature newOne)
         {
             if (newOne.HPPercent == 0)//if creature is dead
+            {
+                return false;
+            }
+            else if(newOne.Floor != GetData.MyFloor)
             {
                 return false;
             }

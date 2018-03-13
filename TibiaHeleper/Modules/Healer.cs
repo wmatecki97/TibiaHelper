@@ -37,7 +37,7 @@ namespace TibiaHeleper.Modules
 
             while (working)
             {
-                //int maxHP = HPXOR ^ GetData.getIntegerDataFromAdress(MaxHPAdr);
+                //int maxHP = HPXOR ^ GetData.getIntegerDataFromAddress(MaxHPAdr);
                 int HP = GetData.getHP();
                 int mana = GetData.getMana();
                 if (HP > 0)

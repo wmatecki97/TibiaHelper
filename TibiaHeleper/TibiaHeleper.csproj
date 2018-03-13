@@ -72,6 +72,7 @@
     <Compile Include="Modules\Targeting\Targeter.cs" />
     <Compile Include="Simulators\KeyAddresses.cs" />
     <Compile Include="Simulators\KeyboardSimulator.cs" />
+    <Compile Include="Simulators\MouseSimulator.cs" />
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
     <Compile Include="Storage\Storage.cs" />

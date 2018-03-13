@@ -24,6 +24,7 @@ namespace TibiaHeleper.Windows
         {
             list = ModulesManager.targeting.getTargetListCopy();
             target = new Target();
+            clearAllTextBoxes();
         }
 
         private void fillList()
@@ -100,8 +101,8 @@ namespace TibiaHeleper.Windows
         private void clearAllTextBoxes()
         {
             Name.Text = "";
-            maxHP.Text = "";
-            minHP.Text = "";
+            maxHP.Text = "100";
+            minHP.Text = "0";
             Action.Text = "";
         }
 
@@ -115,7 +116,13 @@ namespace TibiaHeleper.Windows
 
         private void Save(object sender, RoutedEventArgs e)
         {
+            bool wasWorking = ModulesManager.targeting.working;
+            if (wasWorking) ModulesManager.TargetingDisable();
+
             ModulesManager.targeting.setTargetList(list);
+
+            if (wasWorking) ModulesManager.TargetingEnable();
+
         }
 
         private void SelectedAction(object sender, RoutedEventArgs e)

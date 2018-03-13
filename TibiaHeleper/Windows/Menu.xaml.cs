@@ -89,5 +89,10 @@ namespace TibiaHeleper.Windows
         {
             ModulesManager.TargetingEnable();
         }
+
+        private void Test(object sender, RoutedEventArgs e)
+        {
+            GetData.getGameWindowDistanceFromLeft();
+        }
     }
 }

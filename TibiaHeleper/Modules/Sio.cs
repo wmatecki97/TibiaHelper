@@ -24,6 +24,7 @@ namespace TibiaHeleper.Modules
         public void Run()
         {
             findPlayer();
+            if (player == null) return;
             string spell = "exura sio \"" + player.name + "\"";
             
             while (working)

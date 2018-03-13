@@ -8,17 +8,18 @@ namespace TibiaHeleper.Storage
     {
         public string name { get; }
         public int id { get; }
-        public int HPPercent { get { return GetData.getCreatureHPPercent(adress); } }
-        public bool onScreen { get { return GetData.isCreatureOnScreen(adress); } }
-        public UInt32 adress { get; }
-        public int XPosition { get; set; }
-        public int YPosition { get; set; }
+        public int HPPercent { get { return GetData.getCreatureHPPercent(Address); } }
+        public bool onScreen { get { return GetData.isCreatureOnScreen(Address); } }
+        public UInt32 Address { get; }
+        public int XPosition { get { return GetData.getCreatureXPosition(Address); } }
+        public int YPosition { get { return GetData.getCreatureYPosition(Address); } }
+        public int Floor { get { return GetData.getCreatureFloor(Address); } }
 
-        public Creature(int id, UInt32 adress)
+        public Creature(int id, UInt32 Address)
         {
             this.id = id;
-            this.adress = adress;
-            this.name = GetData.GetCreatureName(adress);
+            this.Address = Address;
+            this.name = GetData.GetCreatureName(Address);
         }
 
     }

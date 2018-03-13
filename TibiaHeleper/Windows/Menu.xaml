@@ -15,5 +15,6 @@
         <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="97" Click="Load"/>
         <Button x:Name="Targeting" Content="Targeting" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="97" Click="TargetingButtonClicked"/>
         <CheckBox x:Name="TargetingEnable" Content="Enable Targeting" HorizontalAlignment="Left" Margin="125,55,0,0" VerticalAlignment="Top" Width="127" Checked="TargetingRun" Unchecked="TargetingDisable"/>
+        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Width="97" Click="Test"/>
     </Grid>
 </Window>

@@ -40,7 +40,8 @@ namespace TibiaHeleper.Simulators
             button = button.ToUpper();
             if (button.IndexOf("+") == -1)
             {
-                PostMessage(proc.MainWindowHandle, WM_CHAR, DButton[button], 0);
+                PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton[button], 0);
+                PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton[button], 0);
             }
             else
             {
