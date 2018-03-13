@@ -89,8 +89,8 @@ namespace TibiaHeleper.MemoryOperations
         }
         public static int getActualSpeed() { return getIntegerDataFromAddress( Addresses.ActualSpeed); }
         public static int getNormalSpeed() { return getIntegerDataFromAddress( Addresses.NormalSpeed); }
-        public static int getMyXPosition() { return getIntegerDataFromAddress(Addresses.MyXPosition); }
-        public static int getMyYPosition() { return getIntegerDataFromAddress(Addresses.MyYPosition); }
+        public static int MyXPosition { get { return getIntegerDataFromAddress(Addresses.MyXPosition); } }
+        public static int MyYPosition { get { return getIntegerDataFromAddress(Addresses.MyYPosition); } }
         public static int MyFloor { get { return getByteAsIntegerFromAddress(Addresses.MyFloorByteAddress); } }
 
         public static Creature getPlayer(string playerName)
@@ -136,9 +136,7 @@ namespace TibiaHeleper.MemoryOperations
 
         public static int GetDistance(Creature creature) //TO IMPLEMENT
         {
-            int Xpos = creature.XPosition;
-            int Ypos = creature.YPosition;
-            return 0;
+            return Math.Abs(creature.XPosition - MyXPosition) + Math.Abs(creature.YPosition - MyYPosition);
         }
 
 

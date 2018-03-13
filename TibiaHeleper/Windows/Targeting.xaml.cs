@@ -23,6 +23,7 @@ namespace TibiaHeleper.Windows
         private void Load(object sender, RoutedEventArgs e)
         {
             list = ModulesManager.targeting.getTargetListCopy();
+            fillList();
             target = new Target();
             clearAllTextBoxes();
         }

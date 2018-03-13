@@ -19,7 +19,7 @@
         </Grid>
         <Grid Name="Sio" Margin="0,29,0,44">
             <TextBox x:Name="PlayerName" HorizontalAlignment="Left" Height="23" Margin="88,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100"/>
-            <TextBox x:Name="PlayerHpPercent" HorizontalAlignment="Left" Height="23" Margin="214,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+            <TextBox x:Name="PlayerHpPercent" HorizontalAlignment="Left" Height="23" Margin="213,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
             <Label x:Name="SioRow" Content="Sio Player" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="24"/>
             <Label x:Name="PlayerNameLabel" Content="Player Name" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="88,36,0,0" VerticalAlignment="Top" Width="100"/>
             <CheckBox x:Name="SioEnable" Content="Enable" HorizontalAlignment="Left" Margin="300,69,0,0" VerticalAlignment="Top" Checked="EnableSio" Unchecked="DisableSio"/>
