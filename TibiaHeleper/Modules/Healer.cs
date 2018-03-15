@@ -38,8 +38,8 @@ namespace TibiaHeleper.Modules
             while (working)
             {
                 //int maxHP = HPXOR ^ GetData.getIntegerDataFromAddress(MaxHPAdr);
-                int HP = GetData.getHP();
-                int mana = GetData.getMana();
+                int HP = GetData.MyHP;
+                int mana = GetData.MyMana;
                 if (HP > 0)
                 {
                     healHP(HP, mana);

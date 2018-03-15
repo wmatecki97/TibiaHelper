@@ -31,8 +31,8 @@ namespace TibiaHeleper.Modules
             {
                 if(player.onScreen)
                 {
-                    int mana = GetData.getMana();
-                    if (player.HPPercent < healthPercentToHeal && GetData.getMana() >= 140)
+                    int mana = GetData.MyMana;
+                    if (player.HPPercent < healthPercentToHeal && GetData.MyMana >= 140)
                     {
                         KeyboardSimulator.Message(spell);
                       //  KeyboardSimulator.Simulate("f10");

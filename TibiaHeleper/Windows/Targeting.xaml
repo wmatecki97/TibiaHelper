@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TibiaHeleper.Windows"
         mc:Ignorable="d"
-        Title="Targeting" Height="300" Width="300"
+        Title="Targeting" Height="300" Width="440.186"
         Loaded="Load" Closing="Close">
     <Grid>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="176" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="SelectedAction"/>
@@ -18,6 +18,8 @@
         <TextBox x:Name="maxHP" HorizontalAlignment="Left" Height="23" Margin="208,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
         <Label x:Name="actionLabel" Content="Action" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Margin="134,132,0,0" VerticalAlignment="Top" Width="140"/>
         <TextBox x:Name="Action" HorizontalAlignment="Left" Height="23" Margin="134,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="maxDistance" HorizontalAlignment="Left" Height="23" Margin="290,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81"/>
+        <Label x:Name="maxDistanceLabel" Content="Max Distance" HorizontalAlignment="Left" Margin="290,73,0,0" VerticalAlignment="Top"/>
         <Button x:Name="upButton" Content="Up" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Width="45" Click="Up"/>
         <Button x:Name="downButton" Content="Down" HorizontalAlignment="Left" Margin="65,198,0,0" VerticalAlignment="Top" Width="45" Click="Down"/>
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="134,198,0,0" VerticalAlignment="Top" Width="65" Click="Add"/>

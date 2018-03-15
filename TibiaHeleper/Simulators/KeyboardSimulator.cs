@@ -59,8 +59,30 @@ namespace TibiaHeleper.Simulators
 
         }
 
+        private static void copyActualInput()
+        {
+            PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["CTRL"], 0);
+
+            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["A"], 0);
+
+            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["C"], 0);
+
+            PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["CTRL"], 0);
+
+        }
+
+        private static void paste()
+        {
+            PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["CTRL"], 0);
+
+            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["V"], 0);
+
+            PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["CTRL"], 0);
+        }
+
         public static void Message(string text)
         {
+            copyActualInput();
             text = text.ToUpper();
             PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
             foreach (char letter in text)
@@ -68,6 +90,9 @@ namespace TibiaHeleper.Simulators
                 PostMessage(proc.MainWindowHandle, WM_CHAR, DButton[letter.ToString()], 0);
             }
             PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
+
+            paste();
+
         }
     }
 }

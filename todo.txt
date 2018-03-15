@@ -1,10 +1,12 @@
 ﻿Easy stuff
 wyswietlanie jako tytul okna nazwa zalogowanej postaci + okno
 Wybór okna Tibii podczas uruchamiania
-XY Position - getDistance()
+automount
+naprawienie wklejania tekstu po wpisaniu czaru
 
-ogarniie adresów do targetingu - lista battle
-klikanie na potwory
+tryb ataku
+dodanie do targettingu max distance
+jedzenie
 
 
 

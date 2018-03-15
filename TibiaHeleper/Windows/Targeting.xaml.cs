@@ -46,13 +46,14 @@ namespace TibiaHeleper.Windows
 
         private void Down(object sender, RoutedEventArgs e)
         {
-            if (list.IndexOf(target)>-1 && list.IndexOf(target) < list.Count()-1 )
+            if (list.IndexOf(target) > -1 && list.IndexOf(target) < list.Count() - 1)
             {
                 int index = list.IndexOf(target);
                 list.RemoveAt(index);
                 list.Insert(index + 1, target);
+                fillList();
+                listBox.SelectedIndex = index + 1;
             }
-            fillList();
         }
 
         private void Up(object sender, RoutedEventArgs e)
@@ -62,34 +63,40 @@ namespace TibiaHeleper.Windows
                 int index = list.IndexOf(target);
                 list.RemoveAt(index);
                 list.Insert(index - 1, target);
+                fillList();
+                listBox.SelectedIndex = index - 1;
             }
-            fillList();
+
         }
 
         private void Add(object sender, RoutedEventArgs e)
         {
             target = new Target();
+
+            assignTarget();
+            list.Add(target);
+            fillList();
+            target = new Target();
+            clearAllTextBoxes();
+
+        }
+
+        private void assignTarget()
+        {
             try
             {
-                assignTarget();
-                list.Add(target);
-                fillList();
-                target = new Target();
-                clearAllTextBoxes();
+                target.name = Name.Text;
+                target.maxHP = int.Parse(maxHP.Text);
+                target.minHP = int.Parse(minHP.Text);
+                target.action = Action.Text;
+                target.maxDistance = int.Parse(maxDistance.Text);
             }
             catch (Exception)
             {
                 ErrorLabel.Content = "Unacceptable value";
                 Error.Visibility = Visibility.Visible;
             }
-        }
 
-        private void assignTarget()
-        {
-            target.name = Name.Text;
-            target.maxHP = int.Parse(maxHP.Text);
-            target.minHP = int.Parse(minHP.Text);
-            target.action = Action.Text;
         }
 
         private void Delete(object sender, RoutedEventArgs e)
@@ -105,6 +112,7 @@ namespace TibiaHeleper.Windows
             maxHP.Text = "100";
             minHP.Text = "0";
             Action.Text = "";
+            maxDistance.Text = "11";
         }
 
         private void setAllTextboxes()

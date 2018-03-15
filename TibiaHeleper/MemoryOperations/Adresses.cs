@@ -13,6 +13,7 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 XORAdr { get; }
         public static UInt32 ManaAdr { get; }
         public static UInt32 MaxManaAdr { get; }
+        public static UInt32 Hasted { get; }
         public static UInt32 ActualSpeed { get; }
         public static UInt32 NormalSpeed { get; }
         public static UInt32 MyXPosition { get; }
@@ -54,6 +55,7 @@ namespace TibiaHeleper.MemoryOperations
             ManaAdr = 0x57048C;
             ActualSpeed = 0x570418;
             NormalSpeed = 0x570480;
+            Hasted = 0x570410;
             MyXPosition = 0x70E054;
             MyYPosition = 0x70E058;
             MyFloorByteAddress = 0x70E05C;

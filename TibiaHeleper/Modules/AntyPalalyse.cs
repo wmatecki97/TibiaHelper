@@ -24,14 +24,14 @@ namespace TibiaHeleper.Modules
 
             int mana;
             int actualSpeed;
-            int normalSpeed = GetData.getNormalSpeed();
+            int normalSpeed = GetData.MyNormalSpeed;
 
             while (working)
             {
-                mana = GetData.getMana();
-                actualSpeed = GetData.getActualSpeed();
+                mana = GetData.MyMana;
+                actualSpeed = GetData.MyActualSpeed;
 
-                if (mana >= ManaCost && GetData.getActualSpeed() <= normalSpeed-50)
+                if (mana >= ManaCost && GetData.MyActualSpeed <= normalSpeed-50)
                 {                    
                     KeyboardSimulator.Simulate(AntyParalyseSpell);
                     Thread.Sleep(800);

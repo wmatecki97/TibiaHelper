@@ -40,7 +40,7 @@ namespace TibiaHeleper.Modules.Targeting
                         {
                             if ( settings.name.ToUpper() == creature.name.ToUpper())
                             {
-                                if (isTargetBetter(target, creature))
+                                if (isTargetBetter(target, creature) && settings.maxDistance<=GetData.GetDistance(creature))
                                 {
                                     gotTarget = true;
                                     target = creature;
@@ -81,6 +81,10 @@ namespace TibiaHeleper.Modules.Targeting
                 return false;
             }
             else if(newOne.Floor != GetData.MyFloor)
+            {
+                return false;
+            }
+            else if(Math.Abs(newOne.XPosition - GetData.MyXPosition) > 7 || Math.Abs(newOne.YPosition - GetData.MyYPosition) >5)
             {
                 return false;
             }

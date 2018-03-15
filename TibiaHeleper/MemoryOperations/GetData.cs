@@ -22,7 +22,7 @@ namespace TibiaHeleper.MemoryOperations
             lastSpottedCreatureAddress = Addresses.InformationsOfSpottedCreaturesAndPlayersSartAddress;
         }
 
-        
+
 
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace TibiaHeleper.MemoryOperations
         }
         public static int getByteAsIntegerFromAddress(UInt32 Address)
         {
-            return  (int)ReadMemory.ReadBytes(Handle, (long)(Base + Address), 1).FirstOrDefault();
+            return (int)ReadMemory.ReadBytes(Handle, (long)(Base + Address), 1).FirstOrDefault();
         }
         public static int getIntegerDataFromDynamicAddress(UInt32 Address)
         {
@@ -66,7 +66,7 @@ namespace TibiaHeleper.MemoryOperations
         public static void writeInt32(UInt32 Address, int toWrite)
         {
             byte[] lpBuffer = BitConverter.GetBytes(toWrite);
-            int bytesWritten=0;
+            int bytesWritten = 0;
             ReadMemory.WriteInt32(Address + Base, Handle, lpBuffer, 4, ref bytesWritten);
         }
         public static Process getProcess()
@@ -74,21 +74,28 @@ namespace TibiaHeleper.MemoryOperations
             return Tibia;
         }
 
-       
 
-        public static int getXOR() { return getIntegerDataFromAddress(Addresses.XORAdr); }
-        public static int getHP() {
-            int xor = getXOR();
-            int hp = getIntegerDataFromAddress(Addresses.HPAdr);
-            return xor ^ hp;
+
+        public static int XOR { get { return getIntegerDataFromAddress(Addresses.XORAdr); } }
+        public static int MyHP {
+            get
+            {
+                int xor = XOR;
+                int hp = getIntegerDataFromAddress(Addresses.HPAdr);
+                return xor ^ hp;
+            }
         }
-        public static int getMana() {
-            int xor = getXOR();
-            int mana = getIntegerDataFromAddress(Addresses.ManaAdr);
-            return xor ^ mana;
+        public static int MyMana {
+            get
+            {
+                int xor = XOR;
+                int mana = getIntegerDataFromAddress(Addresses.ManaAdr);
+                return xor ^ mana;
+            }
         }
-        public static int getActualSpeed() { return getIntegerDataFromAddress( Addresses.ActualSpeed); }
-        public static int getNormalSpeed() { return getIntegerDataFromAddress( Addresses.NormalSpeed); }
+        public static bool AmIHasted { get { return getIntegerDataFromAddress(Addresses.Hasted) % Flags.AmIInPZ == Flags.AmIHasted; } }
+        public static int MyActualSpeed { get { return getIntegerDataFromAddress( Addresses.ActualSpeed); } }
+        public static int MyNormalSpeed { get { return getIntegerDataFromAddress( Addresses.NormalSpeed); } }
         public static int MyXPosition { get { return getIntegerDataFromAddress(Addresses.MyXPosition); } }
         public static int MyYPosition { get { return getIntegerDataFromAddress(Addresses.MyYPosition); } }
         public static int MyFloor { get { return getByteAsIntegerFromAddress(Addresses.MyFloorByteAddress); } }
