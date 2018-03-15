@@ -2,6 +2,7 @@
 using System.Windows;
 using TibiaHeleper.MemoryOperations;
 using TibiaHeleper.Modules;
+using TibiaHeleper.Simulators;
 
 namespace TibiaHeleper.Windows
 {
@@ -92,7 +93,7 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            GetData.getGameWindowDistanceFromLeft();
+            int a = GetData.getGameWindowDistanceFromLeft();
         }
     }
 }

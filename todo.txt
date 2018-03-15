@@ -3,6 +3,7 @@ wyswietlanie jako tytul okna nazwa zalogowanej postaci + okno
 Wybór okna Tibii podczas uruchamiania
 automount
 naprawienie wklejania tekstu po wpisaniu czaru
+otwieranie plecaka to raczej easy, bo stała jest szerokość prawego panelu
 
 tryb ataku
 dodanie do targettingu max distance

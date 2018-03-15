@@ -59,9 +59,13 @@ namespace TibiaHeleper.MemoryOperations
         {
             return ReadMemory.ReadInt32(Address, Handle);
         }
-        public static string getStringFromAddress(UInt32 Address)
+        public static string getStringFromAddress(UInt32 Address, UInt32 length = 32)
         {
-            return ReadMemory.ReadString(Base + Address, Handle);
+            return ReadMemory.ReadString(Base + Address, Handle, length);
+        }
+        public static string getStringFromDynamicAddress(UInt32 Address, UInt32 length = 32)
+        {
+            return ReadMemory.ReadString(Address, Handle, length);
         }
         public static void writeInt32(UInt32 Address, int toWrite)
         {
@@ -147,10 +151,6 @@ namespace TibiaHeleper.MemoryOperations
         }
 
 
-        public static string getActualInput()
-        {
-            return getStringFromAddress(Addresses.InputAdrWithoutBase-Base);
-        }
         
         public static void ActualizeAllSpottedCreaturesList()
         {
@@ -189,7 +189,13 @@ namespace TibiaHeleper.MemoryOperations
         {
             return getIntegerDataFromAddress(Addresses.Target);
         }
+  /*      public static bool FollowTarget
+        {
+            get {return getIntegerDataFromAddress(Addresses.FollowTargetAddress) == 1; }
+            set { writeInt32(Addresses.FollowTargetAddress, value == false ? 0 : 1); }
+        }
 
+    */
         
         public static int getGameWindowHeight()
         {
@@ -204,8 +210,16 @@ namespace TibiaHeleper.MemoryOperations
             UInt32 third = (UInt32)getIntegerDataFromDynamicAddress(second + Addresses.GameWindowFromLeftDistanceShift2);
             return getIntegerDataFromDynamicAddress(third + Addresses.GameWindowFromLeftDistanceShift3);
         }
-       
 
+
+        public static string getActualInput()
+        {
+            UInt32 first = (UInt32)getIntegerDataFromAddress(Addresses.ActualInput);
+            UInt32 second = (UInt32)getIntegerDataFromDynamicAddress(first + Addresses.ActualInputShift1);
+            UInt32 third = (UInt32)getIntegerDataFromDynamicAddress(second + Addresses.ActualInputShift2);
+            UInt32 fourth = (UInt32)getIntegerDataFromDynamicAddress(third + Addresses.ActualInputShift3);
+            return getStringFromDynamicAddress(fourth + Addresses.ActualInputShift4);
+        }
 
         public static void sendInput(string inputString)
         {

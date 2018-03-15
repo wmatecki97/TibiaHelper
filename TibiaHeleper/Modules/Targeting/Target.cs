@@ -12,6 +12,7 @@ namespace TibiaHeleper.Modules.Targeting
         public int maxHP { get; set; }
         public int maxDistance { get; set; }
 
+        public bool followTarget { get; set; }
         public bool diagonal { get; set; }
         public bool HPMoreImportantThanDistance { get; set; }
     }

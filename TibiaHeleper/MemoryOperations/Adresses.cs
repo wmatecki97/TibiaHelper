@@ -4,9 +4,7 @@ namespace TibiaHeleper.MemoryOperations
 {
     class Addresses
     {
-        //GUI
-        public static UInt32 InputAdrWithoutBase { get; }
-
+        
         //Player
         public static UInt32 MaxHPAdr { get; }
         public static UInt32 HPAdr { get; }
@@ -19,6 +17,8 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 MyXPosition { get; }
         public static UInt32 MyYPosition { get; }
         public static UInt32 MyFloorByteAddress { get; }
+
+        public static UInt32 FollowTargetAddress { get; }
 
         //list of spotted monsters persons and NPC
         public static UInt32 InformationsOfSpottedCreaturesAndPlayersSartAddress { get; } 
@@ -43,10 +43,14 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 GameWindowFromLeftDistanceShift2 { get; }
         public static UInt32 GameWindowFromLeftDistanceShift3 { get; }
 
+        public static UInt32 ActualInput { get; }
+        public static UInt32 ActualInputShift1 { get; }
+        public static UInt32 ActualInputShift2 { get; }
+        public static UInt32 ActualInputShift3 { get; }
+        public static UInt32 ActualInputShift4 { get; }
 
         static Addresses()
         {
-            InputAdrWithoutBase= 0x09924D10;
 
             MaxHPAdr = 0x70E048;
             HPAdr = 0x70E000;
@@ -59,6 +63,8 @@ namespace TibiaHeleper.MemoryOperations
             MyXPosition = 0x70E054;
             MyYPosition = 0x70E058;
             MyFloorByteAddress = 0x70E05C;
+
+            FollowTargetAddress = 0x5815B8;
 
             InformationsOfSpottedCreaturesAndPlayersSartAddress = 0x76A0B0;
             CreatureInformationBlockSize = 0xDC;
@@ -81,6 +87,12 @@ namespace TibiaHeleper.MemoryOperations
             GameWindowFromLeftDistanceShift1 = 0x30;
             GameWindowFromLeftDistanceShift2 = 0x4;
             GameWindowFromLeftDistanceShift3 = 0x4;
+
+            ActualInput = 0x570744;
+            ActualInputShift1 = 0x40;
+            ActualInputShift2 = 0x40;
+            ActualInputShift3 = 0x2C;
+            ActualInputShift4 = 0x0;
 
 
         }

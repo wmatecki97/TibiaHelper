@@ -27,9 +27,10 @@ namespace TibiaHeleper.Simulators
             DButton.Add("\"", 0x22);
             DButton.Add(";", 0xBA);
             DButton.Add("CTRL", 0x11);
-            DButton.Add("CONTROL", 0x11);
+            DButton.Add("CONTROL", 0xA2);
+            DButton.Add("BACKSPACE", 0x08);
 
-            
+
             //Numbers
             DButton.Add("0", 0x30);
             DButton.Add("1", 0x31);

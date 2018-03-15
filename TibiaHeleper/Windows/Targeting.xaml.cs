@@ -90,6 +90,7 @@ namespace TibiaHeleper.Windows
                 target.minHP = int.Parse(minHP.Text);
                 target.action = Action.Text;
                 target.maxDistance = int.Parse(maxDistance.Text);
+                target.followTarget = (bool)FollowTargetCheckBox.IsChecked;
             }
             catch (Exception)
             {

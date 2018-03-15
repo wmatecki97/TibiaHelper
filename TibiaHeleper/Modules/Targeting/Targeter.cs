@@ -65,6 +65,7 @@ namespace TibiaHeleper.Modules.Targeting
 
         private void attack(Creature creature, Target settings)
         {
+          //  GetData.FollowTarget = settings.followTarget;
             MouseSimulator.clickOnField(creature.XPosition, creature.YPosition, true);
             Thread.Sleep(200);
             while (working && GetData.getTargetID() == creature.id && creature.HPPercent > settings.minHP && creature.HPPercent <= settings.maxHP)//waiting until creature is dead or target is not reachable

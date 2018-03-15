@@ -27,11 +27,17 @@ namespace TibiaHeleper.Simulators
 
         public static void Simulate(string action)
         {
+            string text = action;
             action = action.ToUpper();
             if (action.IndexOf('+') != -1 || (action.IndexOf('F') == 0 && (action[1] >= 49 && action[1] <= 57) && action.Length <= 3)) // 49 is '1' like f1 and 57 is '9' length of f* keys is max 3 "f10"
                 Press(action);
             else
-                Message(action);
+            {
+                string userActualInput = GetData.getActualInput();
+                deleteActualInput(userActualInput.Length);
+                Message(text);
+                Message(userActualInput);
+            }
         }
 
         public static void Press(string button)
@@ -54,45 +60,25 @@ namespace TibiaHeleper.Simulators
                 {
                     PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton[singleButton], 0);
                 }
-
             }
 
-        }
-
-        private static void copyActualInput()
-        {
-            PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["CTRL"], 0);
-
-            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["A"], 0);
-
-            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["C"], 0);
-
-            PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["CTRL"], 0);
-
-        }
-
-        private static void paste()
-        {
-            PostMessage(proc.MainWindowHandle, WM_KEYDOWN, DButton["CTRL"], 0);
-
-            PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["V"], 0);
-
-            PostMessage(proc.MainWindowHandle, WM_KEYUP, DButton["CTRL"], 0);
         }
 
         public static void Message(string text)
         {
-            copyActualInput();
-            text = text.ToUpper();
             PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
             foreach (char letter in text)
             {
-                PostMessage(proc.MainWindowHandle, WM_CHAR, DButton[letter.ToString()], 0);
+                PostMessage(proc.MainWindowHandle, WM_CHAR, letter, 0);
             }
             PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
+        }
 
-            paste();
-
+        private static void deleteActualInput(int lettersToDelete)
+        {
+            for (int i = 0; i < lettersToDelete; i++)
+                PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["BACKSPACE"], 0);
+            //TO IMPLEMENT
         }
     }
 }
