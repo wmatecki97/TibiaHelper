@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BackgroundWorkers\BackgroundWorker.cs" />
+    <Compile Include="BackgroundWorkers\CheckIsGameRunningWorker.cs" />
+    <Compile Include="BackgroundWorkers\WorkersManager.cs" />
     <Compile Include="MemoryOperations\Adresses.cs" />
     <Compile Include="MemoryOperations\Flags.cs" />
     <Compile Include="MemoryOperations\GetData.cs" />

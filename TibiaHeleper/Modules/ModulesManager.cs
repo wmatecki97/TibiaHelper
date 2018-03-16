@@ -56,6 +56,7 @@ namespace TibiaHeleper.Modules
             {
                 Thread t = new Thread(module.Run);
                 while (!module.stopped) ;//waiting for thread finish
+
                 module.stopped = false;
                 module.working = true;
                 t.Start();

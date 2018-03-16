@@ -71,7 +71,7 @@ namespace TibiaHeleper.Modules.Targeting
             while (working && GetData.getTargetID() == creature.id && creature.HPPercent > settings.minHP && creature.HPPercent <= settings.maxHP)//waiting until creature is dead or target is not reachable
             {
                 KeyboardSimulator.Simulate(settings.action);
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
             }
         }
 

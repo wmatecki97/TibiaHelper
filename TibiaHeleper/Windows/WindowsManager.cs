@@ -1,4 +1,8 @@
-﻿namespace TibiaHeleper.Windows
+﻿using System;
+using System.Windows;
+using TibiaHeleper.MemoryOperations;
+
+namespace TibiaHeleper.Windows
 {
     public static class WindowsManager
     {
@@ -15,5 +19,7 @@
             targeting = new Targeting();
         }
         
+        
+       
     }
 }
