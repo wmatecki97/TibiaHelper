@@ -63,6 +63,7 @@
     <Compile Include="BackgroundWorkers\CheckIsGameRunningWorker.cs" />
     <Compile Include="BackgroundWorkers\WorkersManager.cs" />
     <Compile Include="MemoryOperations\Adresses.cs" />
+    <Compile Include="MemoryOperations\Constants.cs" />
     <Compile Include="MemoryOperations\Flags.cs" />
     <Compile Include="MemoryOperations\GetData.cs" />
     <Compile Include="MemoryOperations\ReadMemory.cs" />
@@ -71,8 +72,13 @@
     <Compile Include="Modules\ModulesManager.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\Sio.cs" />
-    <Compile Include="Modules\Targeting\Target.cs" />
-    <Compile Include="Modules\Targeting\Targeter.cs" />
+    <Compile Include="Modules\TargetingModule\Target.cs" />
+    <Compile Include="Modules\TargetingModule\Targeter.cs" />
+    <Compile Include="Modules\WalkerModule\Action.cs" />
+    <Compile Include="Modules\WalkerModule\Tracker.cs" />
+    <Compile Include="Modules\WalkerModule\Walker.cs" />
+    <Compile Include="Modules\WalkerModule\WalkerStatement.cs" />
+    <Compile Include="Modules\WalkerModule\Waypoint.cs" />
     <Compile Include="Simulators\KeyAddresses.cs" />
     <Compile Include="Simulators\KeyboardSimulator.cs" />
     <Compile Include="Simulators\MouseSimulator.cs" />
@@ -90,6 +96,9 @@
     </Compile>
     <Compile Include="Windows\Targeting.xaml.cs">
       <DependentUpon>Targeting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WalkerWindow.xaml.cs">
+      <DependentUpon>WalkerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WindowsManager.cs" />
     <Compile Include="App.xaml.cs">
@@ -109,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Targeting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WalkerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

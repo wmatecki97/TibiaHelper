@@ -13,6 +13,7 @@ namespace TibiaHeleper.Modules.Targeting
         public bool working { get; set; }
         public bool stopped { get; set; }
         public List<Target> targetSettingsList { get; set; } //has to be sorted by priority
+        public bool attacking;
 
         public Targeter()
         {
@@ -55,7 +56,9 @@ namespace TibiaHeleper.Modules.Targeting
                 {
                     lock (targetSettingsList)
                     {
+                        attacking = true;
                         attack(target, Settings);
+                        attacking = false;
                     }
                 }
                 else Thread.Sleep(500);

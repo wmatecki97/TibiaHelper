@@ -33,6 +33,7 @@ namespace TibiaHeleper.Windows
         {
             if (ModulesManager.healer.working) HealerEnable.IsChecked = true;
             if (ModulesManager.targeting.working) TargetingEnable.IsChecked = true;
+            if (ModulesManager.walker.working) WalkerEnable.IsChecked = true;
         }
 
         private void HealerDisable(object sender, RoutedEventArgs e)
@@ -103,9 +104,25 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            int a = GetData.getGameWindowDistanceFromLeft();
+            int x = GetData.MyXPosition;
+            int y = GetData.MyYPosition;
         }
 
-      
+        private void WalkerButtonClicked(object sender, RoutedEventArgs e)
+        {
+            WindowsManager.walkerWindow.ReloadData();
+            WindowsManager.walkerWindow.Show();
+            this.Hide();
+        }
+
+        private void WorkerRun(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.WalkerEnable();
+        }
+
+        private void WorkerDisable(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.WalkerDisable();
+        }
     }
 }

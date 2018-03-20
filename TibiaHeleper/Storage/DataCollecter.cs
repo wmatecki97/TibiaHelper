@@ -1,6 +1,7 @@
 ﻿using System;
 using TibiaHeleper.Modules;
 using TibiaHeleper.Modules.Targeting;
+using TibiaHeleper.Modules.WalkerModule;
 
 namespace TibiaHeleper.Storage
 {
@@ -12,6 +13,7 @@ namespace TibiaHeleper.Storage
         public Sio sio { get; set; }
         public AntyPalalyse antyParalyse {get; set;}
         public Targeter targeting { get; set; }
+        public Walker walker { get; set;}
 
 
         public DataCollecter()
@@ -21,6 +23,7 @@ namespace TibiaHeleper.Storage
             sio = ModulesManager.sio;
             antyParalyse = ModulesManager.antyParalyse;
             targeting = ModulesManager.targeting;
+            walker = ModulesManager.walker;
         }
 
         public void activateLoadedSettings()
@@ -45,6 +48,10 @@ namespace TibiaHeleper.Storage
             ModulesManager.TargetingDisable();
             ModulesManager.targeting = targeting;
             if (targeting.working)  ModulesManager.HardEnableThread((Module)targeting);
+
+            ModulesManager.WalkerDisable();
+            ModulesManager.walker = walker;
+            if(walker.working)ModulesManager.HardEnableThread((Module)walker);
 
         }
     }

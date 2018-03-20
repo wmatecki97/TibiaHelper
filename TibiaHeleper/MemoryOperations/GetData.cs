@@ -178,6 +178,17 @@ namespace TibiaHeleper.MemoryOperations
         {
             return Math.Abs(creature.XPosition - MyXPosition) + Math.Abs(creature.YPosition - MyYPosition);
         }
+        public static int GetDistance(int xPosition, int yPosition)
+        {
+            return Math.Abs(xPosition - MyXPosition) + Math.Abs(yPosition - MyYPosition);
+        }
+        public static bool isOnScreen(int xPosition, int yPosition, int floor=100)
+        {
+            bool isFloorGood = floor == MyFloor || floor==100;
+            bool isXGood = Math.Abs(GetData.MyXPosition - xPosition) <= (Constants.GameWindowWidthSquares - 1) / 2;
+            bool isYGood =  Math.Abs(GetData.MyYPosition - yPosition) <= (Constants.GameWindowHeightSquares - 1) / 2;
+            return isXGood && isYGood && isFloorGood;
+        }
 
 
 

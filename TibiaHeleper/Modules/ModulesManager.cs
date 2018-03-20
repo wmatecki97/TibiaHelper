@@ -2,6 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using TibiaHeleper.Modules.Targeting;
+using TibiaHeleper.Modules.WalkerModule;
 
 namespace TibiaHeleper.Modules
 {
@@ -13,6 +14,8 @@ namespace TibiaHeleper.Modules
         public static Sio sio { get; set; }
         public static AntyPalalyse antyParalyse { get; set; }
         public static Targeter targeting { get; set; }
+        public static Walker walker { get; set; }
+        public static Tracker tracker { get; set; }
 
         // private static Thread THealer;
         // private static Thread TAutoHaste;
@@ -31,6 +34,8 @@ namespace TibiaHeleper.Modules
             sio = new Sio();
             antyParalyse = new AntyPalalyse();
             targeting = new Targeter();
+            walker = new Walker();
+            tracker = new Tracker();
 
         }
         /// <summary>
@@ -87,6 +92,12 @@ namespace TibiaHeleper.Modules
 
         public static void TargetingEnable() { enableThread((Module)targeting); }
         public static void TargetingDisable() { disableThread((Module)targeting); }
+
+        public static void WalkerEnable() { enableThread((Module)walker); }
+        public static void WalkerDisable() { disableThread((Module)walker); }
+
+        public static void TrackerEnable() { enableThread((Module)tracker); }
+        public static void TrackerDisable() { disableThread((Module)tracker); }
 
         public static void serialize()
         {

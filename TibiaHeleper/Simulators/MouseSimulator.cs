@@ -19,7 +19,7 @@ namespace TibiaHeleper.Simulators
 
         private static int leftTopFieldXPosition { get { return GetData.MyXPosition - 7; } }
         private static int leftTopFieldYPosition { get { return GetData.MyYPosition - 5; } }
-        private static int fieldPixelSize { get { return GetData.getGameWindowHeight() / 11; } }
+        private static int fieldPixelSize { get { return GetData.getGameWindowHeight() / Constants.GameWindowHeightSquares; } }
 
 
         [DllImport("user32.dll")]

@@ -10,6 +10,7 @@ namespace TibiaHeleper.Windows
         public static AdditionalModules additionalModulesWindow { get; set; }
         public static Menu menu { get; set; }
         public static Targeting targeting { get; set; }
+        public static WalkerWindow walkerWindow { get; set; }
 
         static WindowsManager()
         {
@@ -17,6 +18,7 @@ namespace TibiaHeleper.Windows
             additionalModulesWindow = new AdditionalModules();
             menu = new Menu();
             targeting = new Targeting();
+            walkerWindow = new WalkerWindow();
         }
         
         

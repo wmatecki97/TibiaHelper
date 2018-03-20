@@ -36,3 +36,5 @@ C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\Windows
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\bin\Debug\WindowsInput.xml
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\Targeting.g.cs
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\Targeting.baml
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\WalkerWindow.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\WalkerWindow.baml

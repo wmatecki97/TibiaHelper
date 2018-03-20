@@ -1,0 +1,1 @@
+zmienna, która ma id ostatnio kliknietego elementuy musi ogarniac miejsce gdzie on lezys
