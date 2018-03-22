@@ -8,7 +8,7 @@ namespace TibiaHeleper.BackgroundWorkers
 {
     public class BackgroundWorker
     {
-        public int TimeToWait;
+        public int refreshFrequency;
         public bool working { get; set; }
         public bool finished { get; set; }
 
@@ -16,7 +16,7 @@ namespace TibiaHeleper.BackgroundWorkers
         
         public BackgroundWorker()
         {
-            TimeToWait = 2;
+            refreshFrequency = 2;
             working = false;
             finished = false;
         }

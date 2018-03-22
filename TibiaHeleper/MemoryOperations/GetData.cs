@@ -23,8 +23,6 @@ namespace TibiaHeleper.MemoryOperations
         }
 
 
-
-
         /// <summary>
         /// looking for tibia.exe returns false when Tibia.exe not found
         /// </summary>
@@ -81,7 +79,9 @@ namespace TibiaHeleper.MemoryOperations
             return Tibia;
         }
 
-
+        /// <summary>
+        /// checks who is logged in and sets Me. Returns null if nobody is logged in.
+        /// </summary>
         public static void WhoAmI()
         {
             Me = null;
@@ -104,6 +104,7 @@ namespace TibiaHeleper.MemoryOperations
                 }
             }
         }
+        public static int MyID { get { return Me.id; } }
         public static int XOR { get { return getIntegerDataFromAddress(Addresses.XORAdr); } }
         public static int MyHP
         {
@@ -176,6 +177,7 @@ namespace TibiaHeleper.MemoryOperations
 
         public static int GetDistance(Creature creature) //TO IMPLEMENT
         {
+            if (creature.Floor != MyFloor) return 100;
             return Math.Abs(creature.XPosition - MyXPosition) + Math.Abs(creature.YPosition - MyYPosition);
         }
         public static int GetDistance(int xPosition, int yPosition)
@@ -209,6 +211,25 @@ namespace TibiaHeleper.MemoryOperations
                     lastSpottedCreatureAddress += CreatureInformationBlockSize;
                 }
                 else wasCreatureSpotted = false;
+            }
+            lock (allSpottedCreaturesList) //delete from list dead creatures
+            {
+                for(int i=0; i<allSpottedCreaturesList.Count(); i++)
+                {
+                    if (allSpottedCreaturesList[i].HPPercent == 0)
+                    {
+                        allSpottedCreaturesList.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+        }
+        public static void ResetAllSpottedCreatureList()
+        {
+            lastSpottedCreatureAddress = Addresses.InformationsOfSpottedCreaturesAndPlayersSartAddress;
+            lock (allSpottedCreaturesList)
+            {
+                allSpottedCreaturesList = new List<Creature>();
             }
         }
         public static List<Creature> GetBattleList()

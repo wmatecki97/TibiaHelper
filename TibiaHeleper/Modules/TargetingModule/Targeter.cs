@@ -41,7 +41,7 @@ namespace TibiaHeleper.Modules.Targeting
                         {
                             if ( settings.name.ToUpper() == creature.name.ToUpper())
                             {
-                                if (isTargetBetter(target, creature) && settings.maxDistance<=GetData.GetDistance(creature))
+                                if (isTargetBetter(target, creature) && settings.maxDistance>=GetData.GetDistance(creature))
                                 {
                                     gotTarget = true;
                                     target = creature;

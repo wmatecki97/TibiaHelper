@@ -17,7 +17,7 @@ namespace TibiaHeleper.BackgroundWorkers
             {
                 if (!GetData.isGameOpened())
                     Environment.Exit(0);
-                Thread.Sleep(1000 * TimeToWait);
+                Thread.Sleep(1000 * refreshFrequency);
             }
             finished = true;
         }

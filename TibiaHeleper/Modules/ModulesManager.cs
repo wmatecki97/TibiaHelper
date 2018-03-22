@@ -93,7 +93,7 @@ namespace TibiaHeleper.Modules
         public static void TargetingEnable() { enableThread((Module)targeting); }
         public static void TargetingDisable() { disableThread((Module)targeting); }
 
-        public static void WalkerEnable() { enableThread((Module)walker); }
+        public static void WalkerEnable() {  enableThread((Module)walker); }
         public static void WalkerDisable() { disableThread((Module)walker); }
 
         public static void TrackerEnable() { enableThread((Module)tracker); }

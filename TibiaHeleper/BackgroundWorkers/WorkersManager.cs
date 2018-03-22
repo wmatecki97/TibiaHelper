@@ -30,6 +30,7 @@ namespace TibiaHeleper.BackgroundWorkers
         public static void EnvironmentGettingSterted()
         {
             addWorker(new CheckIsGameRunningWorker());
+            addWorker(new WhoIsLoggedInWorker());
         }
 
 
