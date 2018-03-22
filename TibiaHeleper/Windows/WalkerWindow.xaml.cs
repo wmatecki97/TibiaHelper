@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TibiaHeleper.Modules;
 using TibiaHeleper.Modules.WalkerModule;
 
@@ -30,11 +20,16 @@ namespace TibiaHeleper.Windows
         private List<WalkerStatement> list;
         private int tolerance;
 
+        private string startLabellName;
+        private int startIndex;
+
         private void Load(object sender, RoutedEventArgs e)
         {
+            startIndex = ModulesManager.walker.actualStatementIndex;
             list = ModulesManager.walker.CopyList();
             tolerance = ModulesManager.walker.tolerance;
             fillList();
+            listBox.SelectedIndex = startIndex;
         }
         private void fillList()
         {
@@ -101,8 +96,46 @@ namespace TibiaHeleper.Windows
             bool wasWorking = ModulesManager.walker.working;
             if(wasWorking==true) ModulesManager.WalkerDisable();
             while (!ModulesManager.walker.stopped) ;
+
             ModulesManager.walker.SetList(list);
+            if (!wasWorking) ModulesManager.walker.startStatementIndex = startIndex;
+
             if (wasWorking) ModulesManager.WalkerEnable();
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            WindowsManager.menu.Show();
+            this.Hide();
+        }
+
+        private void AddLabel(object sender, RoutedEventArgs e)
+        {
+            String name = LabelTextBox.Text;
+            bool isGood = true;
+            foreach (WalkerStatement statement in list)
+            {
+                if (statement.name == name)
+                    isGood = false;
+            }
+            if (isGood)
+            {
+                int index = listBox.SelectedIndex;
+                if (index == -1) index = list.Count;
+                WalkerLabel label = new WalkerLabel(name);
+                list.Insert(index, label);
+                fillList();
+            }
+            else
+            {
+                ErrorLabel.Content = "Unacceptable value";
+                Error.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void SetStartLabel(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -19,16 +19,16 @@
         <Button x:Name="AccuracyButton" Content="Set Accuracy" HorizontalAlignment="Left" Margin="223,68,0,0" VerticalAlignment="Top" Width="107" Height="23" Click="SetAccuracy"/>
         <TextBox x:Name="Accuracy" HorizontalAlignment="Left" Height="23" Margin="167,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="51"/>
         <TextBox x:Name="startLabel" HorizontalAlignment="Left" Height="23" Margin="167,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="51"/>
-        <Button x:Name="SetStartLabelButton" Content="Set Start Label" HorizontalAlignment="Left" Margin="223,105,0,0" VerticalAlignment="Top" Width="107" Height="24" />
+        <Button x:Name="SetStartLabelButton" Content="Set Start Label" HorizontalAlignment="Left" Margin="223,105,0,0" VerticalAlignment="Top" Width="107" Height="24" Click="SetStartLabel"/>
 
-        <Button x:Name="labelButton" Content="Add Label" HorizontalAlignment="Left" FontSize="10" Margin="279,162,0,0" VerticalAlignment="Top" Width="51" Height="23"/>
-        <TextBox x:Name="LabelLabel" HorizontalAlignment="Left" Height="23" Margin="167,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
+        <Button x:Name="labelButton" Content="Add Label" HorizontalAlignment="Left" FontSize="10" Margin="279,162,0,0" VerticalAlignment="Top" Width="51" Height="23" Click="AddLabel"/>
+        <TextBox x:Name="LabelTextBox" HorizontalAlignment="Left" Height="23" Margin="167,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
 
         <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="255,204,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="WaypointButton" Content="Add Waypoint" HorizontalAlignment="Left" Margin="167,204,0,0" VerticalAlignment="Top" Width="83"/>
 
         <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="173,237,0,0" VerticalAlignment="Top" Width="71" Click="Save"/>
-        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="259,237,0,0" VerticalAlignment="Top" Width="71"/>
+        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="259,237,0,0" VerticalAlignment="Top" Width="71" Click="Back"/>
 
 
         <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">

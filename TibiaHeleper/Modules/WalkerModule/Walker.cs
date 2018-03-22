@@ -6,20 +6,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using TibiaHeleper.MemoryOperations;
 using TibiaHeleper.Simulators;
+using TibiaHeleper.Windows;
 
 namespace TibiaHeleper.Modules.WalkerModule
 {
+    [Serializable]
     class Walker : Module
     {
         public List<WalkerStatement> list;
 
-        public Stack<Waypoint> wayBack;
+        private Stack<Waypoint> wayBack;
 
         public bool stopped { get; set; }
         public bool working { get; set; }
-        private int actualStatementId;
+        public int actualStatementIndex;
+        public int startStatementIndex;
 
         public int tolerance;
+
+        private int direction;
+        private int lastDirection;
+        //8 - north
+        //2 - south
+        //4 - west
+        //6 - east
+        //1 - south-west
+        //3 - south-east
+        //7 - north-west
+        //9 - north-east
+
+
 
         public Walker()
         {
@@ -35,33 +51,43 @@ namespace TibiaHeleper.Modules.WalkerModule
             WalkerStatement statement;
             int listCount;
             lock (list) { listCount = list.Count(); }
+            int temp;
 
-            while (working)
+            while (working && actualStatementIndex < list.Count())
             {
-                for (actualStatementId = 0; actualStatementId <listCount && working; actualStatementId++)
+                lock (list)
                 {
-                    lock (list)
+                    listCount = list.Count();
+
+                    statement = list[actualStatementIndex];
+                    //getting and setting on window list
+
+                    if (statement.type == (int)StatementType.getType["waypoint"] || statement.type == (int)StatementType.getType["stand"])//walk
                     {
-                        listCount = list.Count();
-
-                        statement = list[actualStatementId];
-                        //getting and setting on window list
-
-                        if (statement.type == (int)WalkerStatement.getType["waypoint"])//walk
+                        temp = tolerance;
+                        if (statement.type == (int)StatementType.getType["stand"])
+                            tolerance = 0;
+                        if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
                         {
-                            if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
-                            {
-                                tryTogetBack(); //if player is in not good position then goes back to the last reached waypoint
-                                actualStatementId--;
-                            }
+                            tryTogetBack(); //if player is in not good position then goes back to the last reached waypoint
+                            actualStatementIndex--;
                         }
-                        else//do action
+                        tolerance = temp;
+                    }
+                    else if (statement.type == (int)StatementType.getType["action"])//do action
+                    {
+                        try
                         {
-
+                            Action action = (Action)statement;
+                            action.DoAction();
                         }
+                        catch (Exception){}
                     }
                 }
+                actualStatementIndex++;
             }
+            actualStatementIndex = 0;
+            working = false;
             stopped = true;
         }
 
@@ -71,7 +97,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             bool isStackEmpty;
             lock (wayBack)
             {
-               isStackEmpty  = wayBack.Count() == 0;
+                isStackEmpty = wayBack.Count() == 0;
             }
 
             if (isStackEmpty) return getNewDirection();
@@ -84,7 +110,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 }
                 if (!goToCoordinates(waypoint)) //if it is impossible to get back
                 {
-                    if(!getNewDirection())
+                    if (!getNewDirection())
                         return false;
                     break;
                 }
@@ -100,10 +126,25 @@ namespace TibiaHeleper.Modules.WalkerModule
         /// <returns></returns>
         private bool goToCoordinates(Waypoint waypoint)
         {
-            while(!hasWaypointBeenReached(waypoint) && GetData.isOnScreen(waypoint.xPos, waypoint.yPos) && working)
+            while (!hasWaypointBeenReached(waypoint) && GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor) && working)
             {
-                while (ModulesManager.targeting.attacking) Thread.Sleep(500); // waits for targetting
-                    go(waypoint);
+
+                while (ModulesManager.targeting.attacking)
+                    Thread.Sleep(500); // waits for targetting
+
+                direction = 0;
+                if (waypoint.xPos > GetData.MyXPosition)
+                    direction += 1;
+                else if (waypoint.xPos < GetData.MyXPosition)
+                    direction -= 1;
+                if (waypoint.yPos > GetData.MyYPosition)
+                    direction += 2;
+                else if (waypoint.yPos < GetData.MyYPosition)
+                    direction += 8;
+                else direction += 5;
+
+                go(waypoint);
+                Thread.Sleep(200);
             }
             return hasWaypointBeenReached(waypoint);
         }
@@ -124,48 +165,61 @@ namespace TibiaHeleper.Modules.WalkerModule
         /// <param name="waypoint"></param>
         private void go(Waypoint waypoint)
         {
-            MouseSimulator.clickOnField(waypoint.xPos, waypoint.yPos);
+            if (direction == 8)
+                KeyboardSimulator.Press("up");
+            else if (direction == 6)
+                KeyboardSimulator.Press("right");
+            else if (direction == 4)
+                KeyboardSimulator.Press("left");
+            else if (direction == 2)
+                KeyboardSimulator.Press("down");
+            else
+                MouseSimulator.clickOnField(waypoint.xPos, waypoint.yPos);
+
+            // KeyboardSimulator.Press("NUM" + direction);
+
+            //MouseSimulator.clickOnField(waypoint.xPos, waypoint.yPos);
         }
 
         private bool getNewDirection()
         {
-            int distance=99;
+            int distance = 99;
             Waypoint waypoint;
-            int nextStatementID = actualStatementId;
+            int nextStatementID = actualStatementIndex;
 
-            for (int i=actualStatementId+1; i!=actualStatementId; i++) //checking last 20 and next 20 waypoints and gets the closest one
+            for (int i = actualStatementIndex + 1; i != actualStatementIndex; i++) //checking waypoints and gets the closest one
             {
                 if (i >= list.Count())
                 {
                     i = 0;
-                    if (i == actualStatementId)
+                    if (i == actualStatementIndex)
                         break;
                 }
-                    
 
-                if (list[i].type==(int)WalkerStatement.getType["waypoint"]) // if statement is waypoint
+
+                if (list[i].type == (int)StatementType.getType["waypoint"]) // if statement is waypoint
                 {
                     waypoint = (Waypoint)list[i];
-                    if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos))
+                    if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor))
                     {
-                        if(distance>GetData.GetDistance(waypoint.xPos, waypoint.yPos))//setting the new result
+                        if (distance > GetData.GetDistance(waypoint.xPos, waypoint.yPos))//setting the new result
                         {
                             distance = GetData.GetDistance(waypoint.xPos, waypoint.yPos);
-                            nextStatementID = i-1;
+                            nextStatementID = i - 1;
                         }
                     }
                 }
-                else if(list[i].type == (int)WalkerStatement.getType["check"])// if statement is action
+                else if (list[i].type == (int)StatementType.getType["check"])// if statement is action
                 {
                     throw new NotImplementedException();
                     //when all conditions are good then go to label
                 }
             }
-            actualStatementId = nextStatementID;
-            return distance <99;
+            actualStatementIndex = nextStatementID;
+            return distance < 99;
         }
-     
-        
+
+
         public List<WalkerStatement> CopyList()
         {
             List<WalkerStatement> result = new List<WalkerStatement>();
@@ -176,7 +230,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                     result.Add((WalkerStatement)(statement.Clone()));
                 }
             }
-            
+
             return result;
         }
 
@@ -187,6 +241,6 @@ namespace TibiaHeleper.Modules.WalkerModule
                 list = newList;
             }
         }
-        
+
     }
 }

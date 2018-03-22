@@ -3,15 +3,16 @@ Wybór okna Tibii podczas uruchamiania
 automount
 otwieranie plecaka to raczej easy, bo stała jest szerokość prawego panelu
 
-Dodanie wątku, który zamyka bota jeśli tibia została zamknięta
 
 tryb ataku
 jedzenie
 
+poprawa adresów po przelogowaniu
+poppsute zapisywanie listy walkera - po zapisie pracuje na orginale
 
+dodanie aktualnych współrzędnych i waypointa do ktorego idzie bot
 
 Walker
-ogarnięcie aktualnej pozycji
 wyznaczenie czy dane pole można przejść
 ogarnięcie trasy do celu
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TibiaHeleper.Modules.WalkerModule
 {
+    [Serializable]
     public class WalkerStatement: ICloneable
     {
         /// <summary>
@@ -19,23 +20,11 @@ namespace TibiaHeleper.Modules.WalkerModule
 
         public string name { get; set; }
 
-        public WalkerStatement()
-        {
-            Initialize();
-        }
-
-
-        public static Hashtable getType;
-        public static void Initialize()
-        {
-            getType = new Hashtable();
-            getType.Add("waypoint",0);
-            getType.Add("action",1);
-        }
-
         public virtual object Clone()
         {
             return null;
         }
     }
+
+
 }

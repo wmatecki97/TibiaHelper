@@ -73,9 +73,20 @@ namespace TibiaHeleper.Simulators
 
             //Arrows
             DButton.Add("LEFT", 0x25);
-            DButton.Add("RIGHT", 0x26);
-            DButton.Add("UP", 0x27);
+            DButton.Add("RIGHT", 0x27);
+            DButton.Add("UP", 0x26);
             DButton.Add("DOWN", 0x28);
+
+            //Numeric Keypad
+            DButton.Add("NUM1", 0x61);
+            DButton.Add("NUM2", 0x62);
+            DButton.Add("NUM3", 0x63);
+            DButton.Add("NUM4", 0x64);
+            DButton.Add("NUM5", 0x65);
+            DButton.Add("NUM6", 0x66);
+            DButton.Add("NUM7", 0x67);
+            DButton.Add("NUM8", 0x68);
+            DButton.Add("NUM9", 0x69);
 
         }
     }

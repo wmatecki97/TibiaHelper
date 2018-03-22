@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TibiaHeleper.Modules.WalkerModule
 {
+    [Serializable]
     public class Waypoint : WalkerStatement, ICloneable
     {
         public int xPos;
@@ -17,7 +18,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             xPos = xPosition;
             yPos = yPosition;
             floor = Floor;
-            type = 0;
+            type = (int)StatementType.getType["waypoint"];
             name = "W: " + floor.ToString() + ":" + xPosition.ToString() + ":" + yPosition.ToString();
         }
 

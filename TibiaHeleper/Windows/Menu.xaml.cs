@@ -61,9 +61,7 @@ namespace TibiaHeleper.Windows
         public new void Show()
         {
             base.Show();
-            GetData.WhoAmI();
-            if (GetData.Me != null)
-                Title = "Tibia Helper -" + GetData.Me.name;
+            
         }
 
         private void OpenAdditionalModulesWindow(object sender, RoutedEventArgs e)
@@ -106,6 +104,7 @@ namespace TibiaHeleper.Windows
         {
             int x = GetData.MyXPosition;
             int y = GetData.MyYPosition;
+            int floor = GetData.MyFloor;
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)
@@ -120,9 +119,21 @@ namespace TibiaHeleper.Windows
             ModulesManager.WalkerEnable();
         }
 
+ 
+
         private void WorkerDisable(object sender, RoutedEventArgs e)
         {
             ModulesManager.WalkerDisable();
+        }
+
+        public void Update()
+        {
+            this.Dispatcher.Invoke(() => {
+                WalkerEnable.IsChecked = ModulesManager.walker.working;
+                TargetingEnable.IsChecked = ModulesManager.targeting.working;
+                HealerEnable.IsChecked = ModulesManager.targeting.working;
+                if (GetData.Me != null) Title = "Tibia Helper -" + GetData.Me.name;
+            });
         }
     }
 }
