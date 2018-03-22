@@ -8,7 +8,7 @@ tryb ataku
 jedzenie
 
 poprawa adresów po przelogowaniu
-poppsute zapisywanie listy walkera - po zapisie pracuje na orginale
+
 
 dodanie aktualnych współrzędnych i waypointa do ktorego idzie bot
 

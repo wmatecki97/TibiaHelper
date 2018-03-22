@@ -15,16 +15,16 @@ namespace TibiaHeleper.Modules.WalkerModule
         {
             getType = new Hashtable();
             getType.Add("waypoint", 0);
-            getType.Add("action", 1);
+            getType.Add("label", 1);
             getType.Add("check", 2);
-            getType.Add("label", 3);
-            getType.Add("goto", 4);
+            getType.Add("action", 3);
 
-            getType.Add("mouseClick", 5);
-            getType.Add("say", 6);
-            getType.Add("stand", 7);
-            getType.Add("stand", 8);
-            getType.Add("hotkey", 9);
+            getType.Add("Go To Label", 4);
+            getType.Add("Mouse Click", 5);
+            getType.Add("Say", 6);
+            getType.Add("Stand", 7);
+            getType.Add("Hotkey", 9);
+            getType.Add("Use On Field", 10);
 
         }
     }

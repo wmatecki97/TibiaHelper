@@ -19,7 +19,7 @@ namespace TibiaHeleper.BackgroundWorkers
             while (working)
             {
                 GetData.WhoAmI();
-                if(loggedID!=GetData.MyID)
+                if(GetData.Me!=null && loggedID!=GetData.MyID)
                 {
                     loggedID = GetData.MyID;
                     WindowsManager.menu.Update();
@@ -27,13 +27,14 @@ namespace TibiaHeleper.BackgroundWorkers
                     GetData.ActualizeAllSpottedCreaturesList();
                 }
                 Thread.Sleep(1000 * refreshFrequency);
+                WindowsManager.walkerWindow.Update();
             }
             finished = true;
         }
 
         public WhoIsLoggedInWorker()
         {
-            refreshFrequency = 10;
+            refreshFrequency = 3;
             loggedID = -1;
         }
     }

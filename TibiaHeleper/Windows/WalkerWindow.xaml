@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TibiaHeleper.Windows"
         mc:Ignorable="d"
-        Title="Walker" Height="300" Width="350" Loaded="Load" Closed="Close">
+        ResizeMode="NoResize"
+        Title="Walker" Height="320" Width="660" Loaded="Load" Closed="Close">
     <Grid>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="208" Margin="10,10,0,0" VerticalAlignment="Top" Width="137"/>
-        <Button x:Name="Up" Content="Up" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="63"/>
-        <Button x:Name="Down" Content="Down" HorizontalAlignment="Left" Margin="78,223,0,0" VerticalAlignment="Top" Width="69"/>
+        <Button x:Name="UpButton" Content="Up" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="63" Click="Up"/>
+        <Button x:Name="DownButton" Content="Down" HorizontalAlignment="Left" Margin="78,223,0,0" VerticalAlignment="Top" Width="69" Click="Down"/>
         <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="63"/>
-        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="78,247,0,0" VerticalAlignment="Top" Width="69"/>
+        <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="78,247,0,0" VerticalAlignment="Top" Width="69" Click="Delete"/>
 
         <Label x:Name="TrackingLabel" Content="Tracking" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="167,12,0,0" VerticalAlignment="Top" Width="163"/>
         <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="193,38,0,0" VerticalAlignment="Top" Width="51" Click="StartTracking"/>
@@ -19,21 +20,42 @@
         <Button x:Name="AccuracyButton" Content="Set Accuracy" HorizontalAlignment="Left" Margin="223,68,0,0" VerticalAlignment="Top" Width="107" Height="23" Click="SetAccuracy"/>
         <TextBox x:Name="Accuracy" HorizontalAlignment="Left" Height="23" Margin="167,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="51"/>
         <TextBox x:Name="startLabel" HorizontalAlignment="Left" Height="23" Margin="167,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="51"/>
-        <Button x:Name="SetStartLabelButton" Content="Set Start Label" HorizontalAlignment="Left" Margin="223,105,0,0" VerticalAlignment="Top" Width="107" Height="24" Click="SetStartLabel"/>
+        <Button x:Name="SetStartLabelButton" Content="Set Start Label" HorizontalAlignment="Left" Margin="225,105,0,0" VerticalAlignment="Top" Width="107" Height="24" Click="SetStartLabel"/>
 
         <Button x:Name="labelButton" Content="Add Label" HorizontalAlignment="Left" FontSize="10" Margin="279,162,0,0" VerticalAlignment="Top" Width="51" Height="23" Click="AddLabel"/>
         <TextBox x:Name="LabelTextBox" HorizontalAlignment="Left" Height="23" Margin="167,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
 
-        <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="255,204,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="WaypointButton" Content="Add Waypoint" HorizontalAlignment="Left" Margin="167,204,0,0" VerticalAlignment="Top" Width="83"/>
+        <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="349,237,0,0" VerticalAlignment="Top" Width="174"/>
 
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="173,237,0,0" VerticalAlignment="Top" Width="71" Click="Save"/>
-        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="259,237,0,0" VerticalAlignment="Top" Width="71" Click="Back"/>
-
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="167,237,0,0" VerticalAlignment="Top" Width="83" Click="Save"/>
+        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="255,237,0,0" VerticalAlignment="Top" Width="75" Click="Back"/>
+        <Label x:Name="InformationLabel" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="167,256,10,0.4" Content="Not Logged In" FontSize="10" Foreground="#00f000"/>
 
         <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
             <Label x:Name="ErrorLabel" Content="Error" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="300" Height="177"/>
             <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
+        </Grid>
+
+        <Grid Name="ActionGrid" Margin="337,0,0,0.4">
+            <Grid Name="PositionGrid" Margin="0,26,111.2,165" Visibility="Hidden">
+                <TextBox x:Name="XPositionTextBox" HorizontalAlignment="Left" Height="23" Margin="4,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+                <TextBox x:Name="YPositionTextBox" HorizontalAlignment="Left" Height="23" Margin="71,36,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="63"/>
+                <TextBox x:Name="FloorTextBox" HorizontalAlignment="Left" Height="23" Margin="138,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
+                <Label x:Name="XPositionLabel" Content="X Position" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="4,10,0,0" VerticalAlignment="Top" Width="62"/>
+                <Label x:Name="YPositionLabel" Content="Y Position" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" Width="63"/>
+                <Label x:Name="FloorLabel" Content="Floor" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="45"/>
+                <Button x:Name="GetMyCoordinatesButton" Content="Get Actual Position" HorizontalAlignment="Left" Margin="4,66,0,0" VerticalAlignment="Top" Width="179" Click="GetMyCoordinates" Height="23"/>
+            </Grid>
+            <Grid Name="MouseClickGrid" Margin="0,130,111.2,135" Visibility="Hidden">
+                <CheckBox x:Name="RightClickCheckBox" Content="Right Mouse Button Click" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="170"/>
+            </Grid>
+            <Grid Name="TextActionGrid" Margin="0,160,111.2,55" Visibility="Hidden">
+                <Label x:Name="InputDescriptionLabel" Content="Hotkey" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Width="175"/>
+                <TextBox x:Name="ActionTextBox" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+            </Grid>
+
+            <Label x:Name="ActionTypeLabel" Content="Action Type" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="101"/>
+            <ListBox x:Name="ActionsListBox" HorizontalAlignment="Left" Padding="0" Height="183" Margin="195,41,0,0" VerticalAlignment="Top" Width="101" SelectionChanged="ActionSelected" />
         </Grid>
     </Grid>
 </Window>

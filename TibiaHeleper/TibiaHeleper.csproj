@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="BackgroundWorkers\BackgroundWorker.cs" />
     <Compile Include="BackgroundWorkers\CheckIsGameRunningWorker.cs" />
+    <Compile Include="BackgroundWorkers\PlayerInformationWorker.cs" />
     <Compile Include="BackgroundWorkers\WhoIsLoggedInWorker.cs" />
     <Compile Include="BackgroundWorkers\WorkersManager.cs" />
     <Compile Include="MemoryOperations\Adresses.cs" />
