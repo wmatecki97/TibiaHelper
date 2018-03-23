@@ -18,6 +18,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             if (actionType == (int)StatementType.getType["Hotkey"]) hotkey((string)arguments[0]);
             if (actionType == (int)StatementType.getType["Go To Label"]) GoToLabel((string)arguments[0]);
             if (actionType == (int)StatementType.getType["Use On Position"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
+            
         }
 
         public static void Say(string text)
@@ -55,6 +56,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 }
             }
         }
+
 
     }
 }

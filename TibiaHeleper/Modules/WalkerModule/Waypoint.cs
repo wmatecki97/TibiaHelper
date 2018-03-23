@@ -13,13 +13,21 @@ namespace TibiaHeleper.Modules.WalkerModule
         public int yPos;
         public int floor;
 
-        public Waypoint(int xPosition, int yPosition, int Floor)
+        public Waypoint(int xPosition, int yPosition, int Floor, bool Stand =false)
         {
             xPos = xPosition;
             yPos = yPosition;
             floor = Floor;
-            type = (int)StatementType.getType["waypoint"];
             name = "W: " + floor.ToString() + ":" + xPosition.ToString() + ":" + yPosition.ToString();
+            if (!Stand)
+                type = (int)StatementType.getType["Waypoint"];
+            else
+            {
+                type = (int)StatementType.getType["Stand"];
+                name = "S: " + floor.ToString() + ":" + xPosition.ToString() + ":" + yPosition.ToString();
+
+            }
+
         }
 
         public override object Clone()

@@ -62,10 +62,10 @@ namespace TibiaHeleper.Modules.WalkerModule
                     statement = list[actualStatementIndex];
                     //getting and setting on window list
 
-                    if (statement.type == (int)StatementType.getType["waypoint"] || statement.type == (int)StatementType.getType["stand"])//walk
+                    if (statement.type == (int)StatementType.getType["Waypoint"] || statement.type == (int)StatementType.getType["Stand"])//walk
                     {
                         temp = tolerance;
-                        if (statement.type == (int)StatementType.getType["stand"])
+                        if (statement.type == (int)StatementType.getType["Stand"])
                             tolerance = 0;
                         if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
                         {
@@ -89,6 +89,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             actualStatementIndex = 0;
             working = false;
             stopped = true;
+            WindowsManager.menu.Update();
         }
 
         private bool tryTogetBack()
@@ -156,7 +157,7 @@ namespace TibiaHeleper.Modules.WalkerModule
         /// <returns></returns>
         private bool hasWaypointBeenReached(Waypoint waypoint)
         {
-            return Math.Abs(GetData.MyXPosition - waypoint.xPos) <= tolerance && Math.Abs(GetData.MyYPosition - waypoint.yPos) <= tolerance;
+            return Math.Abs(GetData.MyXPosition - waypoint.xPos) + Math.Abs(GetData.MyYPosition - waypoint.yPos) <= tolerance;
         }
 
         /// <summary>
@@ -197,7 +198,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 }
 
 
-                if (list[i].type == (int)StatementType.getType["waypoint"]) // if statement is waypoint
+                if (list[i].type == (int)StatementType.getType["Waypoint"]) // if statement is waypoint
                 {
                     waypoint = (Waypoint)list[i];
                     if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor))

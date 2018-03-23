@@ -14,5 +14,10 @@ namespace TibiaHeleper.Modules.WalkerModule
             this.name = name;
             this.type = (int)StatementType.getType["label"];
         }
+
+        public override object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

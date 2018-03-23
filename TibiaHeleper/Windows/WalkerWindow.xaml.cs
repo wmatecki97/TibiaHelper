@@ -53,6 +53,14 @@ namespace TibiaHeleper.Windows
                 listBox.Items.Add(item);
             }
         }
+        private void insertToList(WalkerStatement item)
+        {
+            int index =list.IndexOf((WalkerStatement) listBox.SelectedItem)+1;
+            if (index == -1) index = 0;
+            list.Insert(index, item);
+            fillList();
+            listBox.SelectedItem = item;
+        }
 
         public void ReloadData()
         {
@@ -119,15 +127,11 @@ namespace TibiaHeleper.Windows
             }
             if (isGood)
             {
-                int index = listBox.SelectedIndex;
-                if (index == -1) index = list.Count;
-                WalkerLabel label = new WalkerLabel(name);
-                list.Insert(index, label);
-                fillList();
+                insertToList(new WalkerLabel(name));
             }
             else
             {
-                ErrorLabel.Content = "Unacceptable value";
+                ErrorLabel.Content = "Not unique value";
                 Error.Visibility = Visibility.Visible;
             }
         }
@@ -185,7 +189,6 @@ namespace TibiaHeleper.Windows
                 listBox.SelectedIndex = selectedIndex - 1;
             }
         }
-
         private void Delete(object sender, RoutedEventArgs e)
         {
             list.Remove((WalkerStatement)listBox.SelectedItem);
@@ -202,6 +205,7 @@ namespace TibiaHeleper.Windows
             });
         }
 
+
         private void GetMyCoordinates(object sender, RoutedEventArgs e)
         {
             Creature me = GetData.Me;
@@ -209,16 +213,14 @@ namespace TibiaHeleper.Windows
             YPositionTextBox.Text = me.YPosition.ToString();
             FloorTextBox.Text = me.Floor.ToString();
         }
-        
         private void hideActionFields()
         {
             TextActionGrid.Visibility = Visibility.Hidden;
             PositionGrid.Visibility = Visibility.Hidden;
             MouseClickGrid.Visibility = Visibility.Hidden;
-     //       RightClickCheckBox.IsChecked = false;
+            //       RightClickCheckBox.IsChecked = false;
 
         }
-
         private void ActionSelected(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             hideActionFields();
@@ -245,6 +247,7 @@ namespace TibiaHeleper.Windows
             }
             else if (action == "Go To Label")
             {
+
                 InputDescriptionLabel.Content = "Label Name";
                 TextActionGrid.Visibility = Visibility.Visible;
             }
@@ -253,6 +256,64 @@ namespace TibiaHeleper.Windows
                 PositionGrid.Visibility = Visibility.Visible;
                 MouseClickGrid.Visibility = Visibility.Visible;
             }
+            else if (action == "Waypoint")
+            {
+                PositionGrid.Visibility = Visibility.Visible;
+            }
+        }
+        /// <summary>
+        /// returns coordinates entered by user. Parsing string to int and Throws an exception.
+        /// </summary>
+        /// <returns></returns>
+        private int[] Coordinates()
+        {
+            int[] arr;
+            int x = int.Parse(XPositionTextBox.Text);
+            int y = int.Parse(YPositionTextBox.Text);
+            int f = int.Parse(FloorTextBox.Text);
+            arr = new int[] { x, y, f };
+            return arr;
+        }
+        private void AddAction(object sender, RoutedEventArgs e)
+        {
+            int actionType = (int)((DictionaryEntry)ActionsListBox.SelectedItem).Value;
+            WalkerStatement action = null;
+            Hashtable type = StatementType.getType;
+            try
+            {
+                if (actionType == (int)type["Waypoint"] || actionType == (int)type["Stand"])
+                {
+                    int[] position = Coordinates();
+                    action = new Waypoint(position[0], position[1], position[2], actionType == (int)type["Stand"]);
+                }
+                else if (actionType == (int)type["Go To Label"])
+                {
+                    action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text);
+                }
+                else if (actionType == (int)type["Mouse Click"])
+                {
+                    action = new Modules.WalkerModule.Action(actionType, Coordinates(), RightClickCheckBox.IsChecked);
+
+                }
+                else if (actionType == (int)type["Say"] || actionType == (int)type["Hotkey"])
+                {
+                    action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text);
+                }
+                else if (actionType == (int)type["Use On Field"])
+                {
+                    action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text, Coordinates());
+                }
+                else return; //protect from adding null to the list
+                insertToList(action);          
+            }
+            catch (Exception)
+            {
+                ErrorLabel.Content = "Unacceptable value";
+                Error.Visibility = Visibility.Visible;
+            }
+
+            //    Modules.WalkerModule.Action action = new Modules.WalkerModule.Action(actionType,;
+
         }
     }
 }

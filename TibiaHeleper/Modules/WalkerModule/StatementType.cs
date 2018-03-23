@@ -14,10 +14,10 @@ namespace TibiaHeleper.Modules.WalkerModule
         static StatementType()
         {
             getType = new Hashtable();
-            getType.Add("waypoint", 0);
-            getType.Add("label", 1);
-            getType.Add("check", 2);
-            getType.Add("action", 3);
+            getType.Add("label", 0);
+            getType.Add("check", 1);
+            getType.Add("action", 2);
+            getType.Add("Waypoint", 3);
 
             getType.Add("Go To Label", 4);
             getType.Add("Mouse Click", 5);

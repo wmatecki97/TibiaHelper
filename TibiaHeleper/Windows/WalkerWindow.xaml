@@ -25,7 +25,7 @@
         <Button x:Name="labelButton" Content="Add Label" HorizontalAlignment="Left" FontSize="10" Margin="279,162,0,0" VerticalAlignment="Top" Width="51" Height="23" Click="AddLabel"/>
         <TextBox x:Name="LabelTextBox" HorizontalAlignment="Left" Height="23" Margin="167,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="107"/>
 
-        <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="349,237,0,0" VerticalAlignment="Top" Width="174"/>
+        <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="354,237,0,0" VerticalAlignment="Top" Width="174" Click="AddAction"/>
 
         <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="167,237,0,0" VerticalAlignment="Top" Width="83" Click="Save"/>
         <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="255,237,0,0" VerticalAlignment="Top" Width="75" Click="Back"/>
