@@ -27,5 +27,14 @@ namespace TibiaHeleper.Modules.WalkerModule
             getType.Add("Use On Field", 10);
 
         }
+
+        public static string getTypeByValue(int value)
+        {
+            foreach(DictionaryEntry item in getType)
+            {
+                if ((int)item.Value == value) return item.Key as string;
+            }
+            return "";
+        }
     }
 }

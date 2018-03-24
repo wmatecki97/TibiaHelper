@@ -21,6 +21,8 @@ namespace TibiaHeleper.Modules.WalkerModule
         public bool working { get; set; }
         public int actualStatementIndex;
         public int startStatementIndex;
+        public int attemptsToRandomDirection;
+        private Random rand;
 
         public int tolerance;
 
@@ -43,6 +45,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             list = new List<WalkerStatement>();
             wayBack = new Stack<Waypoint>();
             tolerance = 0;
+            attemptsToRandomDirection = 5;
         }
 
         public void Run()
@@ -127,9 +130,10 @@ namespace TibiaHeleper.Modules.WalkerModule
         /// <returns></returns>
         private bool goToCoordinates(Waypoint waypoint)
         {
+            int attempt = 0;
             while (!hasWaypointBeenReached(waypoint) && GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor) && working)
             {
-
+                attempt++;
                 while (ModulesManager.targeting.attacking)
                     Thread.Sleep(500); // waits for targetting
 
@@ -143,6 +147,10 @@ namespace TibiaHeleper.Modules.WalkerModule
                 else if (waypoint.yPos < GetData.MyYPosition)
                     direction += 8;
                 else direction += 5;
+                if(attempt == attemptsToRandomDirection)
+                {
+                    direction = rand.Next(1, 9);
+                }
 
                 go(waypoint);
                 Thread.Sleep(200);

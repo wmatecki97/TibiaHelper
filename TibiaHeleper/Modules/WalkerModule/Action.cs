@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TibiaHeleper.Modules.WalkerModule
 {
+    [Serializable]
     public class Action : WalkerStatement, ICloneable
     {
         public int defaultAction;
@@ -17,6 +18,9 @@ namespace TibiaHeleper.Modules.WalkerModule
             defaultAction = defaultActionType;
             args = arguments;
             type = (int)StatementType.getType["action"];
+            name = "Action: " + StatementType.getTypeByValue(defaultActionType);
+            if (defaultActionType == (int)StatementType.getType["Go To Label"]) name = "Action: Go to \"" + arguments[0] + "\"";
+            if (defaultActionType == (int)StatementType.getType["Say"]) name = "Action: Say \"" + arguments[0] + "\"";
         }
 
         public void DoAction()

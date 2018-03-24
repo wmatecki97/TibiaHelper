@@ -55,7 +55,7 @@ namespace TibiaHeleper.Windows
         }
         private void insertToList(WalkerStatement item)
         {
-            int index =list.IndexOf((WalkerStatement) listBox.SelectedItem)+1;
+            int index = list.IndexOf((WalkerStatement)listBox.SelectedItem) + 1;
             if (index == -1) index = 0;
             list.Insert(index, item);
             fillList();
@@ -197,11 +197,16 @@ namespace TibiaHeleper.Windows
 
         public void Update()
         {
+
             this.Dispatcher.Invoke(() =>
             {
+                string text="";
                 Creature me = GetData.Me;
                 if (me != null)
-                    InformationLabel.Content = me.name + ": X: " + me.XPosition + "  Y: " + me.YPosition + " Floor: " + me.Floor;
+                     text = me.name + ": X: " + me.XPosition + "  Y: " + me.YPosition + " Floor: " + me.Floor;
+                if (ModulesManager.walker.working)
+                    text += "\t Actual Statement: " + ModulesManager.walker.list[ModulesManager.walker.actualStatementIndex].name;
+                InformationLabel.Content = text;
             });
         }
 
@@ -292,7 +297,8 @@ namespace TibiaHeleper.Windows
                 }
                 else if (actionType == (int)type["Mouse Click"])
                 {
-                    action = new Modules.WalkerModule.Action(actionType, Coordinates(), RightClickCheckBox.IsChecked);
+                    int[] pos = Coordinates();
+                    action = new Modules.WalkerModule.Action(actionType, pos[0], pos[1], pos[2], RightClickCheckBox.IsChecked);
 
                 }
                 else if (actionType == (int)type["Say"] || actionType == (int)type["Hotkey"])
@@ -301,10 +307,11 @@ namespace TibiaHeleper.Windows
                 }
                 else if (actionType == (int)type["Use On Field"])
                 {
-                    action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text, Coordinates());
+                    int[] pos = Coordinates();
+                    action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text, pos[0], pos[1], pos[2]);
                 }
                 else return; //protect from adding null to the list
-                insertToList(action);          
+                insertToList(action);
             }
             catch (Exception)
             {
