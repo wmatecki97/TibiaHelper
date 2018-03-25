@@ -1,22 +1,24 @@
 ﻿using Microsoft.Win32;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using TibiaHeleper.Modules.WalkerModule;
 
 namespace TibiaHeleper.Storage
 {
     class Storage
     {
-        private static DataCollecter collecter;
+        const string procedureExtension = "thp";
+        const string defaultExtension = "th";
 
-        public static void Save()
+        private static void Save(object toSave, string extension = defaultExtension)
         {
-            collecter = new DataCollecter();
 
             SaveFileDialog sfd = new SaveFileDialog();
 
-            sfd.FileName = "*.th";
-            sfd.DefaultExt = "th";
-            sfd.Filter = "tibia helper files (*.th)|*.th";
+            sfd.FileName = "*." + extension;
+            sfd.DefaultExt = extension;
+            sfd.Filter = "tibia helper files (*." + extension + ")|*." + extension;
 
             if (sfd.ShowDialog() == true)
             {
@@ -31,17 +33,17 @@ namespace TibiaHeleper.Storage
                 // Persist to file
                 FileStream stream = File.Create(filename);
                 var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, collecter);
+                formatter.Serialize(stream, toSave);
                 stream.Close();
             }
         }
-
-        public static void Load()
+        private static object Load(string extension = defaultExtension)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.FileName = "*.th";
-            ofd.DefaultExt = "th";
-            ofd.Filter = "tibia helper files (*.th)|*.th";
+            ofd.FileName = "*." + extension;
+            ofd.DefaultExt = extension;
+            ofd.Filter = "tibia helper files (*."+extension+")|*."+extension;
+            object result=null;
 
             if (ofd.ShowDialog() == true)
             {
@@ -50,10 +52,32 @@ namespace TibiaHeleper.Storage
                 // Restore from file
                 var formatter = new BinaryFormatter();
                 FileStream stream = File.OpenRead(filename);
-                collecter = (DataCollecter)formatter.Deserialize(stream);
+                result = formatter.Deserialize(stream);
                 stream.Close();
-                collecter.activateLoadedSettings();
             }
+            return result;
         }
+
+        public static void SaveAllModules()
+        {
+            DataCollecter collecter = new DataCollecter();
+            Save(collecter);
+        }
+        public static void LoadAllModules()
+        {
+            DataCollecter collecter;
+            collecter = (DataCollecter)Load();
+            collecter.activateLoadedSettings();
+        }
+
+        public static void SaveProcedure(List<WalkerStatement> list)
+        {
+            Save(list, procedureExtension);
+        }
+        public static List<WalkerStatement> LoadProcedure()
+        {
+            return (List<WalkerStatement>) Load(procedureExtension);
+        }
+
     }
 }

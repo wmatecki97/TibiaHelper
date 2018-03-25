@@ -15,10 +15,10 @@ namespace TibiaHeleper.Modules.WalkerModule
         public static void DoAction(int actionType, params object[] arguments)
         {
             if (actionType == (int)StatementType.getType["Say"]) Say((string)arguments[0]);
-            if (actionType == (int)StatementType.getType["Mouse Click"]) Click((int)arguments[0], (int)arguments[1], (int)arguments[2], (bool)arguments[3]);
-            if (actionType == (int)StatementType.getType["Hotkey"]) hotkey((string)arguments[0]);
-            if (actionType == (int)StatementType.getType["Go To Label"]) GoToLabel((string)arguments[0]);
-            if (actionType == (int)StatementType.getType["Use On Field"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
+            else if (actionType == (int)StatementType.getType["Mouse Click"]) Click((int)arguments[0], (int)arguments[1], (int)arguments[2], (bool)arguments[3]);
+            else if (actionType == (int)StatementType.getType["Hotkey"]) hotkey((string)arguments[0]);
+            else if (actionType == (int)StatementType.getType["Go To Label"]) GoToLabel((string)arguments[0]);
+            else if (actionType == (int)StatementType.getType["Use On Field"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
             
         }
 

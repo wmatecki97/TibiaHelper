@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using TibiaHeleper.MemoryOperations;
 using TibiaHeleper.Modules;
 using TibiaHeleper.Modules.WalkerModule;
@@ -20,7 +21,7 @@ namespace TibiaHeleper.Windows
         }
 
         private bool workingOnCopy;
-        private List<WalkerStatement> list;
+        private List<WalkerStatement> StatementsList;
         private int tolerance;
 
         private string startLabelName;
@@ -29,7 +30,7 @@ namespace TibiaHeleper.Windows
         private void Load(object sender, RoutedEventArgs e)
         {
             startIndex = ModulesManager.walker.actualStatementIndex;
-            list = ModulesManager.walker.CopyList();
+            StatementsList = ModulesManager.walker.CopyList();
             tolerance = ModulesManager.walker.tolerance;
             fillList();
             listBox.SelectedIndex = startIndex;
@@ -47,7 +48,7 @@ namespace TibiaHeleper.Windows
         private void fillList()
         {
             listBox.Items.Clear();
-            foreach (WalkerStatement item in list)
+            foreach (WalkerStatement item in StatementsList)
             {
                 listBox.DisplayMemberPath = "name";
                 listBox.Items.Add(item);
@@ -55,16 +56,16 @@ namespace TibiaHeleper.Windows
         }
         private void insertToList(WalkerStatement item)
         {
-            int index = list.IndexOf((WalkerStatement)listBox.SelectedItem) + 1;
-            if (index == -1) index = 0;
-            list.Insert(index, item);
+            int index = StatementsList.IndexOf((WalkerStatement)listBox.SelectedItem) + 1;
+            if (index == -1) index = listBox.Items.Count-1;
+            StatementsList.Insert(index, item);
             fillList();
-            listBox.SelectedItem = item;
+            listBox.SelectedIndex = index;
         }
 
         public void ReloadData()
         {
-            list = ModulesManager.walker.CopyList();
+            StatementsList = ModulesManager.walker.CopyList();
             fillList();
         }
 
@@ -76,15 +77,15 @@ namespace TibiaHeleper.Windows
         private void StopTracking(object sender, RoutedEventArgs e)
         {
             ModulesManager.TrackerDisable();
-            List<Waypoint> trackedList = ModulesManager.tracker.list;
+            List<WalkerStatement> trackedList = ModulesManager.tracker.list;
             while (!ModulesManager.tracker.stopped) ;//waiting for tracker finished
-            ModulesManager.tracker.list = new List<Waypoint>();
-            foreach (Waypoint waypoint in trackedList)
-            {
-                list.Add(waypoint);
-            }
+            ModulesManager.tracker.list = new List<WalkerStatement>();
+            Way way = new Way(trackedList);
+            insertToList(way);
             fillList();
+            listBox.SelectedItem = way;
             startButton.Visibility = Visibility.Visible;
+
         }
 
         private void HideErrorGrid(object sender, RoutedEventArgs e)
@@ -102,25 +103,26 @@ namespace TibiaHeleper.Windows
             if (wasWorking == true) ModulesManager.WalkerDisable();
             while (!ModulesManager.walker.stopped) ;
 
-            ModulesManager.walker.SetList(list);
-            if (startLabelName != "") ModulesManager.walker.startStatementIndex = list.FindIndex(x => x.name == startLabelName);
+            ModulesManager.walker.SetList(Way.changeWayToWaypointList(StatementsList));
+            if (startLabelName != "") ModulesManager.walker.startStatementIndex = StatementsList.FindIndex(x => x.name == startLabelName);
 
             if (!wasWorking) ModulesManager.walker.startStatementIndex = startIndex;
             if (wasWorking) ModulesManager.WalkerEnable();
 
-            list = ModulesManager.walker.CopyList();
+            StatementsList = ModulesManager.walker.CopyList();
         }
         private void Back(object sender, RoutedEventArgs e)
         {
             WindowsManager.menu.Show();
             this.Hide();
         }
+        
 
         private void AddLabel(object sender, RoutedEventArgs e)
         {
             String name = LabelTextBox.Text;
             bool isGood = true;
-            foreach (WalkerStatement statement in list)
+            foreach (WalkerStatement statement in StatementsList)
             {
                 if (statement.name == name)
                     isGood = false;
@@ -144,7 +146,7 @@ namespace TibiaHeleper.Windows
         }
         private bool labelExist(string name)
         {
-            foreach (WalkerStatement item in list)
+            foreach (WalkerStatement item in StatementsList)
             {
                 if (item.name == name)
                     return true;
@@ -168,11 +170,11 @@ namespace TibiaHeleper.Windows
         private void Down(object sender, RoutedEventArgs e)
         {
             WalkerStatement selectedItem = (WalkerStatement)listBox.SelectedItem;
-            int selectedIndex = list.IndexOf(selectedItem);
-            if (selectedIndex < list.Count - 1)
+            int selectedIndex = StatementsList.IndexOf(selectedItem);
+            if (selectedIndex < StatementsList.Count - 1)
             {
-                list.RemoveAt(selectedIndex);
-                list.Insert(selectedIndex - 1, selectedItem);
+                StatementsList.RemoveAt(selectedIndex);
+                StatementsList.Insert(selectedIndex + 1, selectedItem);
                 fillList();
                 listBox.SelectedIndex = selectedIndex + 1;
             }
@@ -180,18 +182,18 @@ namespace TibiaHeleper.Windows
         private void Up(object sender, RoutedEventArgs e)
         {
             WalkerStatement selectedItem = (WalkerStatement)listBox.SelectedItem;
-            int selectedIndex = list.IndexOf(selectedItem);
+            int selectedIndex = StatementsList.IndexOf(selectedItem);
             if (selectedIndex > 0)
             {
-                list.RemoveAt(selectedIndex);
-                list.Insert(selectedIndex - 1, selectedItem);
+                StatementsList.RemoveAt(selectedIndex);
+                StatementsList.Insert(selectedIndex - 1, selectedItem);
                 fillList();
                 listBox.SelectedIndex = selectedIndex - 1;
             }
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            list.Remove((WalkerStatement)listBox.SelectedItem);
+            StatementsList.Remove((WalkerStatement)listBox.SelectedItem);
             fillList();
         }
 
@@ -200,23 +202,26 @@ namespace TibiaHeleper.Windows
 
             this.Dispatcher.Invoke(() =>
             {
-                string text="";
+                string text = "";
                 Creature me = GetData.Me;
                 if (me != null)
-                     text = me.name + ": X: " + me.XPosition + "  Y: " + me.YPosition + " Floor: " + me.Floor;
+                    text = me.name + ": X: " + me.XPosition + "  Y: " + me.YPosition + " Floor: " + me.Floor;
                 if (ModulesManager.walker.working)
                     text += "\t Actual Statement: " + ModulesManager.walker.list[ModulesManager.walker.actualStatementIndex].name;
                 InformationLabel.Content = text;
             });
         }
 
-
         private void GetMyCoordinates(object sender, RoutedEventArgs e)
         {
             Creature me = GetData.Me;
-            XPositionTextBox.Text = me.XPosition.ToString();
-            YPositionTextBox.Text = me.YPosition.ToString();
-            FloorTextBox.Text = me.Floor.ToString();
+            if (me != null)
+            {
+                XPositionTextBox.Text = me.XPosition.ToString();
+                YPositionTextBox.Text = me.YPosition.ToString();
+                FloorTextBox.Text = me.Floor.ToString();
+            }
+
         }
         private void hideActionFields()
         {
@@ -321,6 +326,102 @@ namespace TibiaHeleper.Windows
 
             //    Modules.WalkerModule.Action action = new Modules.WalkerModule.Action(actionType,;
 
+        }
+
+        private void LoadProcedure(object sender, RoutedEventArgs e)
+        {
+            int a = listBox.SelectedIndex;
+            List<WalkerStatement> procedure = Storage.Storage.LoadProcedure();
+            if (procedure != null) //if cancelled on file choose
+            {
+                foreach (WalkerStatement statement in procedure)
+                    insertToList(statement);
+            }
+
+        }
+        private void SaveProcedure(object sender, RoutedEventArgs e)
+        {
+            IList lst = listBox.SelectedItems;
+            if(lst.Count<=0)
+            {
+                ErrorLabel.Content = "Select at least one statement";
+                Error.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                List<WalkerStatement> StoreList = new List<WalkerStatement>();
+                foreach (object item in lst)
+                {
+                    StoreList.Add((WalkerStatement)item);
+                }
+
+                Storage.Storage.SaveProcedure(StoreList);
+            }
+        }
+        private void HideProcedureGrid(object sender, RoutedEventArgs e)
+        {
+            ProcedureGrid.Visibility = Visibility.Hidden;
+
+            BasicsWalkerOperationsGrid.Visibility = Visibility.Visible;
+            ActionGrid.Visibility = Visibility.Visible;
+
+            listBox.SelectionMode = SelectionMode.Single;
+        }
+        private void Procedure(object sender, RoutedEventArgs e)
+        {
+            BasicsWalkerOperationsGrid.Visibility = Visibility.Hidden;
+            ActionGrid.Visibility = Visibility.Hidden;
+
+            ProcedureGrid.Visibility = Visibility.Visible;
+            listBox.SelectionMode = SelectionMode.Multiple;
+        }
+        private void SelectAll(object sender, RoutedEventArgs e)
+        {
+
+            listBox.SelectAll();
+
+        }
+        private void DeselectAll(object sender, RoutedEventArgs e)
+        {
+            listBox.UnselectAll();
+        }
+
+        private void changePossitionTextBox(TextBox t, int modifier)
+        {
+            try
+            {
+                if (t.Text != "")
+                    t.Text = (int.Parse(t.Text)+modifier).ToString();
+            }
+            catch
+            {
+                ErrorLabel.Content = "Unacceptable value";
+                Error.Visibility = Visibility.Visible;
+            }
+        }
+        private void North(object sender, RoutedEventArgs e)
+        {
+            changePossitionTextBox(YPositionTextBox, -1);
+        }
+        private void South(object sender, RoutedEventArgs e)
+        {
+            changePossitionTextBox(YPositionTextBox,1);
+        }
+        private void East(object sender, RoutedEventArgs e)
+        {
+            changePossitionTextBox(XPositionTextBox,1);
+        }
+        private void West(object sender, RoutedEventArgs e)
+        {
+            changePossitionTextBox(XPositionTextBox,-1);
+        }
+        private void FloorUp(object sender, RoutedEventArgs e)
+        {
+            changePossitionTextBox(FloorTextBox,-1);
+        }
+        private void FloorDown(object sender, RoutedEventArgs e)
+        {
+            changePossitionTextBox(FloorTextBox,-1);
         }
     }
 }

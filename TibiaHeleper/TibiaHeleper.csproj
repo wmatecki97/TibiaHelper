@@ -61,7 +61,6 @@
     </ApplicationDefinition>
     <Compile Include="BackgroundWorkers\BackgroundWorker.cs" />
     <Compile Include="BackgroundWorkers\CheckIsGameRunningWorker.cs" />
-    <Compile Include="BackgroundWorkers\PlayerInformationWorker.cs" />
     <Compile Include="BackgroundWorkers\WhoIsLoggedInWorker.cs" />
     <Compile Include="BackgroundWorkers\WorkersManager.cs" />
     <Compile Include="MemoryOperations\Adresses.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Modules\WalkerModule\Walker.cs" />
     <Compile Include="Modules\WalkerModule\WalkerLabel.cs" />
     <Compile Include="Modules\WalkerModule\WalkerStatement.cs" />
+    <Compile Include="Modules\WalkerModule\Way.cs" />
     <Compile Include="Modules\WalkerModule\Waypoint.cs" />
     <Compile Include="Simulators\KeyAddresses.cs" />
     <Compile Include="Simulators\KeyboardSimulator.cs" />

@@ -23,6 +23,7 @@ namespace TibiaHeleper.Modules.Targeting
 
         public void Run()
         {
+            attacking = false;
             List<Creature> battleList;
             bool gotTarget;
             Creature target;

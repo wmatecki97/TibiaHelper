@@ -73,12 +73,12 @@ namespace TibiaHeleper.Windows
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            Storage.Storage.Save();
+            Storage.Storage.SaveAllModules();
         }
 
         private void Load(object sender, RoutedEventArgs e)
         {
-            Storage.Storage.Load();
+            Storage.Storage.LoadAllModules();
             checkWorkingModules();
             WindowsManager.additionalModulesWindow.checkWorkingModules();
             WindowsManager.healerWindow.assignData();

@@ -46,47 +46,48 @@ namespace TibiaHeleper.Modules.WalkerModule
             wayBack = new Stack<Waypoint>();
             tolerance = 0;
             attemptsToRandomDirection = 5;
+            rand = new Random();
         }
 
         public void Run()
         {
-
             WalkerStatement statement;
             int listCount;
             lock (list) { listCount = list.Count(); }
             int temp;
 
-            while (working && actualStatementIndex < list.Count())
+            while (working && actualStatementIndex < listCount)
             {
                 lock (list)
                 {
                     listCount = list.Count();
-
                     statement = list[actualStatementIndex];
-                    //getting and setting on window list
-
-                    if (statement.type == (int)StatementType.getType["Waypoint"] || statement.type == (int)StatementType.getType["Stand"])//walk
-                    {
-                        temp = tolerance;
-                        if (statement.type == (int)StatementType.getType["Stand"])
-                            tolerance = 0;
-                        if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
-                        {
-                            tryTogetBack(); //if player is in not good position then goes back to the last reached waypoint
-                            actualStatementIndex--;
-                        }
-                        tolerance = temp;
-                    }
-                    else if (statement.type == (int)StatementType.getType["action"])//do action
-                    {
-                        try
-                        {
-                            Action action = (Action)statement;
-                            action.DoAction();
-                        }
-                        catch (Exception){}
-                    }
                 }
+                //getting and setting on window list
+
+                if (statement.type == (int)StatementType.getType["Waypoint"] || statement.type == (int)StatementType.getType["Stand"])//walk
+                {
+                    temp = tolerance;
+                    if (statement.type == (int)StatementType.getType["Stand"])
+                        tolerance = 0;
+                    if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
+                    {
+                        tryTogetBack(); //if player is in not good position then goes back to the last reached waypoint
+                        actualStatementIndex--;
+                    }
+                    tolerance = temp;
+                }
+                else if (statement.type == (int)StatementType.getType["action"])//do action
+                {
+                    try
+                    {
+                        Action action = (Action)statement;
+                        action.DoAction();
+                    }
+                    catch (Exception) { }
+                }
+                Thread.Sleep(50);
+
                 actualStatementIndex++;
             }
             actualStatementIndex = 0;
@@ -147,9 +148,10 @@ namespace TibiaHeleper.Modules.WalkerModule
                 else if (waypoint.yPos < GetData.MyYPosition)
                     direction += 8;
                 else direction += 5;
-                if(attempt == attemptsToRandomDirection)
+                if (attempt == attemptsToRandomDirection)
                 {
                     direction = rand.Next(1, 9);
+                    attempt = 0;
                 }
 
                 go(waypoint);
@@ -198,35 +200,39 @@ namespace TibiaHeleper.Modules.WalkerModule
 
             for (int i = actualStatementIndex + 1; i != actualStatementIndex; i++) //checking waypoints and gets the closest one
             {
-                if (i >= list.Count())
+                lock (list)
                 {
-                    i = 0;
-                    if (i == actualStatementIndex)
-                        break;
-                }
-
-
-                if (list[i].type == (int)StatementType.getType["Waypoint"]) // if statement is waypoint
-                {
-                    waypoint = (Waypoint)list[i];
-                    if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor))
+                    if (i >= list.Count())
                     {
-                        if (distance > GetData.GetDistance(waypoint.xPos, waypoint.yPos))//setting the new result
+                        i = 0;
+                        if (i == actualStatementIndex)
+                            break;
+                    }
+
+                    if (list[i].type == (int)StatementType.getType["Waypoint"]) // if statement is waypoint
+                    {
+                        waypoint = (Waypoint)list[i];
+                        if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor))
                         {
-                            distance = GetData.GetDistance(waypoint.xPos, waypoint.yPos);
-                            nextStatementID = i - 1;
+                            if (distance > GetData.GetDistance(waypoint.xPos, waypoint.yPos))//setting the new result
+                            {
+                                distance = GetData.GetDistance(waypoint.xPos, waypoint.yPos);
+                                nextStatementID = i - 1;
+                            }
                         }
                     }
-                }
-                else if (list[i].type == (int)StatementType.getType["check"])// if statement is action
-                {
-                    throw new NotImplementedException();
-                    //when all conditions are good then go to label
+                    else if (list[i].type == (int)StatementType.getType["check"])// if statement is action
+                    {
+                        throw new NotImplementedException();
+                        //when all conditions are good then go to label
+                    }
                 }
             }
             actualStatementIndex = nextStatementID;
             return distance < 99;
         }
+
+        
 
 
         public List<WalkerStatement> CopyList()
@@ -239,7 +245,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                     result.Add((WalkerStatement)(statement.Clone()));
                 }
             }
-
+            result = Way.changeWaypointListToWay(result);
             return result;
         }
 
@@ -248,6 +254,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             lock (list)
             {
                 list = newList;
+                actualStatementIndex = 0;
             }
         }
 

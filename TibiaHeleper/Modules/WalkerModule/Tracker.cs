@@ -10,14 +10,14 @@ namespace TibiaHeleper.Modules.WalkerModule
 {
     public class Tracker: Module
     {
-        public  List<Waypoint> list;
+        public  List<WalkerStatement> list;
         public bool working { get; set; }
         public bool stopped { get; set; }
 
         public Tracker()
         {
             stopped = true;
-            list = new List<Waypoint>();
+            list = new List<WalkerStatement>();
         }
 
         public  void Run()
