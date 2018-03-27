@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -10,9 +11,13 @@ namespace TibiaHeleper.Storage
     {
         const string procedureExtension = "thp";
         const string defaultExtension = "th";
+        public const string THVersion = "1.0.0";
+
+
 
         private static void Save(object toSave, string extension = defaultExtension)
         {
+            VersionedObject obj = new VersionedObject(toSave);
 
             SaveFileDialog sfd = new SaveFileDialog();
 
@@ -33,7 +38,7 @@ namespace TibiaHeleper.Storage
                 // Persist to file
                 FileStream stream = File.Create(filename);
                 var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, toSave);
+                formatter.Serialize(stream, obj);
                 stream.Close();
             }
         }
@@ -43,7 +48,7 @@ namespace TibiaHeleper.Storage
             ofd.FileName = "*." + extension;
             ofd.DefaultExt = extension;
             ofd.Filter = "tibia helper files (*."+extension+")|*."+extension;
-            object result=null;
+            VersionedObject obj = null;
 
             if (ofd.ShowDialog() == true)
             {
@@ -52,10 +57,12 @@ namespace TibiaHeleper.Storage
                 // Restore from file
                 var formatter = new BinaryFormatter();
                 FileStream stream = File.OpenRead(filename);
-                result = formatter.Deserialize(stream);
+                obj = formatter.Deserialize(stream) as VersionedObject;
                 stream.Close();
+                checkVersion(obj);
             }
-            return result;
+
+            return obj.obj;
         }
 
         public static void SaveAllModules()
@@ -77,6 +84,21 @@ namespace TibiaHeleper.Storage
         public static List<WalkerStatement> LoadProcedure()
         {
             return (List<WalkerStatement>) Load(procedureExtension);
+        }
+
+        public static void checkVersion(VersionedObject obj)
+        {
+            if(obj.version == "0.0.0")
+            {
+                try
+                {
+                    DataCollecter data = (DataCollecter)obj.obj;
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
     }

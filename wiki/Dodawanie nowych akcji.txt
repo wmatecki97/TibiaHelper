@@ -1,3 +1,5 @@
 ﻿1.dodać do StatementType.gettype nazwę kacji i kolejny id - wszystkie id wieksze od akcja będą wyświetlane na liście
 2. W DefaultActions zaimplementować metodę wykonującą akcje
 3. Do defauleActions do DoAction dodać if odpalający metodę
+4. wybranie w WalkerWindow.xaml.cs jakie pola mają się wyświetlać dla danej akcji
+5. Skonfigurowanie przesyłania argumentów w WalkerWindow

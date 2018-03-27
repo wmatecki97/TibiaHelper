@@ -47,6 +47,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             tolerance = 0;
             attemptsToRandomDirection = 5;
             rand = new Random();
+            actualStatementIndex = 0;
         }
 
         public void Run()
@@ -65,10 +66,10 @@ namespace TibiaHeleper.Modules.WalkerModule
                 }
                 //getting and setting on window list
 
-                if (statement.type == (int)StatementType.getType["Waypoint"] || statement.type == (int)StatementType.getType["Stand"])//walk
+                if (statement.type == StatementType.getType["Waypoint"] || statement.type == StatementType.getType["Stand"])//walk
                 {
                     temp = tolerance;
-                    if (statement.type == (int)StatementType.getType["Stand"])
+                    if (statement.type == StatementType.getType["Stand"])
                         tolerance = 0;
                     if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
                     {
@@ -77,7 +78,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                     }
                     tolerance = temp;
                 }
-                else if (statement.type == (int)StatementType.getType["action"])//do action
+                else if (statement.type == StatementType.getType["action"])//do action
                 {
                     try
                     {
@@ -209,7 +210,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                             break;
                     }
 
-                    if (list[i].type == (int)StatementType.getType["Waypoint"]) // if statement is waypoint
+                    if (list[i].type == StatementType.getType["Waypoint"]) // if statement is waypoint
                     {
                         waypoint = (Waypoint)list[i];
                         if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor))
@@ -221,7 +222,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                             }
                         }
                     }
-                    else if (list[i].type == (int)StatementType.getType["check"])// if statement is action
+                    else if (list[i].type == StatementType.getType["check"])// if statement is action
                     {
                         throw new NotImplementedException();
                         //when all conditions are good then go to label

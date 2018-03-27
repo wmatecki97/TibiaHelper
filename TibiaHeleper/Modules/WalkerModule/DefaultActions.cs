@@ -14,11 +14,12 @@ namespace TibiaHeleper.Modules.WalkerModule
     {
         public static void DoAction(int actionType, params object[] arguments)
         {
-            if (actionType == (int)StatementType.getType["Say"]) Say((string)arguments[0]);
-            else if (actionType == (int)StatementType.getType["Mouse Click"]) Click((int)arguments[0], (int)arguments[1], (int)arguments[2], (bool)arguments[3]);
-            else if (actionType == (int)StatementType.getType["Hotkey"]) hotkey((string)arguments[0]);
-            else if (actionType == (int)StatementType.getType["Go To Label"]) GoToLabel((string)arguments[0]);
-            else if (actionType == (int)StatementType.getType["Use On Field"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
+            if (actionType == StatementType.getType["Say"]) Say((string)arguments[0]);
+            else if (actionType == StatementType.getType["Mouse Click"]) Click((int)arguments[0], (int)arguments[1], (int)arguments[2], (bool)arguments[3]);
+            else if (actionType == StatementType.getType["Hotkey"]) hotkey((string)arguments[0]);
+            else if (actionType == StatementType.getType["Go To Label"]) GoToLabel((string)arguments[0]);
+            else if (actionType == StatementType.getType["Use On Field"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
+            else if (actionType == StatementType.getType["Condition"]) FulfillCondition((string)arguments[0], (List<Condition>)arguments[1]);
             
         }
 
@@ -57,6 +58,104 @@ namespace TibiaHeleper.Modules.WalkerModule
                     ModulesManager.walker.actualStatementIndex = list.IndexOf(statement) - 1;
                 }
             }
+        }
+
+        private static void FulfillCondition(string label, List<Condition> list)
+        {
+            bool fulyfilled = false;
+            short and = StatementType.conditionElement["And"];
+
+            foreach(Condition cond in list)
+            {
+                if (cond.connector == and)
+                {
+                    if (fulyfilled) //if not result is false
+                    {
+                        fulyfilled = checkCondition(cond);
+                    }
+                }
+                else if (!fulyfilled) //if yes then "or" is true
+                {
+                    fulyfilled = checkCondition(cond);
+                }
+            }
+
+            if (fulyfilled)
+            {
+                GoToLabel(label);
+            }           
+
+
+        }
+
+        private static bool checkCondition(Condition cond)
+        {
+            int item1 = getItem(1,cond);
+            int item2 = getItem(2, cond);
+            if(cond.comparator == StatementType.conditionElement[">"])
+            {
+                if (item1 > item2) return true;
+                return false;
+            }
+            else if (cond.comparator == StatementType.conditionElement["<"])
+            {
+                if (item1 < item2) return true;
+                return false;
+            }
+            else if (cond.comparator == StatementType.conditionElement["="])
+            {
+                if (item1 == item2) return true;
+                return false;
+            }
+            else if (cond.comparator == StatementType.conditionElement["!="])
+            {
+                if (item1 != item2) return true;
+                return false;
+            }
+            return false;
+        }
+        private static int getItem(int itemNumber, Condition cond)
+        {
+            object arg = null;
+            int itemType=-1;
+            if (itemNumber == 1)
+            {
+                itemType = cond.item1;
+                if (cond.args.Count > 0)
+                    arg = cond.args[0];
+            }
+            else
+            {
+                itemType = cond.item2;
+                int item1 = cond.item1;
+                if (cond.args.Count > 1)
+                    arg = cond.args[1];
+                else if (cond.args.Count > 0)
+                    arg = cond.args[0];
+            }
+
+            if (itemType == StatementType.conditionElement["Cap"])
+            {
+                return GetData.Cap;
+            }
+            else if (itemType == StatementType.conditionElement["Item count"])
+            {
+                throw new NotImplementedException();
+                //TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!
+            }
+            else if (itemType == StatementType.conditionElement["Value"])
+            {
+                return (int)arg;
+            }
+            else if (itemType == StatementType.conditionElement["HP"])
+            {
+                return GetData.MyHP;
+            }
+            else if (itemType == StatementType.conditionElement["Mana"])
+            {
+                return GetData.MyMana;
+            }
+            return -1;
         }
 
 

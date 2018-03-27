@@ -9,8 +9,9 @@ jedzenie
 
 poprawa adresów po przelogowaniu
 
+dodanie conditionów w walkerze
 
-dodanie aktualnych współrzędnych i waypointa do ktorego idzie bot
+
 
 Walker
 wyznaczenie czy dane pole można przejść

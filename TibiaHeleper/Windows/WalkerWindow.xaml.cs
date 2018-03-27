@@ -24,6 +24,10 @@ namespace TibiaHeleper.Windows
         private List<WalkerStatement> StatementsList;
         private int tolerance;
 
+        List<Modules.WalkerModule.Condition> conditionsList;
+        Modules.WalkerModule.Condition condition;
+        short NotSet;
+
         private string startLabelName;
         private int startIndex;
 
@@ -33,11 +37,12 @@ namespace TibiaHeleper.Windows
             StatementsList = ModulesManager.walker.CopyList();
             tolerance = ModulesManager.walker.tolerance;
             fillList();
+            NotSet = StatementType.conditionElement["Not set"];
             listBox.SelectedIndex = startIndex;
 
-            foreach (DictionaryEntry item in StatementType.getType)
+            foreach (KeyValuePair<string, int> item in StatementType.getType)
             {
-                if ((int)item.Value > (int)StatementType.getType["action"])
+                if ((int)item.Value > StatementType.getType["action"])
                 {
                     ActionsListBox.DisplayMemberPath = "Key";
                     ActionsListBox.Items.Add(item);
@@ -57,7 +62,7 @@ namespace TibiaHeleper.Windows
         private void insertToList(WalkerStatement item)
         {
             int index = StatementsList.IndexOf((WalkerStatement)listBox.SelectedItem) + 1;
-            if (index == -1) index = listBox.Items.Count-1;
+            if (index == -1) index = listBox.Items.Count - 1;
             StatementsList.Insert(index, item);
             fillList();
             listBox.SelectedIndex = index;
@@ -116,7 +121,7 @@ namespace TibiaHeleper.Windows
             WindowsManager.menu.Show();
             this.Hide();
         }
-        
+
 
         private void AddLabel(object sender, RoutedEventArgs e)
         {
@@ -203,11 +208,12 @@ namespace TibiaHeleper.Windows
             this.Dispatcher.Invoke(() =>
             {
                 string text = "";
+                int index;
                 Creature me = GetData.Me;
                 if (me != null)
                     text = me.name + ": X: " + me.XPosition + "  Y: " + me.YPosition + " Floor: " + me.Floor;
-                if (ModulesManager.walker.working)
-                    text += "\t Actual Statement: " + ModulesManager.walker.list[ModulesManager.walker.actualStatementIndex].name;
+                if (ModulesManager.walker.working && (index = ModulesManager.walker.actualStatementIndex) >=0 )
+                    text += "\t Actual Statement: " + ModulesManager.walker.list[index].name;
                 InformationLabel.Content = text;
             });
         }
@@ -228,13 +234,14 @@ namespace TibiaHeleper.Windows
             TextActionGrid.Visibility = Visibility.Hidden;
             PositionGrid.Visibility = Visibility.Hidden;
             MouseClickGrid.Visibility = Visibility.Hidden;
+            ConditionButtonGrid.Visibility = Visibility.Hidden;
             //       RightClickCheckBox.IsChecked = false;
 
         }
-        private void ActionSelected(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ActionSelected(object sender, SelectionChangedEventArgs e)
         {
             hideActionFields();
-            string action = (string)((DictionaryEntry)ActionsListBox.SelectedItem).Key;
+            string action = ((KeyValuePair<string, int>)ActionsListBox.SelectedItem).Key;
             if (action == "Hotkey")
             {
                 TextActionGrid.Visibility = Visibility.Visible;
@@ -270,6 +277,10 @@ namespace TibiaHeleper.Windows
             {
                 PositionGrid.Visibility = Visibility.Visible;
             }
+            else if (action == "Condition")
+            {
+                ConditionButtonGrid.Visibility = Visibility.Visible;
+            }
         }
         /// <summary>
         /// returns coordinates entered by user. Parsing string to int and Throws an exception.
@@ -286,37 +297,69 @@ namespace TibiaHeleper.Windows
         }
         private void AddAction(object sender, RoutedEventArgs e)
         {
-            int actionType = (int)((DictionaryEntry)ActionsListBox.SelectedItem).Value;
+            int actionType = ((KeyValuePair<string, int>) ActionsListBox.SelectedItem).Value;
             WalkerStatement action = null;
-            Hashtable type = StatementType.getType;
+            Dictionary<string, int> type = StatementType.getType;
             try
             {
-                if (actionType == (int)type["Waypoint"] || actionType == (int)type["Stand"])
+                if (actionType == type["Waypoint"] || actionType == type["Stand"])
                 {
                     int[] position = Coordinates();
-                    action = new Waypoint(position[0], position[1], position[2], actionType == (int)type["Stand"]);
+                    action = new Waypoint(position[0], position[1], position[2], actionType == type["Stand"]);
                 }
-                else if (actionType == (int)type["Go To Label"])
+                else if (actionType == type["Go To Label"])
                 {
                     action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text);
                 }
-                else if (actionType == (int)type["Mouse Click"])
+                else if (actionType == type["Mouse Click"])
                 {
                     int[] pos = Coordinates();
                     action = new Modules.WalkerModule.Action(actionType, pos[0], pos[1], pos[2], RightClickCheckBox.IsChecked);
 
                 }
-                else if (actionType == (int)type["Say"] || actionType == (int)type["Hotkey"])
+                else if (actionType == type["Say"] || actionType == type["Hotkey"])
                 {
                     action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text);
                 }
-                else if (actionType == (int)type["Use On Field"])
+                else if (actionType == type["Use On Field"])
                 {
                     int[] pos = Coordinates();
                     action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text, pos[0], pos[1], pos[2]);
                 }
+                else if (actionType == type["Condition"])
+                {
+                    if (conditionsList.Count > 0)
+                    {
+                        if (condition.connector == StatementType.conditionElement["Not set"])
+                        {
+                            if (ConditionFulfilledTextBox.Text != "")
+                            {
+                                action = new Modules.WalkerModule.Action(actionType, ConditionFulfilledTextBox.Text, conditionsList);
+                            }
+                            else
+                            {
+                                ErrorLabel.Content = "Condition must has specified label name to go to when condition is fulfilled";
+                                Error.Visibility = Visibility.Visible;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            ErrorLabel.Content = "Condition not completed. Every particular condition contains first value comparator and second value.";
+                            Error.Visibility = Visibility.Visible;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        ErrorLabel.Content = "You can not add empty condition";
+                        Error.Visibility = Visibility.Visible;
+                        return;
+                    }
+                }
                 else return; //protect from adding null to the list
                 insertToList(action);
+                ConditionGrid.Visibility = Visibility.Hidden;
             }
             catch (Exception)
             {
@@ -342,7 +385,7 @@ namespace TibiaHeleper.Windows
         private void SaveProcedure(object sender, RoutedEventArgs e)
         {
             IList lst = listBox.SelectedItems;
-            if(lst.Count<=0)
+            if (lst.Count <= 0)
             {
                 ErrorLabel.Content = "Select at least one statement";
                 Error.Visibility = Visibility.Visible;
@@ -391,7 +434,7 @@ namespace TibiaHeleper.Windows
             try
             {
                 if (t.Text != "")
-                    t.Text = (int.Parse(t.Text)+modifier).ToString();
+                    t.Text = (int.Parse(t.Text) + modifier).ToString();
             }
             catch
             {
@@ -405,23 +448,190 @@ namespace TibiaHeleper.Windows
         }
         private void South(object sender, RoutedEventArgs e)
         {
-            changePossitionTextBox(YPositionTextBox,1);
+            changePossitionTextBox(YPositionTextBox, 1);
         }
         private void East(object sender, RoutedEventArgs e)
         {
-            changePossitionTextBox(XPositionTextBox,1);
+            changePossitionTextBox(XPositionTextBox, 1);
         }
         private void West(object sender, RoutedEventArgs e)
         {
-            changePossitionTextBox(XPositionTextBox,-1);
+            changePossitionTextBox(XPositionTextBox, -1);
         }
         private void FloorUp(object sender, RoutedEventArgs e)
         {
-            changePossitionTextBox(FloorTextBox,-1);
+            changePossitionTextBox(FloorTextBox, -1);
         }
         private void FloorDown(object sender, RoutedEventArgs e)
         {
-            changePossitionTextBox(FloorTextBox,-1);
+            changePossitionTextBox(FloorTextBox, -1);
         }
+
+
+        private void CreateCondition(object sender, RoutedEventArgs e)
+        {
+            ConditionGrid.Visibility = Visibility.Visible;
+            conditionsList = new List<Modules.WalkerModule.Condition>();
+            condition = new Modules.WalkerModule.Condition();
+        }
+
+        private string setText(Modules.WalkerModule.Condition cond, string text = "")
+        {
+            int argsNumber = 0;
+
+            if (cond.connector != NotSet)
+                text += StatementType.getConditionElementName(cond.connector) + "\n";
+            if (cond.item1 == StatementType.conditionElement["Value"])
+                text += cond.args[argsNumber++];
+            else if (cond.item1 == StatementType.conditionElement["Item count"])
+                text += cond.args[argsNumber++] + " count";
+            else
+                text += StatementType.getConditionElementName(cond.item1) ;
+
+            text += " " +StatementType.getConditionElementName(cond.comparator) + " ";
+
+            if (cond.item2 == StatementType.conditionElement["Value"])
+                text += cond.args[argsNumber++];
+            else if (cond.item2 == StatementType.conditionElement["Item count"])
+                text += cond.args[argsNumber++] + " count";
+            else
+                text += StatementType.getConditionElementName(cond.item2);
+
+            return text;
+        }
+        private void refreshCondition()
+        {
+            string text = "";
+            foreach(Modules.WalkerModule.Condition cond in conditionsList)
+            {
+                text = setText(cond, text);
+            }
+            text = setText(condition, text);
+
+            text = text.Replace("Not set", "");
+            ConditionText.Text = text;
+        }
+        private void setComparator(string cond)
+        {
+            if (condition.item1 != NotSet)
+            {
+                condition.comparator = StatementType.conditionElement[cond];
+            }
+            refreshCondition();
+        }
+        private void setConnector(string connector)
+        {
+            if (conditionsList.Count > 0)
+            {
+                condition.connector = StatementType.conditionElement[connector];
+            }
+            refreshCondition();
+        }
+        private void setItem(string item, object value = null)
+        {
+           
+            if(condition.connector!=NotSet || conditionsList.Count == 0)
+            {
+                if (value != null)
+                    condition.args.Add(value);
+                if (condition.item1 == NotSet)
+                {
+                    condition.item1 = StatementType.conditionElement[item];
+                }
+                else if (condition.comparator != NotSet)
+                {
+                    condition.item2 = StatementType.conditionElement[item];
+                    conditionsList.Add(condition);
+                    condition = new Modules.WalkerModule.Condition();
+                }
+                refreshCondition();
+            }
+            
+
+          
+        }
+
+        private void GreaterButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setComparator(">");
+        }
+        private void SmallerButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setComparator("<");
+
+        }
+        private void EqualButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setComparator("=");
+
+        }
+        private void NotEqualButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setComparator("!=");
+
+        }
+        private void AndButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setConnector("And");
+        }
+        private void OrButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setConnector("Or");
+        }
+        private void DeleteButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (conditionsList.Count > 0)
+            {
+                conditionsList.RemoveAt(conditionsList.Count - 1);
+            }
+            refreshCondition();
+        }
+        private void AddValueButtonClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                setItem("Value", int.Parse(ValueTextBox.Text));
+            }
+            catch (Exception)
+            {
+                ErrorLabel.Content = "Unacceptable value";
+                Error.Visibility = Visibility.Visible;
+            }
+        }
+        private void AddHpButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setItem("HP");
+        }
+        private void AddManaButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setItem("Mana");
+        }
+        private void AddCapButtonClicked(object sender, RoutedEventArgs e)
+        {
+            setItem("Cap");
+        }
+        private void ItemCountButtonClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                setItem("Item count", ItemCountTextBox.Text);
+            }
+            catch (Exception)
+            {
+                ErrorLabel.Content = "Unacceptable value";
+                Error.Visibility = Visibility.Visible;
+            }
+        }
+        private void CancelCondition(object sender, RoutedEventArgs e)
+        {
+            condition = new Modules.WalkerModule.Condition();
+            conditionsList = new List<Modules.WalkerModule.Condition>();
+
+            refreshCondition();
+            ConditionGrid.Visibility = Visibility.Hidden;
+
+        }
+
+     
     }
 }

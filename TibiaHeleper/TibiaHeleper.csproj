@@ -76,6 +76,7 @@
     <Compile Include="Modules\TargetingModule\Target.cs" />
     <Compile Include="Modules\TargetingModule\Targeter.cs" />
     <Compile Include="Modules\WalkerModule\Action.cs" />
+    <Compile Include="Modules\WalkerModule\Condition.cs" />
     <Compile Include="Modules\WalkerModule\DefaultActions.cs" />
     <Compile Include="Modules\WalkerModule\StatementType.cs" />
     <Compile Include="Modules\WalkerModule\Tracker.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
     <Compile Include="Storage\Storage.cs" />
+    <Compile Include="Storage\VersionedObject.cs" />
     <Compile Include="Windows\AdditionalModules.xaml.cs">
       <DependentUpon>AdditionalModules.xaml</DependentUpon>
     </Compile>

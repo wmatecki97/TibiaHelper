@@ -13,7 +13,7 @@ namespace TibiaHeleper.Modules.WalkerModule
 
         public Way(List<WalkerStatement> listOfWaypoints)
         {
-            type = (int)StatementType.getType["Way"];
+            type = StatementType.getType["Way"];
             list = listOfWaypoints;
             if(list!=null && list.Count>0)
             {
@@ -36,7 +36,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             {
                 list.Add(StatementsList[i]);
 
-                if (StatementsList[i].type == (int)StatementType.getType["Way"])
+                if (StatementsList[i].type == StatementType.getType["Way"])
                 {
                     Way way = (Way)StatementsList[i];
                     foreach (Waypoint waypoint in way.list)
@@ -62,7 +62,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                     list.Add(StatementsList[i]);
                 }
 
-                if (StatementsList[i].type == (int)StatementType.getType["Way"])
+                if (StatementsList[i].type == StatementType.getType["Way"])
                 {
                     skip = !skip;
                 }

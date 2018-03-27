@@ -133,6 +133,7 @@ namespace TibiaHeleper.MemoryOperations
         public static int MyXPosition { get { return getIntegerDataFromAddress(Addresses.MyXPosition); } }
         public static int MyYPosition { get { return getIntegerDataFromAddress(Addresses.MyYPosition); } }
         public static int MyFloor { get { return getByteAsIntegerFromAddress(Addresses.MyFloorByteAddress); } }
+        public static int Cap { get { return (int) ((getIntegerDataFromAddress(Addresses.XORAdr) ^ getIntegerDataFromAddress(Addresses.CapXor))/100); } }
 
         public static Creature getPlayer(string playerName)
         {
@@ -270,6 +271,10 @@ namespace TibiaHeleper.MemoryOperations
             UInt32 second = (UInt32)getIntegerDataFromDynamicAddress(first + Addresses.GameWindowFromLeftDistanceShift1);
             UInt32 third = (UInt32)getIntegerDataFromDynamicAddress(second + Addresses.GameWindowFromLeftDistanceShift2);
             return getIntegerDataFromDynamicAddress(third + Addresses.GameWindowFromLeftDistanceShift3);
+        }
+        public static string getLastServerInfo()
+        {
+            return getStringFromAddress(Addresses.LastServerInfoMessage);
         }
 
 

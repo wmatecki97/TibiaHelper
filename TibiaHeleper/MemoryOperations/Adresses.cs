@@ -17,6 +17,8 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 MyXPosition { get; }
         public static UInt32 MyYPosition { get; }
         public static UInt32 MyFloorByteAddress { get; }
+        public static UInt32 CapXor { get; }
+
 
         public static UInt32 FollowTargetAddress { get; }
 
@@ -49,6 +51,8 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 ActualInputShift3 { get; }
         public static UInt32 ActualInputShift4 { get; }
 
+        public static UInt32 LastServerInfoMessage { get; }
+
         static Addresses()
         {
 
@@ -63,6 +67,7 @@ namespace TibiaHeleper.MemoryOperations
             MyXPosition = 0x70E054;
             MyYPosition = 0x70E058;
             MyFloorByteAddress = 0x70E05C;
+            CapXor = 0x70E040;
 
             FollowTargetAddress = 0x5815B8;
 
@@ -93,6 +98,8 @@ namespace TibiaHeleper.MemoryOperations
             ActualInputShift2 = 0x40;
             ActualInputShift3 = 0x2C;
             ActualInputShift4 = 0x0;
+
+            LastServerInfoMessage = 0x5C3DC0;
 
 
         }

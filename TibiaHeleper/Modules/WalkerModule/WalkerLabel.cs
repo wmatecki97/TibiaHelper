@@ -12,7 +12,7 @@ namespace TibiaHeleper.Modules.WalkerModule
         public WalkerLabel(string name)
         {
             this.name = name;
-            this.type = (int)StatementType.getType["label"];
+            this.type = StatementType.getType["label"];
         }
 
         public override object Clone()

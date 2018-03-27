@@ -20,10 +20,10 @@ namespace TibiaHeleper.Modules.WalkerModule
             floor = Floor;
             name = "W: " + floor.ToString() + ":" + xPosition.ToString() + ":" + yPosition.ToString();
             if (!Stand)
-                type = (int)StatementType.getType["Waypoint"];
+                type = StatementType.getType["Waypoint"];
             else
             {
-                type = (int)StatementType.getType["Stand"];
+                type = StatementType.getType["Stand"];
                 name = "S: " + floor.ToString() + ":" + xPosition.ToString() + ":" + yPosition.ToString();
 
             }

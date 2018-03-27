@@ -105,6 +105,7 @@ namespace TibiaHeleper.Windows
             int x = GetData.MyXPosition;
             int y = GetData.MyYPosition;
             int floor = GetData.MyFloor;
+            int sasa = GetData.Cap;
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)
