@@ -116,9 +116,9 @@
         </Grid>
 
 
-        <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
-            <Label x:Name="ErrorLabel" Content="Error" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="300" Height="177"/>
-            <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
+        <Grid Name="Error" HorizontalAlignment="Left" Height="290" VerticalAlignment="Top" Width="654" Background="White" Visibility="Hidden" Margin="0,0,-0.4,0">
+            <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="289,245,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
+            <TextBlock x:Name="ErrorLabel" TextAlignment="Center" Foreground="Red" HorizontalAlignment="Left" Margin="10,96,0,0" TextWrapping="Wrap" Text="Error" VerticalAlignment="Top" Height="116" Width="634"/>
         </Grid>
     </Grid>
 </Window>

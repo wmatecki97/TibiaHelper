@@ -12,6 +12,8 @@
         public static int PlayerOnScreenEdge { get; }
         public static int PlayerOutOfScreen { get; }
 
+        public static int EQWindowID { get; }
+        public static int EQWindowHidden { get; }
 
 
         static Flags()
@@ -25,6 +27,9 @@
             PlayerOnScreen = 0;
             PlayerOnScreenEdge = 256;
             PlayerOutOfScreen = 127;
+
+            EQWindowID = 0xB5;
+            EQWindowHidden = 0x4E;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             getType = new Dictionary<string, int>();
             getType.Add("label", 0);
             getType.Add("Way", 1);
-            getType.Add("action", 2);
+            getType.Add("Action", 2);
             getType.Add("Waypoint", 3);
 
             getType.Add("Condition", 4);

@@ -78,7 +78,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                     }
                     tolerance = temp;
                 }
-                else if (statement.type == StatementType.getType["action"])//do action
+                else if (statement.type == StatementType.getType["Action"])//do action
                 {
                     try
                     {
@@ -222,9 +222,9 @@ namespace TibiaHeleper.Modules.WalkerModule
                             }
                         }
                     }
-                    else if (list[i].type == StatementType.getType["check"])// if statement is action
+                    else if (list[i].type == StatementType.getType["Action"])// if statement is action
                     {
-                        throw new NotImplementedException();
+                        //throw new NotImplementedException();
                         //when all conditions are good then go to label
                     }
                 }

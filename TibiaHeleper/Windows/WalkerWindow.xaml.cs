@@ -42,7 +42,7 @@ namespace TibiaHeleper.Windows
 
             foreach (KeyValuePair<string, int> item in StatementType.getType)
             {
-                if ((int)item.Value > StatementType.getType["action"])
+                if ((int)item.Value > StatementType.getType["Action"])
                 {
                     ActionsListBox.DisplayMemberPath = "Key";
                     ActionsListBox.Items.Add(item);
@@ -138,8 +138,7 @@ namespace TibiaHeleper.Windows
             }
             else
             {
-                ErrorLabel.Content = "Not unique value";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp("Not unique value");
             }
         }
         private void SetStartLabel(object sender, RoutedEventArgs e)
@@ -166,8 +165,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp();
             }
         }
 
@@ -212,10 +210,15 @@ namespace TibiaHeleper.Windows
                 Creature me = GetData.Me;
                 if (me != null)
                     text = me.name + ": X: " + me.XPosition + "  Y: " + me.YPosition + " Floor: " + me.Floor;
-                if (ModulesManager.walker.working && (index = ModulesManager.walker.actualStatementIndex) >=0 )
+                if (ModulesManager.walker.working && (index = ModulesManager.walker.actualStatementIndex) >= 0)
                     text += "\t Actual Statement: " + ModulesManager.walker.list[index].name;
                 InformationLabel.Content = text;
             });
+        }
+        public void showErrorPopUp(string errorMessage = "Unacceptable value")
+        {
+            ErrorLabel.Text = errorMessage;
+            Error.Visibility = Visibility.Visible;
         }
 
         private void GetMyCoordinates(object sender, RoutedEventArgs e)
@@ -297,7 +300,7 @@ namespace TibiaHeleper.Windows
         }
         private void AddAction(object sender, RoutedEventArgs e)
         {
-            int actionType = ((KeyValuePair<string, int>) ActionsListBox.SelectedItem).Value;
+            int actionType = ((KeyValuePair<string, int>)ActionsListBox.SelectedItem).Value;
             WalkerStatement action = null;
             Dictionary<string, int> type = StatementType.getType;
             try
@@ -338,22 +341,19 @@ namespace TibiaHeleper.Windows
                             }
                             else
                             {
-                                ErrorLabel.Content = "Condition must has specified label name to go to when condition is fulfilled";
-                                Error.Visibility = Visibility.Visible;
+                                showErrorPopUp("Condition must has specified label name to go to when condition is fulfilled");
                                 return;
                             }
                         }
                         else
                         {
-                            ErrorLabel.Content = "Condition not completed. Every particular condition contains first value comparator and second value.";
-                            Error.Visibility = Visibility.Visible;
+                            showErrorPopUp("Condition not completed. Every particular condition contains first value comparator and second value.");
                             return;
                         }
                     }
                     else
                     {
-                        ErrorLabel.Content = "You can not add empty condition";
-                        Error.Visibility = Visibility.Visible;
+                        showErrorPopUp("You can not add empty condition");
                         return;
                     }
                 }
@@ -363,8 +363,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp();
             }
 
             //    Modules.WalkerModule.Action action = new Modules.WalkerModule.Action(actionType,;
@@ -387,8 +386,7 @@ namespace TibiaHeleper.Windows
             IList lst = listBox.SelectedItems;
             if (lst.Count <= 0)
             {
-                ErrorLabel.Content = "Select at least one statement";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp("Select at least one statement");
             }
             else
             {
@@ -438,8 +436,7 @@ namespace TibiaHeleper.Windows
             }
             catch
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp();
             }
         }
         private void North(object sender, RoutedEventArgs e)
@@ -486,9 +483,9 @@ namespace TibiaHeleper.Windows
             else if (cond.item1 == StatementType.conditionElement["Item count"])
                 text += cond.args[argsNumber++] + " count";
             else
-                text += StatementType.getConditionElementName(cond.item1) ;
+                text += StatementType.getConditionElementName(cond.item1);
 
-            text += " " +StatementType.getConditionElementName(cond.comparator) + " ";
+            text += " " + StatementType.getConditionElementName(cond.comparator) + " ";
 
             if (cond.item2 == StatementType.conditionElement["Value"])
                 text += cond.args[argsNumber++];
@@ -502,7 +499,7 @@ namespace TibiaHeleper.Windows
         private void refreshCondition()
         {
             string text = "";
-            foreach(Modules.WalkerModule.Condition cond in conditionsList)
+            foreach (Modules.WalkerModule.Condition cond in conditionsList)
             {
                 text = setText(cond, text);
             }
@@ -529,8 +526,8 @@ namespace TibiaHeleper.Windows
         }
         private void setItem(string item, object value = null)
         {
-           
-            if(condition.connector!=NotSet || conditionsList.Count == 0)
+
+            if (condition.connector != NotSet || conditionsList.Count == 0)
             {
                 if (value != null)
                     condition.args.Add(value);
@@ -546,9 +543,9 @@ namespace TibiaHeleper.Windows
                 }
                 refreshCondition();
             }
-            
 
-          
+
+
         }
 
         private void GreaterButtonClicked(object sender, RoutedEventArgs e)
@@ -594,8 +591,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp();
             }
         }
         private void AddHpButtonClicked(object sender, RoutedEventArgs e)
@@ -618,8 +614,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showErrorPopUp();
             }
         }
         private void CancelCondition(object sender, RoutedEventArgs e)
@@ -632,6 +627,6 @@ namespace TibiaHeleper.Windows
 
         }
 
-     
+
     }
 }

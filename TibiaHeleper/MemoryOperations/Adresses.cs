@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TibiaHeleper.MemoryOperations
 {
@@ -44,6 +45,12 @@ namespace TibiaHeleper.MemoryOperations
         public static UInt32 GameWindowFromLeftDistanceShift1 { get; }
         public static UInt32 GameWindowFromLeftDistanceShift2 { get; }
         public static UInt32 GameWindowFromLeftDistanceShift3 { get; }
+
+        public static uint GameWindowWidth { get; }
+
+        public static uint WindowIDOffset;
+        public static List<UInt32> ThirdWindowFromTop;
+        public static List<UInt32> SecondWindowFromTop;
 
         public static UInt32 ActualInput { get; }
         public static UInt32 ActualInputShift1 { get; }
@@ -92,6 +99,25 @@ namespace TibiaHeleper.MemoryOperations
             GameWindowFromLeftDistanceShift1 = 0x30;
             GameWindowFromLeftDistanceShift2 = 0x4;
             GameWindowFromLeftDistanceShift3 = 0x4;
+
+            GameWindowWidth = 0x581F90;
+
+            WindowIDOffset = 0x8;
+
+            ThirdWindowFromTop = new List<uint>();
+            ThirdWindowFromTop.Add(0x7B00D4);
+            ThirdWindowFromTop.Add(0xD0);
+            ThirdWindowFromTop.Add(0x10);
+            ThirdWindowFromTop.Add(0x10);
+            ThirdWindowFromTop.Add(0x18);
+
+            SecondWindowFromTop = new List<uint>();
+            SecondWindowFromTop.Add(0x7B00D4);
+            SecondWindowFromTop.Add(0x88);
+            SecondWindowFromTop.Add(0x58);
+            SecondWindowFromTop.Add(0xC);
+            SecondWindowFromTop.Add(0x10);
+            SecondWindowFromTop.Add(0x18);
 
             ActualInput = 0x570744;
             ActualInputShift1 = 0x40;

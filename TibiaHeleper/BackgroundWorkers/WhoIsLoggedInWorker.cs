@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TibiaHeleper.MemoryOperations;
+using TibiaHeleper.Modules;
 using TibiaHeleper.Windows;
 
 namespace TibiaHeleper.BackgroundWorkers
@@ -22,7 +23,10 @@ namespace TibiaHeleper.BackgroundWorkers
                 if(GetData.Me!=null && loggedID!=GetData.MyID)
                 {
                     loggedID = GetData.MyID;
-                    WindowsManager.menu.Update();
+                    lock (ModulesManager.walker.list)
+                    {
+                        WindowsManager.menu.Update();
+                    }
                     GetData.ResetAllSpottedCreatureList();
                     GetData.ActualizeAllSpottedCreaturesList();
                 }

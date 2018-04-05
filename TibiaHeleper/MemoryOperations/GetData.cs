@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using TibiaHeleper.Storage;
 using System.Linq;
+using TibiaHeleper.Simulators;
 
 namespace TibiaHeleper.MemoryOperations
 {
@@ -68,6 +69,15 @@ namespace TibiaHeleper.MemoryOperations
         {
             return ReadMemory.ReadString(Address, Handle, length);
         }
+        public static void WriteString(string inputString, uint address)
+        {
+            string temp = getActualInput();
+            byte[] bytes = Encoding.ASCII.GetBytes(inputString);
+            int bufferLength = bytes.Length;
+            int numberOfBytesWritten = 0;
+
+            ReadMemory.WriteString(Base + address, Handle, bytes, bufferLength, ref numberOfBytesWritten);
+        }
         public static void writeInt32(UInt32 Address, int toWrite)
         {
             byte[] lpBuffer = BitConverter.GetBytes(toWrite);
@@ -77,6 +87,17 @@ namespace TibiaHeleper.MemoryOperations
         public static Process getProcess()
         {
             return Tibia;
+        }
+        public static int getDynamicAddress(List<uint> list)
+        {
+            int address=getIntegerDataFromAddress(list[0]);
+            int temp =address;
+            for(int i=1; i<list.Count; i++)
+            {
+                address = temp + (int)list[i];
+                temp = getIntegerDataFromDynamicAddress((uint)address);
+            }
+            return address;
         }
 
         /// <summary>
@@ -276,6 +297,14 @@ namespace TibiaHeleper.MemoryOperations
         {
             return getStringFromAddress(Addresses.LastServerInfoMessage);
         }
+        public static void clearLastServerInfo()
+        {
+            string toClear = getLastServerInfo(), blank="";
+            foreach(char c in toClear)
+                blank += ' ';           
+            WriteString(blank, Addresses.LastServerInfoMessage);
+        }
+        public static int gameWindowWidth { get { return getIntegerDataFromAddress(Addresses.GameWindowWidth); } }
 
 
         public static string getActualInput()
@@ -286,16 +315,73 @@ namespace TibiaHeleper.MemoryOperations
             UInt32 fourth = (UInt32)getIntegerDataFromDynamicAddress(third + Addresses.ActualInputShift3);
             return getStringFromDynamicAddress(fourth + Addresses.ActualInputShift4);
         }
-
-        public static void sendInput(string inputString)
+        /// <summary>
+        /// returns count of items from serverInfo for example using one of 20 mana potions returns 20.
+        /// </summary>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public static int getCountFromServerInfo()
         {
-            string temp = getActualInput();
-            byte[] bytes = Encoding.ASCII.GetBytes(inputString);
-            int bufferLength = bytes.Length;
-            int numberOfBytesWritten = 0;
+            string info = getStringFromAddress(Addresses.LastServerInfoMessage);
+            if (info.IndexOf("the last") != -1) return 1;
+            int index = info.IndexOf("of ")+3;
+            int number = 0;
+           
+            try
+            {
+                number = int.Parse(info[index].ToString()) + number * 10;
+            }
+            catch (Exception) {
+                return -1;
+            }
 
-            ReadMemory.WriteString(Base, Handle, bytes, bufferLength, ref numberOfBytesWritten);
+            return number;
         }
+
+        public static bool getShieldPosition(out int x, out int y)
+        {
+            
+            uint secondWindowAddress = (uint)getDynamicAddress(Addresses.SecondWindowFromTop);
+            uint thirdWindowAddress = (uint)getDynamicAddress(Addresses.ThirdWindowFromTop);
+            if ((getIntegerDataFromDynamicAddress(secondWindowAddress + Addresses.WindowIDOffset)) != Flags.EQWindowHidden) // if eq windown is hidden
+            {
+                if ((getIntegerDataFromDynamicAddress(thirdWindowAddress + Addresses.WindowIDOffset)) == Flags.EQWindowHidden)
+                {
+                    y = getIntegerDataFromDynamicAddress(thirdWindowAddress)+Constants.MaximizeEQButtonYOffset;
+                    x = gameWindowWidth + Constants.MaximizeEQButtonXOffset;
+                    MouseSimulator.click(x, y);
+                }
+            }
+            else
+            {
+                y = getIntegerDataFromDynamicAddress(secondWindowAddress) + Constants.MaximizeEQButtonYOffset;
+                x = gameWindowWidth + Constants.MaximizeEQButtonXOffset;
+                MouseSimulator.click(x, y);
+            }
+
+            x = gameWindowWidth + Constants.ShieldXOffset;
+            y = -1;
+            if ((getIntegerDataFromDynamicAddress(secondWindowAddress + Addresses.WindowIDOffset)) != Flags.EQWindowID) // if eq windown is not on second position
+            {
+                if (getIntegerDataFromDynamicAddress(thirdWindowAddress + Addresses.WindowIDOffset) != Flags.EQWindowID) //if eq window is not in second or third position
+                {
+                    return false;
+                }
+                else
+                {
+                    y = getIntegerDataFromDynamicAddress(thirdWindowAddress) + Constants.ShieldYOffset;
+                }
+            }
+            else
+            {
+                y = getIntegerDataFromDynamicAddress(secondWindowAddress) + Constants.ShieldYOffset;
+            }
+            
+
+            return true;
+        }
+
+       
 
     }
 }

@@ -140,8 +140,35 @@ namespace TibiaHeleper.Modules.WalkerModule
             }
             else if (itemType == StatementType.conditionElement["Item count"])
             {
-                throw new NotImplementedException();
-                //TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!TO IMPLEMENT !!!
+                int result=0;
+                string action = cond.args.FirstOrDefault() as string;
+                int x, y;
+                GetData.getShieldPosition(out x, out y);
+                bool wasHealerEnabled = ModulesManager.healer.working;
+
+                int timeToSleep = 50;
+                for(int i=0; i<5; i++) //nr of tries
+                {
+
+                    ModulesManager.HealerDisable();
+
+                    KeyboardSimulator.Press(action);
+                    Thread.Sleep(timeToSleep);
+                    MouseSimulator.click(x, y);
+                    Thread.Sleep(timeToSleep);
+                    result = GetData.getCountFromServerInfo();
+
+                    if (wasHealerEnabled)
+                        ModulesManager.HealerEnable();
+
+                    GetData.clearLastServerInfo();
+
+                    if (result != -1) break;
+                    timeToSleep += 40;
+                }
+                if (result == -1) result = 0;
+
+                return result;
             }
             else if (itemType == StatementType.conditionElement["Value"])
             {

@@ -17,7 +17,7 @@ namespace TibiaHeleper.Modules.WalkerModule
         {
             defaultAction = defaultActionType;
             args = arguments;
-            type = StatementType.getType["action"];
+            type = StatementType.getType["Action"];
             name = "Action: " + StatementType.getTypeByValue(defaultActionType);
             if (defaultActionType == StatementType.getType["Go To Label"]) name = "Action: Go to \"" + arguments[0] + "\"";
             else if (defaultActionType == StatementType.getType["Say"]) name = "Action: Say \"" + arguments[0] + "\"";

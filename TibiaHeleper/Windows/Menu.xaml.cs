@@ -102,10 +102,10 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            int x = GetData.MyXPosition;
-            int y = GetData.MyYPosition;
-            int floor = GetData.MyFloor;
-            int sasa = GetData.Cap;
+            int b = GetData.getGameWindowDistanceFromLeft();
+            int c = GetData.gameWindowWidth;
+            GetData.getShieldPosition(out b, out c);
+            GetData.clearLastServerInfo();
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)
