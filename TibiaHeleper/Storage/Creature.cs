@@ -10,12 +10,12 @@ namespace TibiaHeleper.Storage
         public int id { get; }
         public int HPPercent { get { return GetData.getCreatureHPPercent(Address); } }
         public bool onScreen { get { return GetData.isCreatureOnScreen(Address); } }
-        public UInt32 Address { get; }
+        public uint Address { get; }
         public int XPosition { get { return GetData.getCreatureXPosition(Address); } }
         public int YPosition { get { return GetData.getCreatureYPosition(Address); } }
         public int Floor { get { return GetData.getCreatureFloor(Address); } }
 
-        public Creature(int id, UInt32 Address)
+        public Creature(int id, uint Address)
         {
             this.id = id;
             this.Address = Address;

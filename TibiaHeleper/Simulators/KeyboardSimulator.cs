@@ -8,15 +8,15 @@ namespace TibiaHeleper.Simulators
 {
     class KeyboardSimulator
     {
-        const UInt32 WM_KEYDOWN = 0x0100;
-        const UInt32 WM_KEYUP = 0x0101;
-        const UInt32 WM_CHAR = 0x0102;
+        const uint WM_KEYDOWN = 0x0100;
+        const uint WM_KEYUP = 0x0101;
+        const uint WM_CHAR = 0x0102;
 
         static Dictionary<string, int> DButton;
         static Process proc;
 
         [DllImport("user32.dll")]
-        static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
+        static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 
         static KeyboardSimulator()
         {
@@ -33,7 +33,7 @@ namespace TibiaHeleper.Simulators
                 Press(action);
             else
             {
-                string userActualInput = GetData.getActualInput();
+                string userActualInput = GetData.ActualInput;
                 deleteActualInput(userActualInput.Length);
                 Message(text);
                 Message(userActualInput);

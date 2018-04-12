@@ -7,58 +7,49 @@ namespace TibiaHeleper.MemoryOperations
     {
         
         //Player
-        public static UInt32 MaxHPAdr { get; }
-        public static UInt32 HPAdr { get; }
-        public static UInt32 XORAdr { get; }
-        public static UInt32 ManaAdr { get; }
-        public static UInt32 MaxManaAdr { get; }
-        public static UInt32 Hasted { get; }
-        public static UInt32 ActualSpeed { get; }
-        public static UInt32 NormalSpeed { get; }
-        public static UInt32 MyXPosition { get; }
-        public static UInt32 MyYPosition { get; }
-        public static UInt32 MyFloorByteAddress { get; }
-        public static UInt32 CapXor { get; }
+        public static uint MaxHPAdr { get; }
+        public static uint HPAdr { get; }
+        public static uint XORAdr { get; }
+        public static uint ManaAdr { get; }
+        public static uint MaxManaAdr { get; }
+        public static uint MyFlags { get; }
+        public static uint ActualSpeed { get; }
+        public static uint NormalSpeed { get; }
+        public static uint MyXPosition { get; }
+        public static uint MyYPosition { get; }
+        public static uint MyFloorByteAddress { get; }
+        public static uint CapXor { get; }
 
 
-        public static UInt32 FollowTargetAddress { get; }
+        public static uint FollowTargetAddress { get; }
 
         //list of spotted monsters persons and NPC
-        public static UInt32 InformationsOfSpottedCreaturesAndPlayersSartAddress { get; } 
-        public static UInt32 CreatureInformationBlockSize { get; }
-        public static UInt32 CreatureHpShift { get; }// means PlayerInformationsAddress + shift is player HP
-        public static UInt32 CreatureOnScreenShift { get; }
-        public static UInt32 CreatureNameShift { get; }
-        public static UInt32 CreatureXPositionShift { get; }
-        public static UInt32 CreatureYPositionShift { get; }
-        public static UInt32 CreatureFloorShift { get; }
+        public static uint InformationsOfSpottedCreaturesAndPlayersSartAddress { get; } 
+        public static uint CreatureInformationBlockSize { get; }
+        public static uint CreatureHpShift { get; }// means PlayerInformationsAddress + shift is player HP
+        public static uint CreatureOnScreenShift { get; }
+        public static uint CreatureNameShift { get; }
+        public static uint CreatureXPositionShift { get; }
+        public static uint CreatureYPositionShift { get; }
+        public static uint CreatureFloorShift { get; }
 
         //Battle List
-        public static UInt32 BattleListAddress { get; }
-        public static UInt32 Target { get; }
+        public static uint BattleListAddress { get; }
+        public static uint Target { get; }
 
         //GUI
-        public static UInt32 GameWindowHeight { get; }
-        public static UInt32 GameWindowHeightShift1 { get; }
-        public static UInt32 GameWindowHeightShift2 { get; }
-        public static UInt32 GameWindowFromLeftDistance { get; }
-        public static UInt32 GameWindowFromLeftDistanceShift1 { get; }
-        public static UInt32 GameWindowFromLeftDistanceShift2 { get; }
-        public static UInt32 GameWindowFromLeftDistanceShift3 { get; }
+        public static List<uint> GameWindowHeight { get; }
+        public static List<uint> GameWindowFromLeftDistance { get; }
 
         public static uint GameWindowWidth { get; }
 
         public static uint WindowIDOffset;
-        public static List<UInt32> ThirdWindowFromTop;
-        public static List<UInt32> SecondWindowFromTop;
+        public static List<uint> ThirdWindowFromTop;
+        public static List<uint> SecondWindowFromTop;
 
-        public static UInt32 ActualInput { get; }
-        public static UInt32 ActualInputShift1 { get; }
-        public static UInt32 ActualInputShift2 { get; }
-        public static UInt32 ActualInputShift3 { get; }
-        public static UInt32 ActualInputShift4 { get; }
+        public static List<uint> ActualInput { get; }
 
-        public static UInt32 LastServerInfoMessage { get; }
+        public static uint LastServerInfoMessage { get; }
 
         static Addresses()
         {
@@ -70,7 +61,7 @@ namespace TibiaHeleper.MemoryOperations
             ManaAdr = 0x57048C;
             ActualSpeed = 0x570418;
             NormalSpeed = 0x570480;
-            Hasted = 0x570410;
+            MyFlags = 0x570410;
             MyXPosition = 0x70E054;
             MyYPosition = 0x70E058;
             MyFloorByteAddress = 0x70E05C;
@@ -92,13 +83,15 @@ namespace TibiaHeleper.MemoryOperations
             Target = 0x570488;
 
             //GUI
-            GameWindowHeight = 0x570744;
-            GameWindowHeightShift1 = 0x30;
-            GameWindowHeightShift2 = 0x20;
-            GameWindowFromLeftDistance = 0x570744;
-            GameWindowFromLeftDistanceShift1 = 0x30;
-            GameWindowFromLeftDistanceShift2 = 0x4;
-            GameWindowFromLeftDistanceShift3 = 0x4;
+            GameWindowHeight = new List<uint>();
+            GameWindowHeight.Add(0x570744);
+            GameWindowHeight.Add(0x30);
+            GameWindowHeight.Add(0x20);
+            GameWindowFromLeftDistance = new List<uint>();
+            GameWindowFromLeftDistance.Add(0x570744);
+            GameWindowFromLeftDistance.Add(0x30);
+            GameWindowFromLeftDistance.Add(0x4);
+            GameWindowFromLeftDistance.Add(0x4);
 
             GameWindowWidth = 0x581F90;
 
@@ -119,11 +112,12 @@ namespace TibiaHeleper.MemoryOperations
             SecondWindowFromTop.Add(0x10);
             SecondWindowFromTop.Add(0x18);
 
-            ActualInput = 0x570744;
-            ActualInputShift1 = 0x40;
-            ActualInputShift2 = 0x40;
-            ActualInputShift3 = 0x2C;
-            ActualInputShift4 = 0x0;
+            ActualInput = new List<uint>();
+            ActualInput.Add(0x570744);
+            ActualInput.Add(0x40);
+            ActualInput.Add(0x40);
+            ActualInput.Add(0x2C);
+            ActualInput.Add(0x0);
 
             LastServerInfoMessage = 0x5C3DC0;
 

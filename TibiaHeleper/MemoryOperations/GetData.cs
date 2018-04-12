@@ -12,9 +12,9 @@ namespace TibiaHeleper.MemoryOperations
     {
         static Process Tibia;
         public static IntPtr Handle { get; set; }
-        static UInt32 Base;
+        static uint Base;
         private static List<Creature> allSpottedCreaturesList;
-        private static UInt32 lastSpottedCreatureAddress;
+        private static uint lastSpottedCreatureAddress;
         public static Creature Me;
 
         static GetData()
@@ -37,7 +37,7 @@ namespace TibiaHeleper.MemoryOperations
             }
             else return false;
             Handle = Tibia.Handle;
-            Base = (UInt32)Tibia.MainModule.BaseAddress;
+            Base = (uint)Tibia.MainModule.BaseAddress;
             return true;
         }
         public static bool isGameOpened()
@@ -49,36 +49,36 @@ namespace TibiaHeleper.MemoryOperations
         /// </summary>
         /// <param name="Address"></param>
         /// <returns></returns>
-        public static int getIntegerDataFromAddress(UInt32 Address)
+        public static int getIntegerDataFromAddress(uint Address)
         {
             return ReadMemory.ReadInt32(Base + Address, Handle);
         }
-        public static int getByteAsIntegerFromAddress(UInt32 Address)
+        public static int getByteAsIntegerFromAddress(uint Address)
         {
             return (int)ReadMemory.ReadBytes(Handle, (long)(Base + Address), 1).FirstOrDefault();
         }
-        public static int getIntegerDataFromDynamicAddress(UInt32 Address)
+        public static int getIntegerDataFromDynamicAddress(uint Address)
         {
             return ReadMemory.ReadInt32(Address, Handle);
         }
-        public static string getStringFromAddress(UInt32 Address, UInt32 length = 32)
+        public static string getStringFromAddress(uint Address, uint length = 32)
         {
             return ReadMemory.ReadString(Base + Address, Handle, length);
         }
-        public static string getStringFromDynamicAddress(UInt32 Address, UInt32 length = 32)
+        public static string getStringFromDynamicAddress(uint Address, uint length = 32)
         {
             return ReadMemory.ReadString(Address, Handle, length);
         }
         public static void WriteString(string inputString, uint address)
         {
-            string temp = getActualInput();
+            string temp = ActualInput;
             byte[] bytes = Encoding.ASCII.GetBytes(inputString);
             int bufferLength = bytes.Length;
             int numberOfBytesWritten = 0;
 
             ReadMemory.WriteString(Base + address, Handle, bytes, bufferLength, ref numberOfBytesWritten);
         }
-        public static void writeInt32(UInt32 Address, int toWrite)
+        public static void writeInt32(uint Address, int toWrite)
         {
             byte[] lpBuffer = BitConverter.GetBytes(toWrite);
             int bytesWritten = 0;
@@ -145,10 +145,22 @@ namespace TibiaHeleper.MemoryOperations
                 return xor ^ mana;
             }
         }
-        public static bool AmIHasted { get {
-                int x = getIntegerDataFromAddress(Addresses.Hasted);
-                return (getIntegerDataFromAddress(Addresses.Hasted) & Flags.AmIHasted) == Flags.AmIHasted;
-            } }
+        public static bool AmIHasted
+        {
+            get
+            {
+                int x = getIntegerDataFromAddress(Addresses.MyFlags);
+                return (getIntegerDataFromAddress(Addresses.MyFlags) & Flags.AmIHasted) == Flags.AmIHasted;
+            }
+        }
+        public static bool AmInPZ
+        {
+            get
+            {
+                int x = getIntegerDataFromAddress(Addresses.MyFlags);
+                return (getIntegerDataFromAddress(Addresses.MyFlags) & Flags.AmIInPZ) == Flags.AmIInPZ;
+            }
+        }
         public static int MyActualSpeed { get { return getIntegerDataFromAddress(Addresses.ActualSpeed); } }
         public static int MyNormalSpeed { get { return getIntegerDataFromAddress(Addresses.NormalSpeed); } }
         public static int MyXPosition { get { return getIntegerDataFromAddress(Addresses.MyXPosition); } }
@@ -170,27 +182,27 @@ namespace TibiaHeleper.MemoryOperations
             return null;
         }
 
-        public static string GetCreatureName(UInt32 Address)
+        public static string GetCreatureName(uint Address)
         {
             return getStringFromAddress(Address + Addresses.CreatureNameShift);
         }
-        public static bool isCreatureOnScreen(UInt32 playerAddress)
+        public static bool isCreatureOnScreen(uint playerAddress)
         {
             return (getIntegerDataFromAddress(playerAddress + Addresses.CreatureOnScreenShift) == 1);
         }
-        public static int getCreatureHPPercent(UInt32 CreatureAddress)
+        public static int getCreatureHPPercent(uint CreatureAddress)
         {
             return getIntegerDataFromAddress(CreatureAddress + Addresses.CreatureHpShift);
         }
-        public static int getCreatureXPosition(UInt32 CreatureAddress)
+        public static int getCreatureXPosition(uint CreatureAddress)
         {
             return getIntegerDataFromAddress(CreatureAddress + Addresses.CreatureXPositionShift);
         }
-        public static int getCreatureYPosition(UInt32 CreatureAddress)
+        public static int getCreatureYPosition(uint CreatureAddress)
         {
             return getIntegerDataFromAddress(CreatureAddress + Addresses.CreatureYPositionShift);
         }
-        public static int getCreatureFloor(UInt32 CreatureAddress)
+        public static int getCreatureFloor(uint CreatureAddress)
         {
             return getByteAsIntegerFromAddress(CreatureAddress + Addresses.CreatureFloorShift);
 
@@ -220,7 +232,7 @@ namespace TibiaHeleper.MemoryOperations
         {
             bool wasCreatureSpotted = true;
             int id;
-            UInt32 CreatureInformationBlockSize = Addresses.CreatureInformationBlockSize;
+            uint CreatureInformationBlockSize = Addresses.CreatureInformationBlockSize;
             while (wasCreatureSpotted)
             {
                 if ((id = getIntegerDataFromAddress(lastSpottedCreatureAddress)) != 0)
@@ -280,26 +292,12 @@ namespace TibiaHeleper.MemoryOperations
 
           */
 
-        public static int getGameWindowHeight()
-        {
-            UInt32 first = (UInt32)getIntegerDataFromAddress(Addresses.GameWindowHeight);
-            UInt32 second = (UInt32)getIntegerDataFromDynamicAddress(first + Addresses.GameWindowHeightShift1);
-            return getIntegerDataFromDynamicAddress(second + Addresses.GameWindowHeightShift2);
-        }
-        public static int getGameWindowDistanceFromLeft()
-        {
-            UInt32 first = (UInt32)getIntegerDataFromAddress(Addresses.GameWindowFromLeftDistance);
-            UInt32 second = (UInt32)getIntegerDataFromDynamicAddress(first + Addresses.GameWindowFromLeftDistanceShift1);
-            UInt32 third = (UInt32)getIntegerDataFromDynamicAddress(second + Addresses.GameWindowFromLeftDistanceShift2);
-            return getIntegerDataFromDynamicAddress(third + Addresses.GameWindowFromLeftDistanceShift3);
-        }
-        public static string getLastServerInfo()
-        {
-            return getStringFromAddress(Addresses.LastServerInfoMessage);
-        }
+        public static int GameWindowHeight { get { return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.GameWindowHeight)); } }
+        public static int GameWindowDistanceFromLeft { get {  return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.GameWindowFromLeftDistance)); } }
+        public static string LastServerInfo { get { return getStringFromAddress(Addresses.LastServerInfoMessage); } }
         public static void clearLastServerInfo()
         {
-            string toClear = getLastServerInfo(), blank="";
+            string toClear = LastServerInfo, blank="";
             foreach(char c in toClear)
                 blank += ' ';           
             WriteString(blank, Addresses.LastServerInfoMessage);
@@ -307,14 +305,7 @@ namespace TibiaHeleper.MemoryOperations
         public static int gameWindowWidth { get { return getIntegerDataFromAddress(Addresses.GameWindowWidth); } }
 
 
-        public static string getActualInput()
-        {
-            UInt32 first = (UInt32)getIntegerDataFromAddress(Addresses.ActualInput);
-            UInt32 second = (UInt32)getIntegerDataFromDynamicAddress(first + Addresses.ActualInputShift1);
-            UInt32 third = (UInt32)getIntegerDataFromDynamicAddress(second + Addresses.ActualInputShift2);
-            UInt32 fourth = (UInt32)getIntegerDataFromDynamicAddress(third + Addresses.ActualInputShift3);
-            return getStringFromDynamicAddress(fourth + Addresses.ActualInputShift4);
-        }
+        public static string ActualInput{ get { return getStringFromDynamicAddress((uint)getDynamicAddress(Addresses.ActualInput)); } }
         /// <summary>
         /// returns count of items from serverInfo for example using one of 20 mana potions returns 20.
         /// </summary>
@@ -338,7 +329,7 @@ namespace TibiaHeleper.MemoryOperations
             return number;
         }
 
-        public static bool getShieldPosition(out int x, out int y)
+        public static bool getItemFromEQWindowPosition(out int x, out int y, int xOffset, int yOffset)
         {
             
             uint secondWindowAddress = (uint)getDynamicAddress(Addresses.SecondWindowFromTop);
@@ -359,7 +350,7 @@ namespace TibiaHeleper.MemoryOperations
                 MouseSimulator.click(x, y);
             }
 
-            x = gameWindowWidth + Constants.ShieldXOffset;
+            x = gameWindowWidth + xOffset;
             y = -1;
             if ((getIntegerDataFromDynamicAddress(secondWindowAddress + Addresses.WindowIDOffset)) != Flags.EQWindowID) // if eq windown is not on second position
             {
@@ -369,15 +360,13 @@ namespace TibiaHeleper.MemoryOperations
                 }
                 else
                 {
-                    y = getIntegerDataFromDynamicAddress(thirdWindowAddress) + Constants.ShieldYOffset;
+                    y = getIntegerDataFromDynamicAddress(thirdWindowAddress) + yOffset;
                 }
             }
             else
             {
-                y = getIntegerDataFromDynamicAddress(secondWindowAddress) + Constants.ShieldYOffset;
+                y = getIntegerDataFromDynamicAddress(secondWindowAddress) + yOffset;
             }
-            
-
             return true;
         }
 

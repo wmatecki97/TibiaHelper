@@ -143,7 +143,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 int result=0;
                 string action = cond.args.FirstOrDefault() as string;
                 int x, y;
-                GetData.getShieldPosition(out x, out y);
+                GetData.getItemFromEQWindowPosition(out x, out y, Constants.ShieldXOffset, Constants.ShieldYOffset);
                 bool wasHealerEnabled = ModulesManager.healer.working;
 
                 int timeToSleep = 50;

@@ -6,12 +6,14 @@ otwieranie plecaka to raczej easy, bo stała jest szerokość prawego panelu
 
 tryb ataku
 jedzenie
-
-poprawa adresów po przelogowaniu
-
-dodanie conditionów w walkerze
-
-
+Diagonal
+Handel
+edit w walkerze
+save w targettingu - nie dodaje do działającej listy targettingu
+blokada na atak ze strefy chronionej 1
+jeżeli podczas ataku przejdzie przez waypoint to go ominąć w walkerze
+Jeżeli wylogowano to trzeba zresetować All spotted creature list
+dodanie wait do actions
 
 Walker
 wyznaczenie czy dane pole można przejść

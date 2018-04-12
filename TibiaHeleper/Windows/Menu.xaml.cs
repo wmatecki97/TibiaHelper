@@ -102,9 +102,9 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            int b = GetData.getGameWindowDistanceFromLeft();
+            int b = GetData.GameWindowDistanceFromLeft;
             int c = GetData.gameWindowWidth;
-            GetData.getShieldPosition(out b, out c);
+            GetData.getItemFromEQWindowPosition(out b, out c, Constants.ShieldXOffset, Constants.ShieldYOffset);
             GetData.clearLastServerInfo();
         }
 
@@ -135,6 +135,11 @@ namespace TibiaHeleper.Windows
                 HealerEnable.IsChecked = ModulesManager.targeting.working;
                 if (GetData.Me != null) Title = "Tibia Helper -" + GetData.Me.name;
             });
+        }
+
+        private void OpenHelpWindow(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

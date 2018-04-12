@@ -47,7 +47,7 @@ namespace TibiaHeleper.Storage
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.FileName = "*." + extension;
             ofd.DefaultExt = extension;
-            ofd.Filter = "tibia helper files (*."+extension+")|*."+extension;
+            ofd.Filter = "tibia helper files (*." + extension + ")|*." + extension;
             VersionedObject obj = null;
 
             if (ofd.ShowDialog() == true)
@@ -83,12 +83,12 @@ namespace TibiaHeleper.Storage
         }
         public static List<WalkerStatement> LoadProcedure()
         {
-            return (List<WalkerStatement>) Load(procedureExtension);
+            return (List<WalkerStatement>)Load(procedureExtension);
         }
 
         public static void checkVersion(VersionedObject obj)
         {
-            if(obj.version == "0.0.0")
+            if (obj.version == "0.0.0")
             {
                 try
                 {
@@ -99,6 +99,27 @@ namespace TibiaHeleper.Storage
 
                 }
             }
+        }
+
+        public static object Copy(object obj)
+        {
+            object result;
+            string filename = "TemporaryTibiaHelperFile";
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+            FileStream stream = File.Create(filename);
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(stream, obj);
+            stream.Close();
+            stream = File.OpenRead(filename);
+            result = formatter.Deserialize(stream);
+            stream.Close();
+
+            File.Delete(filename);
+
+            return result;
         }
 
     }

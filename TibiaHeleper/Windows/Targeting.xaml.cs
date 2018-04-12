@@ -81,6 +81,12 @@ namespace TibiaHeleper.Windows
 
         }
 
+        public void showPopUpWindow(string errorMessage = "Unacceptable value")
+        {
+            ErrorLabel.Content = errorMessage;
+            Error.Visibility = Visibility.Visible;
+        }
+
         private void assignTarget()
         {
             try
@@ -94,8 +100,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showPopUpWindow();
             }
 
         }
@@ -114,6 +119,7 @@ namespace TibiaHeleper.Windows
             minHP.Text = "0";
             Action.Text = "";
             maxDistance.Text = "11";
+            FollowTargetCheckBox.IsChecked = false;
         }
 
         private void setAllTextboxes()
@@ -122,6 +128,7 @@ namespace TibiaHeleper.Windows
             maxHP.Text = target.maxHP.ToString();
             minHP.Text = target.minHP.ToString();
             Action.Text = target.action;
+            FollowTargetCheckBox.IsChecked = target.followTarget;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -130,8 +137,11 @@ namespace TibiaHeleper.Windows
             if (wasWorking) ModulesManager.TargetingDisable();
 
             ModulesManager.targeting.setTargetList(list);
+            list = ModulesManager.targeting.getTargetListCopy();
 
             if (wasWorking) ModulesManager.TargetingEnable();
+
+            showPopUpWindow("Saved succesfully");
 
         }
 

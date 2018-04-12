@@ -20,7 +20,6 @@ namespace TibiaHeleper.Windows
             InitializeComponent();
         }
 
-        private bool workingOnCopy;
         private List<WalkerStatement> StatementsList;
         private int tolerance;
 
@@ -115,6 +114,9 @@ namespace TibiaHeleper.Windows
             if (wasWorking) ModulesManager.WalkerEnable();
 
             StatementsList = ModulesManager.walker.CopyList();
+            fillList();
+
+            showPopUpWindow("Saved succesfully");
         }
         private void Back(object sender, RoutedEventArgs e)
         {
@@ -138,7 +140,7 @@ namespace TibiaHeleper.Windows
             }
             else
             {
-                showErrorPopUp("Not unique value");
+                showPopUpWindow("Not unique value");
             }
         }
         private void SetStartLabel(object sender, RoutedEventArgs e)
@@ -165,7 +167,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                showErrorPopUp();
+                showPopUpWindow();
             }
         }
 
@@ -199,6 +201,89 @@ namespace TibiaHeleper.Windows
             StatementsList.Remove((WalkerStatement)listBox.SelectedItem);
             fillList();
         }
+        private void Edit(object sender, RoutedEventArgs e)
+        {
+            WalkerStatement selected = listBox.SelectedItem as WalkerStatement;
+            string action="";
+            int selectedType = selected.type;
+            if (selected != null)
+            {
+                hideActionFields();
+
+                if(selected.type == StatementType.getType["Action"])
+                {
+                    Modules.WalkerModule.Action act = selected as Modules.WalkerModule.Action;
+                    selectedType = act.defaultAction;
+                }
+                foreach (var type in StatementType.getType)
+                {
+                    if (type.Value == selectedType)
+                    {
+                        ActionsListBox.SelectedItem = type;
+                        action = StatementType.getTypeName(selectedType);
+                        break;
+                    }
+                }
+
+
+                if (action == "Hotkey")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    ActionTextBox.Text = statement.args[0].ToString();
+                }
+                else if (action == "Stand")
+                {
+                    Waypoint statement = selected as Waypoint;
+                    setPositionTextBoxes(statement);
+                }
+                else if (action == "Use On Field")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    ActionTextBox.Text = statement.args[0].ToString();
+
+                    XPositionTextBox.Text = statement.args[1].ToString();
+                    YPositionTextBox.Text = statement.args[2].ToString();
+                    FloorTextBox.Text = statement.args[3].ToString();
+                }
+                else if (action == "Say")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    ActionTextBox.Text = statement.args[0].ToString();
+                }
+                else if (action == "Go To Label")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    ActionTextBox.Text = statement.args[0].ToString();
+                }
+                else if (action == "Mouse Click")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    XPositionTextBox.Text = statement.args[0].ToString();
+                    YPositionTextBox.Text = statement.args[1].ToString();
+                    FloorTextBox.Text = statement.args[2].ToString();
+                    RightClickCheckBox.IsChecked = statement.args[3] as bool?;
+                }
+                else if (action == "Waypoint")
+                {
+                    Waypoint statement = selected as Waypoint;
+                    setPositionTextBoxes(statement);
+                }
+                else if (action == "Condition")
+                {
+                    CreateCondition(null, null);
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    ConditionFulfilledTextBox.Text = statement.args[0].ToString();
+                    conditionsList = statement.args[1] as List<Modules.WalkerModule.Condition>;
+                    refreshCondition();
+                }
+            }
+        }
+        private void setPositionTextBoxes(Waypoint waypoint)
+        {
+            XPositionTextBox.Text = waypoint.xPos.ToString();
+            YPositionTextBox.Text = waypoint.yPos.ToString();
+            FloorTextBox.Text = waypoint.floor.ToString();
+        }
 
         public void Update()
         {
@@ -215,7 +300,7 @@ namespace TibiaHeleper.Windows
                 InformationLabel.Content = text;
             });
         }
-        public void showErrorPopUp(string errorMessage = "Unacceptable value")
+        public void showPopUpWindow(string errorMessage = "Unacceptable value")
         {
             ErrorLabel.Text = errorMessage;
             Error.Visibility = Visibility.Visible;
@@ -238,6 +323,7 @@ namespace TibiaHeleper.Windows
             PositionGrid.Visibility = Visibility.Hidden;
             MouseClickGrid.Visibility = Visibility.Hidden;
             ConditionButtonGrid.Visibility = Visibility.Hidden;
+            ConditionGrid.Visibility = Visibility.Hidden;
             //       RightClickCheckBox.IsChecked = false;
 
         }
@@ -341,19 +427,19 @@ namespace TibiaHeleper.Windows
                             }
                             else
                             {
-                                showErrorPopUp("Condition must has specified label name to go to when condition is fulfilled");
+                                showPopUpWindow("Condition must has specified label name to go to when condition is fulfilled");
                                 return;
                             }
                         }
                         else
                         {
-                            showErrorPopUp("Condition not completed. Every particular condition contains first value comparator and second value.");
+                            showPopUpWindow("Condition not completed. Every particular condition contains first value comparator and second value.");
                             return;
                         }
                     }
                     else
                     {
-                        showErrorPopUp("You can not add empty condition");
+                        showPopUpWindow("You can not add empty condition");
                         return;
                     }
                 }
@@ -363,7 +449,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                showErrorPopUp();
+                showPopUpWindow();
             }
 
             //    Modules.WalkerModule.Action action = new Modules.WalkerModule.Action(actionType,;
@@ -386,7 +472,7 @@ namespace TibiaHeleper.Windows
             IList lst = listBox.SelectedItems;
             if (lst.Count <= 0)
             {
-                showErrorPopUp("Select at least one statement");
+                showPopUpWindow("Select at least one statement");
             }
             else
             {
@@ -436,7 +522,7 @@ namespace TibiaHeleper.Windows
             }
             catch
             {
-                showErrorPopUp();
+                showPopUpWindow();
             }
         }
         private void North(object sender, RoutedEventArgs e)
@@ -470,6 +556,8 @@ namespace TibiaHeleper.Windows
             ConditionGrid.Visibility = Visibility.Visible;
             conditionsList = new List<Modules.WalkerModule.Condition>();
             condition = new Modules.WalkerModule.Condition();
+            ConditionText.Text = "";
+            ConditionFulfilledTextBox.Text = "";
         }
 
         private string setText(Modules.WalkerModule.Condition cond, string text = "")
@@ -591,7 +679,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                showErrorPopUp();
+                showPopUpWindow();
             }
         }
         private void AddHpButtonClicked(object sender, RoutedEventArgs e)
@@ -614,7 +702,7 @@ namespace TibiaHeleper.Windows
             }
             catch (Exception)
             {
-                showErrorPopUp();
+                showPopUpWindow();
             }
         }
         private void CancelCondition(object sender, RoutedEventArgs e)

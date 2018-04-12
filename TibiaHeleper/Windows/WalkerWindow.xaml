@@ -12,7 +12,7 @@
         <Grid Name="BasicsWalkerOperationsGrid">
             <Button x:Name="UpButton" Content="Up" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="63" Click="Up"/>
             <Button x:Name="DownButton" Content="Down" HorizontalAlignment="Left" Margin="78,223,0,0" VerticalAlignment="Top" Width="69" Click="Down"/>
-            <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="63"/>
+            <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="63" Click="Edit"/>
             <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="78,247,0,0" VerticalAlignment="Top" Width="69" Click="Delete"/>
 
             <Label x:Name="TrackingLabel" Content="Tracking" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="167,12,0,0" VerticalAlignment="Top" Width="163"/>

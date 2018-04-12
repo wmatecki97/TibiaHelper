@@ -19,20 +19,20 @@ namespace TibiaHeleper.Simulators
 
         private static int leftTopFieldXPosition { get { return GetData.MyXPosition - 7; } }
         private static int leftTopFieldYPosition { get { return GetData.MyYPosition - 5; } }
-        private static int fieldPixelSize { get { return GetData.getGameWindowHeight() / Constants.GameWindowHeightSquares; } }
+        private static int fieldPixelSize { get { return GetData.GameWindowHeight / Constants.GameWindowHeightSquares; } }
 
 
         [DllImport("user32.dll")]
-        static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
+        static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 
         [DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
 
-        const UInt32 WM_LBUTTONDOWN = 0x0201;
-        const UInt32 WM_LBUTTONUP = 0x202;
-        const UInt32 WM_RBUTTONDOWN = 0x0204;
-        const UInt32 WM_RBUTTONUP = 0x0205;
+        const uint WM_LBUTTONDOWN = 0x0201;
+        const uint WM_LBUTTONUP = 0x202;
+        const uint WM_RBUTTONDOWN = 0x0204;
+        const uint WM_RBUTTONUP = 0x0205;
 
 
         public static void test()
@@ -61,7 +61,7 @@ namespace TibiaHeleper.Simulators
             int yToMove = yPosition - leftTopFieldYPosition;
 
             //setting start position to a centre of first field in left up square
-            int XPixelPosition = GetData.getGameWindowDistanceFromLeft() + fieldPixelSize / 2;
+            int XPixelPosition = GetData.GameWindowDistanceFromLeft + fieldPixelSize / 2;
             int YPixelPosition = fieldPixelSize / 2;
 
             //geting coordinates form centre of destination field

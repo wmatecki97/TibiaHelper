@@ -51,11 +51,13 @@ namespace TibiaHeleper.Windows
                
                 if(isWorking)
                     ModulesManager.HealerEnable();
+
+                showPopUpWindow("Saved succesfully");
+
             }
             catch(Exception)
             {
-                ErrorLabel.Content = "Unacceptable value";
-                Error.Visibility = Visibility.Visible;
+                showPopUpWindow();
             }
 
            
@@ -64,6 +66,12 @@ namespace TibiaHeleper.Windows
         private void HideErrorGrid(object sender, RoutedEventArgs e)
         {
             Error.Visibility = Visibility.Hidden;
+        }
+
+        public void showPopUpWindow(string errorMessage = "Unacceptable value")
+        { 
+            ErrorLabel.Content = errorMessage;
+            Error.Visibility = Visibility.Visible;
         }
 
         private void Back(object sender, RoutedEventArgs e)

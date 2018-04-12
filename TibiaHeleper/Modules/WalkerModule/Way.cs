@@ -34,8 +34,6 @@ namespace TibiaHeleper.Modules.WalkerModule
 
             for (int i = 0; i < StatementsList.Count; i++)
             {
-                list.Add(StatementsList[i]);
-
                 if (StatementsList[i].type == StatementType.getType["Way"])
                 {
                     Way way = (Way)StatementsList[i];
@@ -43,6 +41,9 @@ namespace TibiaHeleper.Modules.WalkerModule
                     {
                         list.Add(waypoint);
                     }
+                }
+                else
+                {
                     list.Add(StatementsList[i]);
                 }
             }
@@ -52,9 +53,42 @@ namespace TibiaHeleper.Modules.WalkerModule
 
         public static List<WalkerStatement> changeWaypointListToWay(List<WalkerStatement> StatementsList)
         {
+
             List<WalkerStatement> list = new List<WalkerStatement>();
             bool skip = false;
-            
+            List<WalkerStatement> way = new List<WalkerStatement>();
+            for (int i = 0; i < StatementsList.Count; i++)
+            {
+                if (StatementsList[i].type != StatementType.getType["Waypoint"])
+                {
+                    if (way.Count == 1)
+                    {
+                        list.Add(way[0]);
+                    }
+                    else if (way.Count > 1)
+                    {
+                        list.Add(new Way(way));
+                        way = new List<WalkerStatement>();
+                    }
+
+                    list.Add(StatementsList[i]);
+                }
+                else
+                {
+                    way.Add(StatementsList[i]);
+                }
+            }
+            if (way.Count == 1)
+            {
+                list.Add(way[0]);
+            }
+            else if (way.Count > 1)
+            {
+                list.Add(new Way(way));
+                way = new List<WalkerStatement>();
+            }
+
+            /*
             for (int i = 0; i < StatementsList.Count; i++)
             {
                 if (!skip)
@@ -68,14 +102,11 @@ namespace TibiaHeleper.Modules.WalkerModule
                 }
 
             }
-
+            */
             return list;
         }
 
-        public override object Clone()
-        {
-            return MemberwiseClone();
-        }
+        
 
 
     }
