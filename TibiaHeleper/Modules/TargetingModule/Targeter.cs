@@ -53,7 +53,7 @@ namespace TibiaHeleper.Modules.Targeting
                         if (gotTarget) break;
                     }
                 }                
-                if (gotTarget)
+                if (gotTarget && !GetData.AmInPZ)
                 {
                     lock (targetSettingsList)
                     {
@@ -71,6 +71,11 @@ namespace TibiaHeleper.Modules.Targeting
         {
           //  GetData.FollowTarget = settings.followTarget;
             MouseSimulator.clickOnField(creature.XPosition, creature.YPosition, true);
+
+            int x, y; //setting follow mode
+            GetData.getItemFromEQWindowPosition(out x, out y, Constants.FollowTargetModeXOffset, Constants.FollowTargetModeYOffset[settings.followTarget ? 1 : 0]);
+            MouseSimulator.click(x, y);
+
             Thread.Sleep(200);
             while (working && GetData.getTargetID() == creature.id && creature.HPPercent > settings.minHP && creature.HPPercent <= settings.maxHP)//waiting until creature is dead or target is not reachable
             {
@@ -109,16 +114,8 @@ namespace TibiaHeleper.Modules.Targeting
         }
 
         public List<Target> getTargetListCopy()
-        {
-            List<Target> result = new List<Target>();
-            lock (targetSettingsList)
-            {
-                foreach (Target target in targetSettingsList)
-                {
-                    result.Add(target);
-                }
-            }
-            return result;
+        {           
+            return (List<Target>)Storage.Storage.Copy(targetSettingsList);
         }
         public void setTargetList(List<Target> list)
         {
