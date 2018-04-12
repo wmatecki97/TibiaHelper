@@ -23,11 +23,13 @@ namespace TibiaHeleper.Modules.WalkerModule
         public int startStatementIndex;
         public int attemptsToRandomDirection;
         private Random rand;
+        bool trackerWorking;
 
         public int tolerance;
 
         private int direction;
-        private int lastDirection;
+      //  private int lastDirection;
+        //like in numeric block
         //8 - north
         //2 - south
         //4 - west
@@ -56,6 +58,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             int listCount;
             lock (list) { listCount = list.Count(); }
             int temp;
+            startTracking();
 
             while (working && actualStatementIndex < listCount)
             {
@@ -104,23 +107,23 @@ namespace TibiaHeleper.Modules.WalkerModule
             lock (wayBack)
             {
                 isStackEmpty = wayBack.Count() == 0;
-            }
 
-            if (isStackEmpty) return getNewDirection();
 
-            while (!isStackEmpty && working)
-            {
-                lock (wayBack)
+                if (isStackEmpty) return getNewDirection();
+
+                while (!isStackEmpty && working && !ModulesManager.targeting.attacking)
                 {
+                    
                     waypoint = wayBack.Pop();
+
+                    if (!goToCoordinates(waypoint)) //if it is impossible to get back
+                    {
+                        if (!getNewDirection())
+                            return false;
+                        break;
+                    }
+                    isStackEmpty = wayBack.Count() == 0;
                 }
-                if (!goToCoordinates(waypoint)) //if it is impossible to get back
-                {
-                    if (!getNewDirection())
-                        return false;
-                    break;
-                }
-                isStackEmpty = wayBack.Count() == 0;
             }
             return true;
         }
@@ -233,21 +236,10 @@ namespace TibiaHeleper.Modules.WalkerModule
             return distance < 99;
         }
 
-        
-
-
         public List<WalkerStatement> CopyList()
         {
-            List<WalkerStatement> result = new List<WalkerStatement>();
-            lock (list)
-            {
-                foreach (WalkerStatement statement in list)
-                {
-                    result.Add((WalkerStatement)(statement.Clone()));
-                }
-            }
-            result = Way.changeWaypointListToWay(result);
-            return result;
+            return Storage.Storage.Copy(Way.changeWaypointListToWay(list)) as List<WalkerStatement>;
+
         }
 
         public void SetList(List<WalkerStatement> newList)
@@ -257,6 +249,58 @@ namespace TibiaHeleper.Modules.WalkerModule
                 list = newList;
                 actualStatementIndex = 0;
             }
+        }
+
+        private void startTracking()
+        {
+            Thread t = new Thread(tracker);
+            t.Start();
+        }
+
+        private void tracker()
+        {
+            int lastX=GetData.MyXPosition, lastY=GetData.MyYPosition, LastFloor=GetData.MyFloor;
+            int actualX, actualY, actualFloor;
+            Waypoint waypoint;
+            while (working)
+            {
+                if (trackerWorking)
+                {
+                    actualX = GetData.MyXPosition;
+                    actualY = GetData.MyYPosition;
+                    actualFloor = GetData.MyFloor;
+
+                    if (actualX != lastX || actualY != lastY || actualFloor != LastFloor)
+                    {
+                        if (list[actualStatementIndex].type == StatementType.getType["Waypoint"])//checking if waypoint has been reached
+                        {
+                            waypoint = (Waypoint)list[actualStatementIndex];
+                            if (actualX == waypoint.xPos && actualY == waypoint.yPos && actualFloor == waypoint.floor)//if wayppoint has been reached then reset wayBack
+                            {
+                                lock (wayBack)
+                                {
+                                    wayBack = new Stack<Waypoint>();
+                                    continue;
+                                }
+                            }
+                        }
+
+                        lastX = actualX;
+                        lastY = actualY;
+                        LastFloor = actualFloor;
+                        lock (wayBack)
+                        {
+                            wayBack.Push(new Waypoint(actualX, actualY, actualFloor, true));
+                        }
+
+                    }
+
+                }
+                Thread.Sleep(200);
+
+            }
+
+
         }
 
     }
