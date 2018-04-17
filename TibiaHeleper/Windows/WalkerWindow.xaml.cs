@@ -370,6 +370,11 @@ namespace TibiaHeleper.Windows
             {
                 ConditionButtonGrid.Visibility = Visibility.Visible;
             }
+            else if (action == "Wait")
+            {
+                InputDescriptionLabel.Content = "Time to wait";
+                TextActionGrid.Visibility = Visibility.Visible;
+            }
         }
         /// <summary>
         /// returns coordinates entered by user. Parsing string to int and Throws an exception.
@@ -406,7 +411,7 @@ namespace TibiaHeleper.Windows
                     action = new Modules.WalkerModule.Action(actionType, pos[0], pos[1], pos[2], RightClickCheckBox.IsChecked);
 
                 }
-                else if (actionType == type["Say"] || actionType == type["Hotkey"])
+                else if (actionType == type["Say"] || actionType == type["Hotkey"] || actionType == type["Hotkey"])
                 {
                     action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text);
                 }
@@ -414,6 +419,10 @@ namespace TibiaHeleper.Windows
                 {
                     int[] pos = Coordinates();
                     action = new Modules.WalkerModule.Action(actionType, ActionTextBox.Text, pos[0], pos[1], pos[2]);
+                }
+                else if (actionType == type["Wait"])
+                {
+                    action = new Modules.WalkerModule.Action(actionType, int.Parse(ActionTextBox.Text));
                 }
                 else if (actionType == type["Condition"])
                 {

@@ -33,7 +33,7 @@ namespace TibiaHeleper.Simulators
         const uint WM_LBUTTONUP = 0x202;
         const uint WM_RBUTTONDOWN = 0x0204;
         const uint WM_RBUTTONUP = 0x0205;
-
+        const uint WM_MOUSEMOVE = 0x0200;
 
         public static void test()
         {
@@ -53,7 +53,14 @@ namespace TibiaHeleper.Simulators
                 SendMessage(proc.MainWindowHandle, WM_LBUTTONDOWN, (IntPtr)0, MakeLParam(XPos, YPos));
                 SendMessage(proc.MainWindowHandle, WM_LBUTTONUP, (IntPtr)0, MakeLParam(XPos, YPos));
             }
-        }       
+        }
+
+        public static void drag(int fromXPos, int fromYPos,int toXPos,int toYPos )
+        {
+            SendMessage(proc.MainWindowHandle, WM_LBUTTONDOWN, (IntPtr)0, MakeLParam(fromXPos, fromYPos));
+            SendMessage(proc.MainWindowHandle, WM_LBUTTONUP, (IntPtr)0, MakeLParam(toXPos, toYPos));
+        }
+
 
         public static void clickOnField(int xPosition, int yPosition, bool isRightClick = false)
         {

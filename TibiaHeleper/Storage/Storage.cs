@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using TibiaHeleper.Modules.WalkerModule;
 
 namespace TibiaHeleper.Storage
@@ -13,6 +14,12 @@ namespace TibiaHeleper.Storage
         const string defaultExtension = "th";
         public const string THVersion = "1.0.0";
 
+        public static Semaphore IOSem;
+
+        static Storage()
+        {
+            IOSem = new Semaphore(1,1);
+        }
 
 
         private static void Save(object toSave, string extension = defaultExtension)
@@ -103,8 +110,12 @@ namespace TibiaHeleper.Storage
 
         public static object Copy(object obj)
         {
+
             object result;
             string filename = "TemporaryTibiaHelperFile";
+
+            IOSem.WaitOne();
+
             if (File.Exists(filename))
             {
                 File.Delete(filename);
@@ -119,6 +130,7 @@ namespace TibiaHeleper.Storage
 
             File.Delete(filename);
 
+            IOSem.Release();
             return result;
         }
 

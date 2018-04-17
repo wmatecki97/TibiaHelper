@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TibiaHeleper.Windows"
         mc:Ignorable="d"
-        Title="Targeting" Height="300" Width="440.186"
+        Title="Targeting" Height="300" Width="652.986"
         Loaded="Load" Closing="Close">
     <Grid>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="176" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="SelectedAction"/>
@@ -26,12 +26,24 @@
         <Button x:Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Margin="208,198,0,0" VerticalAlignment="Top" Width="65" Click="Delete"/>
         <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="134,237,0,0" VerticalAlignment="Top" Width="65" Click="Save"/>
         <Button x:Name="editButton" Content="Apply edit" HorizontalAlignment="Left" Margin="22,237,0,0" VerticalAlignment="Top" Width="75" Click="Edit"/>
-       
+
         <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
             <Label x:Name="ErrorLabel" Content="Error" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="300" Height="177"/>
             <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
         </Grid>
-        
-        <CheckBox x:Name="FollowTargetCheckBox" Content="Follow Target" HorizontalAlignment="Left" Margin="290,168,0,0" VerticalAlignment="Top" Width="81" Height="18"/>
+
+        <CheckBox x:Name="FollowTargetCheckBox" Content="Follow Target" HorizontalAlignment="Left" Margin="290,168,0,0" VerticalAlignment="Top" Width="101" Height="18"/>
+        <CheckBox x:Name="DiagonalCheckBox" Content="Stay Diagonal" HorizontalAlignment="Left" Margin="290,142,0,0" VerticalAlignment="Top" Width="101"/>
+        <CheckBox x:Name="LookForFoodCheckBox" Content="Look For Food" HorizontalAlignment="Left" Margin="290,191,0,0" VerticalAlignment="Top" Width="101"/>
+        <ListBox x:Name="LootListBox" HorizontalAlignment="Left" Height="130" Margin="405,28,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="FoodListBox" HorizontalAlignment="Left" Height="130" Margin="530,28,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="LootLabel" Content="Loot" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="405,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.969,-0.687" Width="100"/>
+        <Label x:Name="FoodLabel" Content="Food" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="530,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.969,-0.687" Width="100"/>
+        <TextBox x:Name="ItemTextBox" HorizontalAlignment="Left" Height="23" Margin="405,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" TextChanged="CheckForHint" />
+        <Button x:Name="AddLootButton" Content="Add to loot list" HorizontalAlignment="Left" Margin="405,212,0,0" VerticalAlignment="Top" Width="100" Click="AddToLootList"/>
+        <Button x:Name="AddFood" Content="Add to food List" HorizontalAlignment="Left" Margin="530,212,0,0" VerticalAlignment="Top" Width="100" Click="AddToFoodList"/>
+        <TextBox x:Name="HintTextBox" IsReadOnly="True" Background="LightGray" HorizontalAlignment="Left" Height="23" Margin="405,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225"/>
+        <Button x:Name="DeleteFromLootListButton" Content="Delete from loot" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="100" Click="DeleteFromLootList"/>
+        <Button x:Name="DeleteFromFoodListButton" Content="Delete ftom food" HorizontalAlignment="Left" Margin="530,236,0,0" VerticalAlignment="Top" Width="100" Click="DeleteFromLootList"/>
     </Grid>
 </Window>

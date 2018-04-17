@@ -178,8 +178,11 @@ namespace TibiaHeleper.Modules.WalkerModule
         /// simple attempt to go to the waypoint. It is not certain to get there!
         /// </summary>
         /// <param name="waypoint"></param>
-        private void go(Waypoint waypoint)
+        public void go(Waypoint waypoint, int? dir = null)
         {
+            if (dir != null)
+                direction = (int)dir;
+
             if (direction == 8)
                 KeyboardSimulator.Press("up");
             else if (direction == 6)
@@ -253,6 +256,7 @@ namespace TibiaHeleper.Modules.WalkerModule
 
         private void startTracking()
         {
+            trackerWorking = true;
             Thread t = new Thread(tracker);
             t.Start();
         }

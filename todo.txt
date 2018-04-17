@@ -1,25 +1,14 @@
-﻿Easy stuff
-Wybór okna Tibii podczas uruchamiania
+﻿Wybór okna Tibii podczas uruchamiania
 automount
-otwieranie plecaka to raczej easy, bo stała jest szerokość prawego panelu
+
 
 
 tryb ataku
 jedzenie
-Diagonal
 Handel
-edit w walkerze
-save w targettingu - nie dodaje do działającej listy targettingu
-blokada na atak ze strefy chronionej 1
-jeżeli podczas ataku przejdzie przez waypoint to go ominąć w walkerze
+jeżeli podczas ataku przejdzie przez waypoint to go ominąć w walkerze - powinno działać - trzeba zatrzymać się w traackerze na zerowaniu wayback
 Jeżeli wylogowano to trzeba zresetować All spotted creature list
-dodanie wait do actions
 
-Walker
-wyznaczenie czy dane pole można przejść
-ogarnięcie trasy do celu
+Looter
 
-1.sprawdzenie dużych przeszkód na najprostszej drodze
-2. znalezeinie z której strony będzie łatwiej je ominąć
-3. wyznaczenie drogi do punktu przez którry będziemy omijać
-4. rozpisanie drogi na pojedyncze kratki
+Przerobienie wszystkich Background workerow na wskaźniki na funkcje

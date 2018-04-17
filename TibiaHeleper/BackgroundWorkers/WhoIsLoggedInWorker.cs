@@ -23,10 +23,9 @@ namespace TibiaHeleper.BackgroundWorkers
                 if(GetData.Me!=null && loggedID!=GetData.MyID)
                 {
                     loggedID = GetData.MyID;
-                    lock (ModulesManager.walker.list)
-                    {
-                        WindowsManager.menu.Update();
-                    }
+                    
+                    WindowsManager.menu.Update();
+
                     GetData.ResetAllSpottedCreatureList();
                     GetData.ActualizeAllSpottedCreaturesList();
                 }

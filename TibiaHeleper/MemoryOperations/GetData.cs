@@ -5,6 +5,7 @@ using System.Text;
 using TibiaHeleper.Storage;
 using System.Linq;
 using TibiaHeleper.Simulators;
+using System.Threading;
 
 namespace TibiaHeleper.MemoryOperations
 {
@@ -107,10 +108,10 @@ namespace TibiaHeleper.MemoryOperations
         {
             Me = null;
             int PlayersOnScreenMiddleCount = 0;
-            lock (allSpottedCreaturesList)
+
+            while (Me == null)
             {
-                ActualizeAllSpottedCreaturesList();
-                while (Me == null)
+                lock (allSpottedCreaturesList)
                 {
                     foreach (Creature creature in allSpottedCreaturesList)
                     {
@@ -120,9 +121,10 @@ namespace TibiaHeleper.MemoryOperations
                             if (PlayersOnScreenMiddleCount == 1) Me = creature;
                         }
                     }
-                    if (PlayersOnScreenMiddleCount > 1) Me = null;
-                    if (PlayersOnScreenMiddleCount == 0) break;//player is not logged in
                 }
+                if (PlayersOnScreenMiddleCount > 1) Me = null;
+                if (PlayersOnScreenMiddleCount == 0) break;//player is not logged in
+                
             }
         }
         public static int MyID { get { return Me.id; } }
@@ -167,6 +169,7 @@ namespace TibiaHeleper.MemoryOperations
         public static int MyYPosition { get { return getIntegerDataFromAddress(Addresses.MyYPosition); } }
         public static int MyFloor { get { return getByteAsIntegerFromAddress(Addresses.MyFloorByteAddress); } }
         public static int Cap { get { return (int) ((getIntegerDataFromAddress(Addresses.XORAdr) ^ getIntegerDataFromAddress(Addresses.CapXor))/100); } }
+        public static int HungryTime { get { return getIntegerDataFromAddress(Addresses.AmIHungry); } }
 
         public static Creature getPlayer(string playerName)
         {
@@ -274,15 +277,18 @@ namespace TibiaHeleper.MemoryOperations
             {
                 foreach (Creature creature in allSpottedCreaturesList)
                 {
-                    if (creature.onScreen)
+                    if (creature.onScreen && creature.Floor == MyFloor)
                         battleList.Add(creature);
                 }
             }
             return battleList;
         }
-        public static int getTargetID()
+        public static int getTargetID
         {
-            return getIntegerDataFromAddress(Addresses.Target);
+            get
+            {
+                return getIntegerDataFromAddress(Addresses.Target);
+            }
         }
         /*      public static bool FollowTarget
               {
@@ -295,6 +301,7 @@ namespace TibiaHeleper.MemoryOperations
         public static int GameWindowHeight { get { return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.GameWindowHeight)); } }
         public static int GameWindowDistanceFromLeft { get {  return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.GameWindowFromLeftDistance)); } }
         public static string LastServerInfo { get { return getStringFromAddress(Addresses.LastServerInfoMessage); } }
+        public static int LastClickedObjectID { get { return getIntegerDataFromAddress(Addresses.LastClickedObject); } }
         public static void clearLastServerInfo()
         {
             string toClear = LastServerInfo, blank="";
@@ -329,26 +336,33 @@ namespace TibiaHeleper.MemoryOperations
             return number;
         }
 
-        public static bool getItemFromEQWindowPosition(out int x, out int y, int xOffset, int yOffset)
+        public static int firstOpenedWindowHeight { get{ return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.FirstOpenedWindowHeight)); } }
+        public static void openEqWindow()
         {
-            
             uint secondWindowAddress = (uint)getDynamicAddress(Addresses.SecondWindowFromTop);
             uint thirdWindowAddress = (uint)getDynamicAddress(Addresses.ThirdWindowFromTop);
             if ((getIntegerDataFromDynamicAddress(secondWindowAddress + Addresses.WindowIDOffset)) != Flags.EQWindowHidden) // if eq windown is hidden
             {
                 if ((getIntegerDataFromDynamicAddress(thirdWindowAddress + Addresses.WindowIDOffset)) == Flags.EQWindowHidden)
                 {
-                    y = getIntegerDataFromDynamicAddress(thirdWindowAddress)+Constants.MaximizeEQButtonYOffset;
-                    x = gameWindowWidth + Constants.MaximizeEQButtonXOffset;
+                    int y = getIntegerDataFromDynamicAddress(thirdWindowAddress) + Constants.MaximizeEQButtonYOffset;
+                    int x = gameWindowWidth + Constants.MaximizeEQButtonXOffset;
                     MouseSimulator.click(x, y);
                 }
             }
             else
             {
-                y = getIntegerDataFromDynamicAddress(secondWindowAddress) + Constants.MaximizeEQButtonYOffset;
-                x = gameWindowWidth + Constants.MaximizeEQButtonXOffset;
+                int y = getIntegerDataFromDynamicAddress(secondWindowAddress) + Constants.MaximizeEQButtonYOffset;
+                int x = gameWindowWidth + Constants.MaximizeEQButtonXOffset;
                 MouseSimulator.click(x, y);
             }
+        }
+        public static bool getItemFromEQWindowPosition(out int x, out int y, int xOffset, int yOffset)
+        {
+            
+            uint secondWindowAddress = (uint)getDynamicAddress(Addresses.SecondWindowFromTop);
+            uint thirdWindowAddress = (uint)getDynamicAddress(Addresses.ThirdWindowFromTop);
+            openEqWindow();
 
             x = gameWindowWidth + xOffset;
             y = -1;
@@ -369,8 +383,97 @@ namespace TibiaHeleper.MemoryOperations
             }
             return true;
         }
+        public static void closeAllOpenedWindows()
+        {
+            openEqWindow();
+            int x = gameWindowWidth + Constants.OpenedWindowCloseButtonFromLeftXOffset;
+            int y = Constants.FirstOpenedWindowYOffset + Constants.OpenedWindowCloseButtonYOffset;
+            while(firstOpenedWindowHeight > 60)
+            {
+                MouseSimulator.click(x, y);
+            }
+        }
+        public static void resizeFirstOpenedWindow()
+        {
+            int x = gameWindowWidth -50;
+            int y = Constants.FirstOpenedWindowYOffset + getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.FirstOpenedWindowHeight)) + Constants.OpenedWindowResizeFromBottomYOffset;
+            int toX = x;
+            int toY = Constants.FirstOpenedWindowYOffset + Constants.OpenedWindowMinimumHeight;
+            MouseSimulator.drag(x, y, toX, toY);
+        }
+        public static void openBackpack()
+        {
+            int x, y;
+            getItemFromEQWindowPosition(out x,out y, Constants.ShieldXOffset, Constants.BackpackYOffset);
+            MouseSimulator.click(x, y, true);
+        }
+        public static bool getItemCoordinatesFromFirstOpenedWindow(out int x, out int y, List<int> items)
+        {
+            if (firstOpenedWindowHeight > 0)
+            {
+                y = Constants.FirstOpenedWindowYOffset + Constants.ItemInOpenedWindowYOffset;
+                int yScroll = Constants.OpenedWindowScrollDownButtonFromBottomYOffset + Constants.FirstOpenedWindowYOffset + firstOpenedWindowHeight;
+                int xScroll = Constants.OpenedWindowScrollFromRightXOffset + gameWindowWidth;
 
-       
+                for (int j = 0; j < 5; j++) // for all lines in backpack
+                {
+                    x = gameWindowWidth + Constants.ItemInOpenedWindowFromRightOffset;
+                    for (int i = 0; i < 4; i++) // check every 4 items
+                    {
+                        MouseSimulator.click(x, y);
+                        if (items.Any(item => item == LastClickedObjectID))
+                        {
+                            return true;
+                        }
+                        x -= Constants.ItemInOpenWindowWidth;
+                    }
+                    for (int i = 0; i < Constants.FullLineScrollClickCount; i++)
+                    {
+                        MouseSimulator.click(xScroll, yScroll);
+                    }
+                }
+            }
+
+            x = y = -1;
+            return false;
+        }
+        public static void UseItemFromBackpack(int itemID, int TimesToUse = 1)
+        {
+            List<int> list = new List<int>();
+            list.Add(itemID);
+            UseItemsFromBackpack(list, TimesToUse);
+        }
+        public static void UseItemsFromBackpack(List<int> items, int timeToUse = 1)
+        {
+            openEqWindow();
+            closeAllOpenedWindows();
+            openBackpack();
+
+            UseItemsFromFrstOpenedWindow(items, timeToUse);
+        }
+
+        public static void UseItemsFromFrstOpenedWindow(List<int> items, int timeToUse = 1)
+        {
+            int x, y;
+
+            {//wait until backpack is opened or 3 seconds
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                while (firstOpenedWindowHeight == 0 && sw.ElapsedMilliseconds < 3000) ;
+            }
+            resizeFirstOpenedWindow();
+
+            if (getItemCoordinatesFromFirstOpenedWindow(out x, out y, items))
+            {
+                for (int i = 0; i < timeToUse; i++)
+                {
+                    MouseSimulator.click(x, y, true);
+                    if (timeToUse > 1)
+                        Thread.Sleep(100);
+                }
+            }
+            closeAllOpenedWindows();
+        }
 
     }
 }

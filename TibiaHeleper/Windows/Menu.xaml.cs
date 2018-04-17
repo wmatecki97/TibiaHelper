@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using TibiaHeleper.BackgroundWorkers;
 using TibiaHeleper.MemoryOperations;
@@ -102,10 +103,13 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            int b = GetData.GameWindowDistanceFromLeft;
-            int c = GetData.gameWindowWidth;
-            GetData.getItemFromEQWindowPosition(out b, out c, Constants.ShieldXOffset, Constants.ShieldYOffset);
-            GetData.clearLastServerInfo();
+            bool x = GetData.AmIHasted;
+            // GetData.closeAllOpenedWindows();
+            //GetData.UseItemFromBackpack(3583,2);
+            int a, b;
+            List<int> c = new List<int>();
+            GetData.getItemCoordinatesFromFirstOpenedWindow(out a, out b, c);
+            
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)
@@ -132,7 +136,7 @@ namespace TibiaHeleper.Windows
             this.Dispatcher.Invoke(() => {
                 WalkerEnable.IsChecked = ModulesManager.walker.working;
                 TargetingEnable.IsChecked = ModulesManager.targeting.working;
-                HealerEnable.IsChecked = ModulesManager.targeting.working;
+                HealerEnable.IsChecked = ModulesManager.healer.working;
                 if (GetData.Me != null) Title = "Tibia Helper -" + GetData.Me.name;
             });
         }

@@ -5,7 +5,7 @@ namespace TibiaHeleper.MemoryOperations
 {
     class Addresses
     {
-        
+
         //Player
         public static uint MaxHPAdr { get; }
         public static uint HPAdr { get; }
@@ -19,12 +19,13 @@ namespace TibiaHeleper.MemoryOperations
         public static uint MyYPosition { get; }
         public static uint MyFloorByteAddress { get; }
         public static uint CapXor { get; }
+        public static uint AmIHungry { get; }
 
 
         public static uint FollowTargetAddress { get; }
 
         //list of spotted monsters persons and NPC
-        public static uint InformationsOfSpottedCreaturesAndPlayersSartAddress { get; } 
+        public static uint InformationsOfSpottedCreaturesAndPlayersSartAddress { get; }
         public static uint CreatureInformationBlockSize { get; }
         public static uint CreatureHpShift { get; }// means PlayerInformationsAddress + shift is player HP
         public static uint CreatureOnScreenShift { get; }
@@ -40,16 +41,18 @@ namespace TibiaHeleper.MemoryOperations
         //GUI
         public static List<uint> GameWindowHeight { get; }
         public static List<uint> GameWindowFromLeftDistance { get; }
-
         public static uint GameWindowWidth { get; }
-
         public static uint WindowIDOffset;
         public static List<uint> ThirdWindowFromTop;
         public static List<uint> SecondWindowFromTop;
 
         public static List<uint> ActualInput { get; }
-
         public static uint LastServerInfoMessage { get; }
+
+        public static uint LastClickedObject { get; }
+
+        public static List<uint> FirstOpenedWindowHeight { get; }
+      //  public static uint FirstOpenedWindowHeightShift { get; }
 
         static Addresses()
         {
@@ -66,6 +69,7 @@ namespace TibiaHeleper.MemoryOperations
             MyYPosition = 0x70E058;
             MyFloorByteAddress = 0x70E05C;
             CapXor = 0x70E040;
+            AmIHungry = 0x570454;
 
             FollowTargetAddress = 0x5815B8;
 
@@ -121,6 +125,14 @@ namespace TibiaHeleper.MemoryOperations
 
             LastServerInfoMessage = 0x5C3DC0;
 
+            LastClickedObject = 0x70A488;
+
+            FirstOpenedWindowHeight = new List<uint>();
+            FirstOpenedWindowHeight.Add(0x00570744);
+            FirstOpenedWindowHeight.Add(0x38);
+            FirstOpenedWindowHeight.Add(0x24);
+            FirstOpenedWindowHeight.Add(0x20);
+            //FirstOpenedWindowHeightShift = 0x8;
 
         }
     }

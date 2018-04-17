@@ -67,6 +67,7 @@
     <Compile Include="MemoryOperations\Constants.cs" />
     <Compile Include="MemoryOperations\Flags.cs" />
     <Compile Include="MemoryOperations\GetData.cs" />
+    <Compile Include="MemoryOperations\ItemList.cs" />
     <Compile Include="MemoryOperations\ReadMemory.cs" />
     <Compile Include="Modules\AntyPalalyse.cs" />
     <Compile Include="Modules\AutoHaste.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Simulators\MouseSimulator.cs" />
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
+    <Compile Include="Storage\Item.cs" />
     <Compile Include="Storage\Storage.cs" />
     <Compile Include="Storage\VersionedObject.cs" />
     <Compile Include="Windows\AdditionalModules.xaml.cs">

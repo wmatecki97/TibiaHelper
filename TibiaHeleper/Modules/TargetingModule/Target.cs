@@ -15,5 +15,8 @@ namespace TibiaHeleper.Modules.Targeting
         public bool followTarget { get; set; }
         public bool diagonal { get; set; }
         public bool HPMoreImportantThanDistance { get; set; }
+
+        public bool loot { get; set; }
+        public bool lookForFood { get; set; }
     }
 }
