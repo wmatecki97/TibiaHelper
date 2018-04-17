@@ -56,7 +56,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             getType.Add("Hotkey", 9);
             getType.Add("Use On Field", 10);
             getType.Add("Go To Label", 11);
-
+            getType.Add("Wait", 12);
 
         }
 

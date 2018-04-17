@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -20,6 +21,8 @@ namespace TibiaHeleper.Modules.WalkerModule
             else if (actionType == StatementType.getType["Go To Label"]) GoToLabel((string)arguments[0]);
             else if (actionType == StatementType.getType["Use On Field"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
             else if (actionType == StatementType.getType["Condition"]) FulfillCondition((string)arguments[0], (List<Condition>)arguments[1]);
+            else if (actionType == StatementType.getType["Wait"]) Wait((int)arguments[0]);
+
             
         }
 
@@ -39,6 +42,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 DefaultActions.hotkey(hotkey);
                 Thread.Sleep(100);
                 DefaultActions.Click(xPosition, yPosition,floor,false);
+                Thread.Sleep(500);
             }
         }
         public static void Click(int xPosition, int yPosition, int floor, bool isRightClick)
@@ -185,6 +189,16 @@ namespace TibiaHeleper.Modules.WalkerModule
             return -1;
         }
 
+        private static void Wait(int timeToWait)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            while(sw.ElapsedMilliseconds<timeToWait && ModulesManager.walker.working)
+            {
+                //wait
+            }
+            sw.Stop();
+        }
 
     }
 }
