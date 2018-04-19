@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using TibiaHeleper.MemoryOperations;
 
 namespace TibiaHeleper.Simulators
@@ -29,11 +31,29 @@ namespace TibiaHeleper.Simulators
         private static extern int SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
 
+        [DllImport("user32.dll", EntryPoint = "SetCursorPos")]
+        private static extern bool SetCursorPos(int X, int Y);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out PointInter lpPoint);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct PointInter
+        {
+            public int X;
+            public int Y;
+            public static explicit operator Point(PointInter point) => new Point(point.X, point.Y);
+        }
+
+
         const uint WM_LBUTTONDOWN = 0x0201;
         const uint WM_LBUTTONUP = 0x202;
         const uint WM_RBUTTONDOWN = 0x0204;
         const uint WM_RBUTTONUP = 0x0205;
         const uint WM_MOUSEMOVE = 0x0200;
+        const uint WM_SETCURSOR = 0x0020;
+
+
 
         public static void test()
         {
@@ -43,6 +63,7 @@ namespace TibiaHeleper.Simulators
 
         public static void click(int XPos, int YPos, bool isRightClick = false)
         {
+            SimulatorSynchronisation.semaphore.WaitOne();
             if (isRightClick)
             {
                 SendMessage(proc.MainWindowHandle, WM_RBUTTONDOWN, (IntPtr)0, MakeLParam(XPos, YPos));
@@ -53,17 +74,33 @@ namespace TibiaHeleper.Simulators
                 SendMessage(proc.MainWindowHandle, WM_LBUTTONDOWN, (IntPtr)0, MakeLParam(XPos, YPos));
                 SendMessage(proc.MainWindowHandle, WM_LBUTTONUP, (IntPtr)0, MakeLParam(XPos, YPos));
             }
+            SimulatorSynchronisation.semaphore.Release();
         }
 
         public static void drag(int fromXPos, int fromYPos,int toXPos,int toYPos )
         {
+            SimulatorSynchronisation.semaphore.WaitOne();
+          
+
             SendMessage(proc.MainWindowHandle, WM_LBUTTONDOWN, (IntPtr)0, MakeLParam(fromXPos, fromYPos));
+
+            //It is necessary because Tibia has to change cursor and this happens only when real mouse cursor is moved
+            PointInter cursor;
+            GetCursorPos(out cursor);
+            SetCursorPos(toXPos, toYPos);
+            Thread.Sleep(50);
+
             SendMessage(proc.MainWindowHandle, WM_LBUTTONUP, (IntPtr)0, MakeLParam(toXPos, toYPos));
+
+            SetCursorPos(cursor.X, cursor.Y);
+            SimulatorSynchronisation.semaphore.Release();
+
         }
 
 
         public static void clickOnField(int xPosition, int yPosition, bool isRightClick = false)
         {
+
             int xToMove = xPosition - leftTopFieldXPosition;
             int yToMove = yPosition - leftTopFieldYPosition;
 

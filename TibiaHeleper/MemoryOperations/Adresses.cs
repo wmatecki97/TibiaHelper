@@ -52,7 +52,8 @@ namespace TibiaHeleper.MemoryOperations
         public static uint LastClickedObject { get; }
 
         public static List<uint> FirstOpenedWindowHeight { get; }
-      //  public static uint FirstOpenedWindowHeightShift { get; }
+
+        public static List<uint> tradeWindowSelectedItem { get; }
 
         static Addresses()
         {
@@ -132,7 +133,14 @@ namespace TibiaHeleper.MemoryOperations
             FirstOpenedWindowHeight.Add(0x38);
             FirstOpenedWindowHeight.Add(0x24);
             FirstOpenedWindowHeight.Add(0x20);
-            //FirstOpenedWindowHeightShift = 0x8;
+
+            tradeWindowSelectedItem = new List<uint>();
+            tradeWindowSelectedItem.Add(0x00570744);
+            tradeWindowSelectedItem.Add(0x24);
+            tradeWindowSelectedItem.Add(0x24);
+            tradeWindowSelectedItem.Add(0x44);
+            tradeWindowSelectedItem.Add(0x38);
+            tradeWindowSelectedItem.Add(0x14c);
 
         }
     }

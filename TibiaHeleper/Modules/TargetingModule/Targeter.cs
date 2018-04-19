@@ -6,6 +6,7 @@ using TibiaHeleper.Simulators;
 using TibiaHeleper.Storage;
 using System.Linq;
 using TibiaHeleper.Modules.WalkerModule;
+using TibiaHeleper.Modules.TargetingModule;
 
 namespace TibiaHeleper.Modules.Targeting
 {
@@ -21,7 +22,7 @@ namespace TibiaHeleper.Modules.Targeting
             stopped = true;
             targetSettingsList = new List<Target>();
             foodList = new List<Item>();
-            lootList = new List<Item>();
+            lootList = new List<LootItem>();
         }
         static Targeter()
         {
@@ -29,7 +30,7 @@ namespace TibiaHeleper.Modules.Targeting
         }
 
         public List<Item> foodList;
-        public List<Item> lootList;
+        public List<LootItem> lootList;
         private static Random rand;
 
         public void Run()
@@ -99,16 +100,43 @@ namespace TibiaHeleper.Modules.Targeting
                     tryToStandDiagonal();
                 Thread.Sleep(500);
             }
-            if(settings.lookForFood && creature.HPPercent==0 && GetData.HungryTime < 20)
+            if(creature.HPPercent == 0 && (settings.lookForFood || settings.loot))
             {
+                GetData.closeAllOpenedWindows();
+                Thread.Sleep(200);
                 MouseSimulator.clickOnField(creature.XPosition, creature.YPosition, true);
-                lock (foodList)
+
+                if (settings.lookForFood && GetData.HungryTime < 20)
                 {
-                    GetData.UseItemsFromFrstOpenedWindow(Item.ToIdList(foodList));
+                    LookForFood(creature);
+                }
+                if(settings.loot)
+                {
+                    Loot(creature);
+                }
+            }
+           
+        }
+
+
+        private void Loot(Creature creature)
+        {
+            int x, y;
+            lock (lootList)
+            {
+                while (GetData.getItemCoordinatesFromFirstOpenedWindow(out x, out y, Item.ToIdList(lootList)))
+                {
+                    GetData.DragToBackpack(x, y);
                 }
             }
         }
-
+        private void LookForFood(Creature creature)
+        {
+            lock (foodList)
+            {
+                GetData.UseItemsFromFrstOpenedWindow(Item.ToIdList(foodList));
+            }
+        }
         private void tryToStandDiagonal()
         {
             List<Creature> CreaturesToStayDiagonal = new List<Creature>();
@@ -322,7 +350,7 @@ namespace TibiaHeleper.Modules.Targeting
         {           
             return (List<Target>)Storage.Storage.Copy(targetSettingsList);
         }
-        public void setLootList(List<Item> list)
+        public void setLootList(List<LootItem> list)
         {
             lock (lootList)
             {

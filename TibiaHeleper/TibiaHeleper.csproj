@@ -74,6 +74,7 @@
     <Compile Include="Modules\ModulesManager.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\Sio.cs" />
+    <Compile Include="Modules\TargetingModule\LootItem.cs" />
     <Compile Include="Modules\TargetingModule\Target.cs" />
     <Compile Include="Modules\TargetingModule\Targeter.cs" />
     <Compile Include="Modules\WalkerModule\Action.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Simulators\KeyAddresses.cs" />
     <Compile Include="Simulators\KeyboardSimulator.cs" />
     <Compile Include="Simulators\MouseSimulator.cs" />
+    <Compile Include="Simulators\SimulatorSynchronisation.cs" />
     <Compile Include="Storage\Creature.cs" />
     <Compile Include="Storage\DataCollecter.cs" />
     <Compile Include="Storage\Item.cs" />

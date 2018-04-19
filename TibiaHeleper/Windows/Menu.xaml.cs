@@ -103,13 +103,13 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            bool x = GetData.AmIHasted;
-            // GetData.closeAllOpenedWindows();
-            //GetData.UseItemFromBackpack(3583,2);
-            int a, b;
-            List<int> c = new List<int>();
-            GetData.getItemCoordinatesFromFirstOpenedWindow(out a, out b, c);
             
+            int u = 3267;
+            int k = 3272;
+            Dictionary<int, int> l = new Dictionary<int, int>();
+            l.Add(u,14);
+
+            GetData.BuyItems(l);
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)

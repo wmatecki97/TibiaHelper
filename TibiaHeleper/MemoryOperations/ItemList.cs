@@ -11,6 +11,11 @@ namespace TibiaHeleper.MemoryOperations
     {
         public static List<Item> Items;
 
+        public static Item GetItemByPartOfItsName(string partOfName)
+        {
+            return ItemList.Items.FirstOrDefault(i => i.name.ToUpper().StartsWith(partOfName));
+        }
+            
         static ItemList()
         {
             Items = new List<Item>();

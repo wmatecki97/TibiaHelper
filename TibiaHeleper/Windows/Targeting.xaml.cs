@@ -5,6 +5,7 @@ using System.Windows;
 using TibiaHeleper.MemoryOperations;
 using TibiaHeleper.Modules;
 using TibiaHeleper.Modules.Targeting;
+using TibiaHeleper.Modules.TargetingModule;
 using TibiaHeleper.Storage;
 
 namespace TibiaHeleper.Windows
@@ -19,27 +20,29 @@ namespace TibiaHeleper.Windows
             InitializeComponent();
         }
 
-        private List<Target> list;
-        private List<Item> lootList;
-        private List<Item> foodList;
-        private Target target;
-        private Item item;
+        private List<Target> _list;
+        private List<LootItem> _lootList;
+        private List<Item> _foodList;
+        private Target _target;
+        private Item _item;
+        private Item _lootContainer;
 
         private void Load(object sender, RoutedEventArgs e)
         {
-            list = ModulesManager.targeting.getTargetListCopy();
-            foodList = Storage.Storage.Copy(ModulesManager.targeting.foodList) as List<Item>;
-            lootList = Storage.Storage.Copy(ModulesManager.targeting.lootList) as List<Item>;
+            _list = ModulesManager.targeting.getTargetListCopy();
+            _foodList = Storage.Storage.Copy(ModulesManager.targeting.foodList) as List<Item>;
+            _lootList = Storage.Storage.Copy(ModulesManager.targeting.lootList) as List<LootItem>;
+            _lootContainer = new Item("Default container", -1);
 
             fillAllLists();
-            target = new Target();
+            _target = new Target();
             clearAllTextBoxes();
         }
 
         private void fillList()
         {
             listBox.Items.Clear();
-            foreach (Target item in list)
+            foreach (Target item in _list)
             {
                 listBox.DisplayMemberPath = "name";
                 listBox.Items.Add(item);
@@ -48,16 +51,16 @@ namespace TibiaHeleper.Windows
         private void fillLootList()
         {
             LootListBox.Items.Clear();
-            foreach (Item item in lootList)
+            foreach (LootItem item in _lootList)
             {
-                LootListBox.DisplayMemberPath = "name";
+                LootListBox.DisplayMemberPath = "displayedName";
                 LootListBox.Items.Add(item);
             }
         }
         private void fillFoodList()
         {
             FoodListBox.Items.Clear();
-            foreach (Item item in foodList)
+            foreach (Item item in _foodList)
             {
                 FoodListBox.DisplayMemberPath = "name";
                 FoodListBox.Items.Add(item);
@@ -77,22 +80,22 @@ namespace TibiaHeleper.Windows
         }
         private void Down(object sender, RoutedEventArgs e)
         {
-            if (list.IndexOf(target) > -1 && list.IndexOf(target) < list.Count() - 1)
+            if (_list.IndexOf(_target) > -1 && _list.IndexOf(_target) < _list.Count() - 1)
             {
-                int index = list.IndexOf(target);
-                list.RemoveAt(index);
-                list.Insert(index + 1, target);
+                int index = _list.IndexOf(_target);
+                _list.RemoveAt(index);
+                _list.Insert(index + 1, _target);
                 fillList();
                 listBox.SelectedIndex = index + 1;
             }
         }
         private void Up(object sender, RoutedEventArgs e)
         {
-            if (list.IndexOf(target) > 0)
+            if (_list.IndexOf(_target) > 0)
             {
-                int index = list.IndexOf(target);
-                list.RemoveAt(index);
-                list.Insert(index - 1, target);
+                int index = _list.IndexOf(_target);
+                _list.RemoveAt(index);
+                _list.Insert(index - 1, _target);
                 fillList();
                 listBox.SelectedIndex = index - 1;
             }
@@ -101,18 +104,18 @@ namespace TibiaHeleper.Windows
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            target = new Target();
+            _target = new Target();
 
             assignTarget();
-            list.Add(target);
+            _list.Add(_target);
             fillList();
-            target = new Target();
+            _target = new Target();
             clearAllTextBoxes();
 
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            list.Remove(target);
+            _list.Remove(_target);
             fillList();
             clearAllTextBoxes();
         }
@@ -127,14 +130,15 @@ namespace TibiaHeleper.Windows
         {
             try
             {
-                target.name = Name.Text;
-                target.maxHP = int.Parse(maxHP.Text);
-                target.minHP = int.Parse(minHP.Text);
-                target.action = Action.Text;
-                target.maxDistance = int.Parse(maxDistance.Text);
-                target.followTarget = (bool)FollowTargetCheckBox.IsChecked;
-                target.diagonal = (bool)DiagonalCheckBox.IsChecked;
-                target.lookForFood = (bool)LookForFoodCheckBox.IsChecked;
+                _target.name = Name.Text;
+                _target.maxHP = int.Parse(maxHP.Text);
+                _target.minHP = int.Parse(minHP.Text);
+                _target.action = Action.Text;
+                _target.maxDistance = int.Parse(maxDistance.Text);
+                _target.followTarget = FollowTargetCheckBox.IsChecked.Value;
+                _target.diagonal = DiagonalCheckBox.IsChecked.Value;
+                _target.lookForFood = LookForFoodCheckBox.IsChecked.Value;
+                _target.loot = LootCheckBox.IsChecked.Value;
             }
             catch (Exception)
             {
@@ -156,12 +160,12 @@ namespace TibiaHeleper.Windows
         }
         private void setAllTextboxes()
         {
-            Name.Text = target.name;
-            maxHP.Text = target.maxHP.ToString();
-            minHP.Text = target.minHP.ToString();
-            Action.Text = target.action;
-            FollowTargetCheckBox.IsChecked = target.followTarget;
-            LookForFoodCheckBox.IsChecked = target.lookForFood;
+            Name.Text = _target.name;
+            maxHP.Text = _target.maxHP.ToString();
+            minHP.Text = _target.minHP.ToString();
+            Action.Text = _target.action;
+            FollowTargetCheckBox.IsChecked = _target.followTarget;
+            LookForFoodCheckBox.IsChecked = _target.lookForFood;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -169,13 +173,13 @@ namespace TibiaHeleper.Windows
             bool wasWorking = ModulesManager.targeting.working;
             if (wasWorking) ModulesManager.TargetingDisable();
 
-            ModulesManager.targeting.setTargetList(list);
-            ModulesManager.targeting.setFoodList(foodList);
-            ModulesManager.targeting.setLootList(lootList);
+            ModulesManager.targeting.setTargetList(_list);
+            ModulesManager.targeting.setFoodList(_foodList);
+            ModulesManager.targeting.setLootList(_lootList);
 
-            foodList = Storage.Storage.Copy(ModulesManager.targeting.foodList) as List<Item>;
-            lootList = Storage.Storage.Copy(ModulesManager.targeting.lootList) as List<Item>;
-            list = ModulesManager.targeting.getTargetListCopy();
+            _foodList = Storage.Storage.Copy(ModulesManager.targeting.foodList) as List<Item>;
+            _lootList = Storage.Storage.Copy(ModulesManager.targeting.lootList) as List<LootItem>;
+            _list = ModulesManager.targeting.getTargetListCopy();
 
             if (wasWorking) ModulesManager.TargetingEnable();
 
@@ -186,8 +190,8 @@ namespace TibiaHeleper.Windows
 
         private void SelectedAction(object sender, RoutedEventArgs e)
         {
-            target = listBox.SelectedItem as Target;
-            if (target != null)
+            _target = listBox.SelectedItem as Target;
+            if (_target != null)
                 setAllTextboxes();
             else
                 clearAllTextBoxes();
@@ -215,13 +219,13 @@ namespace TibiaHeleper.Windows
             string text = ItemTextBox.Text.ToUpper();
             if (text != "")
             {
-                item = ItemList.Items.FirstOrDefault(i => i.name.ToUpper().StartsWith(text));
-                if (item != null)
+                _item = ItemList.GetItemByPartOfItsName(text);
+                if (_item != null)
                 {
-                    HintTextBox.Text = item.name + " " + item.ID;
+                    HintTextBox.Text = _item.name + " " + _item.ID;
                 }
             }
-            else
+            else // when text was deleted
             {
                 HintTextBox.Text = "";
             }
@@ -229,28 +233,30 @@ namespace TibiaHeleper.Windows
 
         private void AddToLootList(object sender, RoutedEventArgs e)
         {
-            if (item != null)
+            if (_item != null)
             {
-                lootList.Add(item);
+                LootItem lootItem = new LootItem(_item.name, _item.ID, _lootContainer);
+
+                _lootList.Add(lootItem);
                 ItemTextBox.Text = "";
                 fillLootList();
             }
         }
         private void AddToFoodList(object sender, RoutedEventArgs e)
         {
-            if (item != null)
+            if (_item != null)
             {
-                foodList.Add(item);
+                _foodList.Add(_item);
                 ItemTextBox.Text = "";
                 fillFoodList();
             }
         }
         private void DeleteFromLootList(object sender, RoutedEventArgs e)
         {
-            Item it = LootListBox.SelectedItem as Item;
+            LootItem it = LootListBox.SelectedItem as LootItem;
             if (it != null)
             {
-                lootList.Remove(it);
+                _lootList.Remove(it);
                 fillLootList();
             }
         }
@@ -259,9 +265,22 @@ namespace TibiaHeleper.Windows
             Item it = FoodListBox.SelectedItem as Item;
             if (it != null)
             {
-                foodList.Remove(it);
+                _foodList.Remove(it);
                 fillLootList();
             }
+        }
+
+        private void SetLootContainer(object sender, RoutedEventArgs e)
+        {
+            if (_item != null)
+            {
+                _lootContainer = _item;
+                ItemTextBox.Text = "";
+                ActualLootContainerLabel.Content = "Actual loot container: " + _lootContainer.name;
+            }
+            else
+                _lootContainer = new Item("Default container", -1);
+
         }
     }
 }

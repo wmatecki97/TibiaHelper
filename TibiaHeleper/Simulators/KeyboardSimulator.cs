@@ -42,6 +42,8 @@ namespace TibiaHeleper.Simulators
 
         public static void Press(string button)
         {
+            SimulatorSynchronisation.semaphore.WaitOne();
+
             button = button.Replace(" ", "");
             button = button.ToUpper();
             if (button.IndexOf("+") == -1)
@@ -62,16 +64,23 @@ namespace TibiaHeleper.Simulators
                 }
             }
 
+            SimulatorSynchronisation.semaphore.Release();
+
         }
 
         public static void Message(string text)
         {
+            SimulatorSynchronisation.semaphore.WaitOne();
+
             PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
             foreach (char letter in text)
             {
                 PostMessage(proc.MainWindowHandle, WM_CHAR, letter, 0);
             }
             PostMessage(proc.MainWindowHandle, WM_CHAR, DButton["ENTER"], 0);
+
+            SimulatorSynchronisation.semaphore.Release();
+
         }
 
         private static void deleteActualInput(int lettersToDelete)

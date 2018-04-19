@@ -81,7 +81,8 @@ namespace TibiaHeleper.Storage
         {
             DataCollecter collecter;
             collecter = (DataCollecter)Load();
-            collecter.activateLoadedSettings();
+            if(collecter!=null)
+                collecter.activateLoadedSettings();
         }
 
         public static void SaveProcedure(List<WalkerStatement> list)

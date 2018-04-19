@@ -35,6 +35,21 @@ namespace TibiaHeleper.MemoryOperations
         public static int OpenedWindowCloseButtonYOffset { get; }
 
 
+        public const int TradeWindowSellOrOKButtonXFromRightOffset = -30;
+        public const int TradeWindowSellButtonYOffset = 25;
+        public const int TradeWindowFirstItemYOffset = 50;
+        public const int TradeWindowSecondItemYOffset = 65;
+        public const int ThirdItemFromListYOffset = 80;
+        public const int TradeWindowScrollDownButtonYOffset = 82;
+        public const int TradeWindowItemCountSliderYPosition = 100;
+        public const int TradeWindowItemCountSliderLeftXPosition = -153;
+        public const int TradeWindowItemCountMoreButtonXPosition = -60;
+        public const int TradeWindowOKButtonYOffset = 140;
+
+
+
+
+
         static Constants()
         {
 

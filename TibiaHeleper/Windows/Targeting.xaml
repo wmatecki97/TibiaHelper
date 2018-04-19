@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TibiaHeleper.Windows"
         mc:Ignorable="d"
-        Title="Targeting" Height="300" Width="652.986"
+        Title="Targeting" Height="342.4" Width="652.986"
         Loaded="Load" Closing="Close">
     <Grid>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="176" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="SelectedAction"/>
-        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="208,237,0,0" VerticalAlignment="Top" Width="65" Height="21" Click="Back"/>
+        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Margin="290,275,0,0" VerticalAlignment="Top" Width="65" Height="21" Click="Back"/>
         <Label x:Name="nemaLabel" Content="Name" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="134,9,0,0" VerticalAlignment="Top" Width="140"/>
         <TextBox x:Name="Name" HorizontalAlignment="Left" Height="23" Margin="134,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
         <Label x:Name="minHPLabel" Content="Min HP%" HorizontalAlignment="Left" Margin="134,73,0,0" VerticalAlignment="Top" Width="65"/>
@@ -24,7 +24,7 @@
         <Button x:Name="downButton" Content="Down" HorizontalAlignment="Left" Margin="65,198,0,0" VerticalAlignment="Top" Width="45" Click="Down"/>
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="134,198,0,0" VerticalAlignment="Top" Width="65" Click="Add"/>
         <Button x:Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Margin="208,198,0,0" VerticalAlignment="Top" Width="65" Click="Delete"/>
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="134,237,0,0" VerticalAlignment="Top" Width="65" Click="Save"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="208,276,0,0" VerticalAlignment="Top" Width="65" Click="Save"/>
         <Button x:Name="editButton" Content="Apply edit" HorizontalAlignment="Left" Margin="22,237,0,0" VerticalAlignment="Top" Width="75" Click="Edit"/>
 
         <Grid Name="Error" HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="400" Background="White" Visibility="Hidden">
@@ -45,5 +45,8 @@
         <TextBox x:Name="HintTextBox" IsReadOnly="True" Background="LightGray" HorizontalAlignment="Left" Height="23" Margin="405,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225"/>
         <Button x:Name="DeleteFromLootListButton" Content="Delete from loot" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="100" Click="DeleteFromLootList"/>
         <Button x:Name="DeleteFromFoodListButton" Content="Delete ftom food" HorizontalAlignment="Left" Margin="530,236,0,0" VerticalAlignment="Top" Width="100" Click="DeleteFromLootList"/>
+        <CheckBox x:Name="LootCheckBox" Content="Look for loot" HorizontalAlignment="Left" Margin="290,214,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="SetContainerForLootButton" Content="Set loot container" HorizontalAlignment="Left" Margin="405,261,0,0" VerticalAlignment="Top" Width="100" Click="SetLootContainer"/>
+        <Label x:Name="ActualLootContainerLabel" Content="Actual loot container: Default container" HorizontalAlignment="Left" Margin="405,277,0,0" VerticalAlignment="Top" Width="241"/>
     </Grid>
 </Window>
