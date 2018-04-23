@@ -23,6 +23,15 @@ namespace TibiaHeleper.Storage
             this.name = name;
         }
 
+        public static bool operator == (Item lhs, Item rhs)
+        {
+            return lhs.ID == rhs.ID;
+        }
+        public static bool operator !=(Item lhs, Item Rhs)
+        {
+            return lhs.ID != Rhs.ID;
+        }
+
         public static List<int> ToIdList(List<LootItem> items)
         {
             List<int> IDs = new List<int>();

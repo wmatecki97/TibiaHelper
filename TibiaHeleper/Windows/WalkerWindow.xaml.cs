@@ -26,9 +26,12 @@ namespace TibiaHeleper.Windows
         List<Modules.WalkerModule.Condition> conditionsList;
         Modules.WalkerModule.Condition condition;
         short NotSet;
+        List<TradeItem> tradeList;
 
         private string startLabelName;
         private int startIndex;
+
+        private Item _item;
 
         private void Load(object sender, RoutedEventArgs e)
         {
@@ -48,6 +51,14 @@ namespace TibiaHeleper.Windows
                 }
 
             }
+
+           
+            SellOrBuyComboBox.Items.Add("Sell");
+            SellOrBuyComboBox.Items.Add("Buy");
+            SellOrBuyComboBox.SelectedIndex = 0;
+
+            tradeList = new List<TradeItem>();
+
         }
         private void fillList()
         {
@@ -276,6 +287,13 @@ namespace TibiaHeleper.Windows
                     conditionsList = statement.args[1] as List<Modules.WalkerModule.Condition>;
                     refreshCondition();
                 }
+                else if(action == "Trade")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    tradeList = (List<TradeItem>)statement.args[0];
+                    ShowTradeGrid(new object(), new RoutedEventArgs());
+                    refreshTradeList();
+                }
             }
         }
         private void setPositionTextBoxes(Waypoint waypoint)
@@ -325,6 +343,7 @@ namespace TibiaHeleper.Windows
             ConditionButtonGrid.Visibility = Visibility.Hidden;
             ConditionGrid.Visibility = Visibility.Hidden;
             //       RightClickCheckBox.IsChecked = false;
+            TradeButtonGrid.Visibility = Visibility.Hidden;
 
         }
         private void ActionSelected(object sender, SelectionChangedEventArgs e)
@@ -374,6 +393,10 @@ namespace TibiaHeleper.Windows
             {
                 InputDescriptionLabel.Content = "Time to wait";
                 TextActionGrid.Visibility = Visibility.Visible;
+            }
+            else if (action == "Trade")
+            {
+                TradeButtonGrid.Visibility = Visibility.Visible;
             }
         }
         /// <summary>
@@ -452,6 +475,24 @@ namespace TibiaHeleper.Windows
                         return;
                     }
                 }
+                else if (actionType == type["Trade"])
+                {
+                    if(tradeList.Count > 0)
+                    {
+                        action = new Modules.WalkerModule.Action(actionType, tradeList);
+                        tradeList = new List<TradeItem>();
+                        AmountTextBox.Text = "";
+                        refreshTradeList();
+                        TradeGrid.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        showPopUpWindow("Can not add empty action. Add an action first.");
+                    }
+                }
+               
+
+
                 else return; //protect from adding null to the list
                 insertToList(action);
                 ConditionGrid.Visibility = Visibility.Hidden;
@@ -724,6 +765,95 @@ namespace TibiaHeleper.Windows
 
         }
 
+        private void ShowTradeGrid(object sender, RoutedEventArgs e)
+        {
+            TradeGrid.Visibility = Visibility.Visible;
+        }
 
+        private void CancelTrade(object sender, RoutedEventArgs e)
+        {
+            TradeGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void CheckForHint(object sender, TextChangedEventArgs e)
+        {
+            string text = ItemTextBox.Text.ToUpper();
+            if (text != "")
+            {
+                _item = ItemList.GetItemByPartOfItsName(text);
+                if (_item != null)
+                {
+                    HintTextBox.Text = _item.name + " " + _item.ID;
+                }
+                else
+                    HintTextBox.Text = "";
+            }
+            else // when text was deleted
+            {
+                HintTextBox.Text = "";
+            }
+        }
+
+        private void TradeTypeChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(SellOrBuyComboBox.SelectedItem.ToString() == "Buy")
+            {
+                BuyItemCountGrid.Visibility = Visibility.Visible;
+            }
+            else
+                BuyItemCountGrid.Visibility = Visibility.Hidden;
+
+        }
+
+        private void DeleteItemFromTradeList(object sender, RoutedEventArgs e)
+        {
+            if (TradeListBox.SelectedIndex >= 0)
+            {
+                TradeItem item = TradeListBox.SelectedItem as TradeItem;
+                tradeList.Remove(item);
+                refreshTradeList();
+            }
+
+        }
+
+        private void AddItemToTradeList(object sender, RoutedEventArgs e)
+        {
+            if(_item != null)
+            {
+                int amount=-1;
+                if (SellOrBuyComboBox.SelectedValue.ToString() == "Buy") 
+                {
+                    if(int.TryParse(AmountTextBox.Text, out amount))
+                    {
+                        tradeList.Add(new TradeItem(_item, TradeItem.Action.Buy, amount));
+                        refreshTradeList();
+                    }
+                    else
+                    {
+                        showPopUpWindow("Amount must be a number bigger than 0");
+                    }
+                }               
+                if(SellOrBuyComboBox.SelectedValue.ToString() == "Sell")
+                {
+                    tradeList.Add(new TradeItem(_item, TradeItem.Action.Sell));
+                    refreshTradeList();
+                }
+            }
+            else
+            {
+                showPopUpWindow("Item must be specyfied");
+            }
+            
+        }
+
+        private void refreshTradeList()
+        {
+            TradeListBox.Items.Clear();
+            foreach (TradeItem item in tradeList)
+            {
+                TradeListBox.DisplayMemberPath = "displayName";
+                TradeListBox.Items.Add(item);
+            }
+        }
     }
 }

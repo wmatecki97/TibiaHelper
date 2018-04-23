@@ -22,8 +22,9 @@ namespace TibiaHeleper.Modules.WalkerModule
             else if (actionType == StatementType.getType["Use On Field"]) UseOnPosition((string)arguments[0], (int)arguments[1], (int)arguments[2], (int)arguments[3]);
             else if (actionType == StatementType.getType["Condition"]) FulfillCondition((string)arguments[0], (List<Condition>)arguments[1]);
             else if (actionType == StatementType.getType["Wait"]) Wait((int)arguments[0]);
+            else if (actionType == StatementType.getType["Trade"]) Trade((List<TradeItem>)arguments[0]);
 
-            
+
         }
 
         public static void Say(string text)
@@ -200,5 +201,13 @@ namespace TibiaHeleper.Modules.WalkerModule
             sw.Stop();
         }
 
+        private static void Trade(List<TradeItem> list)
+        {
+            List<TradeItem> toBuy = list.Where(item => item.action == TradeItem.Action.Buy).ToList();
+            List<TradeItem> toSell = list.Where(item => item.action == TradeItem.Action.Sell).ToList();
+
+            GetData.SellItems(toSell);
+            GetData.BuyItems(toBuy);
+        }
     }
 }

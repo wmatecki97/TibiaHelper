@@ -111,6 +111,36 @@
 
             </Grid>
 
+            <Grid Name="TradeButtonGrid" Visibility="Hidden">
+                <Button x:Name="ShowTradeGridButton" Content="Open Trade Window" HorizontalAlignment="Left" Margin="28,155,0,0" VerticalAlignment="Top" Width="135" Click="ShowTradeGrid"/>
+            </Grid>
+
+            <Grid Name="TradeGrid" Visibility="Hidden" Background="White">
+
+                <TextBox x:Name="ItemTextBox" HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" TextChanged="CheckForHint" />
+                <TextBox x:Name="HintTextBox" IsReadOnly="True" Background="LightGray" HorizontalAlignment="Left" Height="23" Margin="10,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
+
+                <ComboBox x:Name="SellOrBuyComboBox" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="TradeTypeChanged" Height="20"/>
+
+                <Grid Name="BuyItemCountGrid" Visibility="Visible" Margin="0,50,162.8,184.6">
+                    <Label x:Name="ItemCountLabel" Content="Amount" HorizontalContentAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="AmountTextBox" HorizontalAlignment="Left" Height="23" Margin="10,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144"/>
+
+                </Grid>
+                
+                <Button x:Name="DeleteItemButton" Content="Delete Item" HorizontalAlignment="Left" Margin="85,117,0,0" VerticalAlignment="Top" Width="69" Click="DeleteItemFromTradeList" />
+                <Button x:Name="AddTradeItemButton" Content="Add item" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="70" Click="AddItemToTradeList"/>
+
+                <ListBox x:Name="TradeListBox" HorizontalAlignment="Left" Height="125" Margin="182,25,0,0" VerticalAlignment="Top" Width="100"/>
+                <Label x:Name="TradeListLabel" Content="Trade list" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Top" Width="100"/>
+
+                <Button x:Name="CancelTradeButton" Content="Cancel" HorizontalAlignment="Left" Margin="207,242,0,0" VerticalAlignment="Top" Width="75" Click="CancelTrade"/>
+                <Label x:Name="ItemLabel" Content="Item" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="272"/>
+
+                
+            </Grid>
+
+
             <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="174" Click="AddAction"/>
 
         </Grid>

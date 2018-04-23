@@ -224,6 +224,8 @@ namespace TibiaHeleper.Windows
                 {
                     HintTextBox.Text = _item.name + " " + _item.ID;
                 }
+                else
+                    HintTextBox.Text = "";
             }
             else // when text was deleted
             {

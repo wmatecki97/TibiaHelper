@@ -6,6 +6,7 @@ using TibiaHeleper.Storage;
 using System.Linq;
 using TibiaHeleper.Simulators;
 using System.Threading;
+using TibiaHeleper.Modules.WalkerModule;
 
 namespace TibiaHeleper.MemoryOperations
 {
@@ -110,7 +111,7 @@ namespace TibiaHeleper.MemoryOperations
         {
             Me = null;
             int PlayersOnScreenMiddleCount = 0;
-
+            ActualizeAllSpottedCreaturesList();
             while (Me == null)
             {
                 lock (allSpottedCreaturesList)
@@ -344,6 +345,9 @@ namespace TibiaHeleper.MemoryOperations
         }
 
         #region RightSideWindows
+
+        public static Item _currentContainer;
+
         public static void openEqWindow()
         {
             uint secondWindowAddress = (uint)getDynamicAddress(Addresses.SecondWindowFromTop);
@@ -369,6 +373,7 @@ namespace TibiaHeleper.MemoryOperations
             int x, y;
             getItemFromEQWindowPosition(out x, out y, Constants.ShieldXOffset, Constants.BackpackYOffset);
             MouseSimulator.click(x, y, true);
+            _currentContainer = new Item("Default container", -1);
         }
         public static void closeAllOpenedWindows()
         {
@@ -379,6 +384,7 @@ namespace TibiaHeleper.MemoryOperations
             {
                 MouseSimulator.click(x, y);
             }
+            _currentContainer = null;
         }
         public static void resizeFirstOpenedWindow()
         {
@@ -392,7 +398,6 @@ namespace TibiaHeleper.MemoryOperations
         public static int firstOpenedWindowHeight { get { return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.FirstOpenedWindowHeight)); } }
         public static bool getItemFromEQWindowPosition(out int x, out int y, int xOffset, int yOffset)
         {
-
             uint secondWindowAddress = (uint)getDynamicAddress(Addresses.SecondWindowFromTop);
             uint thirdWindowAddress = (uint)getDynamicAddress(Addresses.ThirdWindowFromTop);
             openEqWindow();
@@ -531,7 +536,7 @@ namespace TibiaHeleper.MemoryOperations
             return firstOpenedWindowHeight > 0;
         }
 
-        private static void TradeItems(Dictionary<int, int> items)
+        private static void TradeItems(List<TradeItem> items)
         {
             int x = gameWindowWidth -50;
 
@@ -577,39 +582,43 @@ namespace TibiaHeleper.MemoryOperations
             while (firstOpenedWindowHeight > 200)
                 resizeFirstOpenedWindow();
         }
-        public static void SellItems(List<int> items)
+
+        public static void SellItems(List<TradeItem> items, bool openTradeWindow = true)
         {
-            Dictionary<int, int> dict = new Dictionary<int, int>();
-            foreach (int item in items)
+            if (items.Count > 0)
             {
-                dict.Add(item, 0);
+                if (openTradeWindow)
+                    OpenTradeWindow();
+                int x, y;
+
+                Thread.Sleep(200);
+
+                // Click sell button
+                y = Constants.FirstOpenedWindowYOffset + Constants.TradeWindowSellButtonYOffset;
+                x = Constants.TradeWindowSellOrOKButtonXFromRightOffset + gameWindowWidth;
+                MouseSimulator.click(x, y);
+
+                TradeItems(items);
+            }           
+        }
+        public static void BuyItems(List<TradeItem> items, bool openTradeWindow = true)
+        {
+            if(items.Count > 0)
+            {
+                if (openTradeWindow)
+                    OpenTradeWindow();
+                TradeItems(items);
             }
-
-            OpenTradeWindow();
-            int x, y;
-
-            Thread.Sleep(200);
-
-            // Click sell button
-            y = Constants.FirstOpenedWindowYOffset + Constants.TradeWindowSellButtonYOffset;
-            x = Constants.TradeWindowSellOrOKButtonXFromRightOffset + gameWindowWidth;
-            MouseSimulator.click(x, y);
             
-            TradeItems(dict);
-
-        }
-        public static void BuyItems(Dictionary<int,int> ItemsAndAmounts)
-        {
-            OpenTradeWindow();
-            TradeItems(ItemsAndAmounts);
         }
 
-        private static void ClickAndTradeItem(int x, int y, Dictionary<int,int> items)
+        private static void ClickAndTradeItem(int x, int y, List<TradeItem> items)
         {
             MouseSimulator.click(x, y);
-            if(items.Any(item => item.Key == tradeItemID))
+            TradeItem ti;
+            if(((ti = items.FirstOrDefault(tradeItem => tradeItem.item.ID == tradeItemID)) != null))
             {
-                TradeIt(items[tradeItemID]);
+                TradeIt(ti.amount);
             }
         }
         /// <summary>

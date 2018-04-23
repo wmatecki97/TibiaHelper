@@ -4,11 +4,23 @@ automount
 
 
 tryb ataku
-jedzenie
-Handel
 jeżeli podczas ataku przejdzie przez waypoint to go ominąć w walkerze - powinno działać - trzeba zatrzymać się w traackerze na zerowaniu wayback
 Jeżeli wylogowano to trzeba zresetować All spotted creature list
 
-Looter
+================================
+LOOTER
+zabezpieczenie przed nie zamkniętym oknem
+ogarnięcie plecaka do którego jest wkładany loot
+=================================
+
+TRADER
+dodanie do akcji handlu
+handlowanie powyżej 100 przedmiotów
+
+================================
+
+Przerobić na enuma statementtype
+
+Deposit
 
 Przerobienie wszystkich Background workerow na wskaźniki na funkcje

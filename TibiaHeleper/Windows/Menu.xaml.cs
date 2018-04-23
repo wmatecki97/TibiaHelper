@@ -4,6 +4,7 @@ using System.Windows;
 using TibiaHeleper.BackgroundWorkers;
 using TibiaHeleper.MemoryOperations;
 using TibiaHeleper.Modules;
+using TibiaHeleper.Modules.WalkerModule;
 using TibiaHeleper.Simulators;
 
 namespace TibiaHeleper.Windows
@@ -103,13 +104,7 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            
-            int u = 3267;
-            int k = 3272;
-            Dictionary<int, int> l = new Dictionary<int, int>();
-            l.Add(u,14);
-
-            GetData.BuyItems(l);
+            int a = GetData.getDynamicAddress(Addresses.FirstOpenedWindowHeight);
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)

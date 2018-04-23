@@ -82,6 +82,7 @@
     <Compile Include="Modules\WalkerModule\DefaultActions.cs" />
     <Compile Include="Modules\WalkerModule\StatementType.cs" />
     <Compile Include="Modules\WalkerModule\Tracker.cs" />
+    <Compile Include="Modules\WalkerModule\TradeItem.cs" />
     <Compile Include="Modules\WalkerModule\Walker.cs" />
     <Compile Include="Modules\WalkerModule\WalkerLabel.cs" />
     <Compile Include="Modules\WalkerModule\WalkerStatement.cs" />
