@@ -27,6 +27,19 @@ namespace TibiaHeleper.MemoryOperations
 
         public static string ReadString(long Address, IntPtr Handle, uint length = 32)
         {
+            if (length > 32)
+            {
+                var a = ASCIIEncoding.Default.GetString(ReadBytes(Handle, Address, length)).Split('\0');
+                string result = "";
+                foreach (var i in a)
+                {
+                    if (i == ",")
+                        break;
+                    result += i;
+                }
+                return result;
+            }
+
             return ASCIIEncoding.Default.GetString(ReadBytes(Handle, Address, length)).Split('\0')[0];
         }
         //not sure

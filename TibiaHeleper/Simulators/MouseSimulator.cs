@@ -77,22 +77,29 @@ namespace TibiaHeleper.Simulators
             SimulatorSynchronisation.semaphore.Release();
         }
 
-        public static void drag(int fromXPos, int fromYPos,int toXPos,int toYPos )
+        public static void drag(int fromXPos, int fromYPos,int toXPos,int toYPos , bool moveRealMouse=false)
         {
             SimulatorSynchronisation.semaphore.WaitOne();
           
 
             SendMessage(proc.MainWindowHandle, WM_LBUTTONDOWN, (IntPtr)0, MakeLParam(fromXPos, fromYPos));
 
-            //It is necessary because Tibia has to change cursor and this happens only when real mouse cursor is moved
             PointInter cursor;
             GetCursorPos(out cursor);
-            SetCursorPos(toXPos, toYPos);
-            Thread.Sleep(50);
+
+            if (moveRealMouse)
+            {
+                //It is necessary because Tibia has to change cursor and this happens only when real mouse cursor is moved
+                SetCursorPos(toXPos, toYPos);
+                Thread.Sleep(50);
+            }
+           
 
             SendMessage(proc.MainWindowHandle, WM_LBUTTONUP, (IntPtr)0, MakeLParam(toXPos, toYPos));
 
-            SetCursorPos(cursor.X, cursor.Y);
+            if(moveRealMouse)
+                SetCursorPos(cursor.X, cursor.Y);
+
             SimulatorSynchronisation.semaphore.Release();
 
         }

@@ -11,6 +11,7 @@ namespace TibiaHeleper.Windows
         public static Menu menu { get; set; }
         public static Targeting targeting { get; set; }
         public static WalkerWindow walkerWindow { get; set; }
+        public static AlarmsWindow alarms { get; set; }
 
         static WindowsManager()
         {
@@ -19,6 +20,7 @@ namespace TibiaHeleper.Windows
             menu = new Menu();
             targeting = new Targeting();
             walkerWindow = new WalkerWindow();
+            alarms = new AlarmsWindow();
         }
         
         

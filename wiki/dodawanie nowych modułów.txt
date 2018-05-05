@@ -5,3 +5,4 @@
 4. dodać na okno z modułem metodę do wczytywania stanu modułu po wczytaniu (np. wpisanie obecnej wartości hp)
 5. dodać stronę modułu do akcji Load w Menu
 6. dodać do DataCollectera moduł
+7. Dodać do ModullesManager wyłączenie modułu do disableAllWorkingModules()

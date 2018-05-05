@@ -36,6 +36,7 @@ namespace TibiaHeleper.Windows
             if (ModulesManager.healer.working) HealerEnable.IsChecked = true;
             if (ModulesManager.targeting.working) TargetingEnable.IsChecked = true;
             if (ModulesManager.walker.working) WalkerEnable.IsChecked = true;
+            if (ModulesManager.alarms.working) alarmsCheckBox.IsChecked = true;
         }
 
         private void HealerDisable(object sender, RoutedEventArgs e)
@@ -104,7 +105,7 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            int a = GetData.getDynamicAddress(Addresses.FirstOpenedWindowHeight);
+            int a = GetData.firstOpenedWindow.height;
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)
@@ -132,6 +133,7 @@ namespace TibiaHeleper.Windows
                 WalkerEnable.IsChecked = ModulesManager.walker.working;
                 TargetingEnable.IsChecked = ModulesManager.targeting.working;
                 HealerEnable.IsChecked = ModulesManager.healer.working;
+                alarmsCheckBox.IsChecked = ModulesManager.alarms.working;
                 if (GetData.Me != null) Title = "Tibia Helper -" + GetData.Me.name;
             });
         }
@@ -139,6 +141,22 @@ namespace TibiaHeleper.Windows
         private void OpenHelpWindow(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void OpenAlarmsWindow(object sender, RoutedEventArgs e)
+        {
+            WindowsManager.alarms.Show();
+            this.Hide();
+        }
+
+        private void AlarmDisable(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.AlarmsDisable();
+        }
+
+        private void AlarmEnable(object sender, RoutedEventArgs e)
+        {
+            ModulesManager.AlarmsEnabe();
         }
     }
 }

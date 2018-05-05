@@ -20,6 +20,7 @@ namespace TibiaHeleper.MemoryOperations
         public static uint MyFloorByteAddress { get; }
         public static uint CapXor { get; }
         public static uint AmIHungry { get; }
+        public static List<uint> isAnybodyLoggedIn { get; }
 
 
         public static uint FollowTargetAddress { get; }
@@ -53,6 +54,8 @@ namespace TibiaHeleper.MemoryOperations
 
         public static List<uint> FirstOpenedWindowHeight { get; }
 
+        public static List<uint> SecondOpenedWindowHeight { get; }
+
         public static List<uint> tradeWindowSelectedItem { get; }
 
         static Addresses()
@@ -71,6 +74,12 @@ namespace TibiaHeleper.MemoryOperations
             MyFloorByteAddress = 0x70E05C;
             CapXor = 0x70E040;
             AmIHungry = 0x570454;
+            isAnybodyLoggedIn = new List<uint>();
+            isAnybodyLoggedIn.Add(0x005695E4);
+            isAnybodyLoggedIn.Add(0xC);
+            isAnybodyLoggedIn.Add(0x8);
+            isAnybodyLoggedIn.Add(0x30);
+            isAnybodyLoggedIn.Add(0xC);
 
             FollowTargetAddress = 0x5815B8;
 
@@ -133,6 +142,15 @@ namespace TibiaHeleper.MemoryOperations
             FirstOpenedWindowHeight.Add(0x38);
             FirstOpenedWindowHeight.Add(0x24);
             FirstOpenedWindowHeight.Add(0x20);
+
+            SecondOpenedWindowHeight = new List<uint>();
+            SecondOpenedWindowHeight.Add(0x00570744);
+            SecondOpenedWindowHeight.Add(0x24);
+            SecondOpenedWindowHeight.Add(0x24);
+            SecondOpenedWindowHeight.Add(0x4c);
+            SecondOpenedWindowHeight.Add(0xc);
+            SecondOpenedWindowHeight.Add(0x10);
+            SecondOpenedWindowHeight.Add(0x20);
 
             tradeWindowSelectedItem = new List<uint>();
             tradeWindowSelectedItem.Add(0x00570744);

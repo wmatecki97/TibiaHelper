@@ -16,6 +16,7 @@ namespace TibiaHeleper.Modules
         public static Targeter targeting { get; set; }
         public static Walker walker { get; set; }
         public static Tracker tracker { get; set; }
+        public static Alarms alarms { get; set; }
 
         // private static Thread THealer;
         // private static Thread TAutoHaste;
@@ -36,6 +37,9 @@ namespace TibiaHeleper.Modules
             targeting = new Targeter();
             walker = new Walker();
             tracker = new Tracker();
+            alarms = new Alarms();
+
+            disabled = false;
 
         }
         /// <summary>
@@ -99,6 +103,10 @@ namespace TibiaHeleper.Modules
         public static void TrackerEnable() { enableThread((Module)tracker); }
         public static void TrackerDisable() { disableThread((Module)tracker); }
 
+        public static void AlarmsEnabe() { enableThread((Module)alarms); }
+        public static void AlarmsDisable() { disableThread((Module)alarms); }
+
+
         public static void serialize()
         {
             // Serialize the object data to a file
@@ -110,6 +118,66 @@ namespace TibiaHeleper.Modules
             stream.Close();
 
 
+        }
+
+        private static bool _healer;
+        private static bool _autoHaste;
+        private static bool _sio;
+        private static bool _antyParalyse;
+        private static bool _targeting;
+        private static bool _walker;
+        private static bool _tracker;
+
+        private static bool disabled;
+
+        public static void DisableAllWorkingModules()
+        {
+            if (!disabled)
+            {
+                _healer = healer.working;
+                _autoHaste = autoHaste.working;
+                _sio = sio.working;
+                _antyParalyse = antyParalyse.working;
+                _targeting = targeting.working;
+                _walker = walker.working;
+                _tracker = tracker.working;
+              
+                HealerDisable();
+                AutoHasteDisable();
+                SioDisable();
+                AntyParalyseDisable();
+                TargetingDisable();
+                WalkerDisable();
+                TrackerDisable();
+               
+                disabled = true;
+            }
+
+        }
+
+        public static void EnableAllDisabledModules()
+        {
+            if (disabled)
+            {
+                if (_healer)
+                    HealerEnable();
+                if (_autoHaste)
+                    AutoHasteEnable();
+                if (_sio)
+                    SioEnable();
+                if (_antyParalyse)
+                    AntyParalyseEnable();
+                if (_targeting)
+                    TargetingEnable();
+                if (_walker)
+                    WalkerEnable();
+                if (_tracker)
+                    TrackerEnable();
+                
+
+                disabled = false;
+            }
+            
         }
 
 

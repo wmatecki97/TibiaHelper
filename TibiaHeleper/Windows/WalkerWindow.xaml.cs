@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TibiaHeleper.MemoryOperations;
 using TibiaHeleper.Modules;
+using TibiaHeleper.Modules.TargetingModule;
 using TibiaHeleper.Modules.WalkerModule;
 using TibiaHeleper.Storage;
 
@@ -13,7 +14,7 @@ namespace TibiaHeleper.Windows
     /// <summary>
     /// Interaction logic for WalkerWindow.xaml
     /// </summary>
-    public partial class WalkerWindow : Window
+    public partial class WalkerWindow : System.Windows.Window
     {
         public WalkerWindow()
         {
@@ -27,6 +28,8 @@ namespace TibiaHeleper.Windows
         Modules.WalkerModule.Condition condition;
         short NotSet;
         List<TradeItem> tradeList;
+        List<LootItem> putIntoList;
+        List<LootItem> takeFromList;
 
         private string startLabelName;
         private int startIndex;
@@ -57,7 +60,20 @@ namespace TibiaHeleper.Windows
             SellOrBuyComboBox.Items.Add("Buy");
             SellOrBuyComboBox.SelectedIndex = 0;
 
+            DepositOrMailBoxComboBox.Items.Add("Deposit");
+            DepositOrMailBoxComboBox.Items.Add("Mail Box");
+            DepositOrMailBoxComboBox.SelectedIndex = 0;
+
+            for(int i=0; i<12; i++)
+            {
+                depoNumberComboBox.Items.Add(i.ToString());
+            }
+
+            depoNumberComboBox.SelectedIndex = 0;
+
             tradeList = new List<TradeItem>();
+            putIntoList = new List<LootItem>();
+            takeFromList = new List<LootItem>();
 
         }
         private void fillList()
@@ -119,9 +135,10 @@ namespace TibiaHeleper.Windows
             while (!ModulesManager.walker.stopped) ;
 
             ModulesManager.walker.SetList(Way.changeWayToWaypointList(StatementsList));
-            if (startLabelName != "") ModulesManager.walker.startStatementIndex = StatementsList.FindIndex(x => x.name == startLabelName);
+            if (startLabelName != "") ModulesManager.walker.startStatementIndex = ModulesManager.walker.list.FindIndex(x => x.name == startLabelName);
 
-            if (!wasWorking) ModulesManager.walker.startStatementIndex = startIndex;
+            //if (!wasWorking) ModulesManager.walker.startStatementIndex = startIndex;
+
             if (wasWorking) ModulesManager.WalkerEnable();
 
             StatementsList = ModulesManager.walker.CopyList();
@@ -158,7 +175,7 @@ namespace TibiaHeleper.Windows
         {
 
             startLabelName = startLabel.Text;
-            if (labelExist(startLabelName))
+            if (!labelExist(startLabelName))
                 startLabelName = "";
         }
         private bool labelExist(string name)
@@ -220,6 +237,7 @@ namespace TibiaHeleper.Windows
             if (selected != null)
             {
                 hideActionFields();
+                ActionsListBox.SelectedIndex = -1;
 
                 if(selected.type == StatementType.getType["Action"])
                 {
@@ -287,12 +305,23 @@ namespace TibiaHeleper.Windows
                     conditionsList = statement.args[1] as List<Modules.WalkerModule.Condition>;
                     refreshCondition();
                 }
-                else if(action == "Trade")
+                else if (action == "Trade")
                 {
                     Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
                     tradeList = (List<TradeItem>)statement.args[0];
                     ShowTradeGrid(new object(), new RoutedEventArgs());
                     refreshTradeList();
+                }
+                else if (action == "Deposit")
+                {
+                    Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
+                    putIntoList = (List<LootItem>)statement.args[1];
+                    takeFromList = (List<LootItem>)statement.args[2];
+                    DepositOrMailBoxComboBox.SelectedItem = ((bool)statement.args[0]) ? "Deposit" : "Mail box";
+
+                    ShowDepositButton(new object(), new RoutedEventArgs());
+                    RefreshPutIntoList();
+                    RefreshTakeFromList();
                 }
             }
         }
@@ -344,60 +373,69 @@ namespace TibiaHeleper.Windows
             ConditionGrid.Visibility = Visibility.Hidden;
             //       RightClickCheckBox.IsChecked = false;
             TradeButtonGrid.Visibility = Visibility.Hidden;
+            DepositButtonGrid.Visibility = Visibility.Hidden;
 
         }
         private void ActionSelected(object sender, SelectionChangedEventArgs e)
         {
             hideActionFields();
-            string action = ((KeyValuePair<string, int>)ActionsListBox.SelectedItem).Key;
-            if (action == "Hotkey")
+            if (ActionsListBox.SelectedIndex != -1)
             {
-                TextActionGrid.Visibility = Visibility.Visible;
-                InputDescriptionLabel.Content = "Hotkey";
-            }
-            else if (action == "Stand")
-            {
-                PositionGrid.Visibility = Visibility.Visible;
-            }
-            else if (action == "Use On Field")
-            {
-                PositionGrid.Visibility = Visibility.Visible;
-                TextActionGrid.Visibility = Visibility.Visible;
-                InputDescriptionLabel.Content = "Hotkey";
-            }
-            else if (action == "Say")
-            {
-                InputDescriptionLabel.Content = "Text To Say";
-                TextActionGrid.Visibility = Visibility.Visible;
-            }
-            else if (action == "Go To Label")
-            {
+                string action = ((KeyValuePair<string, int>)ActionsListBox.SelectedItem).Key;
+                if (action == "Hotkey")
+                {
+                    TextActionGrid.Visibility = Visibility.Visible;
+                    InputDescriptionLabel.Content = "Hotkey";
+                }
+                else if (action == "Stand")
+                {
+                    PositionGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Use On Field")
+                {
+                    PositionGrid.Visibility = Visibility.Visible;
+                    TextActionGrid.Visibility = Visibility.Visible;
+                    InputDescriptionLabel.Content = "Hotkey";
+                }
+                else if (action == "Say")
+                {
+                    InputDescriptionLabel.Content = "Text To Say";
+                    TextActionGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Go To Label")
+                {
 
-                InputDescriptionLabel.Content = "Label Name";
-                TextActionGrid.Visibility = Visibility.Visible;
+                    InputDescriptionLabel.Content = "Label Name";
+                    TextActionGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Mouse Click")
+                {
+                    PositionGrid.Visibility = Visibility.Visible;
+                    MouseClickGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Waypoint")
+                {
+                    PositionGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Condition")
+                {
+                    ConditionButtonGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Wait")
+                {
+                    InputDescriptionLabel.Content = "Time to wait";
+                    TextActionGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Trade")
+                {
+                    TradeButtonGrid.Visibility = Visibility.Visible;
+                }
+                else if (action == "Deposit")
+                {
+                    DepositButtonGrid.Visibility = Visibility.Visible;
+                }
             }
-            else if (action == "Mouse Click")
-            {
-                PositionGrid.Visibility = Visibility.Visible;
-                MouseClickGrid.Visibility = Visibility.Visible;
-            }
-            else if (action == "Waypoint")
-            {
-                PositionGrid.Visibility = Visibility.Visible;
-            }
-            else if (action == "Condition")
-            {
-                ConditionButtonGrid.Visibility = Visibility.Visible;
-            }
-            else if (action == "Wait")
-            {
-                InputDescriptionLabel.Content = "Time to wait";
-                TextActionGrid.Visibility = Visibility.Visible;
-            }
-            else if (action == "Trade")
-            {
-                TradeButtonGrid.Visibility = Visibility.Visible;
-            }
+            
         }
         /// <summary>
         /// returns coordinates entered by user. Parsing string to int and Throws an exception.
@@ -477,22 +515,39 @@ namespace TibiaHeleper.Windows
                 }
                 else if (actionType == type["Trade"])
                 {
-                    if(tradeList.Count > 0)
+                    if (tradeList.Count > 0)
                     {
                         action = new Modules.WalkerModule.Action(actionType, tradeList);
                         tradeList = new List<TradeItem>();
                         AmountTextBox.Text = "";
                         refreshTradeList();
                         TradeGrid.Visibility = Visibility.Hidden;
+                        ItemAndHintGrid.Visibility = Visibility.Hidden;
                     }
                     else
                     {
                         showPopUpWindow("Can not add empty action. Add an action first.");
                     }
                 }
-               
+                else if (actionType == type["Deposit"])
+                {
+                    if (putIntoList.Count > 0 || takeFromList.Count>0)
+                    {
+                        action = new Modules.WalkerModule.Action(actionType, DepositOrMailBoxComboBox.SelectedItem.ToString()=="Deposit", putIntoList, takeFromList);
+                        putIntoList = new List<LootItem>();
+                        takeFromList = new List<LootItem>();
+                        RefreshPutIntoList();
+                        RefreshTakeFromList();
+                        
+                        DepositGrid.Visibility = Visibility.Hidden;
+                        ItemAndHintGrid.Visibility = Visibility.Hidden;
 
-
+                    }
+                    else
+                    {
+                        showPopUpWindow("Can not add empty action. Add items first.");
+                    }
+                }
                 else return; //protect from adding null to the list
                 insertToList(action);
                 ConditionGrid.Visibility = Visibility.Hidden;
@@ -768,13 +823,13 @@ namespace TibiaHeleper.Windows
         private void ShowTradeGrid(object sender, RoutedEventArgs e)
         {
             TradeGrid.Visibility = Visibility.Visible;
+            ItemAndHintGrid.Visibility = Visibility.Visible;
         }
-
         private void CancelTrade(object sender, RoutedEventArgs e)
         {
             TradeGrid.Visibility = Visibility.Hidden;
+            ItemAndHintGrid.Visibility = Visibility.Hidden;
         }
-
         private void CheckForHint(object sender, TextChangedEventArgs e)
         {
             string text = ItemTextBox.Text.ToUpper();
@@ -804,7 +859,6 @@ namespace TibiaHeleper.Windows
                 BuyItemCountGrid.Visibility = Visibility.Hidden;
 
         }
-
         private void DeleteItemFromTradeList(object sender, RoutedEventArgs e)
         {
             if (TradeListBox.SelectedIndex >= 0)
@@ -815,7 +869,6 @@ namespace TibiaHeleper.Windows
             }
 
         }
-
         private void AddItemToTradeList(object sender, RoutedEventArgs e)
         {
             if(_item != null)
@@ -854,6 +907,84 @@ namespace TibiaHeleper.Windows
                 TradeListBox.DisplayMemberPath = "displayName";
                 TradeListBox.Items.Add(item);
             }
+        }
+
+        private void ShowDepositButton(object sender, RoutedEventArgs e)
+        {
+            DepositGrid.Visibility = Visibility.Visible;
+            ItemAndHintGrid.Visibility = Visibility.Visible;
+        }
+
+
+        private void RefreshPutIntoList()
+        {
+            putIntoListBox.Items.Clear();
+            foreach (LootItem item in putIntoList)
+            {
+                putIntoListBox.DisplayMemberPath = "displayedName";
+                putIntoListBox.Items.Add(item);
+            }
+        }
+        private void RefreshTakeFromList()
+        {
+            takeFromListBox.Items.Clear();
+            foreach (LootItem item in takeFromList)
+            {
+                takeFromListBox.DisplayMemberPath = "displayedName";
+                takeFromListBox.Items.Add(item);
+            }
+        }
+
+        private void AddToDepositList(object sender, RoutedEventArgs e)
+        {
+            if (_item != null)
+            {
+                putIntoList.Add(new LootItem(_item.name, _item.ID, new Item(depoNumberComboBox.SelectedItem.ToString())));
+                RefreshPutIntoList();
+            }
+            
+        }
+        private void RemoveFromDeposit(object sender, RoutedEventArgs e)
+        {
+            if (putIntoListBox.SelectedIndex != -1)
+            {
+                putIntoList.RemoveAt(putIntoListBox.SelectedIndex);
+                RefreshPutIntoList();
+            }
+        }
+        private void AddToTake(object sender, RoutedEventArgs e)
+        {
+            if (_item != null)
+            {
+                takeFromList.Add(new LootItem(_item.name, _item.ID, new Item(depoNumberComboBox.SelectedItem.ToString())));
+                RefreshTakeFromList();
+            }
+        }
+        private void removeFromTake(object sender, RoutedEventArgs e)
+        {
+            if (takeFromListBox.SelectedIndex != -1)
+            {
+                takeFromList.RemoveAt(takeFromListBox.SelectedIndex);
+                RefreshTakeFromList();
+            }
+        }
+
+        private void DepositTypeChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(DepositOrMailBoxComboBox.SelectedItem.ToString() == "Deposit")
+            {
+                depoChestNumberGrid.Visibility = Visibility.Visible;
+            }
+            else if(DepositOrMailBoxComboBox.SelectedItem.ToString() == "Mail box")
+            {
+                depoChestNumberGrid.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void HideDepositGrid(object sender, RoutedEventArgs e)
+        {
+            DepositGrid.Visibility = Visibility.Hidden;
+            ItemAndHintGrid.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TibiaHeleper.Windows"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Walker" Height="320" Width="660" Loaded="Load" Closed="Close">
+        Title="Walker" Height="320" Width="670" Loaded="Load" Closed="Close">
     <Grid>
         <ListBox x:Name="listBox" SelectionMode="Single" HorizontalAlignment="Left" Height="208" Margin="10,10,0,0" VerticalAlignment="Top" Width="137"/>
         <Grid Name="BasicsWalkerOperationsGrid">
@@ -65,14 +65,6 @@
             </Grid>
 
 
-            <Grid Name="ProcedureGrid" Visibility="Hidden">
-                <Button x:Name="SaveProcedureButton" Content="Save Procedure" HorizontalAlignment="Left" Margin="166,237,0,0" VerticalAlignment="Top" Width="96" Click="SaveProcedure"/>
-                <Button x:Name="LoadProcedureButton" Content="Load Procedure" HorizontalAlignment="Left" Margin="267,237,0,0" VerticalAlignment="Top" Width="99" Click="LoadProcedure"/>
-                <Button x:Name="CancelProcedureButton" Content="Cancel" HorizontalAlignment="Left" Margin="371,237,0,0" VerticalAlignment="Top" Width="75" Click="HideProcedureGrid"/>
-                <Button x:Name="SelectAllButton" Content="Select All" HorizontalAlignment="Left" Margin="230,191,0,0" VerticalAlignment="Top" Width="75" Click="SelectAll"/>
-                <Button x:Name="DeselectAllButton" Content="Deselect All" HorizontalAlignment="Left" Margin="331,191,0,0" VerticalAlignment="Top" Width="75" Click="DeselectAll"/>
-
-            </Grid>
             <Grid Name="ConditionButtonGrid" Margin="0,145,126.6,106" Visibility="Hidden">
                 <Button x:Name="CreateConditionButton" Content="Create Condition" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Width="134" Click="CreateCondition"/>
 
@@ -117,34 +109,78 @@
 
             <Grid Name="TradeGrid" Visibility="Hidden" Background="White">
 
-                <TextBox x:Name="ItemTextBox" HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" TextChanged="CheckForHint" />
-                <TextBox x:Name="HintTextBox" IsReadOnly="True" Background="LightGray" HorizontalAlignment="Left" Height="23" Margin="10,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
 
-                <ComboBox x:Name="SellOrBuyComboBox" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="TradeTypeChanged" Height="20"/>
+                <ComboBox x:Name="SellOrBuyComboBox" HorizontalAlignment="Left" Margin="147,25,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="TradeTypeChanged" Height="20"/>
 
-                <Grid Name="BuyItemCountGrid" Visibility="Visible" Margin="0,50,162.8,184.6">
+                <Grid Name="BuyItemCountGrid" Visibility="Visible" Margin="137,50,25.8,184.6">
                     <Label x:Name="ItemCountLabel" Content="Amount" HorizontalContentAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="AmountTextBox" HorizontalAlignment="Left" Height="23" Margin="10,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144"/>
 
                 </Grid>
-                
-                <Button x:Name="DeleteItemButton" Content="Delete Item" HorizontalAlignment="Left" Margin="85,117,0,0" VerticalAlignment="Top" Width="69" Click="DeleteItemFromTradeList" />
-                <Button x:Name="AddTradeItemButton" Content="Add item" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="70" Click="AddItemToTradeList"/>
 
-                <ListBox x:Name="TradeListBox" HorizontalAlignment="Left" Height="125" Margin="182,25,0,0" VerticalAlignment="Top" Width="100"/>
-                <Label x:Name="TradeListLabel" Content="Trade list" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Top" Width="100"/>
+                <Button x:Name="DeleteItemButton" Content="Delete Item" HorizontalAlignment="Left" Margin="11,185,0,0" VerticalAlignment="Top" Width="69" Click="DeleteItemFromTradeList" />
+                <Button x:Name="AddTradeItemButton" Content="Add item" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="70" Click="AddItemToTradeList"/>
+
+                <ListBox x:Name="TradeListBox" HorizontalAlignment="Left" Height="125" Margin="11,26,0,0" VerticalAlignment="Top" Width="100"/>
+                <Label x:Name="TradeListLabel" Content="Trade list" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="11,0,0,0"/>
 
                 <Button x:Name="CancelTradeButton" Content="Cancel" HorizontalAlignment="Left" Margin="207,242,0,0" VerticalAlignment="Top" Width="75" Click="CancelTrade"/>
-                <Label x:Name="ItemLabel" Content="Item" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="272"/>
+                <Label x:Name="ItemLabel" Content="Item" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="111,125,0,0" VerticalAlignment="Top" Width="200"/>
 
-                
+
             </Grid>
 
+            <Grid Name="DepositButtonGrid" Visibility="Hidden">
+                <Button x:Name="DepositButton" Content="Open Deposit Window" HorizontalAlignment="Left" Margin="28,155,0,0" VerticalAlignment="Top" Width="135" Click="ShowDepositButton"/>
+            </Grid>
 
             <Button x:Name="AddActionButton" Content="Add Action" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="174" Click="AddAction"/>
 
         </Grid>
 
+        <Grid Name="ProcedureGrid" Visibility="Hidden">
+            <Button x:Name="SaveProcedureButton" Content="Save Procedure" HorizontalAlignment="Left" Margin="166,237,0,0" VerticalAlignment="Top" Width="96" Click="SaveProcedure"/>
+            <Button x:Name="LoadProcedureButton" Content="Load Procedure" HorizontalAlignment="Left" Margin="267,237,0,0" VerticalAlignment="Top" Width="99" Click="LoadProcedure"/>
+            <Button x:Name="CancelProcedureButton" Content="Cancel" HorizontalAlignment="Left" Margin="371,237,0,0" VerticalAlignment="Top" Width="75" Click="HideProcedureGrid"/>
+            <Button x:Name="SelectAllButton" Content="Select All" HorizontalAlignment="Left" Margin="230,191,0,0" VerticalAlignment="Top" Width="75" Click="SelectAll"/>
+            <Button x:Name="DeselectAllButton" Content="Deselect All" HorizontalAlignment="Left" Margin="331,191,0,0" VerticalAlignment="Top" Width="75" Click="DeselectAll"/>
+
+        </Grid>
+
+        <Grid Name="DepositGrid" Visibility="Hidden" Background="White" Margin="337,0,-0.4,0.4">
+
+
+            <ComboBox x:Name="DepositOrMailBoxComboBox" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="92" SelectionChanged="DepositTypeChanged" Height="20"/>
+
+
+            <ListBox x:Name="putIntoListBox" HorizontalAlignment="Left" Height="125" Margin="42,25,0,0" VerticalAlignment="Top" Width="127"/>
+            <ListBox x:Name="takeFromListBox" HorizontalAlignment="Left" Height="125" Margin="174,25,0,0" VerticalAlignment="Top" Width="127"/>
+            <Label Content="Items to deposit" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="42,-1,0,0" VerticalAlignment="Top" Width="127"/>
+            <Label Content="Items to take" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="174,2,0,0" VerticalAlignment="Top" Width="127"/>
+
+            <Button x:Name="addToDepositButton" Content="Deposit it" HorizontalAlignment="Left" Margin="107,208,0,0" VerticalAlignment="Top" Width="100" Click="AddToDepositList"/>
+            <Button x:Name="removeFromDepositButton" Content="Delete" HorizontalAlignment="Left" Margin="107,232,0,0" VerticalAlignment="Top" Width="100" Click="RemoveFromDeposit"/>
+            <Button x:Name="addToTakeButton" Content="Take to backpack" HorizontalAlignment="Left" Margin="212,208,0,0" VerticalAlignment="Top" Width="100" Click="AddToTake"/>
+            <Button x:Name="removeFromTakeButton" Content="Delete" HorizontalAlignment="Left" Margin="212,232,0,0" VerticalAlignment="Top" Width="100" Click="removeFromTake"/>
+
+            <Grid Name="depoChestNumberGrid" Margin="5,175,210,34">
+
+                <ComboBox x:Name="depoNumberComboBox" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="97"/>
+                <Label x:Name="depoNumberLabel" Content="Deposit number" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,6,-0.2,0" VerticalAlignment="Top" Width="97" Grid.RowSpan="2"/>
+            </Grid>
+
+            <Button x:Name="addDepositActionButton" Content="Add action" HorizontalAlignment="Left" Margin="27,256,0,0" VerticalAlignment="Top" Width="111" Click="AddAction"/>
+            <Button x:Name="cancelDepositButton" Content="Cancel" HorizontalAlignment="Left" Margin="163,256,0,0" VerticalAlignment="Top" Width="111" Click="HideDepositGrid"/>
+
+
+
+
+        </Grid>
+
+        <Grid Name="ItemAndHintGrid" Visibility="Hidden">
+            <TextBox x:Name="ItemTextBox" HorizontalAlignment="Left" Height="23" Margin="444,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" TextChanged="CheckForHint" />
+            <TextBox x:Name="HintTextBox" IsReadOnly="True" Background="LightGray" HorizontalAlignment="Left" Height="23" Margin="444,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205"/>
+        </Grid>
 
         <Grid Name="Error" HorizontalAlignment="Left" Height="290" VerticalAlignment="Top" Width="654" Background="White" Visibility="Hidden" Margin="0,0,-0.4,0">
             <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="289,245,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>

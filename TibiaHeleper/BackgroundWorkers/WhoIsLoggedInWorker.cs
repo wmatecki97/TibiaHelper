@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,30 +15,65 @@ namespace TibiaHeleper.BackgroundWorkers
     {
 
         private int loggedID;
+        public static Stopwatch sw { get; set; }
 
         public override void Run()
         {
+
+            sw = new Stopwatch();
+            sw.Start();
+            bool modulesDisabled = false;
+
             while (working)
             {
                 GetData.WhoAmI();
-                if(GetData.Me!=null && loggedID!=GetData.MyID)
-                {
-                    loggedID = GetData.MyID;
-                    
-                    WindowsManager.menu.Update();
+                
+                modulesDisabled = ManageModules(modulesDisabled);
 
+                WindowsManager.menu.Update();
+
+
+
+                if (sw.ElapsedMilliseconds > 60000) // every 1 min reset all spotted creatures list
+                {
                     GetData.ResetAllSpottedCreatureList();
                     GetData.ActualizeAllSpottedCreaturesList();
+                    sw.Restart();
                 }
+
+
+
                 Thread.Sleep(1000 * refreshFrequency);
                 WindowsManager.walkerWindow.Update();
             }
             finished = true;
         }
 
+        private static bool ManageModules(bool modulesDisabled)
+        {
+            bool a = GetData.isAnybodyLoggedIn;
+            if (!GetData.isAnybodyLoggedIn)
+            {
+                if (!modulesDisabled)
+                {
+                    ModulesManager.DisableAllWorkingModules();
+                    modulesDisabled = true;
+                    GetData.ResetAllSpottedCreatureList();
+                }
+            }
+            else if (modulesDisabled)
+            {
+                ModulesManager.EnableAllDisabledModules();
+                modulesDisabled = false;
+            }
+
+            return modulesDisabled;
+        }
+
+
         public WhoIsLoggedInWorker()
         {
-            refreshFrequency = 3;
+            refreshFrequency = 1;
             loggedID = -1;
         }
     }

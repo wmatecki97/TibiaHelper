@@ -58,6 +58,8 @@ namespace TibiaHeleper.Modules.WalkerModule
             getType.Add("Go To Label", 11);
             getType.Add("Wait", 12);
             getType.Add("Trade", 13);
+            getType.Add("Deposit", 14);
+
 
         }
 

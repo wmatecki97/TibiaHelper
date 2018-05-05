@@ -22,8 +22,9 @@ namespace TibiaHeleper.Storage
         }
 
 
-        private static void Save(object toSave, string extension = defaultExtension)
+        private static bool Save(object toSave, string extension = defaultExtension)
         {
+            bool success;
             VersionedObject obj = new VersionedObject(toSave);
 
             SaveFileDialog sfd = new SaveFileDialog();
@@ -34,20 +35,30 @@ namespace TibiaHeleper.Storage
 
             if (sfd.ShowDialog() == true)
             {
-                string filename = Path.GetFullPath(sfd.FileName);
-
-                // Delete old file, if it exists
-                if (File.Exists(filename))
+                try
                 {
-                    File.Delete(filename);
-                }
+                    string filename = Path.GetFullPath(sfd.FileName);
 
-                // Persist to file
-                FileStream stream = File.Create(filename);
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, obj);
-                stream.Close();
+                    // Delete old file, if it exists
+                    if (File.Exists(filename))
+                    {
+                        File.Delete(filename);
+                    }
+
+                    // Persist to file
+                    FileStream stream = File.Create(filename);
+                    var formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, obj);
+                    stream.Close();
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
+                return success;
             }
+            return false;
         }
         private static object Load(string extension = defaultExtension)
         {
@@ -59,23 +70,31 @@ namespace TibiaHeleper.Storage
 
             if (ofd.ShowDialog() == true)
             {
-                string filename = Path.GetFullPath(ofd.FileName);
+                try
+                {
+                    string filename = Path.GetFullPath(ofd.FileName);
 
-                // Restore from file
-                var formatter = new BinaryFormatter();
-                FileStream stream = File.OpenRead(filename);
-                obj = formatter.Deserialize(stream) as VersionedObject;
-                stream.Close();
-                checkVersion(obj);
+                    // Restore from file
+                    var formatter = new BinaryFormatter();
+                    FileStream stream = File.OpenRead(filename);
+                    obj = formatter.Deserialize(stream) as VersionedObject;
+                    stream.Close();
+                    checkVersion(obj);
+                }
+                catch (Exception)
+                {
+                    obj.obj = null;
+                }
+                
             }
 
             return obj.obj;
         }
 
-        public static void SaveAllModules()
+        public static bool SaveAllModules()
         {
             DataCollecter collecter = new DataCollecter();
-            Save(collecter);
+            return Save(collecter);
         }
         public static void LoadAllModules()
         {
@@ -85,9 +104,9 @@ namespace TibiaHeleper.Storage
                 collecter.activateLoadedSettings();
         }
 
-        public static void SaveProcedure(List<WalkerStatement> list)
+        public static bool SaveProcedure(List<WalkerStatement> list)
         {
-            Save(list, procedureExtension);
+            return Save(list, procedureExtension);
         }
         public static List<WalkerStatement> LoadProcedure()
         {
@@ -117,22 +136,38 @@ namespace TibiaHeleper.Storage
 
             IOSem.WaitOne();
 
-            if (File.Exists(filename))
+            try
             {
-                File.Delete(filename);
-            }
-            FileStream stream = File.Create(filename);
-            var formatter = new BinaryFormatter();
-            formatter.Serialize(stream, obj);
-            stream.Close();
-            stream = File.OpenRead(filename);
-            result = formatter.Deserialize(stream);
-            stream.Close();
+                if (File.Exists(filename))
+                {
+                    File.Delete(filename);
+                }
 
-            File.Delete(filename);
+
+                using (FileStream stream = File.Create(filename))
+                {
+                    var formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, obj);
+                    stream.Close();
+                }
+                using (FileStream stream = File.OpenRead(filename))
+                {
+                    var formatter = new BinaryFormatter();
+                    result = formatter.Deserialize(stream);
+                    stream.Close();
+
+                    File.Delete(filename);
+                }
+
+            }
+            catch (IOException)
+            {
+                result=null;
+            }
 
             IOSem.Release();
             return result;
+
         }
 
     }

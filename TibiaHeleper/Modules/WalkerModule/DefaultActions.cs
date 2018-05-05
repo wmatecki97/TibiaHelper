@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TibiaHeleper.MemoryOperations;
+using TibiaHeleper.Modules.TargetingModule;
 using TibiaHeleper.Simulators;
 
 namespace TibiaHeleper.Modules.WalkerModule
@@ -23,6 +24,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             else if (actionType == StatementType.getType["Condition"]) FulfillCondition((string)arguments[0], (List<Condition>)arguments[1]);
             else if (actionType == StatementType.getType["Wait"]) Wait((int)arguments[0]);
             else if (actionType == StatementType.getType["Trade"]) Trade((List<TradeItem>)arguments[0]);
+            else if (actionType == StatementType.getType["Deposit"]) Deposit((bool)arguments[0], (List<LootItem>)arguments[1], (List<LootItem>)arguments[2]);
 
 
         }
@@ -151,7 +153,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 GetData.getItemFromEQWindowPosition(out x, out y, Constants.ShieldXOffset, Constants.ShieldYOffset);
                 bool wasHealerEnabled = ModulesManager.healer.working;
 
-                int timeToSleep = 50;
+                int timeToSleep = 350;
                 for(int i=0; i<5; i++) //nr of tries
                 {
 
@@ -161,7 +163,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                     Thread.Sleep(timeToSleep);
                     MouseSimulator.click(x, y);
                     Thread.Sleep(timeToSleep);
-                    result = GetData.getCountFromServerInfo();
+                    result = GetData.GetCountFromServerInfo();
 
                     if (wasHealerEnabled)
                         ModulesManager.HealerEnable();
@@ -206,8 +208,21 @@ namespace TibiaHeleper.Modules.WalkerModule
             List<TradeItem> toBuy = list.Where(item => item.action == TradeItem.Action.Buy).ToList();
             List<TradeItem> toSell = list.Where(item => item.action == TradeItem.Action.Sell).ToList();
 
+            bool targetingEnabled = ModulesManager.targeting.working;
+
+            if (targetingEnabled)
+                ModulesManager.TargetingDisable();
+
             GetData.SellItems(toSell);
             GetData.BuyItems(toBuy);
+
+            if (targetingEnabled)
+                ModulesManager.TargetingEnable();
+        }
+
+        private static void Deposit(bool deposit, List<LootItem> toPutInto, List<LootItem> toTakeFrom)
+        {
+
         }
     }
 }

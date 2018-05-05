@@ -47,9 +47,9 @@ namespace TibiaHeleper.Modules.WalkerModule
             list = new List<WalkerStatement>();
             wayBack = new Stack<Waypoint>();
             tolerance = 0;
-            attemptsToRandomDirection = 5;
+            attemptsToRandomDirection = 15;
             rand = new Random();
-            actualStatementIndex = 0;
+            actualStatementIndex = startStatementIndex = 0;
         }
 
         public void Run()
@@ -59,6 +59,8 @@ namespace TibiaHeleper.Modules.WalkerModule
             lock (list) { listCount = list.Count(); }
             int temp;
             startTracking();
+            actualStatementIndex = startStatementIndex;
+            startStatementIndex = 0;
 
             while (working && actualStatementIndex < listCount)
             {
@@ -77,7 +79,6 @@ namespace TibiaHeleper.Modules.WalkerModule
                     if (!goToCoordinates((Waypoint)statement))// goes to the coordinates
                     {
                         tryTogetBack(); //if player is in not good position then goes back to the last reached waypoint
-                        actualStatementIndex--;
                     }
                     tolerance = temp;
                 }
@@ -201,7 +202,7 @@ namespace TibiaHeleper.Modules.WalkerModule
 
         private bool getNewDirection()
         {
-            int distance = 99;
+            int distance = 99, temp;
             Waypoint waypoint;
             int nextStatementID = actualStatementIndex;
 
@@ -221,9 +222,9 @@ namespace TibiaHeleper.Modules.WalkerModule
                         waypoint = (Waypoint)list[i];
                         if (GetData.isOnScreen(waypoint.xPos, waypoint.yPos, waypoint.floor))
                         {
-                            if (distance > GetData.GetDistance(waypoint.xPos, waypoint.yPos))//setting the new result
+                            if (distance > (temp =GetData.GetDistance(waypoint.xPos, waypoint.yPos) + (int)Math.Abs(i-actualStatementIndex)/10) )//setting the new result
                             {
-                                distance = GetData.GetDistance(waypoint.xPos, waypoint.yPos);
+                                distance = temp;
                                 nextStatementID = i - 1;
                             }
                         }
@@ -273,21 +274,29 @@ namespace TibiaHeleper.Modules.WalkerModule
                     actualX = GetData.MyXPosition;
                     actualY = GetData.MyYPosition;
                     actualFloor = GetData.MyFloor;
-
-                    if (actualX != lastX || actualY != lastY || actualFloor != LastFloor)
+                    //if (actualX != lastX || actualY != lastY || actualFloor != LastFloor)
                     {
-                        if (list[actualStatementIndex].type == StatementType.getType["Waypoint"])//checking if waypoint has been reached
+                        for(int i=actualStatementIndex; i<10; i++)
                         {
-                            waypoint = (Waypoint)list[actualStatementIndex];
-                            if (actualX == waypoint.xPos && actualY == waypoint.yPos && actualFloor == waypoint.floor)//if wayppoint has been reached then reset wayBack
+                            lock (list)
                             {
-                                lock (wayBack)
+                                if (list[i].type == StatementType.getType["Waypoint"])//checking if waypoint has been reached
                                 {
-                                    wayBack = new Stack<Waypoint>();
-                                    continue;
+                                    waypoint = (Waypoint)list[i];
+                                    if (actualX == waypoint.xPos && actualY == waypoint.yPos && actualFloor == waypoint.floor)//if wayppoint has been reached then reset wayBack
+                                    {
+                                        actualStatementIndex = i;
+                                        lock (wayBack)
+                                        {
+                                            wayBack = new Stack<Waypoint>();
+                                            continue;
+                                        }
+                                    }
                                 }
                             }
+                            
                         }
+                        
 
                         lastX = actualX;
                         lastY = actualY;

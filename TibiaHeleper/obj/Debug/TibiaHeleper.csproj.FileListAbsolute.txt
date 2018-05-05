@@ -40,3 +40,5 @@ C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\WalkerWindow.baml
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\HelpWindow.g.cs
 C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\HelpWindow.baml
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\AlarmsWindow.g.cs
+C:\Users\wiktor\Dropbox\visual studio\TibiaHelper\TibiaHeleper\obj\Debug\Windows\AlarmsWindow.baml

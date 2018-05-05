@@ -25,11 +25,28 @@ namespace TibiaHeleper.Storage
 
         public static bool operator == (Item lhs, Item rhs)
         {
-            return lhs.ID == rhs.ID;
+            if (!Equals(lhs, null))
+            {
+                if (!Equals(rhs, null))
+                    return lhs.ID == rhs.ID;
+                else
+                    return false;
+            }
+            else
+                return Equals(rhs, null);
+
         }
-        public static bool operator !=(Item lhs, Item Rhs)
+        public static bool operator !=(Item lhs, Item rhs)
         {
-            return lhs.ID != Rhs.ID;
+            if (!Equals(lhs, null))
+            {
+                if (!Equals(rhs, null))
+                    return lhs.ID != rhs.ID;
+                else
+                    return true;
+            }
+            else
+                return !Equals(rhs, null);
         }
 
         public static List<int> ToIdList(List<LootItem> items)

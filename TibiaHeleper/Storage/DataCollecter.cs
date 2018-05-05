@@ -14,6 +14,7 @@ namespace TibiaHeleper.Storage
         public AntyPalalyse antyParalyse {get; set;}
         public Targeter targeting { get; set; }
         public Walker walker { get; set;}
+        public Alarms alarms { get; set; }
 
 
         public DataCollecter()
@@ -24,6 +25,7 @@ namespace TibiaHeleper.Storage
             antyParalyse = ModulesManager.antyParalyse;
             targeting = ModulesManager.targeting;
             walker = ModulesManager.walker;
+            alarms = ModulesManager.alarms;
         }
 
         public void activateLoadedSettings()
@@ -52,6 +54,10 @@ namespace TibiaHeleper.Storage
             ModulesManager.WalkerDisable();
             ModulesManager.walker = walker;
             if(walker.working)ModulesManager.HardEnableThread((Module)walker);
+
+            ModulesManager.AlarmsDisable();
+            ModulesManager.alarms = alarms;
+            if (alarms.working) ModulesManager.HardEnableThread((Module)alarms);
 
         }
     }

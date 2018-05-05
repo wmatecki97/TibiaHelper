@@ -69,6 +69,7 @@
     <Compile Include="MemoryOperations\GetData.cs" />
     <Compile Include="MemoryOperations\ItemList.cs" />
     <Compile Include="MemoryOperations\ReadMemory.cs" />
+    <Compile Include="Modules\Alarms.cs" />
     <Compile Include="Modules\AntyPalalyse.cs" />
     <Compile Include="Modules\AutoHaste.cs" />
     <Compile Include="Modules\ModulesManager.cs" />
@@ -97,8 +98,12 @@
     <Compile Include="Storage\Item.cs" />
     <Compile Include="Storage\Storage.cs" />
     <Compile Include="Storage\VersionedObject.cs" />
+    <Compile Include="Storage\Window.cs" />
     <Compile Include="Windows\AdditionalModules.xaml.cs">
       <DependentUpon>AdditionalModules.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AlarmsWindow.xaml.cs">
+      <DependentUpon>AlarmsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\HealerWindow.xaml.cs">
       <DependentUpon>HealerWindow.xaml</DependentUpon>
@@ -121,6 +126,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\AdditionalModules.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AlarmsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

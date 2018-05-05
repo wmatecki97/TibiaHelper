@@ -55,7 +55,6 @@ namespace TibiaHeleper.Modules.WalkerModule
         {
 
             List<WalkerStatement> list = new List<WalkerStatement>();
-            bool skip = false;
             List<WalkerStatement> way = new List<WalkerStatement>();
             for (int i = 0; i < StatementsList.Count; i++)
             {

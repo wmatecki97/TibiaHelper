@@ -1,26 +1,34 @@
 ﻿Wybór okna Tibii podczas uruchamiania
 automount
 
-
-
 tryb ataku
-jeżeli podczas ataku przejdzie przez waypoint to go ominąć w walkerze - powinno działać - trzeba zatrzymać się w traackerze na zerowaniu wayback
-Jeżeli wylogowano to trzeba zresetować All spotted creature list
+
+obsidian knife
 
 ================================
 LOOTER
-zabezpieczenie przed nie zamkniętym oknem
-ogarnięcie plecaka do którego jest wkładany loot
+zabezpieczenie przed niezamkniętym oknem
+scroll backpacka w gore ma byc przeciagnieciem suwaka
+sprawdzenie czy wyloociłem coś fajnego zamiast otwierania wszystkich trupów
+
 =================================
 
 TRADER
-dodanie do akcji handlu
 handlowanie powyżej 100 przedmiotów
 
 ================================
 
-Przerobić na enuma statementtype
-
 Deposit
 
-Przerobienie wszystkich Background workerow na wskaźniki na funkcje
+MANA BURNER
+
+
+
+Tracker w walkerze bardzo do poprawy
+nie pojawiło się okno edycji akcji na walkerze jeśli wcześniej była wybrana jakaś akcja.
+nie ładuje się hp do alarmu
+
+
+w read memory przekroczono 2 miliardy i intpointer sie wywalił
+get count from server info nie działa
+allspottedcreaturelist wywaliło się na foreachu bo zostało zedytowane
