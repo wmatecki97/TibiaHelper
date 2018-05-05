@@ -13,7 +13,7 @@ namespace TibiaHeleper.Windows
     /// <summary>
     /// Interaction logic for Targeting.xaml
     /// </summary>
-    public partial class Targeting : Window
+    public partial class Targeting : System.Windows.Window
     {
         public Targeting()
         {
@@ -26,13 +26,16 @@ namespace TibiaHeleper.Windows
         private Target _target;
         private Item _item;
         private Item _lootContainer;
+        private Item _nextContainer;
 
         private void Load(object sender, RoutedEventArgs e)
         {
             _list = ModulesManager.targeting.getTargetListCopy();
             _foodList = Storage.Storage.Copy(ModulesManager.targeting.foodList) as List<Item>;
             _lootList = Storage.Storage.Copy(ModulesManager.targeting.lootList) as List<LootItem>;
-            _lootContainer = new Item("Default container", -1);
+            _lootContainer = new Item("Default container", 0);
+            _nextContainer = ModulesManager.targeting.nextContainer;
+            OpenNextContainerCheckBox.IsChecked = ModulesManager.targeting.openNextContainer;
 
             fillAllLists();
             _target = new Target();
@@ -157,6 +160,10 @@ namespace TibiaHeleper.Windows
             maxDistance.Text = "11";
             FollowTargetCheckBox.IsChecked = false;
             LookForFoodCheckBox.IsChecked = false;
+            LootCheckBox.IsChecked = false;
+
+            ActualNextContainerLabel.Content = "Next backpack: " + _nextContainer.name;
+
         }
         private void setAllTextboxes()
         {
@@ -166,6 +173,8 @@ namespace TibiaHeleper.Windows
             Action.Text = _target.action;
             FollowTargetCheckBox.IsChecked = _target.followTarget;
             LookForFoodCheckBox.IsChecked = _target.lookForFood;
+            maxDistance.Text = _target.maxDistance.ToString();
+            LootCheckBox.IsChecked = _target.loot;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -176,6 +185,8 @@ namespace TibiaHeleper.Windows
             ModulesManager.targeting.setTargetList(_list);
             ModulesManager.targeting.setFoodList(_foodList);
             ModulesManager.targeting.setLootList(_lootList);
+            ModulesManager.targeting.openNextContainer = OpenNextContainerCheckBox.IsChecked.Value;
+            ModulesManager.targeting.nextContainer = _nextContainer;
 
             _foodList = Storage.Storage.Copy(ModulesManager.targeting.foodList) as List<Item>;
             _lootList = Storage.Storage.Copy(ModulesManager.targeting.lootList) as List<LootItem>;
@@ -281,8 +292,20 @@ namespace TibiaHeleper.Windows
                 ActualLootContainerLabel.Content = "Actual loot container: " + _lootContainer.name;
             }
             else
-                _lootContainer = new Item("Default container", -1);
+                _lootContainer = new Item("Default container", 0);
 
+        }
+
+        private void SetNextContainer(object sender, RoutedEventArgs e)
+        {
+            if (_item != null)
+            {
+                _nextContainer = _item;
+                ItemTextBox.Text = "";
+                ActualNextContainerLabel.Content = "Next backpack: " + _nextContainer.name;
+            }
+            else
+                _nextContainer = ItemList.Items.First(item => item.name == "Backpack");
         }
     }
 }

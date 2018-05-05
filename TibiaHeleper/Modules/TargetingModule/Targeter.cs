@@ -16,13 +16,17 @@ namespace TibiaHeleper.Modules.Targeting
         public bool working { get; set; }
         public bool stopped { get; set; }
         public List<Target> targetSettingsList { get; set; } //has to be sorted by priority
-        public bool attacking;
+        public bool attacking { get; set; }
+        public Item nextContainer { get; set; }
+        public bool openNextContainer { get; set; }
+
         public Targeter()
         {
             stopped = true;
             targetSettingsList = new List<Target>();
             foodList = new List<Item>();
             lootList = new List<LootItem>();
+            nextContainer = ItemList.Items.First(item => item.name == "Backpack");
         }
         static Targeter()
         {
@@ -102,41 +106,102 @@ namespace TibiaHeleper.Modules.Targeting
             }
             if(creature.HPPercent == 0 && (settings.lookForFood || settings.loot))
             {
-                GetData.closeAllOpenedWindows();
-                Thread.Sleep(200);
-                MouseSimulator.clickOnField(creature.XPosition, creature.YPosition, true);
+                if (GetData.isAnyWindowOpened)
+                    GetData.closeAllOpenedWindows(true);
+                else
+                    GetData.openBackpack();
+                
+                if (settings.loot)
+                {
+                    bool itemDropped;
 
-                if (settings.lookForFood && GetData.HungryTime < 20)
-                {
-                    LookForFood(creature);
+                    if (settings.lookForFood && GetData.HungryTime < 180)
+                        itemDropped = GetData.CheckLoot(lootList, foodList);
+                    else
+                        itemDropped = GetData.CheckLoot(lootList);
+
+                    if (itemDropped)
+                    {
+                        MouseSimulator.clickOnField(creature.XPosition, creature.YPosition, true);
+                        GetData.waitForWindowOpen(GetData.secondOpenedWindow);
+                        LootAndEat(creature, settings.lookForFood);
+
+                    }
                 }
-                if(settings.loot)
-                {
-                    Loot(creature);
-                }
+                
+                
             }
            
         }
 
 
-        private void Loot(Creature creature)
+        private void LootAndEat(Creature creature, bool lookForFood)
         {
-            int x, y;
+            
+
+            int lastItemId=0, itemId, count=0;
+            List<LootItem> removed = new List<LootItem>();
+
+
             lock (lootList)
             {
-                while (GetData.getItemCoordinatesFromFirstOpenedWindow(out x, out y, Item.ToIdList(lootList)))
-                {
-                    GetData.DragToBackpack(x, y);
-                }
+
+                int x, y;
+                List<int> foodAndLootList = Item.ToIdList(lootList);
+
+
+                if (lookForFood && GetData.HungryTime < 180)
+                    foodAndLootList.AddRange(Item.ToIdList(foodList));
+               
+
+                
+                    while (GetData.getItemCoordinatesFromOpenedWindow(out x, out y, out itemId, foodAndLootList, GetData.secondOpenedWindow))
+                    {
+                        if (lastItemId == itemId)
+                            count++;
+                        else
+                            count = 0;
+
+                        if (lootList.Any(li => li.ID == itemId)) //if it is loot item
+                        {
+                            lastItemId = itemId;
+                            LootItem it = lootList.First(item => item.ID == itemId);
+
+
+                            int toX, toY;
+                            //find container to put it
+                            if (GetData.getItemCoordinatesFromOpenedWindow(out toX, out toY, it.container.ID, GetData.firstOpenedWindow))
+                            {
+                                MouseSimulator.drag(x, y, toX, toY, true);
+                                Thread.Sleep(200);
+                                KeyboardSimulator.Press("Enter");
+                            }
+                            else
+                            {
+                                if (openNextContainer)
+                                {
+                                    if (GetData.UseItemFromOpenedWindow(nextContainer.ID, GetData.firstOpenedWindow))
+                                        Thread.Sleep(1000);
+                                    count = 5;
+                                }
+                            }
+
+                            if (count > 5) // remove item which makes a problem
+                            {
+                                foodAndLootList.Remove(itemId);
+                            }
+                        }
+                        else if (GetData.HungryTime < 180)  // if it is food
+                            MouseSimulator.click(x, y, true);
+                        else
+                            foodAndLootList.Remove(itemId);
+                    }
+                
             }
         }
-        private void LookForFood(Creature creature)
-        {
-            lock (foodList)
-            {
-                GetData.UseItemsFromFrstOpenedWindow(Item.ToIdList(foodList));
-            }
-        }
+
+
+       
         private void tryToStandDiagonal()
         {
             List<Creature> CreaturesToStayDiagonal = new List<Creature>();
