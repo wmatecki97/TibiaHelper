@@ -13,7 +13,7 @@ namespace TibiaHeleper.Modules
         public string playerName { get;  set; }
         public int healthPercentToHeal { get; set; }
 
-        private Creature player { get; set; }
+        private Creature _player { get; set; }
 
         public Sio()
         {
@@ -24,15 +24,15 @@ namespace TibiaHeleper.Modules
         public void Run()
         {
             findPlayer();
-            if (player == null) return;
-            string spell = "exura sio \"" + player.name + "\"";
+            if (_player == null) return;
+            string spell = "exura sio \"" + _player.name + "\"";
             
             while (working)
             {
-                if(player.onScreen)
+                if(_player.onScreen)
                 {
                     int mana = GetData.MyMana;
-                    if (player.HPPercent < healthPercentToHeal && GetData.MyMana >= 140)
+                    if (_player.HPPercent < healthPercentToHeal && GetData.MyMana >= 140)
                     {
                         KeyboardSimulator.Message(spell);
                       //  KeyboardSimulator.Simulate("f10");
@@ -50,9 +50,9 @@ namespace TibiaHeleper.Modules
         /// <returns></returns>
         private void findPlayer()
         {
-            while (player == null && working)
+            while (_player == null && working)
             {
-                player = GetData.getPlayer(playerName);
+                _player = GetData.getPlayer(playerName);
                 Thread.Sleep(500);
             }
         }

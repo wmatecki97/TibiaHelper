@@ -47,16 +47,17 @@ namespace TibiaHeleper.MemoryOperations
         public static List<uint> ThirdWindowFromTop;
         public static List<uint> SecondWindowFromTop;
 
+        public static List<uint> FirstOpenedWindowHeight { get; }
+        public static List<uint> SecondOpenedWindowHeight { get; }
+        public static List<uint> tradeWindowSelectedItem { get; }
+
         public static List<uint> ActualInput { get; }
         public static uint LastServerInfoMessage { get; }
+        public static List<uint> MoveItemCount { get; }
 
         public static uint LastClickedObject { get; }
 
-        public static List<uint> FirstOpenedWindowHeight { get; }
-
-        public static List<uint> SecondOpenedWindowHeight { get; }
-
-        public static List<uint> tradeWindowSelectedItem { get; }
+        
 
         static Addresses()
         {
@@ -107,6 +108,29 @@ namespace TibiaHeleper.MemoryOperations
             GameWindowFromLeftDistance.Add(0x4);
             GameWindowFromLeftDistance.Add(0x4);
 
+            FirstOpenedWindowHeight = new List<uint>();
+            FirstOpenedWindowHeight.Add(0x00570744);
+            FirstOpenedWindowHeight.Add(0x38);
+            FirstOpenedWindowHeight.Add(0x24);
+            FirstOpenedWindowHeight.Add(0x20);
+
+            SecondOpenedWindowHeight = new List<uint>();
+            SecondOpenedWindowHeight.Add(0x00570744);
+            SecondOpenedWindowHeight.Add(0x24);
+            SecondOpenedWindowHeight.Add(0x24);
+            SecondOpenedWindowHeight.Add(0x4c);
+            SecondOpenedWindowHeight.Add(0xc);
+            SecondOpenedWindowHeight.Add(0x10);
+            SecondOpenedWindowHeight.Add(0x20);
+
+            tradeWindowSelectedItem = new List<uint>();
+            tradeWindowSelectedItem.Add(0x00570744);
+            tradeWindowSelectedItem.Add(0x24);
+            tradeWindowSelectedItem.Add(0x24);
+            tradeWindowSelectedItem.Add(0x44);
+            tradeWindowSelectedItem.Add(0x38);
+            tradeWindowSelectedItem.Add(0x14c);
+
             GameWindowWidth = 0x581F90;
 
             WindowIDOffset = 0x8;
@@ -135,30 +159,16 @@ namespace TibiaHeleper.MemoryOperations
 
             LastServerInfoMessage = 0x5C3DC0;
 
+            MoveItemCount = new List<uint>();
+            MoveItemCount.Add(0x570740);
+            MoveItemCount.Add(0x2C);
+            MoveItemCount.Add(0x24);
+            MoveItemCount.Add(0x2C);
+            MoveItemCount.Add(0x30);
+
             LastClickedObject = 0x70A488;
 
-            FirstOpenedWindowHeight = new List<uint>();
-            FirstOpenedWindowHeight.Add(0x00570744);
-            FirstOpenedWindowHeight.Add(0x38);
-            FirstOpenedWindowHeight.Add(0x24);
-            FirstOpenedWindowHeight.Add(0x20);
-
-            SecondOpenedWindowHeight = new List<uint>();
-            SecondOpenedWindowHeight.Add(0x00570744);
-            SecondOpenedWindowHeight.Add(0x24);
-            SecondOpenedWindowHeight.Add(0x24);
-            SecondOpenedWindowHeight.Add(0x4c);
-            SecondOpenedWindowHeight.Add(0xc);
-            SecondOpenedWindowHeight.Add(0x10);
-            SecondOpenedWindowHeight.Add(0x20);
-
-            tradeWindowSelectedItem = new List<uint>();
-            tradeWindowSelectedItem.Add(0x00570744);
-            tradeWindowSelectedItem.Add(0x24);
-            tradeWindowSelectedItem.Add(0x24);
-            tradeWindowSelectedItem.Add(0x44);
-            tradeWindowSelectedItem.Add(0x38);
-            tradeWindowSelectedItem.Add(0x14c);
+            
 
         }
     }

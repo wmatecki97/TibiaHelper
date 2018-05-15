@@ -15,9 +15,13 @@ namespace TibiaHeleper.MemoryOperations
         {
             return ItemList.Items.FirstOrDefault(i => i.name.ToUpper().StartsWith(partOfName));
         }
-            
+
+        public static Item defaultContainer;
+
         static ItemList()
         {
+            defaultContainer = new Item("Default Container", 0);
+
             Items = new List<Item>();
             Items.Add(new Item("Abacus", 8156));
             Items.Add(new Item("Abacus (Replica)", 19151));

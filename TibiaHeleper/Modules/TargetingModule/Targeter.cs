@@ -30,12 +30,12 @@ namespace TibiaHeleper.Modules.Targeting
         }
         static Targeter()
         {
-            rand = new Random();
+            _rand = new Random();
         }
 
         public List<Item> foodList;
         public List<LootItem> lootList;
-        private static Random rand;
+        private static Random _rand;
 
         public void Run()
         {
@@ -361,7 +361,7 @@ namespace TibiaHeleper.Modules.Targeting
             {
                 if (max > direction[5])
                 {
-                    if (dir == 5 || (direction[i] == max && rand.Next(0, count) == 0))
+                    if (dir == 5 || (direction[i] == max && _rand.Next(0, count) == 0))
                     {
                         dir = i;
                     }

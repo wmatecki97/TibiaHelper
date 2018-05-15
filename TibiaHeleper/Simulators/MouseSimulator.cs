@@ -96,6 +96,7 @@ namespace TibiaHeleper.Simulators
            
 
             SendMessage(proc.MainWindowHandle, WM_LBUTTONUP, (IntPtr)0, MakeLParam(toXPos, toYPos));
+            Thread.Sleep(100);
 
             if(moveRealMouse)
                 SetCursorPos(cursor.X, cursor.Y);

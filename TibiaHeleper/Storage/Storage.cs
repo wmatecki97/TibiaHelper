@@ -80,15 +80,14 @@ namespace TibiaHeleper.Storage
                     obj = formatter.Deserialize(stream) as VersionedObject;
                     stream.Close();
                     checkVersion(obj);
+                    return obj.obj;
                 }
                 catch (Exception)
                 {
-                    obj.obj = null;
+                    return null;
                 }
-                
             }
-
-            return obj.obj;
+            return null;
         }
 
         public static bool SaveAllModules()

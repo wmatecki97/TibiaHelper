@@ -41,7 +41,7 @@ namespace TibiaHeleper.Windows {
     public partial class HealerWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 11 "..\..\..\Windows\HealerWindow.xaml"
+        #line 12 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label Amount;
         
@@ -49,7 +49,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 12 "..\..\..\Windows\HealerWindow.xaml"
+        #line 13 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label hotkeyLabel;
         
@@ -57,7 +57,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 13 "..\..\..\Windows\HealerWindow.xaml"
+        #line 14 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button SaveBtn;
         
@@ -65,7 +65,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 14 "..\..\..\Windows\HealerWindow.xaml"
+        #line 15 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button BackBtn;
         
@@ -73,7 +73,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 16 "..\..\..\Windows\HealerWindow.xaml"
+        #line 17 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label low;
         
@@ -81,7 +81,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 17 "..\..\..\Windows\HealerWindow.xaml"
+        #line 18 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox lowHP;
         
@@ -89,7 +89,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 18 "..\..\..\Windows\HealerWindow.xaml"
+        #line 19 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox lowHPB;
         
@@ -97,7 +97,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 19 "..\..\..\Windows\HealerWindow.xaml"
+        #line 20 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox lowHPMana;
         
@@ -105,7 +105,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 21 "..\..\..\Windows\HealerWindow.xaml"
+        #line 22 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label med;
         
@@ -113,7 +113,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 22 "..\..\..\Windows\HealerWindow.xaml"
+        #line 23 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox medHP;
         
@@ -121,7 +121,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 23 "..\..\..\Windows\HealerWindow.xaml"
+        #line 24 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox medHPB;
         
@@ -129,7 +129,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 24 "..\..\..\Windows\HealerWindow.xaml"
+        #line 25 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox medHPMana;
         
@@ -137,7 +137,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 26 "..\..\..\Windows\HealerWindow.xaml"
+        #line 27 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label high;
         
@@ -145,7 +145,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 27 "..\..\..\Windows\HealerWindow.xaml"
+        #line 28 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox highHP;
         
@@ -153,7 +153,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 28 "..\..\..\Windows\HealerWindow.xaml"
+        #line 29 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox highHPB;
         
@@ -161,7 +161,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 29 "..\..\..\Windows\HealerWindow.xaml"
+        #line 30 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox highHPMana;
         
@@ -169,7 +169,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 31 "..\..\..\Windows\HealerWindow.xaml"
+        #line 32 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ManaNeededLabel;
         
@@ -177,7 +177,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 32 "..\..\..\Windows\HealerWindow.xaml"
+        #line 33 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label LowManaLabel;
         
@@ -185,7 +185,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 33 "..\..\..\Windows\HealerWindow.xaml"
+        #line 34 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox lowMana;
         
@@ -193,7 +193,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 34 "..\..\..\Windows\HealerWindow.xaml"
+        #line 35 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox lMB;
         
@@ -201,7 +201,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 36 "..\..\..\Windows\HealerWindow.xaml"
+        #line 37 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label HighManaLabel;
         
@@ -209,7 +209,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 37 "..\..\..\Windows\HealerWindow.xaml"
+        #line 38 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox highMana;
         
@@ -217,7 +217,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 38 "..\..\..\Windows\HealerWindow.xaml"
+        #line 39 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox hMB;
         
@@ -225,7 +225,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 40 "..\..\..\Windows\HealerWindow.xaml"
+        #line 41 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Error;
         
@@ -233,7 +233,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 41 "..\..\..\Windows\HealerWindow.xaml"
+        #line 42 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ErrorLabel;
         
@@ -241,7 +241,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 42 "..\..\..\Windows\HealerWindow.xaml"
+        #line 43 "..\..\..\Windows\HealerWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button errBtn;
         
@@ -280,13 +280,13 @@ namespace TibiaHeleper.Windows {
             {
             case 1:
             
-            #line 9 "..\..\..\Windows\HealerWindow.xaml"
+            #line 10 "..\..\..\Windows\HealerWindow.xaml"
             ((TibiaHeleper.Windows.HealerWindow)(target)).Loaded += new System.Windows.RoutedEventHandler(this.SetValues);
             
             #line default
             #line hidden
             
-            #line 9 "..\..\..\Windows\HealerWindow.xaml"
+            #line 10 "..\..\..\Windows\HealerWindow.xaml"
             ((TibiaHeleper.Windows.HealerWindow)(target)).Closing += new System.ComponentModel.CancelEventHandler(this.Close);
             
             #line default
@@ -301,7 +301,7 @@ namespace TibiaHeleper.Windows {
             case 4:
             this.SaveBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 13 "..\..\..\Windows\HealerWindow.xaml"
+            #line 14 "..\..\..\Windows\HealerWindow.xaml"
             this.SaveBtn.Click += new System.Windows.RoutedEventHandler(this.Save);
             
             #line default
@@ -310,7 +310,7 @@ namespace TibiaHeleper.Windows {
             case 5:
             this.BackBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 14 "..\..\..\Windows\HealerWindow.xaml"
+            #line 15 "..\..\..\Windows\HealerWindow.xaml"
             this.BackBtn.Click += new System.Windows.RoutedEventHandler(this.Back);
             
             #line default
@@ -382,7 +382,7 @@ namespace TibiaHeleper.Windows {
             case 27:
             this.errBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 42 "..\..\..\Windows\HealerWindow.xaml"
+            #line 43 "..\..\..\Windows\HealerWindow.xaml"
             this.errBtn.Click += new System.Windows.RoutedEventHandler(this.HideErrorGrid);
             
             #line default

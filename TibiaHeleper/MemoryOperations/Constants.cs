@@ -33,6 +33,8 @@ namespace TibiaHeleper.MemoryOperations
         public static int OpenedWindowMinimumHeight { get; }
         public static int OpenedWindowCloseButtonFromLeftXOffset { get; }
         public static int OpenedWindowCloseButtonYOffset { get; }
+        public static int OpenedWindowNavigateButtonsYOffset { get; }
+        public static int OpenedWindowPreviousButtonFromRightXOffset { get; }
 
 
         public const int TradeWindowSellOrOKButtonXFromRightOffset = -30;
@@ -84,6 +86,8 @@ namespace TibiaHeleper.MemoryOperations
             ItemInOpenWindowWidth = 37;
             OpenedWindowCloseButtonFromLeftXOffset = -10;
             OpenedWindowCloseButtonYOffset = 7;
+            OpenedWindowNavigateButtonsYOffset = 2;
+            OpenedWindowPreviousButtonFromRightXOffset = -36;
 
         }
 

@@ -8,6 +8,7 @@ using TibiaHeleper.Modules;
 using TibiaHeleper.Modules.TargetingModule;
 using TibiaHeleper.Modules.WalkerModule;
 using TibiaHeleper.Storage;
+using System.Linq;
 
 namespace TibiaHeleper.Windows
 {
@@ -21,29 +22,30 @@ namespace TibiaHeleper.Windows
             InitializeComponent();
         }
 
-        private List<WalkerStatement> StatementsList;
-        private int tolerance;
+        private List<WalkerStatement> _StatementsList;
+        private int _tolerance;
 
-        List<Modules.WalkerModule.Condition> conditionsList;
-        Modules.WalkerModule.Condition condition;
-        short NotSet;
-        List<TradeItem> tradeList;
-        List<LootItem> putIntoList;
-        List<LootItem> takeFromList;
+        private List<Modules.WalkerModule.Condition> _conditionsList;
+        private Modules.WalkerModule.Condition _condition;
+        private short _NotSet;
+        private List<TradeItem> _tradeList;
+        private List<DepositItem> _putIntoList;
+        private List<DepositItem> _takeFromList;
+        private Item _takenItemContainer;
 
-        private string startLabelName;
-        private int startIndex;
+        private string _startLabelName;
+        private int _startIndex;
 
         private Item _item;
 
         private void Load(object sender, RoutedEventArgs e)
         {
-            startIndex = ModulesManager.walker.actualStatementIndex;
-            StatementsList = ModulesManager.walker.CopyList();
-            tolerance = ModulesManager.walker.tolerance;
+            _startIndex = ModulesManager.walker.actualStatementIndex;
+            _StatementsList = ModulesManager.walker.CopyList();
+            _tolerance = ModulesManager.walker.tolerance;
             fillList();
-            NotSet = StatementType.conditionElement["Not set"];
-            listBox.SelectedIndex = startIndex;
+            _NotSet = StatementType.conditionElement["Not set"];
+            listBox.SelectedIndex = _startIndex;
 
             foreach (KeyValuePair<string, int> item in StatementType.getType)
             {
@@ -64,22 +66,23 @@ namespace TibiaHeleper.Windows
             DepositOrMailBoxComboBox.Items.Add("Mail Box");
             DepositOrMailBoxComboBox.SelectedIndex = 0;
 
-            for(int i=0; i<12; i++)
+            for(int i=1; i<18; i++)
             {
                 depoNumberComboBox.Items.Add(i.ToString());
             }
 
             depoNumberComboBox.SelectedIndex = 0;
 
-            tradeList = new List<TradeItem>();
-            putIntoList = new List<LootItem>();
-            takeFromList = new List<LootItem>();
+            _tradeList = new List<TradeItem>();
+            _putIntoList = new List<DepositItem>();
+            _takeFromList = new List<DepositItem>();
+            _takenItemContainer = ItemList.defaultContainer;
 
         }
         private void fillList()
         {
             listBox.Items.Clear();
-            foreach (WalkerStatement item in StatementsList)
+            foreach (WalkerStatement item in _StatementsList)
             {
                 listBox.DisplayMemberPath = "name";
                 listBox.Items.Add(item);
@@ -87,16 +90,16 @@ namespace TibiaHeleper.Windows
         }
         private void insertToList(WalkerStatement item)
         {
-            int index = StatementsList.IndexOf((WalkerStatement)listBox.SelectedItem) + 1;
+            int index = _StatementsList.IndexOf((WalkerStatement)listBox.SelectedItem) + 1;
             if (index == -1) index = listBox.Items.Count - 1;
-            StatementsList.Insert(index, item);
+            _StatementsList.Insert(index, item);
             fillList();
             listBox.SelectedIndex = index;
         }
 
         public void ReloadData()
         {
-            StatementsList = ModulesManager.walker.CopyList();
+            _StatementsList = ModulesManager.walker.CopyList();
             fillList();
         }
 
@@ -134,14 +137,14 @@ namespace TibiaHeleper.Windows
             if (wasWorking == true) ModulesManager.WalkerDisable();
             while (!ModulesManager.walker.stopped) ;
 
-            ModulesManager.walker.SetList(Way.changeWayToWaypointList(StatementsList));
-            if (startLabelName != "") ModulesManager.walker.startStatementIndex = ModulesManager.walker.list.FindIndex(x => x.name == startLabelName);
+            ModulesManager.walker.SetList(Way.changeWayToWaypointList(_StatementsList));
+            if (_startLabelName != null&& _startLabelName != "") ModulesManager.walker.startStatementIndex = ModulesManager.walker.list.FindIndex(x => x.name == _startLabelName);
 
             //if (!wasWorking) ModulesManager.walker.startStatementIndex = startIndex;
 
             if (wasWorking) ModulesManager.WalkerEnable();
 
-            StatementsList = ModulesManager.walker.CopyList();
+            _StatementsList = ModulesManager.walker.CopyList();
             fillList();
 
             showPopUpWindow("Saved succesfully");
@@ -157,7 +160,7 @@ namespace TibiaHeleper.Windows
         {
             String name = LabelTextBox.Text;
             bool isGood = true;
-            foreach (WalkerStatement statement in StatementsList)
+            foreach (WalkerStatement statement in _StatementsList)
             {
                 if (statement.name == name)
                     isGood = false;
@@ -174,13 +177,13 @@ namespace TibiaHeleper.Windows
         private void SetStartLabel(object sender, RoutedEventArgs e)
         {
 
-            startLabelName = startLabel.Text;
-            if (!labelExist(startLabelName))
-                startLabelName = "";
+            _startLabelName = startLabel.Text;
+            if (!labelExist(_startLabelName))
+                _startLabelName = "";
         }
         private bool labelExist(string name)
         {
-            foreach (WalkerStatement item in StatementsList)
+            foreach (WalkerStatement item in _StatementsList)
             {
                 if (item.name == name)
                     return true;
@@ -203,11 +206,11 @@ namespace TibiaHeleper.Windows
         private void Down(object sender, RoutedEventArgs e)
         {
             WalkerStatement selectedItem = (WalkerStatement)listBox.SelectedItem;
-            int selectedIndex = StatementsList.IndexOf(selectedItem);
-            if (selectedIndex < StatementsList.Count - 1)
+            int selectedIndex = _StatementsList.IndexOf(selectedItem);
+            if (selectedIndex < _StatementsList.Count - 1)
             {
-                StatementsList.RemoveAt(selectedIndex);
-                StatementsList.Insert(selectedIndex + 1, selectedItem);
+                _StatementsList.RemoveAt(selectedIndex);
+                _StatementsList.Insert(selectedIndex + 1, selectedItem);
                 fillList();
                 listBox.SelectedIndex = selectedIndex + 1;
             }
@@ -215,18 +218,18 @@ namespace TibiaHeleper.Windows
         private void Up(object sender, RoutedEventArgs e)
         {
             WalkerStatement selectedItem = (WalkerStatement)listBox.SelectedItem;
-            int selectedIndex = StatementsList.IndexOf(selectedItem);
+            int selectedIndex = _StatementsList.IndexOf(selectedItem);
             if (selectedIndex > 0)
             {
-                StatementsList.RemoveAt(selectedIndex);
-                StatementsList.Insert(selectedIndex - 1, selectedItem);
+                _StatementsList.RemoveAt(selectedIndex);
+                _StatementsList.Insert(selectedIndex - 1, selectedItem);
                 fillList();
                 listBox.SelectedIndex = selectedIndex - 1;
             }
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            StatementsList.Remove((WalkerStatement)listBox.SelectedItem);
+            _StatementsList.Remove((WalkerStatement)listBox.SelectedItem);
             fillList();
         }
         private void Edit(object sender, RoutedEventArgs e)
@@ -302,21 +305,21 @@ namespace TibiaHeleper.Windows
                     CreateCondition(null, null);
                     Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
                     ConditionFulfilledTextBox.Text = statement.args[0].ToString();
-                    conditionsList = statement.args[1] as List<Modules.WalkerModule.Condition>;
+                    _conditionsList = statement.args[1] as List<Modules.WalkerModule.Condition>;
                     refreshCondition();
                 }
                 else if (action == "Trade")
                 {
                     Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
-                    tradeList = (List<TradeItem>)statement.args[0];
+                    _tradeList = (List<TradeItem>)statement.args[0];
                     ShowTradeGrid(new object(), new RoutedEventArgs());
                     refreshTradeList();
                 }
                 else if (action == "Deposit")
                 {
                     Modules.WalkerModule.Action statement = selected as Modules.WalkerModule.Action;
-                    putIntoList = (List<LootItem>)statement.args[1];
-                    takeFromList = (List<LootItem>)statement.args[2];
+                    _putIntoList = (List<DepositItem>)statement.args[1];
+                    _takeFromList = (List<DepositItem>)statement.args[2];
                     DepositOrMailBoxComboBox.SelectedItem = ((bool)statement.args[0]) ? "Deposit" : "Mail box";
 
                     ShowDepositButton(new object(), new RoutedEventArgs());
@@ -487,13 +490,13 @@ namespace TibiaHeleper.Windows
                 }
                 else if (actionType == type["Condition"])
                 {
-                    if (conditionsList.Count > 0)
+                    if (_conditionsList.Count > 0)
                     {
-                        if (condition.connector == StatementType.conditionElement["Not set"])
+                        if (_condition.connector == StatementType.conditionElement["Not set"])
                         {
                             if (ConditionFulfilledTextBox.Text != "")
                             {
-                                action = new Modules.WalkerModule.Action(actionType, ConditionFulfilledTextBox.Text, conditionsList);
+                                action = new Modules.WalkerModule.Action(actionType, ConditionFulfilledTextBox.Text, _conditionsList);
                             }
                             else
                             {
@@ -515,10 +518,10 @@ namespace TibiaHeleper.Windows
                 }
                 else if (actionType == type["Trade"])
                 {
-                    if (tradeList.Count > 0)
+                    if (_tradeList.Count > 0)
                     {
-                        action = new Modules.WalkerModule.Action(actionType, tradeList);
-                        tradeList = new List<TradeItem>();
+                        action = new Modules.WalkerModule.Action(actionType, _tradeList);
+                        _tradeList = new List<TradeItem>();
                         AmountTextBox.Text = "";
                         refreshTradeList();
                         TradeGrid.Visibility = Visibility.Hidden;
@@ -531,11 +534,13 @@ namespace TibiaHeleper.Windows
                 }
                 else if (actionType == type["Deposit"])
                 {
-                    if (putIntoList.Count > 0 || takeFromList.Count>0)
+                    if (_putIntoList.Count > 0 || _takeFromList.Count>0)
                     {
-                        action = new Modules.WalkerModule.Action(actionType, DepositOrMailBoxComboBox.SelectedItem.ToString()=="Deposit", putIntoList, takeFromList);
-                        putIntoList = new List<LootItem>();
-                        takeFromList = new List<LootItem>();
+                        action = new Modules.WalkerModule.Action(actionType, DepositOrMailBoxComboBox.SelectedItem.ToString()=="Deposit", _putIntoList, _takeFromList);
+                        _putIntoList = new List<DepositItem>();
+                        _takeFromList = new List<DepositItem>();
+                        _takenItemContainer = ItemList.Items[0];
+
                         RefreshPutIntoList();
                         RefreshTakeFromList();
                         
@@ -549,7 +554,8 @@ namespace TibiaHeleper.Windows
                     }
                 }
                 else return; //protect from adding null to the list
-                insertToList(action);
+                if(action!=null)
+                    insertToList(action);
                 ConditionGrid.Visibility = Visibility.Hidden;
             }
             catch (Exception)
@@ -659,8 +665,8 @@ namespace TibiaHeleper.Windows
         private void CreateCondition(object sender, RoutedEventArgs e)
         {
             ConditionGrid.Visibility = Visibility.Visible;
-            conditionsList = new List<Modules.WalkerModule.Condition>();
-            condition = new Modules.WalkerModule.Condition();
+            _conditionsList = new List<Modules.WalkerModule.Condition>();
+            _condition = new Modules.WalkerModule.Condition();
             ConditionText.Text = "";
             ConditionFulfilledTextBox.Text = "";
         }
@@ -669,7 +675,7 @@ namespace TibiaHeleper.Windows
         {
             int argsNumber = 0;
 
-            if (cond.connector != NotSet)
+            if (cond.connector != _NotSet)
                 text += StatementType.getConditionElementName(cond.connector) + "\n";
             if (cond.item1 == StatementType.conditionElement["Value"])
                 text += cond.args[argsNumber++];
@@ -692,47 +698,47 @@ namespace TibiaHeleper.Windows
         private void refreshCondition()
         {
             string text = "";
-            foreach (Modules.WalkerModule.Condition cond in conditionsList)
+            foreach (Modules.WalkerModule.Condition cond in _conditionsList)
             {
                 text = setText(cond, text);
             }
-            text = setText(condition, text);
+            text = setText(_condition, text);
 
             text = text.Replace("Not set", "");
             ConditionText.Text = text;
         }
         private void setComparator(string cond)
         {
-            if (condition.item1 != NotSet)
+            if (_condition.item1 != _NotSet)
             {
-                condition.comparator = StatementType.conditionElement[cond];
+                _condition.comparator = StatementType.conditionElement[cond];
             }
             refreshCondition();
         }
         private void setConnector(string connector)
         {
-            if (conditionsList.Count > 0)
+            if (_conditionsList.Count > 0)
             {
-                condition.connector = StatementType.conditionElement[connector];
+                _condition.connector = StatementType.conditionElement[connector];
             }
             refreshCondition();
         }
         private void setItem(string item, object value = null)
         {
 
-            if (condition.connector != NotSet || conditionsList.Count == 0)
+            if (_condition.connector != _NotSet || _conditionsList.Count == 0)
             {
                 if (value != null)
-                    condition.args.Add(value);
-                if (condition.item1 == NotSet)
+                    _condition.args.Add(value);
+                if (_condition.item1 == _NotSet)
                 {
-                    condition.item1 = StatementType.conditionElement[item];
+                    _condition.item1 = StatementType.conditionElement[item];
                 }
-                else if (condition.comparator != NotSet)
+                else if (_condition.comparator != _NotSet)
                 {
-                    condition.item2 = StatementType.conditionElement[item];
-                    conditionsList.Add(condition);
-                    condition = new Modules.WalkerModule.Condition();
+                    _condition.item2 = StatementType.conditionElement[item];
+                    _conditionsList.Add(_condition);
+                    _condition = new Modules.WalkerModule.Condition();
                 }
                 refreshCondition();
             }
@@ -770,9 +776,9 @@ namespace TibiaHeleper.Windows
         }
         private void DeleteButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (conditionsList.Count > 0)
+            if (_conditionsList.Count > 0)
             {
-                conditionsList.RemoveAt(conditionsList.Count - 1);
+                _conditionsList.RemoveAt(_conditionsList.Count - 1);
             }
             refreshCondition();
         }
@@ -812,8 +818,8 @@ namespace TibiaHeleper.Windows
         }
         private void CancelCondition(object sender, RoutedEventArgs e)
         {
-            condition = new Modules.WalkerModule.Condition();
-            conditionsList = new List<Modules.WalkerModule.Condition>();
+            _condition = new Modules.WalkerModule.Condition();
+            _conditionsList = new List<Modules.WalkerModule.Condition>();
 
             refreshCondition();
             ConditionGrid.Visibility = Visibility.Hidden;
@@ -864,7 +870,7 @@ namespace TibiaHeleper.Windows
             if (TradeListBox.SelectedIndex >= 0)
             {
                 TradeItem item = TradeListBox.SelectedItem as TradeItem;
-                tradeList.Remove(item);
+                _tradeList.Remove(item);
                 refreshTradeList();
             }
 
@@ -878,7 +884,7 @@ namespace TibiaHeleper.Windows
                 {
                     if(int.TryParse(AmountTextBox.Text, out amount))
                     {
-                        tradeList.Add(new TradeItem(_item, TradeItem.Action.Buy, amount));
+                        _tradeList.Add(new TradeItem(_item, TradeItem.Action.Buy, amount));
                         refreshTradeList();
                     }
                     else
@@ -888,7 +894,7 @@ namespace TibiaHeleper.Windows
                 }               
                 if(SellOrBuyComboBox.SelectedValue.ToString() == "Sell")
                 {
-                    tradeList.Add(new TradeItem(_item, TradeItem.Action.Sell));
+                    _tradeList.Add(new TradeItem(_item, TradeItem.Action.Sell));
                     refreshTradeList();
                 }
             }
@@ -902,7 +908,7 @@ namespace TibiaHeleper.Windows
         private void refreshTradeList()
         {
             TradeListBox.Items.Clear();
-            foreach (TradeItem item in tradeList)
+            foreach (TradeItem item in _tradeList)
             {
                 TradeListBox.DisplayMemberPath = "displayName";
                 TradeListBox.Items.Add(item);
@@ -913,13 +919,14 @@ namespace TibiaHeleper.Windows
         {
             DepositGrid.Visibility = Visibility.Visible;
             ItemAndHintGrid.Visibility = Visibility.Visible;
+            amountTextBox.Text = "all";
         }
 
 
         private void RefreshPutIntoList()
         {
             putIntoListBox.Items.Clear();
-            foreach (LootItem item in putIntoList)
+            foreach (DepositItem item in _putIntoList)
             {
                 putIntoListBox.DisplayMemberPath = "displayedName";
                 putIntoListBox.Items.Add(item);
@@ -928,7 +935,7 @@ namespace TibiaHeleper.Windows
         private void RefreshTakeFromList()
         {
             takeFromListBox.Items.Clear();
-            foreach (LootItem item in takeFromList)
+            foreach (DepositItem item in _takeFromList)
             {
                 takeFromListBox.DisplayMemberPath = "displayedName";
                 takeFromListBox.Items.Add(item);
@@ -939,8 +946,23 @@ namespace TibiaHeleper.Windows
         {
             if (_item != null)
             {
-                putIntoList.Add(new LootItem(_item.name, _item.ID, new Item(depoNumberComboBox.SelectedItem.ToString())));
-                RefreshPutIntoList();
+                try
+                {
+                    if (amountTextBox.Text.ToUpper() == "ALL")
+                        _putIntoList.Add(new DepositItem(_item.name, _item.ID, int.Parse(depoNumberComboBox.SelectedItem.ToString()), -1));
+                    else
+                        _putIntoList.Add(new DepositItem(_item.name, _item.ID, int.Parse(depoNumberComboBox.SelectedItem.ToString()), int.Parse(amountTextBox.Text)));
+
+                    RefreshPutIntoList();
+                    putIntoListBox.SelectedItem = _putIntoList.Last();
+
+                }
+                catch
+                {
+                    showPopUpWindow("Amount can be positive number or word \"all\"");
+                }
+
+
             }
             
         }
@@ -948,7 +970,7 @@ namespace TibiaHeleper.Windows
         {
             if (putIntoListBox.SelectedIndex != -1)
             {
-                putIntoList.RemoveAt(putIntoListBox.SelectedIndex);
+                _putIntoList.RemoveAt(putIntoListBox.SelectedIndex);
                 RefreshPutIntoList();
             }
         }
@@ -956,15 +978,27 @@ namespace TibiaHeleper.Windows
         {
             if (_item != null)
             {
-                takeFromList.Add(new LootItem(_item.name, _item.ID, new Item(depoNumberComboBox.SelectedItem.ToString())));
-                RefreshTakeFromList();
+                try
+                {
+                    if (amountTextBox.Text.ToUpper() == "ALL")
+                        _takeFromList.Add(new DepositItem(_item.name, _item.ID, int.Parse(depoNumberComboBox.SelectedItem.ToString()), -1, _takenItemContainer));
+                    else
+                        _takeFromList.Add(new DepositItem(_item.name, _item.ID, int.Parse(depoNumberComboBox.SelectedItem.ToString()), int.Parse(amountTextBox.Text), _takenItemContainer));
+
+                    RefreshTakeFromList();
+                    takeFromListBox.SelectedItem = _takeFromList.Last();
+                }
+                catch
+                {
+                    showPopUpWindow("Amount can be positive number or word \"all\"");
+                }
             }
         }
         private void removeFromTake(object sender, RoutedEventArgs e)
         {
             if (takeFromListBox.SelectedIndex != -1)
             {
-                takeFromList.RemoveAt(takeFromListBox.SelectedIndex);
+                _takeFromList.RemoveAt(takeFromListBox.SelectedIndex);
                 RefreshTakeFromList();
             }
         }
@@ -985,6 +1019,12 @@ namespace TibiaHeleper.Windows
         {
             DepositGrid.Visibility = Visibility.Hidden;
             ItemAndHintGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void SetItemTakenContainer(object sender, RoutedEventArgs e)
+        {
+            _takenItemContainer = _item;
+            ContainerToPutTakenItemsTextBlock.Text = "Container for items taken:\n " + _takenItemContainer.name;
         }
     }
 }

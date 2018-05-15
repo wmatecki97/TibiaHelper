@@ -41,7 +41,7 @@ namespace TibiaHeleper.Windows {
     public partial class Targeting : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 11 "..\..\..\Windows\Targeting.xaml"
+        #line 12 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox listBox;
         
@@ -49,7 +49,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 12 "..\..\..\Windows\Targeting.xaml"
+        #line 13 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button BackButton;
         
@@ -57,7 +57,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 13 "..\..\..\Windows\Targeting.xaml"
+        #line 14 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label nemaLabel;
         
@@ -65,7 +65,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 14 "..\..\..\Windows\Targeting.xaml"
+        #line 15 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox Name;
         
@@ -73,7 +73,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 15 "..\..\..\Windows\Targeting.xaml"
+        #line 16 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label minHPLabel;
         
@@ -81,7 +81,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 16 "..\..\..\Windows\Targeting.xaml"
+        #line 17 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label maxHPLabel;
         
@@ -89,7 +89,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 17 "..\..\..\Windows\Targeting.xaml"
+        #line 18 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox minHP;
         
@@ -97,7 +97,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 18 "..\..\..\Windows\Targeting.xaml"
+        #line 19 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox maxHP;
         
@@ -105,7 +105,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 19 "..\..\..\Windows\Targeting.xaml"
+        #line 20 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label actionLabel;
         
@@ -113,7 +113,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 20 "..\..\..\Windows\Targeting.xaml"
+        #line 21 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox Action;
         
@@ -121,7 +121,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 21 "..\..\..\Windows\Targeting.xaml"
+        #line 22 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox maxDistance;
         
@@ -129,7 +129,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 22 "..\..\..\Windows\Targeting.xaml"
+        #line 23 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label maxDistanceLabel;
         
@@ -137,7 +137,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 23 "..\..\..\Windows\Targeting.xaml"
+        #line 24 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button upButton;
         
@@ -145,7 +145,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 24 "..\..\..\Windows\Targeting.xaml"
+        #line 25 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button downButton;
         
@@ -153,7 +153,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 25 "..\..\..\Windows\Targeting.xaml"
+        #line 26 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button addButton;
         
@@ -161,7 +161,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 26 "..\..\..\Windows\Targeting.xaml"
+        #line 27 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button deleteButton;
         
@@ -169,7 +169,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 27 "..\..\..\Windows\Targeting.xaml"
+        #line 28 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button saveButton;
         
@@ -177,7 +177,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 28 "..\..\..\Windows\Targeting.xaml"
+        #line 29 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button editButton;
         
@@ -185,7 +185,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 32 "..\..\..\Windows\Targeting.xaml"
+        #line 33 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox FollowTargetCheckBox;
         
@@ -193,7 +193,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 33 "..\..\..\Windows\Targeting.xaml"
+        #line 34 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox DiagonalCheckBox;
         
@@ -201,7 +201,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 34 "..\..\..\Windows\Targeting.xaml"
+        #line 35 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox LookForFoodCheckBox;
         
@@ -209,7 +209,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 35 "..\..\..\Windows\Targeting.xaml"
+        #line 36 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox LootListBox;
         
@@ -217,7 +217,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 36 "..\..\..\Windows\Targeting.xaml"
+        #line 37 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox FoodListBox;
         
@@ -225,7 +225,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 37 "..\..\..\Windows\Targeting.xaml"
+        #line 38 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label LootLabel;
         
@@ -233,7 +233,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 38 "..\..\..\Windows\Targeting.xaml"
+        #line 39 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label FoodLabel;
         
@@ -241,7 +241,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 39 "..\..\..\Windows\Targeting.xaml"
+        #line 40 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox ItemTextBox;
         
@@ -249,7 +249,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 40 "..\..\..\Windows\Targeting.xaml"
+        #line 41 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button AddLootButton;
         
@@ -257,7 +257,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 41 "..\..\..\Windows\Targeting.xaml"
+        #line 42 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button AddFood;
         
@@ -265,7 +265,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 42 "..\..\..\Windows\Targeting.xaml"
+        #line 43 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox HintTextBox;
         
@@ -273,7 +273,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 43 "..\..\..\Windows\Targeting.xaml"
+        #line 44 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button DeleteFromLootListButton;
         
@@ -281,7 +281,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 44 "..\..\..\Windows\Targeting.xaml"
+        #line 45 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button DeleteFromFoodListButton;
         
@@ -289,7 +289,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 45 "..\..\..\Windows\Targeting.xaml"
+        #line 46 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox LootCheckBox;
         
@@ -297,7 +297,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 46 "..\..\..\Windows\Targeting.xaml"
+        #line 47 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button SetContainerForLootButton;
         
@@ -305,7 +305,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 47 "..\..\..\Windows\Targeting.xaml"
+        #line 48 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button SetNextContainerButton;
         
@@ -313,7 +313,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 49 "..\..\..\Windows\Targeting.xaml"
+        #line 50 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ActualLootContainerLabel;
         
@@ -321,7 +321,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 50 "..\..\..\Windows\Targeting.xaml"
+        #line 51 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ActualNextContainerLabel;
         
@@ -329,7 +329,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 51 "..\..\..\Windows\Targeting.xaml"
+        #line 52 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox OpenNextContainerCheckBox;
         
@@ -337,7 +337,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 53 "..\..\..\Windows\Targeting.xaml"
+        #line 54 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Error;
         
@@ -345,7 +345,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 54 "..\..\..\Windows\Targeting.xaml"
+        #line 55 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ErrorLabel;
         
@@ -353,7 +353,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 55 "..\..\..\Windows\Targeting.xaml"
+        #line 56 "..\..\..\Windows\Targeting.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button errBtn;
         
@@ -392,13 +392,13 @@ namespace TibiaHeleper.Windows {
             {
             case 1:
             
-            #line 9 "..\..\..\Windows\Targeting.xaml"
+            #line 10 "..\..\..\Windows\Targeting.xaml"
             ((TibiaHeleper.Windows.Targeting)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Load);
             
             #line default
             #line hidden
             
-            #line 9 "..\..\..\Windows\Targeting.xaml"
+            #line 10 "..\..\..\Windows\Targeting.xaml"
             ((TibiaHeleper.Windows.Targeting)(target)).Closing += new System.ComponentModel.CancelEventHandler(this.Close);
             
             #line default
@@ -407,7 +407,7 @@ namespace TibiaHeleper.Windows {
             case 2:
             this.listBox = ((System.Windows.Controls.ListBox)(target));
             
-            #line 11 "..\..\..\Windows\Targeting.xaml"
+            #line 12 "..\..\..\Windows\Targeting.xaml"
             this.listBox.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.SelectedAction);
             
             #line default
@@ -416,7 +416,7 @@ namespace TibiaHeleper.Windows {
             case 3:
             this.BackButton = ((System.Windows.Controls.Button)(target));
             
-            #line 12 "..\..\..\Windows\Targeting.xaml"
+            #line 13 "..\..\..\Windows\Targeting.xaml"
             this.BackButton.Click += new System.Windows.RoutedEventHandler(this.Back);
             
             #line default
@@ -455,7 +455,7 @@ namespace TibiaHeleper.Windows {
             case 14:
             this.upButton = ((System.Windows.Controls.Button)(target));
             
-            #line 23 "..\..\..\Windows\Targeting.xaml"
+            #line 24 "..\..\..\Windows\Targeting.xaml"
             this.upButton.Click += new System.Windows.RoutedEventHandler(this.Up);
             
             #line default
@@ -464,7 +464,7 @@ namespace TibiaHeleper.Windows {
             case 15:
             this.downButton = ((System.Windows.Controls.Button)(target));
             
-            #line 24 "..\..\..\Windows\Targeting.xaml"
+            #line 25 "..\..\..\Windows\Targeting.xaml"
             this.downButton.Click += new System.Windows.RoutedEventHandler(this.Down);
             
             #line default
@@ -473,7 +473,7 @@ namespace TibiaHeleper.Windows {
             case 16:
             this.addButton = ((System.Windows.Controls.Button)(target));
             
-            #line 25 "..\..\..\Windows\Targeting.xaml"
+            #line 26 "..\..\..\Windows\Targeting.xaml"
             this.addButton.Click += new System.Windows.RoutedEventHandler(this.Add);
             
             #line default
@@ -482,7 +482,7 @@ namespace TibiaHeleper.Windows {
             case 17:
             this.deleteButton = ((System.Windows.Controls.Button)(target));
             
-            #line 26 "..\..\..\Windows\Targeting.xaml"
+            #line 27 "..\..\..\Windows\Targeting.xaml"
             this.deleteButton.Click += new System.Windows.RoutedEventHandler(this.Delete);
             
             #line default
@@ -491,7 +491,7 @@ namespace TibiaHeleper.Windows {
             case 18:
             this.saveButton = ((System.Windows.Controls.Button)(target));
             
-            #line 27 "..\..\..\Windows\Targeting.xaml"
+            #line 28 "..\..\..\Windows\Targeting.xaml"
             this.saveButton.Click += new System.Windows.RoutedEventHandler(this.Save);
             
             #line default
@@ -500,7 +500,7 @@ namespace TibiaHeleper.Windows {
             case 19:
             this.editButton = ((System.Windows.Controls.Button)(target));
             
-            #line 28 "..\..\..\Windows\Targeting.xaml"
+            #line 29 "..\..\..\Windows\Targeting.xaml"
             this.editButton.Click += new System.Windows.RoutedEventHandler(this.Edit);
             
             #line default
@@ -530,7 +530,7 @@ namespace TibiaHeleper.Windows {
             case 27:
             this.ItemTextBox = ((System.Windows.Controls.TextBox)(target));
             
-            #line 39 "..\..\..\Windows\Targeting.xaml"
+            #line 40 "..\..\..\Windows\Targeting.xaml"
             this.ItemTextBox.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.CheckForHint);
             
             #line default
@@ -539,7 +539,7 @@ namespace TibiaHeleper.Windows {
             case 28:
             this.AddLootButton = ((System.Windows.Controls.Button)(target));
             
-            #line 40 "..\..\..\Windows\Targeting.xaml"
+            #line 41 "..\..\..\Windows\Targeting.xaml"
             this.AddLootButton.Click += new System.Windows.RoutedEventHandler(this.AddToLootList);
             
             #line default
@@ -548,7 +548,7 @@ namespace TibiaHeleper.Windows {
             case 29:
             this.AddFood = ((System.Windows.Controls.Button)(target));
             
-            #line 41 "..\..\..\Windows\Targeting.xaml"
+            #line 42 "..\..\..\Windows\Targeting.xaml"
             this.AddFood.Click += new System.Windows.RoutedEventHandler(this.AddToFoodList);
             
             #line default
@@ -560,7 +560,7 @@ namespace TibiaHeleper.Windows {
             case 31:
             this.DeleteFromLootListButton = ((System.Windows.Controls.Button)(target));
             
-            #line 43 "..\..\..\Windows\Targeting.xaml"
+            #line 44 "..\..\..\Windows\Targeting.xaml"
             this.DeleteFromLootListButton.Click += new System.Windows.RoutedEventHandler(this.DeleteFromLootList);
             
             #line default
@@ -569,7 +569,7 @@ namespace TibiaHeleper.Windows {
             case 32:
             this.DeleteFromFoodListButton = ((System.Windows.Controls.Button)(target));
             
-            #line 44 "..\..\..\Windows\Targeting.xaml"
+            #line 45 "..\..\..\Windows\Targeting.xaml"
             this.DeleteFromFoodListButton.Click += new System.Windows.RoutedEventHandler(this.DeleteFromLootList);
             
             #line default
@@ -581,7 +581,7 @@ namespace TibiaHeleper.Windows {
             case 34:
             this.SetContainerForLootButton = ((System.Windows.Controls.Button)(target));
             
-            #line 46 "..\..\..\Windows\Targeting.xaml"
+            #line 47 "..\..\..\Windows\Targeting.xaml"
             this.SetContainerForLootButton.Click += new System.Windows.RoutedEventHandler(this.SetLootContainer);
             
             #line default
@@ -590,7 +590,7 @@ namespace TibiaHeleper.Windows {
             case 35:
             this.SetNextContainerButton = ((System.Windows.Controls.Button)(target));
             
-            #line 47 "..\..\..\Windows\Targeting.xaml"
+            #line 48 "..\..\..\Windows\Targeting.xaml"
             this.SetNextContainerButton.Click += new System.Windows.RoutedEventHandler(this.SetNextContainer);
             
             #line default
@@ -614,7 +614,7 @@ namespace TibiaHeleper.Windows {
             case 41:
             this.errBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 55 "..\..\..\Windows\Targeting.xaml"
+            #line 56 "..\..\..\Windows\Targeting.xaml"
             this.errBtn.Click += new System.Windows.RoutedEventHandler(this.HideErrorGrid);
             
             #line default

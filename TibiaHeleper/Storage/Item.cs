@@ -49,11 +49,11 @@ namespace TibiaHeleper.Storage
                 return !Equals(rhs, null);
         }
 
-        public static List<int> ToIdList(List<LootItem> items)
+        public static List<int> ToIdList<T>(List<T> items) where T : Item
         {
             List<int> IDs = new List<int>();
 
-            foreach (LootItem item in items)
+            foreach (T item in items)
             {
                 IDs.Add(item.ID);
             }
@@ -61,6 +61,7 @@ namespace TibiaHeleper.Storage
             return IDs;
         }
 
+        /*
         public static List<int> ToIdList(List<Item> items)
         {
             List<int> IDs = new List<int>();
@@ -71,5 +72,6 @@ namespace TibiaHeleper.Storage
             }
             return IDs;
         }
+        */
     }
 }

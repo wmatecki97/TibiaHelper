@@ -41,7 +41,7 @@ namespace TibiaHeleper.Windows {
     public partial class AlarmsWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 11 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 12 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox lowHPCheckBox;
         
@@ -49,7 +49,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 12 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 13 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox notMovingCheckBox;
         
@@ -57,7 +57,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 13 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 14 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox loggedOutCheckBox;
         
@@ -65,7 +65,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 14 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 15 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox checkBox4;
         
@@ -73,7 +73,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 15 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 16 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox hpAmountTextBox;
         
@@ -81,7 +81,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 16 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 17 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label label;
         
@@ -89,7 +89,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 17 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 18 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button saveButton;
         
@@ -97,7 +97,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 18 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 19 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button backButton;
         
@@ -105,7 +105,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 20 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 21 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Error;
         
@@ -113,7 +113,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 21 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 22 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ErrorLabel;
         
@@ -121,7 +121,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 22 "..\..\..\Windows\AlarmsWindow.xaml"
+        #line 23 "..\..\..\Windows\AlarmsWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button errBtn;
         
@@ -160,13 +160,13 @@ namespace TibiaHeleper.Windows {
             {
             case 1:
             
-            #line 9 "..\..\..\Windows\AlarmsWindow.xaml"
+            #line 10 "..\..\..\Windows\AlarmsWindow.xaml"
             ((TibiaHeleper.Windows.AlarmsWindow)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Load);
             
             #line default
             #line hidden
             
-            #line 9 "..\..\..\Windows\AlarmsWindow.xaml"
+            #line 10 "..\..\..\Windows\AlarmsWindow.xaml"
             ((TibiaHeleper.Windows.AlarmsWindow)(target)).Closing += new System.ComponentModel.CancelEventHandler(this.Close);
             
             #line default
@@ -193,7 +193,7 @@ namespace TibiaHeleper.Windows {
             case 8:
             this.saveButton = ((System.Windows.Controls.Button)(target));
             
-            #line 17 "..\..\..\Windows\AlarmsWindow.xaml"
+            #line 18 "..\..\..\Windows\AlarmsWindow.xaml"
             this.saveButton.Click += new System.Windows.RoutedEventHandler(this.Save);
             
             #line default
@@ -202,7 +202,7 @@ namespace TibiaHeleper.Windows {
             case 9:
             this.backButton = ((System.Windows.Controls.Button)(target));
             
-            #line 18 "..\..\..\Windows\AlarmsWindow.xaml"
+            #line 19 "..\..\..\Windows\AlarmsWindow.xaml"
             this.backButton.Click += new System.Windows.RoutedEventHandler(this.Back);
             
             #line default
@@ -217,7 +217,7 @@ namespace TibiaHeleper.Windows {
             case 12:
             this.errBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 22 "..\..\..\Windows\AlarmsWindow.xaml"
+            #line 23 "..\..\..\Windows\AlarmsWindow.xaml"
             this.errBtn.Click += new System.Windows.RoutedEventHandler(this.HideErrorGrid);
             
             #line default

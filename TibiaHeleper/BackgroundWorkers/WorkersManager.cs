@@ -9,21 +9,21 @@ namespace TibiaHeleper.BackgroundWorkers
 {
     public static class WorkersManager
     {
-        private static List<Thread> workersThreadsList;
-        private static List<BackgroundWorker> workersList;
+        private static List<Thread> _workersThreadsList;
+        private static List<BackgroundWorker> _workersList;
 
         private static void addWorker(BackgroundWorker worker)
         {
             Thread t = new Thread(worker.Run);
-            workersList.Add(worker);
+            _workersList.Add(worker);
             worker.working = true;
             t.Start();
         }
 
         static WorkersManager()
         {
-            workersList = new List<BackgroundWorker>();
-            workersThreadsList = new List<Thread>();
+            _workersList = new List<BackgroundWorker>();
+            _workersThreadsList = new List<Thread>();
 
         }
 

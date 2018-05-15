@@ -41,7 +41,7 @@ namespace TibiaHeleper.Windows {
     public partial class Menu : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 11 "..\..\..\Windows\Menu.xaml"
+        #line 12 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button Healer;
         
@@ -49,7 +49,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 12 "..\..\..\Windows\Menu.xaml"
+        #line 13 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox HealerEnable;
         
@@ -57,7 +57,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 13 "..\..\..\Windows\Menu.xaml"
+        #line 14 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button AdditionalModulesButton;
         
@@ -65,7 +65,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 14 "..\..\..\Windows\Menu.xaml"
+        #line 15 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button SaveButton;
         
@@ -73,7 +73,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 15 "..\..\..\Windows\Menu.xaml"
+        #line 16 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button LoadButton;
         
@@ -81,7 +81,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 16 "..\..\..\Windows\Menu.xaml"
+        #line 17 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button Targeting;
         
@@ -89,7 +89,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 17 "..\..\..\Windows\Menu.xaml"
+        #line 18 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button WalkerButton;
         
@@ -97,7 +97,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 18 "..\..\..\Windows\Menu.xaml"
+        #line 19 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox TargetingEnable;
         
@@ -105,7 +105,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 19 "..\..\..\Windows\Menu.xaml"
+        #line 20 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button TestButton;
         
@@ -113,7 +113,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 20 "..\..\..\Windows\Menu.xaml"
+        #line 21 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox WalkerEnable;
         
@@ -121,7 +121,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 21 "..\..\..\Windows\Menu.xaml"
+        #line 22 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button HelpButton;
         
@@ -129,7 +129,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 22 "..\..\..\Windows\Menu.xaml"
+        #line 23 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button AlarmsButton;
         
@@ -137,7 +137,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 23 "..\..\..\Windows\Menu.xaml"
+        #line 24 "..\..\..\Windows\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox alarmsCheckBox;
         
@@ -176,13 +176,13 @@ namespace TibiaHeleper.Windows {
             {
             case 1:
             
-            #line 9 "..\..\..\Windows\Menu.xaml"
+            #line 10 "..\..\..\Windows\Menu.xaml"
             ((TibiaHeleper.Windows.Menu)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Window_Loaded);
             
             #line default
             #line hidden
             
-            #line 9 "..\..\..\Windows\Menu.xaml"
+            #line 10 "..\..\..\Windows\Menu.xaml"
             ((TibiaHeleper.Windows.Menu)(target)).Closing += new System.ComponentModel.CancelEventHandler(this.Close);
             
             #line default
@@ -191,7 +191,7 @@ namespace TibiaHeleper.Windows {
             case 2:
             this.Healer = ((System.Windows.Controls.Button)(target));
             
-            #line 11 "..\..\..\Windows\Menu.xaml"
+            #line 12 "..\..\..\Windows\Menu.xaml"
             this.Healer.Click += new System.Windows.RoutedEventHandler(this.HealerButtonClicked);
             
             #line default
@@ -200,13 +200,13 @@ namespace TibiaHeleper.Windows {
             case 3:
             this.HealerEnable = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 12 "..\..\..\Windows\Menu.xaml"
+            #line 13 "..\..\..\Windows\Menu.xaml"
             this.HealerEnable.Checked += new System.Windows.RoutedEventHandler(this.HealerRun);
             
             #line default
             #line hidden
             
-            #line 12 "..\..\..\Windows\Menu.xaml"
+            #line 13 "..\..\..\Windows\Menu.xaml"
             this.HealerEnable.Unchecked += new System.Windows.RoutedEventHandler(this.HealerDisable);
             
             #line default
@@ -215,7 +215,7 @@ namespace TibiaHeleper.Windows {
             case 4:
             this.AdditionalModulesButton = ((System.Windows.Controls.Button)(target));
             
-            #line 13 "..\..\..\Windows\Menu.xaml"
+            #line 14 "..\..\..\Windows\Menu.xaml"
             this.AdditionalModulesButton.Click += new System.Windows.RoutedEventHandler(this.OpenAdditionalModulesWindow);
             
             #line default
@@ -224,7 +224,7 @@ namespace TibiaHeleper.Windows {
             case 5:
             this.SaveButton = ((System.Windows.Controls.Button)(target));
             
-            #line 14 "..\..\..\Windows\Menu.xaml"
+            #line 15 "..\..\..\Windows\Menu.xaml"
             this.SaveButton.Click += new System.Windows.RoutedEventHandler(this.Save);
             
             #line default
@@ -233,7 +233,7 @@ namespace TibiaHeleper.Windows {
             case 6:
             this.LoadButton = ((System.Windows.Controls.Button)(target));
             
-            #line 15 "..\..\..\Windows\Menu.xaml"
+            #line 16 "..\..\..\Windows\Menu.xaml"
             this.LoadButton.Click += new System.Windows.RoutedEventHandler(this.Load);
             
             #line default
@@ -242,7 +242,7 @@ namespace TibiaHeleper.Windows {
             case 7:
             this.Targeting = ((System.Windows.Controls.Button)(target));
             
-            #line 16 "..\..\..\Windows\Menu.xaml"
+            #line 17 "..\..\..\Windows\Menu.xaml"
             this.Targeting.Click += new System.Windows.RoutedEventHandler(this.TargetingButtonClicked);
             
             #line default
@@ -251,7 +251,7 @@ namespace TibiaHeleper.Windows {
             case 8:
             this.WalkerButton = ((System.Windows.Controls.Button)(target));
             
-            #line 17 "..\..\..\Windows\Menu.xaml"
+            #line 18 "..\..\..\Windows\Menu.xaml"
             this.WalkerButton.Click += new System.Windows.RoutedEventHandler(this.WalkerButtonClicked);
             
             #line default
@@ -260,13 +260,13 @@ namespace TibiaHeleper.Windows {
             case 9:
             this.TargetingEnable = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 18 "..\..\..\Windows\Menu.xaml"
+            #line 19 "..\..\..\Windows\Menu.xaml"
             this.TargetingEnable.Checked += new System.Windows.RoutedEventHandler(this.TargetingRun);
             
             #line default
             #line hidden
             
-            #line 18 "..\..\..\Windows\Menu.xaml"
+            #line 19 "..\..\..\Windows\Menu.xaml"
             this.TargetingEnable.Unchecked += new System.Windows.RoutedEventHandler(this.TargetingDisable);
             
             #line default
@@ -275,7 +275,7 @@ namespace TibiaHeleper.Windows {
             case 10:
             this.TestButton = ((System.Windows.Controls.Button)(target));
             
-            #line 19 "..\..\..\Windows\Menu.xaml"
+            #line 20 "..\..\..\Windows\Menu.xaml"
             this.TestButton.Click += new System.Windows.RoutedEventHandler(this.Test);
             
             #line default
@@ -284,13 +284,13 @@ namespace TibiaHeleper.Windows {
             case 11:
             this.WalkerEnable = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 20 "..\..\..\Windows\Menu.xaml"
+            #line 21 "..\..\..\Windows\Menu.xaml"
             this.WalkerEnable.Checked += new System.Windows.RoutedEventHandler(this.WorkerRun);
             
             #line default
             #line hidden
             
-            #line 20 "..\..\..\Windows\Menu.xaml"
+            #line 21 "..\..\..\Windows\Menu.xaml"
             this.WalkerEnable.Unchecked += new System.Windows.RoutedEventHandler(this.WorkerDisable);
             
             #line default
@@ -299,7 +299,7 @@ namespace TibiaHeleper.Windows {
             case 12:
             this.HelpButton = ((System.Windows.Controls.Button)(target));
             
-            #line 21 "..\..\..\Windows\Menu.xaml"
+            #line 22 "..\..\..\Windows\Menu.xaml"
             this.HelpButton.Click += new System.Windows.RoutedEventHandler(this.OpenHelpWindow);
             
             #line default
@@ -308,7 +308,7 @@ namespace TibiaHeleper.Windows {
             case 13:
             this.AlarmsButton = ((System.Windows.Controls.Button)(target));
             
-            #line 22 "..\..\..\Windows\Menu.xaml"
+            #line 23 "..\..\..\Windows\Menu.xaml"
             this.AlarmsButton.Click += new System.Windows.RoutedEventHandler(this.OpenAlarmsWindow);
             
             #line default
@@ -317,13 +317,13 @@ namespace TibiaHeleper.Windows {
             case 14:
             this.alarmsCheckBox = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 23 "..\..\..\Windows\Menu.xaml"
+            #line 24 "..\..\..\Windows\Menu.xaml"
             this.alarmsCheckBox.Checked += new System.Windows.RoutedEventHandler(this.AlarmEnable);
             
             #line default
             #line hidden
             
-            #line 23 "..\..\..\Windows\Menu.xaml"
+            #line 24 "..\..\..\Windows\Menu.xaml"
             this.alarmsCheckBox.Unchecked += new System.Windows.RoutedEventHandler(this.AlarmDisable);
             
             #line default

@@ -41,7 +41,7 @@ namespace TibiaHeleper.Windows {
     public partial class AdditionalModules : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 11 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 12 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid AutoHaste;
         
@@ -49,7 +49,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 12 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 13 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button BackButton;
         
@@ -57,7 +57,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 13 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 14 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox AHSpell;
         
@@ -65,7 +65,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 14 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 15 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label AutoHasteRow;
         
@@ -73,7 +73,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 15 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 16 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label AHSpellLabel;
         
@@ -81,7 +81,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 16 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 17 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label AHManaLabel;
         
@@ -89,7 +89,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 17 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 18 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox AHMana;
         
@@ -97,7 +97,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 18 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 19 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox AHEnable;
         
@@ -105,7 +105,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 20 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 21 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Sio;
         
@@ -113,7 +113,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 21 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 22 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox PlayerName;
         
@@ -121,7 +121,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 22 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 23 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox PlayerHpPercent;
         
@@ -129,7 +129,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 23 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 24 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label SioRow;
         
@@ -137,7 +137,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 24 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 25 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label PlayerNameLabel;
         
@@ -145,7 +145,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 25 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 26 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox SioEnable;
         
@@ -153,7 +153,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 26 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 27 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label HPPercentLabel;
         
@@ -161,7 +161,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 28 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 29 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid AntyParalyse;
         
@@ -169,7 +169,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 29 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 30 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox APSpell;
         
@@ -177,7 +177,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 30 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 31 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label AntyParalyseRow;
         
@@ -185,7 +185,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 31 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 32 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label APSpellLabel;
         
@@ -193,7 +193,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 32 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 33 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label APManaLabel;
         
@@ -201,7 +201,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 33 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 34 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox APMana;
         
@@ -209,7 +209,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 34 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 35 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox APEnable;
         
@@ -217,7 +217,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 36 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 37 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Error;
         
@@ -225,7 +225,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 37 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 38 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label ErrorLabel;
         
@@ -233,7 +233,7 @@ namespace TibiaHeleper.Windows {
         #line hidden
         
         
-        #line 38 "..\..\..\Windows\AdditionalModules.xaml"
+        #line 39 "..\..\..\Windows\AdditionalModules.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button errBtn;
         
@@ -272,13 +272,13 @@ namespace TibiaHeleper.Windows {
             {
             case 1:
             
-            #line 9 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 10 "..\..\..\Windows\AdditionalModules.xaml"
             ((TibiaHeleper.Windows.AdditionalModules)(target)).Loaded += new System.Windows.RoutedEventHandler(this.AssignData);
             
             #line default
             #line hidden
             
-            #line 9 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 10 "..\..\..\Windows\AdditionalModules.xaml"
             ((TibiaHeleper.Windows.AdditionalModules)(target)).Closed += new System.EventHandler(this.Close);
             
             #line default
@@ -290,7 +290,7 @@ namespace TibiaHeleper.Windows {
             case 3:
             this.BackButton = ((System.Windows.Controls.Button)(target));
             
-            #line 12 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 13 "..\..\..\Windows\AdditionalModules.xaml"
             this.BackButton.Click += new System.Windows.RoutedEventHandler(this.Back);
             
             #line default
@@ -314,13 +314,13 @@ namespace TibiaHeleper.Windows {
             case 9:
             this.AHEnable = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 18 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 19 "..\..\..\Windows\AdditionalModules.xaml"
             this.AHEnable.Checked += new System.Windows.RoutedEventHandler(this.EnableAutoHaste);
             
             #line default
             #line hidden
             
-            #line 18 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 19 "..\..\..\Windows\AdditionalModules.xaml"
             this.AHEnable.Unchecked += new System.Windows.RoutedEventHandler(this.DisableAutoHate);
             
             #line default
@@ -344,13 +344,13 @@ namespace TibiaHeleper.Windows {
             case 15:
             this.SioEnable = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 25 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 26 "..\..\..\Windows\AdditionalModules.xaml"
             this.SioEnable.Checked += new System.Windows.RoutedEventHandler(this.EnableSio);
             
             #line default
             #line hidden
             
-            #line 25 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 26 "..\..\..\Windows\AdditionalModules.xaml"
             this.SioEnable.Unchecked += new System.Windows.RoutedEventHandler(this.DisableSio);
             
             #line default
@@ -380,13 +380,13 @@ namespace TibiaHeleper.Windows {
             case 23:
             this.APEnable = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 34 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 35 "..\..\..\Windows\AdditionalModules.xaml"
             this.APEnable.Checked += new System.Windows.RoutedEventHandler(this.EnableAntyParalyse);
             
             #line default
             #line hidden
             
-            #line 34 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 35 "..\..\..\Windows\AdditionalModules.xaml"
             this.APEnable.Unchecked += new System.Windows.RoutedEventHandler(this.DisableAntyParalyse);
             
             #line default
@@ -401,7 +401,7 @@ namespace TibiaHeleper.Windows {
             case 26:
             this.errBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 38 "..\..\..\Windows\AdditionalModules.xaml"
+            #line 39 "..\..\..\Windows\AdditionalModules.xaml"
             this.errBtn.Click += new System.Windows.RoutedEventHandler(this.HideErrorGrid);
             
             #line default

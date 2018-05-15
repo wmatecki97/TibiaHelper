@@ -150,20 +150,20 @@
         <Grid Name="DepositGrid" Visibility="Hidden" Background="White" Margin="337,0,-0.4,0.4">
 
 
-            <ComboBox x:Name="DepositOrMailBoxComboBox" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="92" SelectionChanged="DepositTypeChanged" Height="20"/>
+            <ComboBox x:Name="DepositOrMailBoxComboBox" HorizontalAlignment="Right" Margin="0,25,225.4,0" VerticalAlignment="Top" Width="97" SelectionChanged="DepositTypeChanged" Height="20"/>
 
 
-            <ListBox x:Name="putIntoListBox" HorizontalAlignment="Left" Height="125" Margin="42,25,0,0" VerticalAlignment="Top" Width="127"/>
-            <ListBox x:Name="takeFromListBox" HorizontalAlignment="Left" Height="125" Margin="174,25,0,0" VerticalAlignment="Top" Width="127"/>
-            <Label Content="Items to deposit" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="42,-1,0,0" VerticalAlignment="Top" Width="127"/>
-            <Label Content="Items to take" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="174,2,0,0" VerticalAlignment="Top" Width="127"/>
+            <ListBox x:Name="putIntoListBox" HorizontalAlignment="Left" Height="125" Margin="107,25,0,0" VerticalAlignment="Top" Width="100"/>
+            <ListBox x:Name="takeFromListBox" HorizontalAlignment="Left" Height="125" Margin="212,25,0,0" VerticalAlignment="Top" Width="100"/>
+            <Label Content="Items to deposit" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="107,-1,0,0" VerticalAlignment="Top" Width="100"/>
+            <Label Content="Items to take" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,0,0,0" VerticalAlignment="Top" Width="100"/>
 
             <Button x:Name="addToDepositButton" Content="Deposit it" HorizontalAlignment="Left" Margin="107,208,0,0" VerticalAlignment="Top" Width="100" Click="AddToDepositList"/>
             <Button x:Name="removeFromDepositButton" Content="Delete" HorizontalAlignment="Left" Margin="107,232,0,0" VerticalAlignment="Top" Width="100" Click="RemoveFromDeposit"/>
             <Button x:Name="addToTakeButton" Content="Take to backpack" HorizontalAlignment="Left" Margin="212,208,0,0" VerticalAlignment="Top" Width="100" Click="AddToTake"/>
             <Button x:Name="removeFromTakeButton" Content="Delete" HorizontalAlignment="Left" Margin="212,232,0,0" VerticalAlignment="Top" Width="100" Click="removeFromTake"/>
 
-            <Grid Name="depoChestNumberGrid" Margin="5,175,210,34">
+            <Grid Name="depoChestNumberGrid" Margin="5,39,210.4,170">
 
                 <ComboBox x:Name="depoNumberComboBox" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="97"/>
                 <Label x:Name="depoNumberLabel" Content="Deposit number" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,6,-0.2,0" VerticalAlignment="Top" Width="97" Grid.RowSpan="2"/>
@@ -171,6 +171,10 @@
 
             <Button x:Name="addDepositActionButton" Content="Add action" HorizontalAlignment="Left" Margin="27,256,0,0" VerticalAlignment="Top" Width="111" Click="AddAction"/>
             <Button x:Name="cancelDepositButton" Content="Cancel" HorizontalAlignment="Left" Margin="163,256,0,0" VerticalAlignment="Top" Width="111" Click="HideDepositGrid"/>
+            <TextBox x:Name="amountTextBox" HorizontalAlignment="Left" Height="23" Margin="5,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97"/>
+            <Label Content="Amount" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,102,0,0" VerticalAlignment="Top" Width="107"/>
+            <TextBlock x:Name="ContainerToPutTakenItemsTextBlock" HorizontalAlignment="Left" Margin="5,192,0,0" TextWrapping="Wrap" Text="Container for items taken: Default Container" TextAlignment="Center" VerticalAlignment="Top" Height="59" Width="97"/>
+            <Button x:Name="TakenItemContainerButton" Content="Set container" HorizontalAlignment="Left" Margin="5,160,0,0" VerticalAlignment="Top" Width="97" Click="SetItemTakenContainer"/>
 
 
 
@@ -182,7 +186,7 @@
             <TextBox x:Name="HintTextBox" IsReadOnly="True" Background="LightGray" HorizontalAlignment="Left" Height="23" Margin="444,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205"/>
         </Grid>
 
-        <Grid Name="Error" HorizontalAlignment="Left" Height="290" VerticalAlignment="Top" Width="654" Background="White" Visibility="Hidden" Margin="0,0,-0.4,0">
+        <Grid Name="Error" HorizontalAlignment="Left" Height="290" VerticalAlignment="Top" Width="664" Background="White" Visibility="Hidden">
             <Button x:Name="errBtn" Content="OK" HorizontalAlignment="Left" Margin="289,245,0,0" VerticalAlignment="Top" Width="75" Click="HideErrorGrid"/>
             <TextBlock x:Name="ErrorLabel" TextAlignment="Center" Foreground="Red" HorizontalAlignment="Left" Margin="10,96,0,0" TextWrapping="Wrap" Text="Error" VerticalAlignment="Top" Height="116" Width="634"/>
         </Grid>

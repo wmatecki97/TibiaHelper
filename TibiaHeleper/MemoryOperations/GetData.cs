@@ -16,14 +16,14 @@ namespace TibiaHeleper.MemoryOperations
         static Process Tibia;
         public static IntPtr Handle { get; set; }
         static uint Base;
-        private static List<Creature> allSpottedCreaturesList;
-        private static uint lastSpottedCreatureAddress;
+        private static List<Creature> _allSpottedCreaturesList;
+        private static uint _lastSpottedCreatureAddress;
         public static Creature Me;
 
         static GetData()
         {
-            allSpottedCreaturesList = new List<Creature>();
-            lastSpottedCreatureAddress = Addresses.InformationsOfSpottedCreaturesAndPlayersSartAddress;
+            _allSpottedCreaturesList = new List<Creature>();
+            _lastSpottedCreatureAddress = Addresses.InformationsOfSpottedCreaturesAndPlayersSartAddress;
             firstOpenedWindow = new Window(Addresses.FirstOpenedWindowHeight);
             secondOpenedWindow = new Window(Addresses.SecondOpenedWindowHeight);
         }
@@ -117,9 +117,9 @@ namespace TibiaHeleper.MemoryOperations
             ActualizeAllSpottedCreaturesList();
             while (Me == null)
             {
-                lock (allSpottedCreaturesList)
+                lock (_allSpottedCreaturesList)
                 {
-                    foreach (Creature creature in allSpottedCreaturesList)
+                    foreach (Creature creature in _allSpottedCreaturesList)
                     {
                         if (creature.XPosition == MyXPosition && creature.YPosition == MyYPosition && creature.Floor == MyFloor)
                         {
@@ -183,9 +183,9 @@ namespace TibiaHeleper.MemoryOperations
         public static Creature getPlayer(string playerName)
         {
             ActualizeAllSpottedCreaturesList();
-            lock (allSpottedCreaturesList)
+            lock (_allSpottedCreaturesList)
             {
-                foreach (Creature creature in allSpottedCreaturesList)
+                foreach (Creature creature in _allSpottedCreaturesList)
                 {
                     if (creature.name == playerName)
                         return creature;
@@ -247,24 +247,24 @@ namespace TibiaHeleper.MemoryOperations
             uint CreatureInformationBlockSize = Addresses.CreatureInformationBlockSize;
             while (wasCreatureSpotted)
             {
-                if ((id = getIntegerDataFromAddress(lastSpottedCreatureAddress)) != 0)
+                if ((id = getIntegerDataFromAddress(_lastSpottedCreatureAddress)) != 0)
                 {
-                    Creature creature = new Creature(id, lastSpottedCreatureAddress);
-                    lock (allSpottedCreaturesList)
+                    Creature creature = new Creature(id, _lastSpottedCreatureAddress);
+                    lock (_allSpottedCreaturesList)
                     {
-                        allSpottedCreaturesList.Insert(0, creature);
+                        _allSpottedCreaturesList.Insert(0, creature);
                     }
-                    lastSpottedCreatureAddress += CreatureInformationBlockSize;
+                    _lastSpottedCreatureAddress += CreatureInformationBlockSize;
                 }
                 else wasCreatureSpotted = false;
             }
-            lock (allSpottedCreaturesList) //delete from list dead creatures
+            lock (_allSpottedCreaturesList) //delete from list dead creatures
             {
-                for (int i = 0; i < allSpottedCreaturesList.Count(); i++)
+                for (int i = 0; i < _allSpottedCreaturesList.Count(); i++)
                 {
-                    if (allSpottedCreaturesList[i].HPPercent == 0)
+                    if (_allSpottedCreaturesList[i].HPPercent == 0)
                     {
-                        allSpottedCreaturesList.RemoveAt(i);
+                        _allSpottedCreaturesList.RemoveAt(i);
                         i--;
                     }
                 }
@@ -272,19 +272,19 @@ namespace TibiaHeleper.MemoryOperations
         }
         public static void ResetAllSpottedCreatureList()
         {
-            lastSpottedCreatureAddress = Addresses.InformationsOfSpottedCreaturesAndPlayersSartAddress;
-            lock (allSpottedCreaturesList)
+            _lastSpottedCreatureAddress = Addresses.InformationsOfSpottedCreaturesAndPlayersSartAddress;
+            lock (_allSpottedCreaturesList)
             {
-                allSpottedCreaturesList = new List<Creature>();
+                _allSpottedCreaturesList = new List<Creature>();
             }
         }
         public static List<Creature> GetBattleList()
         {
             List<Creature> battleList = new List<Creature>();
             ActualizeAllSpottedCreaturesList();
-            lock (allSpottedCreaturesList)
+            lock (_allSpottedCreaturesList)
             {
-                foreach (Creature creature in allSpottedCreaturesList)
+                foreach (Creature creature in _allSpottedCreaturesList)
                 {
                     if (creature.onScreen && creature.Floor == MyFloor)
                         battleList.Add(creature);
@@ -321,7 +321,7 @@ namespace TibiaHeleper.MemoryOperations
         }
         public static int gameWindowWidth { get { return getIntegerDataFromAddress(Addresses.GameWindowWidth); } }
         public static int tradeItemID { get { return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.tradeWindowSelectedItem)); } }
-
+        public static int moveItemsCount { get { return getIntegerDataFromDynamicAddress((uint)getDynamicAddress(Addresses.MoveItemCount)); } }
         #endregion
 
         public static string ActualInput { get { return getStringFromDynamicAddress((uint)getDynamicAddress(Addresses.ActualInput)); } }
@@ -403,11 +403,33 @@ namespace TibiaHeleper.MemoryOperations
                 clear += " ";
 
             LastServerInfo = clear;
-             
-
             return result || infoNotFound==20;
         }
 
+        public static List<Waypoint> FindItemOnTheGround(int itemID)
+        {
+            List<int> list = new List<int>();
+            list.Add(itemID);
+            return FindItemOnTheGround(list);
+        }
+        public static List<Waypoint> FindItemOnTheGround(List<int> itemID)
+        {
+            List<Waypoint> result = new List<Waypoint>();
+            int x = MyXPosition, y = MyYPosition;
+            for(int i=-5; i<=5; i++)
+            {
+                for(int j=-7; j<=7; j++)
+                {
+                    MouseSimulator.clickOnField(x + j, y + i);
+                    Thread.Sleep(50);
+
+                    if(itemID.Any(item => item== LastClickedObjectID))
+                        result.Add(new Waypoint(x + j, y + i, MyFloor));
+                }
+            }
+            return result;
+        }
+        
         #region RightSideWindows
 
         public static Item _currentContainer;
@@ -488,6 +510,10 @@ namespace TibiaHeleper.MemoryOperations
             }
 
         }
+        public static void GoToPreviousWindow(Window window)
+        {
+            MouseSimulator.click(gameWindowWidth + Constants.OpenedWindowPreviousButtonFromRightXOffset, yPositionOfOpenedWindow(window) + Constants.OpenedWindowNavigateButtonsYOffset);
+        }
 
         public static Window firstOpenedWindow;
         public static Window secondOpenedWindow;
@@ -505,6 +531,16 @@ namespace TibiaHeleper.MemoryOperations
             }
 
             return -1;
+        }
+        public static void ScrollUpWindow(Window window)
+        {
+            int x = gameWindowWidth + Constants.OpenedWindowScrollFromRightXOffset;
+            int y = yPositionOfOpenedWindow(window) + Constants.OpenedWindowScrollUpButtonYOffset;
+
+            for(int i=0; i<Constants.FullLineScrollClickCount*5; i++)
+            {
+                MouseSimulator.click(x, y);
+            }
         }
 
         public static bool getItemFromEQWindowPosition(out int x, out int y, int xOffset, int yOffset)

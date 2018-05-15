@@ -81,6 +81,7 @@
     <Compile Include="Modules\WalkerModule\Action.cs" />
     <Compile Include="Modules\WalkerModule\Condition.cs" />
     <Compile Include="Modules\WalkerModule\DefaultActions.cs" />
+    <Compile Include="Modules\WalkerModule\DepositItem.cs" />
     <Compile Include="Modules\WalkerModule\StatementType.cs" />
     <Compile Include="Modules\WalkerModule\Tracker.cs" />
     <Compile Include="Modules\WalkerModule\TradeItem.cs" />

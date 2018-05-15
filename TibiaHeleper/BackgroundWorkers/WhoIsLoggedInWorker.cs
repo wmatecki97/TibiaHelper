@@ -14,7 +14,7 @@ namespace TibiaHeleper.BackgroundWorkers
     class WhoIsLoggedInWorker : BackgroundWorker
     {
 
-        private int loggedID;
+        private int _loggedID;
         public static Stopwatch sw { get; set; }
 
         public override void Run()
@@ -74,7 +74,7 @@ namespace TibiaHeleper.BackgroundWorkers
         public WhoIsLoggedInWorker()
         {
             refreshFrequency = 1;
-            loggedID = -1;
+            _loggedID = -1;
         }
     }
 }

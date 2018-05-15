@@ -22,12 +22,12 @@ namespace TibiaHeleper.Modules
         // private static Thread TAutoHaste;
         // private static Thread TSio;
 
-        private static Semaphore sem;
+        private static Semaphore _sem;
 
         static ModulesManager()
         {
 
-            sem = new Semaphore(1, 1);
+            _sem = new Semaphore(1, 1);
 
 
             healer = new Healer();
@@ -39,7 +39,7 @@ namespace TibiaHeleper.Modules
             tracker = new Tracker();
             alarms = new Alarms();
 
-            disabled = false;
+            _disabled = false;
 
         }
         /// <summary>
@@ -48,19 +48,19 @@ namespace TibiaHeleper.Modules
         /// <param name="module"></param>
         public static void HardEnableThread(Module module)
         {
-            sem.WaitOne();
+            _sem.WaitOne();
 
                 Thread t = new Thread(module.Run);
                 module.stopped = false;
                 module.working = true;
                 t.Start();
 
-            sem.Release();
+            _sem.Release();
 
         }
         private static void enableThread(Module module)
         {
-            sem.WaitOne();
+            _sem.WaitOne();
             if (!module.working)
             {
                 Thread t = new Thread(module.Run);
@@ -70,15 +70,15 @@ namespace TibiaHeleper.Modules
                 module.working = true;
                 t.Start();
             }
-            sem.Release();
+            _sem.Release();
 
         }
         private static void disableThread(Module module)
         {
 
-            sem.WaitOne();
+            _sem.WaitOne();
             module.working = false;
-            sem.Release();
+            _sem.Release();
 
         }
 
@@ -128,11 +128,11 @@ namespace TibiaHeleper.Modules
         private static bool _walker;
         private static bool _tracker;
 
-        private static bool disabled;
+        private static bool _disabled;
 
         public static void DisableAllWorkingModules()
         {
-            if (!disabled)
+            if (!_disabled)
             {
                 _healer = healer.working;
                 _autoHaste = autoHaste.working;
@@ -150,14 +150,14 @@ namespace TibiaHeleper.Modules
                 WalkerDisable();
                 TrackerDisable();
                
-                disabled = true;
+                _disabled = true;
             }
 
         }
 
         public static void EnableAllDisabledModules()
         {
-            if (disabled)
+            if (_disabled)
             {
                 if (_healer)
                     HealerEnable();
@@ -175,7 +175,7 @@ namespace TibiaHeleper.Modules
                     TrackerEnable();
                 
 
-                disabled = false;
+                _disabled = false;
             }
             
         }

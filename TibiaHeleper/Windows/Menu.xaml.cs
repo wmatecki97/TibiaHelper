@@ -105,7 +105,7 @@ namespace TibiaHeleper.Windows
 
         private void Test(object sender, RoutedEventArgs e)
         {
-            int a = GetData.firstOpenedWindow.height;
+            int a = GetData.gameWindowWidth;
         }
 
         private void WalkerButtonClicked(object sender, RoutedEventArgs e)

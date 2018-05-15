@@ -15,19 +15,19 @@ namespace TibiaHeleper.Modules.WalkerModule
     {
         public List<WalkerStatement> list;
 
-        private Stack<Waypoint> wayBack;
+        private Stack<Waypoint> _wayBack;
 
         public bool stopped { get; set; }
         public bool working { get; set; }
         public int actualStatementIndex;
         public int startStatementIndex;
         public int attemptsToRandomDirection;
-        private Random rand;
+        private Random _rand;
         bool trackerWorking;
 
         public int tolerance;
 
-        private int direction;
+        private int _direction;
       //  private int lastDirection;
         //like in numeric block
         //8 - north
@@ -45,10 +45,10 @@ namespace TibiaHeleper.Modules.WalkerModule
         {
             stopped = true;
             list = new List<WalkerStatement>();
-            wayBack = new Stack<Waypoint>();
+            _wayBack = new Stack<Waypoint>();
             tolerance = 0;
             attemptsToRandomDirection = 15;
-            rand = new Random();
+            _rand = new Random();
             actualStatementIndex = startStatementIndex = 0;
         }
 
@@ -58,7 +58,7 @@ namespace TibiaHeleper.Modules.WalkerModule
             int listCount;
             lock (list) { listCount = list.Count(); }
             int temp;
-            startTracking();
+ //           startTracking();
             actualStatementIndex = startStatementIndex;
             startStatementIndex = 0;
 
@@ -105,9 +105,9 @@ namespace TibiaHeleper.Modules.WalkerModule
         {
             Waypoint waypoint;
             bool isStackEmpty;
-            lock (wayBack)
+            lock (_wayBack)
             {
-                isStackEmpty = wayBack.Count() == 0;
+                isStackEmpty = _wayBack.Count() == 0;
 
 
                 if (isStackEmpty) return getNewDirection();
@@ -115,7 +115,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                 while (!isStackEmpty && working && !ModulesManager.targeting.attacking)
                 {
                     
-                    waypoint = wayBack.Pop();
+                    waypoint = _wayBack.Pop();
 
                     if (!goToCoordinates(waypoint)) //if it is impossible to get back
                     {
@@ -123,7 +123,7 @@ namespace TibiaHeleper.Modules.WalkerModule
                             return false;
                         break;
                     }
-                    isStackEmpty = wayBack.Count() == 0;
+                    isStackEmpty = _wayBack.Count() == 0;
                 }
             }
             return true;
@@ -143,19 +143,19 @@ namespace TibiaHeleper.Modules.WalkerModule
                 while (ModulesManager.targeting.attacking)
                     Thread.Sleep(500); // waits for targetting
 
-                direction = 0;
+                _direction = 0;
                 if (waypoint.xPos > GetData.MyXPosition)
-                    direction += 1;
+                    _direction += 1;
                 else if (waypoint.xPos < GetData.MyXPosition)
-                    direction -= 1;
+                    _direction -= 1;
                 if (waypoint.yPos > GetData.MyYPosition)
-                    direction += 2;
+                    _direction += 2;
                 else if (waypoint.yPos < GetData.MyYPosition)
-                    direction += 8;
-                else direction += 5;
+                    _direction += 8;
+                else _direction += 5;
                 if (attempt == attemptsToRandomDirection)
                 {
-                    direction = rand.Next(1, 9);
+                    _direction = _rand.Next(1, 9);
                     attempt = 0;
                 }
 
@@ -182,15 +182,15 @@ namespace TibiaHeleper.Modules.WalkerModule
         public void go(Waypoint waypoint, int? dir = null)
         {
             if (dir != null)
-                direction = (int)dir;
+                _direction = (int)dir;
 
-            if (direction == 8)
+            if (_direction == 8)
                 KeyboardSimulator.Press("up");
-            else if (direction == 6)
+            else if (_direction == 6)
                 KeyboardSimulator.Press("right");
-            else if (direction == 4)
+            else if (_direction == 4)
                 KeyboardSimulator.Press("left");
-            else if (direction == 2)
+            else if (_direction == 2)
                 KeyboardSimulator.Press("down");
             else
                 MouseSimulator.clickOnField(waypoint.xPos, waypoint.yPos);
@@ -286,9 +286,9 @@ namespace TibiaHeleper.Modules.WalkerModule
                                     if (actualX == waypoint.xPos && actualY == waypoint.yPos && actualFloor == waypoint.floor)//if wayppoint has been reached then reset wayBack
                                     {
                                         actualStatementIndex = i;
-                                        lock (wayBack)
+                                        lock (_wayBack)
                                         {
-                                            wayBack = new Stack<Waypoint>();
+                                            _wayBack = new Stack<Waypoint>();
                                             continue;
                                         }
                                     }
@@ -301,9 +301,9 @@ namespace TibiaHeleper.Modules.WalkerModule
                         lastX = actualX;
                         lastY = actualY;
                         LastFloor = actualFloor;
-                        lock (wayBack)
+                        lock (_wayBack)
                         {
-                            wayBack.Push(new Waypoint(actualX, actualY, actualFloor, true));
+                            _wayBack.Push(new Waypoint(actualX, actualY, actualFloor, true));
                         }
 
                     }
